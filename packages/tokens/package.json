@@ -1,0 +1,45 @@
+{
+  "name": "@santo/tokens",
+  "version": "0.1.0",
+  "description": "Fonte única de verdade dos design tokens do Santo — espelhada nas Variables do Figma",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/ts/index.d.ts",
+      "default": "./dist/ts/index.js"
+    },
+    "./css": "./dist/css/santo.css",
+    "./css/*": "./dist/css/*.css",
+    "./tailwind": "./dist/tailwind/santo.css",
+    "./tailwind/*": "./dist/tailwind/*.css",
+    "./figma/*": "./dist/figma/*.json",
+    "./brands": "./dist/ts/brands.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "clean": "rm -rf dist .turbo",
+    "figma:pull": "node scripts/figma-pull.mjs",
+    "figma:push": "node scripts/figma-push.mjs",
+    "figma:check": "node scripts/figma-check.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "test": "node scripts/check-structure.mjs && node scripts/check-figma-plan.mjs && node scripts/check-contrast.mjs",
+    "lint": "eslint scripts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "style-dictionary": "^5.5.0"
+  },
+  "devDependencies": {
+    "@santo/config": "workspace:*",
+    "chokidar": "^4.0.3",
+    "typescript": "^5.9.3"
+  }
+}

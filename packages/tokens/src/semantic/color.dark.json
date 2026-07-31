@@ -1,0 +1,171 @@
+{
+  "$description": "Camada semântica — modo Dark. Espelho exato de color.light.json em estrutura de chaves. Os `solid` de feedback (success/warning/danger/info) permanecem no mesmo degrau do modo claro de propósito: clarear demais derrubaria o contraste do texto branco em cima deles.",
+  "color": {
+    "surface": {
+      "page": { "$type": "color", "$value": "{palette.neutral.950}" },
+      "raised": { "$type": "color", "$value": "{palette.neutral.900}" },
+      "sunken": { "$type": "color", "$value": "{palette.neutral.1000}" },
+      "overlay": { "$type": "color", "$value": "#000000b8" },
+      "inverse": { "$type": "color", "$value": "{palette.neutral.50}" }
+    },
+    "bg": {
+      "brand": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.brand.700}" },
+          "hover": { "$type": "color", "$value": "{palette.brand.600}" },
+          "active": { "$type": "color", "$value": "{palette.brand.500}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.brand.950}" },
+          "hover": { "$type": "color", "$value": "{palette.brand.900}" },
+          "active": { "$type": "color", "$value": "{palette.brand.800}" }
+        }
+      },
+      "neutral": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.neutral.800}" },
+          "hover": { "$type": "color", "$value": "{palette.neutral.700}" },
+          "active": { "$type": "color", "$value": "{palette.neutral.600}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.neutral.800}" },
+          "hover": { "$type": "color", "$value": "{palette.neutral.700}" },
+          "active": { "$type": "color", "$value": "{palette.neutral.600}" }
+        }
+      },
+      "accent": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.accent.400}" },
+          "hover": { "$type": "color", "$value": "{palette.accent.300}" },
+          "active": { "$type": "color", "$value": "{palette.accent.200}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.accent.950}" },
+          "hover": { "$type": "color", "$value": "{palette.accent.900}" },
+          "active": { "$type": "color", "$value": "{palette.accent.800}" }
+        }
+      },
+      "success": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.success.500}" },
+          "hover": { "$type": "color", "$value": "{palette.success.400}" },
+          "active": { "$type": "color", "$value": "{palette.success.300}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.success.950}" },
+          "hover": { "$type": "color", "$value": "{palette.success.900}" },
+          "active": { "$type": "color", "$value": "{palette.success.800}" }
+        }
+      },
+      "warning": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.warning.500}" },
+          "hover": { "$type": "color", "$value": "{palette.warning.400}" },
+          "active": { "$type": "color", "$value": "{palette.warning.300}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.warning.950}" },
+          "hover": { "$type": "color", "$value": "{palette.warning.900}" },
+          "active": { "$type": "color", "$value": "{palette.warning.800}" }
+        }
+      },
+      "danger": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.danger.800}" },
+          "hover": { "$type": "color", "$value": "{palette.danger.700}" },
+          "active": { "$type": "color", "$value": "{palette.danger.600}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.danger.950}" },
+          "hover": { "$type": "color", "$value": "{palette.danger.900}" },
+          "active": { "$type": "color", "$value": "{palette.danger.800}" }
+        }
+      },
+      "info": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.info.800}" },
+          "hover": { "$type": "color", "$value": "{palette.info.700}" },
+          "active": { "$type": "color", "$value": "{palette.info.600}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.info.950}" },
+          "hover": { "$type": "color", "$value": "{palette.info.900}" },
+          "active": { "$type": "color", "$value": "{palette.info.800}" }
+        }
+      },
+      "input": {
+        "default": { "$type": "color", "$value": "{palette.neutral.900}" },
+        "hover": { "$type": "color", "$value": "{palette.neutral.900}" },
+        "disabled": { "$type": "color", "$value": "{palette.neutral.800}" }
+      },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.800}" },
+      "selected": { "$type": "color", "$value": "{palette.brand.950}" },
+      "transparent": { "$type": "color", "$value": "#00000000" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "{palette.neutral.50}" },
+      "secondary": { "$type": "color", "$value": "{palette.neutral.300}" },
+      "tertiary": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "placeholder": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.600}" },
+      "inverse": { "$type": "color", "$value": "{palette.neutral.950}" },
+      "on-brand": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-neutral": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-accent": { "$type": "color", "$value": "{palette.accent.950}" },
+      "on-success": {
+        "$description": "No escuro o verde sólido clareia ao interagir e passa do ponto em que o branco ainda serve — aqui, ao contrário do tema claro, a frente é escura.",
+        "$type": "color",
+        "$value": "{palette.success.950}"
+      },
+      "on-warning": { "$type": "color", "$value": "{palette.warning.950}" },
+      "on-danger": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-info": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.300}" },
+      "accent": { "$type": "color", "$value": "{palette.accent.200}" },
+      "success": { "$type": "color", "$value": "{palette.success.300}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.300}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.200}" },
+      "info": { "$type": "color", "$value": "{palette.info.300}" },
+      "link": {
+        "default": { "$type": "color", "$value": "{palette.brand.300}" },
+        "hover": { "$type": "color", "$value": "{palette.brand.200}" },
+        "visited": { "$type": "color", "$value": "{palette.brand.400}" }
+      }
+    },
+    "border": {
+      "subtle": {
+        "$description": "Divisória — separa conteúdo, não delimita controle. É por isso que ela é a única borda isenta do mínimo de 3:1 da WCAG 1.4.11 (ver EXEMPT em scripts/check-contrast.mjs).",
+        "$type": "color",
+        "$value": "{palette.neutral.800}"
+      },
+      "default": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "strong": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.500}" },
+      "success": { "$type": "color", "$value": "{palette.success.500}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.400}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.500}" },
+      "info": { "$type": "color", "$value": "{palette.info.500}" },
+      "focus": { "$type": "color", "$value": "{palette.brand.400}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.800}" }
+    },
+    "icon": {
+      "primary": { "$type": "color", "$value": "{palette.neutral.200}" },
+      "secondary": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "tertiary": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.600}" },
+      "on-brand": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-neutral": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-accent": { "$type": "color", "$value": "{palette.accent.950}" },
+      "on-success": { "$type": "color", "$value": "{palette.success.950}" },
+      "on-warning": { "$type": "color", "$value": "{palette.warning.950}" },
+      "on-danger": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-info": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.400}" },
+      "accent": { "$type": "color", "$value": "{palette.accent.400}" },
+      "success": { "$type": "color", "$value": "{palette.success.400}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.400}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.400}" },
+      "info": { "$type": "color", "$value": "{palette.info.400}" }
+    }
+  }
+}

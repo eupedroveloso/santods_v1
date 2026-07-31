@@ -2,25 +2,39 @@
   "name": "santo-ds",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+  "description": "Santo Design System — fonte única de verdade compartilhada entre Figma e código",
+  "packageManager": "pnpm@11.18.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=10"
   },
-  "dependencies": {
-    "next": "16.2.10",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,json,md,css}\"",
+    "tokens": "pnpm --filter @santo/tokens build",
+    "tokens:watch": "pnpm --filter @santo/tokens dev",
+    "figma:pull": "pnpm --filter @santo/tokens figma:pull",
+    "figma:push": "pnpm --filter @santo/tokens figma:push",
+    "figma:check": "pnpm --filter @santo/tokens figma:check",
+    "storybook": "pnpm --filter @santo/storybook dev",
+    "docs": "pnpm --filter @santo/docs dev",
+    "landing": "pnpm --filter @santo/landing dev"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.10",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@santo/config": "workspace:*",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.6",
+    "turbo": "^2.10.7",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@dev-mbr/icons": "^1.0.2"
   }
 }

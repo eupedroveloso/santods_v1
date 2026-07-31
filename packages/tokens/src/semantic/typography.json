@@ -1,0 +1,710 @@
+{
+  "typography": {
+    "$description": "Os Text Styles do Santo, 1 para 1 com o Figma. A grade é papel × peso: 11 papéis × 6 pesos = 66 estilos, mais 2 de código. TUDO aqui é referência, nunca literal — um valor digitado à mão viraria um Text Style sem boundVariables no Figma, idêntico na tela e morto para o sistema, porque não acompanharia nem mudança de escala nem troca de marca. O nome NÃO carrega a família: um estilo chamado \"albert-sans/...\" mentiria no painel do produto que aponta a marca para outra fonte.",
+    "heading-1": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.72}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.80}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      }
+    },
+    "heading-2": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.60}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.72}",
+          "letterSpacing": "{type.tracking.tighter}"
+        }
+      }
+    },
+    "heading-3": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.48}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.56}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      }
+    },
+    "heading-4": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.36}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.44}",
+          "letterSpacing": "{type.tracking.tight}"
+        }
+      }
+    },
+    "heading-5": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.30}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.38}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      }
+    },
+    "heading-6": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.24}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.32}",
+          "letterSpacing": "{type.tracking.snug}"
+        }
+      }
+    },
+    "body-large": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.18}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.28}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      }
+    },
+    "body": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.16}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.24}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      }
+    },
+    "body-small": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      }
+    },
+    "caption": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      }
+    },
+    "caption-small": {
+      "light": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.light}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      },
+      "regular": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      },
+      "medium": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.medium}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      },
+      "semibold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.semibold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      },
+      "bold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.bold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      },
+      "extrabold": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.sans}",
+          "fontSize": "{type.size.10}",
+          "fontWeight": "{type.weight.extrabold}",
+          "lineHeight": "{type.leading.16}",
+          "letterSpacing": "{type.tracking.wide}"
+        }
+      }
+    },
+    "code": {
+      "$description": "Único papel fora da grade: usa a família mono, que não muda com a marca porque código monoespaçado não é identidade, é legibilidade.",
+      "md": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.mono}",
+          "fontSize": "{type.size.14}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.20}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      },
+      "sm": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "{brand.family.mono}",
+          "fontSize": "{type.size.12}",
+          "fontWeight": "{type.weight.regular}",
+          "lineHeight": "{type.leading.18}",
+          "letterSpacing": "{type.tracking.normal}"
+        }
+      }
+    }
+  }
+}

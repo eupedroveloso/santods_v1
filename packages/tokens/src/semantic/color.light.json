@@ -1,0 +1,180 @@
+{
+  "$description": "Camada semântica — modo Light. REGRA DURA: este arquivo e color.dark.json têm exatamente as mesmas chaves; só os valores diferem. O verificador de paridade quebra o build se divergirem, porque no Figma os dois são modos de UMA coleção e um modo sem valor vira token quebrado.",
+  "color": {
+    "surface": {
+      "$description": "Planos de fundo por profundidade, não por cor.",
+      "page": { "$type": "color", "$value": "{palette.neutral.50}" },
+      "raised": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "sunken": { "$type": "color", "$value": "{palette.neutral.100}" },
+      "overlay": { "$type": "color", "$value": "#100d1699" },
+      "inverse": { "$type": "color", "$value": "{palette.neutral.900}" }
+    },
+    "bg": {
+      "brand": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.brand.600}" },
+          "hover": { "$type": "color", "$value": "{palette.brand.700}" },
+          "active": { "$type": "color", "$value": "{palette.brand.800}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.brand.50}" },
+          "hover": { "$type": "color", "$value": "{palette.brand.100}" },
+          "active": { "$type": "color", "$value": "{palette.brand.200}" }
+        }
+      },
+      "neutral": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.neutral.900}" },
+          "hover": { "$type": "color", "$value": "{palette.neutral.800}" },
+          "active": { "$type": "color", "$value": "{palette.neutral.700}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.neutral.100}" },
+          "hover": { "$type": "color", "$value": "{palette.neutral.200}" },
+          "active": { "$type": "color", "$value": "{palette.neutral.300}" }
+        }
+      },
+      "accent": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.accent.400}" },
+          "hover": { "$type": "color", "$value": "{palette.accent.500}" },
+          "active": { "$type": "color", "$value": "{palette.accent.600}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.accent.50}" },
+          "hover": { "$type": "color", "$value": "{palette.accent.100}" },
+          "active": { "$type": "color", "$value": "{palette.accent.200}" }
+        }
+      },
+      "success": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.success.700}" },
+          "hover": { "$type": "color", "$value": "{palette.success.800}" },
+          "active": { "$type": "color", "$value": "{palette.success.900}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.success.50}" },
+          "hover": { "$type": "color", "$value": "{palette.success.100}" },
+          "active": { "$type": "color", "$value": "{palette.success.200}" }
+        }
+      },
+      "warning": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.warning.300}" },
+          "hover": { "$type": "color", "$value": "{palette.warning.400}" },
+          "active": { "$type": "color", "$value": "{palette.warning.500}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.warning.50}" },
+          "hover": { "$type": "color", "$value": "{palette.warning.100}" },
+          "active": { "$type": "color", "$value": "{palette.warning.200}" }
+        }
+      },
+      "danger": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.danger.600}" },
+          "hover": { "$type": "color", "$value": "{palette.danger.700}" },
+          "active": { "$type": "color", "$value": "{palette.danger.800}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.danger.50}" },
+          "hover": { "$type": "color", "$value": "{palette.danger.100}" },
+          "active": { "$type": "color", "$value": "{palette.danger.200}" }
+        }
+      },
+      "info": {
+        "solid": {
+          "default": { "$type": "color", "$value": "{palette.info.600}" },
+          "hover": { "$type": "color", "$value": "{palette.info.700}" },
+          "active": { "$type": "color", "$value": "{palette.info.800}" }
+        },
+        "subtle": {
+          "default": { "$type": "color", "$value": "{palette.info.50}" },
+          "hover": { "$type": "color", "$value": "{palette.info.100}" },
+          "active": { "$type": "color", "$value": "{palette.info.200}" }
+        }
+      },
+      "input": {
+        "default": { "$type": "color", "$value": "{palette.neutral.0}" },
+        "hover": { "$type": "color", "$value": "{palette.neutral.0}" },
+        "disabled": { "$type": "color", "$value": "{palette.neutral.100}" }
+      },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.100}" },
+      "selected": { "$type": "color", "$value": "{palette.brand.50}" },
+      "transparent": { "$type": "color", "$value": "#00000000" }
+    },
+    "text": {
+      "primary": { "$type": "color", "$value": "{palette.neutral.900}" },
+      "secondary": { "$type": "color", "$value": "{palette.neutral.600}" },
+      "tertiary": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "placeholder": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "inverse": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-brand": {
+        "$description": "Texto sobre `bg/brand/solid/*`. Existe um token destes POR FAMÍLIA, e não um único `on-solid`, porque nenhuma cor de frente serve todas: as famílias amarelas são claras demais para branco, e no tema escuro o verde também é. Um token por família é o que permite a cada rampa sólida escolher a sua direção sem arrastar as outras.",
+        "$type": "color",
+        "$value": "{palette.neutral.0}"
+      },
+      "on-neutral": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-accent": {
+        "$description": "O ouro é claro demais para texto branco — sobre accent o texto escurece.",
+        "$type": "color",
+        "$value": "{palette.accent.950}"
+      },
+      "on-success": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-warning": {
+        "$description": "Mesma razão do accent: o âmbar do `warning` sólido é amarelo, não laranja escuro.",
+        "$type": "color",
+        "$value": "{palette.warning.950}"
+      },
+      "on-danger": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-info": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.700}" },
+      "accent": { "$type": "color", "$value": "{palette.accent.800}" },
+      "success": { "$type": "color", "$value": "{palette.success.800}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.800}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.700}" },
+      "info": { "$type": "color", "$value": "{palette.info.800}" },
+      "link": {
+        "default": { "$type": "color", "$value": "{palette.brand.600}" },
+        "hover": { "$type": "color", "$value": "{palette.brand.700}" },
+        "visited": { "$type": "color", "$value": "{palette.brand.800}" }
+      }
+    },
+    "border": {
+      "subtle": {
+        "$description": "Divisória — separa conteúdo, não delimita controle. É por isso que ela é a única borda isenta do mínimo de 3:1 da WCAG 1.4.11 (ver EXEMPT em scripts/check-contrast.mjs).",
+        "$type": "color",
+        "$value": "{palette.neutral.200}"
+      },
+      "default": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "strong": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.600}" },
+      "success": { "$type": "color", "$value": "{palette.success.600}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.600}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.600}" },
+      "info": { "$type": "color", "$value": "{palette.info.600}" },
+      "focus": { "$type": "color", "$value": "{palette.brand.600}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.200}" }
+    },
+    "icon": {
+      "primary": { "$type": "color", "$value": "{palette.neutral.700}" },
+      "secondary": { "$type": "color", "$value": "{palette.neutral.500}" },
+      "tertiary": { "$type": "color", "$value": "{palette.neutral.400}" },
+      "disabled": { "$type": "color", "$value": "{palette.neutral.300}" },
+      "on-brand": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-neutral": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-accent": { "$type": "color", "$value": "{palette.accent.950}" },
+      "on-success": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-warning": { "$type": "color", "$value": "{palette.warning.950}" },
+      "on-danger": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "on-info": { "$type": "color", "$value": "{palette.neutral.0}" },
+      "brand": { "$type": "color", "$value": "{palette.brand.600}" },
+      "accent": { "$type": "color", "$value": "{palette.accent.700}" },
+      "success": { "$type": "color", "$value": "{palette.success.600}" },
+      "warning": { "$type": "color", "$value": "{palette.warning.600}" },
+      "danger": { "$type": "color", "$value": "{palette.danger.600}" },
+      "info": { "$type": "color", "$value": "{palette.info.600}" }
+    }
+  }
+}

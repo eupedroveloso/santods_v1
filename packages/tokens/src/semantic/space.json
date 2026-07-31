@@ -1,0 +1,43 @@
+{
+  "$description": "Espaçamento semântico em camisetas. Componentes NUNCA usam `dimension/space/16` direto — usam `space/md`. Assim um produto com densidade diferente reaponta as camisetas e o layout inteiro respira de outro jeito, sem tocar em componente.",
+  "space": {
+    "none": { "$type": "dimension", "$value": "{dimension.space.0}" },
+    "3xs": { "$type": "dimension", "$value": "{dimension.space.2}" },
+    "2xs": { "$type": "dimension", "$value": "{dimension.space.4}" },
+    "xs": { "$type": "dimension", "$value": "{dimension.space.8}" },
+    "sm": { "$type": "dimension", "$value": "{dimension.space.12}" },
+    "md": { "$type": "dimension", "$value": "{dimension.space.16}" },
+    "lg": { "$type": "dimension", "$value": "{dimension.space.24}" },
+    "xl": { "$type": "dimension", "$value": "{dimension.space.32}" },
+    "2xl": { "$type": "dimension", "$value": "{dimension.space.40}" },
+    "3xl": { "$type": "dimension", "$value": "{dimension.space.48}" },
+    "4xl": { "$type": "dimension", "$value": "{dimension.space.64}" },
+    "5xl": { "$type": "dimension", "$value": "{dimension.space.80}" },
+    "6xl": { "$type": "dimension", "$value": "{dimension.space.96}" },
+    "7xl": { "$type": "dimension", "$value": "{dimension.space.128}" },
+    "8xl": { "$type": "dimension", "$value": "{dimension.space.192}" }
+  },
+  "radius": {
+    "$description": "O 6px saiu da escala quando a regra do múltiplo de 4 passou a valer, e `sm` reaponta para 8. Consequência a saber: `sm` e `md` resolvem hoje para o MESMO 8px, porque `md` não é um degrau — é o botão da marca (`brand.shape.radius-base`). Um produto mais expressivo aponta esse botão para 16 e a coincidência desaparece sozinha. Trocar `md` por um degrau fixo consertaria a aparência e mataria a única alavanca de forma que a marca tem.",
+    "none": { "$type": "dimension", "$value": "{dimension.radius.0}" },
+    "xs": { "$type": "dimension", "$value": "{dimension.radius.4}" },
+    "sm": { "$type": "dimension", "$value": "{dimension.radius.8}" },
+    "md": { "$type": "dimension", "$value": "{brand.shape.radius-base}" },
+    "lg": { "$type": "dimension", "$value": "{dimension.radius.12}" },
+    "xl": { "$type": "dimension", "$value": "{dimension.radius.16}" },
+    "2xl": { "$type": "dimension", "$value": "{dimension.radius.24}" },
+    "3xl": { "$type": "dimension", "$value": "{dimension.radius.32}" },
+    "full": { "$type": "dimension", "$value": "{dimension.radius.full}" }
+  },
+  "border": {
+    "none": { "$type": "dimension", "$value": "{dimension.border.0}" },
+    "thin": { "$type": "dimension", "$value": "{dimension.border.1}" },
+    "thick": { "$type": "dimension", "$value": "{dimension.border.2}" },
+    "heavy": { "$type": "dimension", "$value": "{dimension.border.4}" }
+  },
+  "focus": {
+    "$description": "Anel de foco. Largura e deslocamento são tokens porque a espessura do anel é decisão de marca, não de componente.",
+    "width": { "$type": "dimension", "$value": "{dimension.border.2}" },
+    "offset": { "$type": "dimension", "$value": "{dimension.border.2}" }
+  }
+}

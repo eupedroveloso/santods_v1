@@ -1,0 +1,23 @@
+{
+  "$description": "Identidade não-cromática do Santo: tipografia e o 'sotaque' de forma da marca. Um produto novo sobrescreve este arquivo e o palette.json — nada mais.",
+  "brand": {
+    "id": { "$type": "string", "$value": "santo" },
+    "name": { "$type": "string", "$value": "Santo" },
+    "family": {
+      "$description": "A ÚNICA coisa que muda entre marcas na tipografia. Escala, tamanho, entrelinha e peso são idênticos em todo produto — só a família se move, e é por isso que ela mora aqui, na coleção que tem um modo por marca, e não junto das escalas invariantes. Cada Text Style vincula `fontFamily` a esta variável: trocar o modo da marca troca a fonte dos 66 estilos de uma vez, sem tocar em nenhum deles. Requisito para a fonte do Figma e a do build serem literalmente a mesma: estar no Google Fonts.",
+      "sans": {
+        "$description": "Albert Sans — a voz do Santo. Cobre os 11 papéis de texto, do heading-1 ao caption-small.",
+        "$type": "fontFamily",
+        "$value": ["Albert Sans", "system-ui", "-apple-system", "Segoe UI", "sans-serif"]
+      },
+      "mono": {
+        "$type": "fontFamily",
+        "$value": ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"]
+      }
+    },
+    "shape": {
+      "$description": "O raio base da marca. O Santo é levemente arredondado — sério, não infantil. Um produto mais expressivo pode apontar para dimension/radius/16.",
+      "radius-base": { "$type": "dimension", "$value": "{dimension.radius.8}" }
+    }
+  }
+}

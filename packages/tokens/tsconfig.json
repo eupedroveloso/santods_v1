@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@santo/config/tsconfig/base",
+  "compilerOptions": {
+    // Este pacote não tem um só arquivo .ts: o build é JavaScript puro anotado
+    // em JSDoc. `checkJs` é o que transforma essas anotações em verificação de
+    // verdade — sem ele, `tsc --noEmit` passaria por não ter nada para olhar,
+    // e o `typecheck` do pacote seria uma checagem cerimonial.
+    "allowJs": true,
+    "checkJs": true,
+
+    // Desligado só aqui. A regra vale a pena em TypeScript, onde a guarda que
+    // ela pede é natural de escrever; num script de build em JS ela dispara
+    // quase toda vez em `match[1]` e `THEMES[0]` — posições em que o índice é
+    // garantido pelo regex ou pela config logo acima. O resto do `strict`,
+    // inclusive `strictNullChecks`, continua ligado.
+    "noUncheckedIndexedAccess": false,
+
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": ["scripts/**/*.mjs", "figma.config.mjs"],
+  "exclude": ["node_modules", "dist", ".turbo"]
+}

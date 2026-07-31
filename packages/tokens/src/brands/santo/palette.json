@@ -1,0 +1,101 @@
+{
+  "$description": "Paleta da marca Santo. Esta é a ÚNICA camada de cor que muda entre marcas — a camada semântica referencia estes nomes e nunca valores literais, então trocar este arquivo re-tematiza todo o sistema sem tocar em um componente sequer.",
+  "palette": {
+    "brand": {
+      "$description": "Vitral — violeta profundo, o roxo de vitral de igreja. Cor principal do Santo.",
+      "50": { "$type": "color", "$value": "#f4f1fe" },
+      "100": { "$type": "color", "$value": "#e9e3fd" },
+      "200": { "$type": "color", "$value": "#d5c9fc" },
+      "300": { "$type": "color", "$value": "#b9a5f9" },
+      "400": { "$type": "color", "$value": "#9a79f5" },
+      "500": { "$type": "color", "$value": "#7c4def" },
+      "600": { "$type": "color", "$value": "#6a2fe3" },
+      "700": { "$type": "color", "$value": "#5a22c4" },
+      "800": { "$type": "color", "$value": "#4a1d9f" },
+      "900": { "$type": "color", "$value": "#3d1b80" },
+      "950": { "$type": "color", "$value": "#250f52" }
+    },
+    "accent": {
+      "$description": "Halo — o ouro do nimbo. Usado com parcimônia: destaque, premium, estados de marca.",
+      "50": { "$type": "color", "$value": "#fef9ec" },
+      "100": { "$type": "color", "$value": "#fcf0cb" },
+      "200": { "$type": "color", "$value": "#f9e093" },
+      "300": { "$type": "color", "$value": "#f5ca5a" },
+      "400": { "$type": "color", "$value": "#f2b62f" },
+      "500": { "$type": "color", "$value": "#e89f13" },
+      "600": { "$type": "color", "$value": "#cd7d0d" },
+      "700": { "$type": "color", "$value": "#a85b0f" },
+      "800": { "$type": "color", "$value": "#8a4813" },
+      "900": { "$type": "color", "$value": "#743b16" },
+      "950": { "$type": "color", "$value": "#431d06" }
+    },
+    "neutral": {
+      "$description": "Pedra — cinzas com um véu violeta. Neutro puro brigaria com o Vitral; este assenta junto. Os degraus 400 e 500 são mais escuros do que a progressão puramente estética pediria: são eles que carregam texto terciário, placeholder, ícone terciário e borda de controle, e nessas posições a rampa precisa atravessar os limiares da WCAG (3:1 e 4.5:1 contra `surface.sunken`) em vez de passar raspando. Ver scripts/check-contrast.mjs.",
+      "0": { "$type": "color", "$value": "#ffffff" },
+      "50": { "$type": "color", "$value": "#faf9fb" },
+      "100": { "$type": "color", "$value": "#f4f2f7" },
+      "200": { "$type": "color", "$value": "#e9e6ee" },
+      "300": { "$type": "color", "$value": "#d7d3de" },
+      "400": { "$type": "color", "$value": "#8f879e" },
+      "500": { "$type": "color", "$value": "#726b7d" },
+      "600": { "$type": "color", "$value": "#5c5568" },
+      "700": { "$type": "color", "$value": "#464050" },
+      "800": { "$type": "color", "$value": "#2f2a38" },
+      "900": { "$type": "color", "$value": "#1c1824" },
+      "950": { "$type": "color", "$value": "#100d16" },
+      "1000": { "$type": "color", "$value": "#000000" }
+    },
+    "success": {
+      "50": { "$type": "color", "$value": "#ecfdf3" },
+      "100": { "$type": "color", "$value": "#d1fadf" },
+      "200": { "$type": "color", "$value": "#a6f4c5" },
+      "300": { "$type": "color", "$value": "#6ce9a6" },
+      "400": { "$type": "color", "$value": "#32d583" },
+      "500": { "$type": "color", "$value": "#12b76a" },
+      "600": { "$type": "color", "$value": "#039855" },
+      "700": { "$type": "color", "$value": "#027a48" },
+      "800": { "$type": "color", "$value": "#05603a" },
+      "900": { "$type": "color", "$value": "#054f31" },
+      "950": { "$type": "color", "$value": "#023321" }
+    },
+    "warning": {
+      "50": { "$type": "color", "$value": "#fffaeb" },
+      "100": { "$type": "color", "$value": "#fef0c7" },
+      "200": { "$type": "color", "$value": "#fedf89" },
+      "300": { "$type": "color", "$value": "#fec84b" },
+      "400": { "$type": "color", "$value": "#fdb022" },
+      "500": { "$type": "color", "$value": "#f79009" },
+      "600": { "$type": "color", "$value": "#dc6803" },
+      "700": { "$type": "color", "$value": "#b54708" },
+      "800": { "$type": "color", "$value": "#93370d" },
+      "900": { "$type": "color", "$value": "#7a2e0e" },
+      "950": { "$type": "color", "$value": "#4e1d09" }
+    },
+    "danger": {
+      "50": { "$type": "color", "$value": "#fef3f2" },
+      "100": { "$type": "color", "$value": "#fee4e2" },
+      "200": { "$type": "color", "$value": "#fecdca" },
+      "300": { "$type": "color", "$value": "#fda29b" },
+      "400": { "$type": "color", "$value": "#f97066" },
+      "500": { "$type": "color", "$value": "#f04438" },
+      "600": { "$type": "color", "$value": "#d92d20" },
+      "700": { "$type": "color", "$value": "#b42318" },
+      "800": { "$type": "color", "$value": "#912018" },
+      "900": { "$type": "color", "$value": "#7a271a" },
+      "950": { "$type": "color", "$value": "#55160c" }
+    },
+    "info": {
+      "50": { "$type": "color", "$value": "#eff8ff" },
+      "100": { "$type": "color", "$value": "#d1e9ff" },
+      "200": { "$type": "color", "$value": "#b2ddff" },
+      "300": { "$type": "color", "$value": "#84caff" },
+      "400": { "$type": "color", "$value": "#53b1fd" },
+      "500": { "$type": "color", "$value": "#2e90fa" },
+      "600": { "$type": "color", "$value": "#1570ef" },
+      "700": { "$type": "color", "$value": "#175cd3" },
+      "800": { "$type": "color", "$value": "#1849a9" },
+      "900": { "$type": "color", "$value": "#194185" },
+      "950": { "$type": "color", "$value": "#102a56" }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+.next
+.turbo
+out
+storybook-static
+coverage
+pnpm-lock.yaml
+packages/tokens/dist
+packages/icons/src/generated
