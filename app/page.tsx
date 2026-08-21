@@ -1,65 +1,66 @@
-import Image from "next/image";
+import Link from "next/link";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import type { TokenDoc } from "@/lib/tokens/types";
+import { Foundations } from "./_screens/foundations";
+import { ApplicationScreen, CardsScreen, DashboardScreen } from "./_screens/showcase";
+import { ThemeToggle } from "./_components/theme-toggle";
+import { figmaSource } from "@/lib/tokens";
 
-export default function Home() {
+export default async function Home() {
+  const doc: TokenDoc = JSON.parse(
+    await readFile(join(process.cwd(), "tokens/santods.figma.json"), "utf8"),
+  );
+  const tokenCount = Object.values(doc.collections).reduce(
+    (a, c) => a + Object.keys(c.variables).length,
+    0,
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main
+      className="mx-auto flex w-full flex-col gap-3xl px-lg py-3xl"
+      style={{ maxWidth: "var(--santo-dimension-container-xl)" }}
+    >
+      <header className="flex flex-wrap items-end justify-between gap-md border-b-thin border-border-subtle pb-lg">
+        <div className="flex flex-col gap-2xs">
+          <h1 className="santo-heading-3-bold">SantoDS v1</h1>
+          <p className="santo-body-regular text-text-secondary">
+            {tokenCount} variáveis, {Object.keys(doc.textStyles).length} text styles e{" "}
+            {Object.keys(doc.effectStyles).length} effect styles, em paridade verificada com{" "}
+            <code className="santo-code-sm">{figmaSource.fileName}</code>.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex items-center gap-sm">
+          <Link
+            href="/componentes"
+            className="santo-body-small-semibold rounded-md border-thin border-border-default px-md py-xs text-text-primary hover:bg-neutral-subtle-default"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Componentes
+          </Link>
+          <Link
+            href="/studio"
+            className="santo-body-small-semibold rounded-md bg-brand-solid-default px-md py-xs text-text-on-brand hover:bg-brand-solid-hover"
           >
-            Documentation
-          </a>
+            Abrir o Studio
+          </Link>
+          <ThemeToggle />
         </div>
-      </main>
-    </div>
+      </header>
+
+      <Foundations doc={doc} />
+
+      <section className="flex flex-col gap-lg border-t-thin border-border-subtle pt-3xl">
+        <h2 className="santo-heading-5-semibold">Componentes montados só com tokens</h2>
+        <CardsScreen />
+        <DashboardScreen />
+        <ApplicationScreen />
+      </section>
+
+      <footer className="santo-caption-regular border-t-thin border-border-subtle pt-lg text-text-tertiary">
+        {Object.entries(doc.collections)
+          .map(([name, c]) => `${name} (${Object.keys(c.variables).length}, modos: ${c.modes.join("/")})`)
+          .join(" · ")}
+      </footer>
+    </main>
   );
 }

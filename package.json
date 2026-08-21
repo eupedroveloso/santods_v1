@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tokens": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/check-parity.mjs",
+    "tokens:fingerprint": "node scripts/check-parity.mjs --fingerprint",
+    "studio": "next dev --port 4310",
+    "brands:check": "node scripts/check-brands.mjs",
+    "design:check": "node scripts/check-design.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

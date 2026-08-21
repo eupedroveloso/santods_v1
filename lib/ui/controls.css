@@ -1,0 +1,152 @@
+/* Estilos de controle que precisam de pseudo-elemento — o navegador não expõe
+   o miolo de <input type="range"> por classe utilitária. Tudo em token. */
+
+.santo-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.santo-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* --- trilha --- */
+
+.santo-range::-webkit-slider-runnable-track {
+  height: var(--santo-dimension-space-4);
+  border-radius: var(--santo-radius-full);
+  background: var(--santo-color-bg-neutral-subtle-active);
+}
+
+.santo-range::-moz-range-track {
+  height: var(--santo-dimension-space-4);
+  border-radius: var(--santo-radius-full);
+  background: var(--santo-color-bg-neutral-subtle-active);
+}
+
+/* Firefox pinta sozinho a parte já percorrida. */
+.santo-range::-moz-range-progress {
+  height: var(--santo-dimension-space-4);
+  border-radius: var(--santo-radius-full);
+  background: var(--santo-color-bg-brand-solid-default);
+}
+
+/* --- punho --- */
+
+.santo-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: var(--santo-dimension-space-16);
+  width: var(--santo-dimension-space-16);
+  /* centraliza o punho na trilha fina */
+  margin-top: calc(
+    (var(--santo-dimension-space-4) - var(--santo-dimension-space-16)) / 2
+  );
+  border-radius: var(--santo-radius-full);
+  background: var(--santo-color-surface-raised);
+  border: var(--santo-border-thick) solid var(--santo-color-bg-brand-solid-default);
+  box-shadow: var(--santo-shadow-xs);
+  transition: transform var(--santo-motion-duration-fast) var(--santo-motion-easing-standard);
+}
+
+.santo-range::-moz-range-thumb {
+  height: var(--santo-dimension-space-16);
+  width: var(--santo-dimension-space-16);
+  box-sizing: border-box;
+  border-radius: var(--santo-radius-full);
+  background: var(--santo-color-surface-raised);
+  border: var(--santo-border-thick) solid var(--santo-color-bg-brand-solid-default);
+  box-shadow: var(--santo-shadow-xs);
+}
+
+.santo-range:hover::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.santo-range:focus-visible {
+  outline: none;
+}
+
+.santo-range:focus-visible::-webkit-slider-thumb {
+  outline: var(--santo-focus-width) solid var(--santo-color-border-focus);
+  outline-offset: var(--santo-focus-offset);
+}
+
+.santo-range:focus-visible::-moz-range-thumb {
+  outline: var(--santo-focus-width) solid var(--santo-color-border-focus);
+  outline-offset: var(--santo-focus-offset);
+}
+
+/* --- barra de rolagem ---------------------------------------------------
+   O padrão do sistema ignora o tema: fica preta no claro e clara no escuro,
+   com trilha grossa. Aqui a trilha some e o polegar usa o token de borda, que
+   já é calibrado para recuar sem sumir nos dois modos. */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--santo-color-border-default) transparent;
+}
+
+::-webkit-scrollbar {
+  width: var(--santo-dimension-space-12);
+  height: var(--santo-dimension-space-12);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--santo-color-border-default);
+  border-radius: var(--santo-radius-full);
+  /* A borda transparente com background-clip afina o polegar sem estreitar a
+     área de agarre — o alvo continua clicável. */
+  border: var(--santo-dimension-space-4) solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--santo-color-border-strong);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --- largura de borda ---------------------------------------------------
+   O utilitário `border` do Tailwind é 1px cravado — um valor solto escondido
+   num padrão. Estes amarram a espessura aos tokens border/*, para o controle
+   de espessura da aba Marca alcançar cartão e componente. */
+
+@utility border-thin {
+  border-width: var(--santo-border-thin);
+}
+
+@utility border-thick {
+  border-width: var(--santo-border-thick);
+}
+
+@utility border-heavy {
+  border-width: var(--santo-border-heavy);
+}
+
+@utility border-t-thin {
+  border-top-width: var(--santo-border-thin);
+}
+
+@utility border-b-thin {
+  border-bottom-width: var(--santo-border-thin);
+}
+
+@utility border-l-thin {
+  border-left-width: var(--santo-border-thin);
+}
+
+@utility border-r-thin {
+  border-right-width: var(--santo-border-thin);
+}
