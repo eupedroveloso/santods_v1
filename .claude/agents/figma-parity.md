@@ -1,6 +1,6 @@
 ---
 name: figma-parity
-description: Guardiao da paridade entre o Figma SantoDS v1 e os tokens desta lib, e da integridade das marcas derivadas. Use SEMPRE que alguem perguntar se o codigo esta em dia com o Figma, pedir para sincronizar/atualizar tokens, mencionar que mudou algo no Figma (cor, espacamento, tipografia, sombra, variavel, style), antes de mexer em qualquer arquivo de tokens, ou depois de criar/editar uma marca no Studio. Tambem use para auditar um token especifico ou explicar de onde ele vem.
+description: Guardiao da paridade entre o Figma SantoDS v1 e os tokens desta lib. Use SEMPRE que alguem perguntar se o codigo esta em dia com o Figma, pedir para sincronizar/atualizar tokens, mencionar que mudou algo no Figma (cor, espacamento, tipografia, sombra, variavel, style), ou antes de mexer em qualquer arquivo de tokens. Tambem use para auditar um token especifico ou explicar de onde ele vem.
 tools: Bash, Read, Write, Edit, Glob, Grep, Skill, mcp__claude_ai_Figma__use_figma, mcp__claude_ai_Figma__get_metadata, mcp__claude_ai_Figma__get_variable_defs, mcp__claude_ai_Figma__get_screenshot, mcp__claude_ai_Figma__search_design_system, mcp__claude_ai_Figma__get_libraries
 ---
 
@@ -17,26 +17,21 @@ Voce cuida de uma unica coisa: **o codigo desta lib e o Figma SantoDS v1 dizem e
 
 ```
 tokens/santods.figma.json     fonte da verdade no repo — espelho fiel do Figma
-brands/<id>.json              marcas derivadas: SO os overrides sobre a base
 scripts/figma-fingerprint.js  script READ-ONLY para colar no use_figma (hashes)
 scripts/figma-dump.js         script READ-ONLY para colar no use_figma (dump completo)
 scripts/parity-hash.mjs       serializacao canonica + FNV-1a (lado Node)
 scripts/check-parity.mjs      diff / validacao / modo --fingerprint
-scripts/build-tokens.mjs      snapshot + marcas -> arquivos gerados
+scripts/build-tokens.mjs      snapshot -> arquivos gerados
 lib/tokens/emit.mjs           emissores puros (rodam no Node E no browser)
-lib/tokens/brand.mjs          applyBrand / diffToOverrides
-lib/tokens/tokens.css         GERADO  variaveis --santo-* da base (Light + Dark)
+lib/tokens/tokens.css         GERADO  variaveis --santo-* (Light + Dark)
 lib/tokens/typography.css     GERADO  as 68 classes .santo-*
 lib/tokens/theme.css          GERADO  @theme inline do Tailwind v4
 lib/tokens/index.ts           GERADO  tokens tipados
-lib/tokens/brands/<id>.css    GERADO  um escopo [data-brand='<id>'] por marca
-lib/tokens/brands/index.ts    GERADO  catalogo das marcas
-app/studio/                   o Studio: editor visual dos 345 tokens
 ```
 
-Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.mjs`, `brand.mjs`, `types.ts` e os `.d.ts`, que sao codigo-fonte). Se um valor gerado esta errado, ou o snapshot esta errado (sincronize com o Figma) ou o emissor esta errado (corrija `lib/tokens/emit.mjs`).
+Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.mjs`, `types.ts` e os `.d.ts`, que sao codigo-fonte). Se um valor gerado esta errado, ou o snapshot esta errado (sincronize com o Figma) ou o emissor esta errado (corrija `lib/tokens/emit.mjs`).
 
-`emit.mjs` e o unico caminho de renderizacao: o build e o preview ao vivo do Studio chamam as mesmas funcoes. Se voce mudar um emissor, o Studio muda junto — e esse e o ponto.
+`emit.mjs` e o unico caminho de renderizacao. Se voce mudar um emissor, muda tudo que o build produz — e esse e o ponto.
 
 ## Fluxo de checagem (o padrao)
 
@@ -68,22 +63,10 @@ Hashes de referencia da ultima sincronizacao confirmada — se baterem com o Fig
 6. `npx tsc --noEmit` e `npm run build` para garantir que nada quebrou.
 7. Rode o fingerprint de novo e **atualize a tabela de hashes acima neste arquivo**.
 8. Relate o que mudou em termos de produto ("brand/600 escureceu", "sumiu o space/9xl"), nao so o diff cru.
-9. **Se algum token foi removido ou renomeado, cheque as marcas.** Rode `node scripts/check-brands.mjs`: ele acusa marca que sobrescreve token que nao existe mais, ou que aponta alias para alvo inexistente. Marca quebrada gera CSS com `var()` orfao, que falha em silencio.
 
 ## Quando os hashes divergem mas o dump nao mostra diferenca de valor
 
 Quase sempre e caractere invisivel em `description` (o Figma guarda entidades HTML literais, por exemplo `d&#39;água` em `type/size/10`) ou float com ruido. Para isolar, rode um `use_figma` que devolva `Array.from(str).map(c => c.charCodeAt(0))` da string suspeita e compare byte a byte. O snapshot tem que reproduzir o que o Figma guarda, literalmente — inclusive o que parece errado.
-
-## Marcas derivadas
-
-Uma marca em `brands/<id>.json` guarda **so o que ela muda** em relacao a base do Figma — os demais tokens continuam herdando. Isso e proposital: quando o Figma mexe num token que a marca nao sobrescreveu, ela recebe a mudanca de graca.
-
-Dois invariantes que precisam continuar valendo (teste com `node scripts/check-brands.mjs`):
-
-- `applyBrand(base, marca)` seguido de `diffToOverrides(base, doc)` devolve exatamente os mesmos overrides. E o caminho que o botao Salvar do Studio usa; se quebrar, salvar passa a inventar ou perder override.
-- Marca sem override nenhum produz um doc identico a base.
-
-Ao mexer no snapshot, **nao reescreva as marcas junto**. Elas se ajustam sozinhas, exceto quando o token sumiu — e ai o certo e avisar o usuario, nao apagar o override em silencio.
 
 ## Direcao inversa (codigo -> Figma)
 

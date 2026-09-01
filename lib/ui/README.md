@@ -43,7 +43,6 @@ props tipadas, tokens em tudo, e exporte no barril `index.ts`.
 | `SwatchPicker` | Amostra que abre o `ColorPicker`. |
 | `ColorPicker` | Seletor completo: área saturação × brilho, matiz, alfa, conta-gotas e campos que alternam HEX / RGB / HSL. Setas ajustam a área 2D. |
 | `ColorRow` | A linha do editor: amostra, rótulo de largura fixa, campo e ações. A largura fixa é o que alinha uma coluna longa. |
-| `FontPicker` | Escolha de família do catálogo do Google Fonts. Carrega a fonte ao selecionar e mostra amostra na fonte de verdade — seletor que lista tudo na mesma fonte é inútil. |
 | `Color` | Módulo de conversão: `hexToRgb`, `rgbToHsv`, `contrastRatio`… Use `contrastRatio` para conferir par duvidoso. |
 
 ### Estrutura
@@ -53,9 +52,6 @@ props tipadas, tokens em tudo, e exporte no barril `index.ts`.
 | `CardHeader` | Título + descrição + ação no canto. |
 | `Stat` | Número grande com rótulo e variação. |
 | `Divider` | Divisor de 1px no token de borda. |
-| `PanelSection` | Cabeçalho de seção de painel, com fio ao lado do rótulo. O fio é o que separa blocos numa coluna estreita, onde não há espaço para o silêncio fazer isso. |
-| `StackedField` | Rótulo acima do campo. Use quando o rótulo é longo e a coluna estreita — rótulo ao lado colide. |
-| `RampStrip` / `RampScale` | Faixa de rampa contínua, com anel no degrau-semente. Onze retângulos separados parecem amostras avulsas e escondem o que interessa: se a progressão de luminosidade é suave ou tem degrau. |
 | `Disclosure` | Grupo colapsável. O gatilho é pastilha que abraça o texto, não faixa de ponta a ponta. |
 | `Segmented` | Escolha única entre 2 e 4 opções visíveis. Prefira a `Select` quando a comparação entre elas importa. |
 | `TabBar` | Abas em pastilha. |
@@ -93,8 +89,8 @@ exatamente o que se quer (`size-2xl` = 40px para uma célula de calendário).
 
 ### Estilos que precisam de pseudo-elemento
 
-`listbox.tsx` também traz o tipo `SelectOption`, usado por `FontPicker` e pelos
-seletores de alias do editor.
+`listbox.tsx` também traz o tipo `SelectOption`, que descreve as opções passadas
+à `Select`.
 
 `controls.css` — o navegador não expõe o miolo de `<input type="range">` por
 classe utilitária. A classe `.santo-range` estiliza trilha e punho, tudo em token.

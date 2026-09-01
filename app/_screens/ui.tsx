@@ -1,7 +1,7 @@
 /**
  * Primitivas de UI montadas so com tokens do SantoDS.
- * Servem as telas de preview do Studio — e de prova de que os tokens
- * sustentam componentes reais, nao so uma grade de swatches.
+ * Sao a prova de que os tokens sustentam componentes reais, nao so uma
+ * grade de swatches.
  */
 
 export function Card({

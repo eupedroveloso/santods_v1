@@ -24,7 +24,6 @@ const HEX_EXEMPT = {
     'primitivas de espaco de cor: o arco-iris de matiz e vermelho->verde em qualquer marca, e o punho branco precisa ser branco sobre qualquer cor',
   'lib/ui/color.ts': 'modulo de conversao de cor',
   'app/componentes/docs.tsx': 'conteudo de demonstracao: mostra um hex literal dentro de um campo de cor',
-  'lib/tokens/fallback.ts': 'sentinelas de token quebrado, isolados de proposito num modulo so',
 };
 
 /** Unidades que nao existem como token e nunca vao existir. */

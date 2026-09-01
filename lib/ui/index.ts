@@ -30,13 +30,6 @@ export * as Color from "./color";
 
 export { NumberField } from "./number-field";
 
-
-export { FontPicker } from "./font-picker";
-
-export { RampStrip, RampScale } from "./ramp";
-
-export { PanelSection, StackedField } from "./section";
-
 export { Disclosure } from "./disclosure";
 
 export { Segmented, TabBar } from "./segmented";

@@ -61,25 +61,10 @@ export type TokenDoc = {
     cssPrefix: string;
     libraryKey?: string;
     note?: string;
-    brandId?: string;
-    brandName?: string;
   };
   collections: Record<string, CollectionDef>;
   textStyles: Record<string, TextStyleDef>;
   effectStyles: Record<string, EffectStyleDef>;
-};
-
-export type BrandOverrides = {
-  variables: Record<string, Partial<VariableDef> & { collection?: string }>;
-  textStyles: Record<string, Partial<TextStyleDef>>;
-  effectStyles: Record<string, EffectStyleDef>;
-};
-
-export type Brand = {
-  id: string;
-  name: string;
-  description?: string;
-  overrides: BrandOverrides;
 };
 
 export type Declaration = { name: string; varName: string; value: string };

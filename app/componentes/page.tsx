@@ -22,8 +22,7 @@ export default function ComponentesPage() {
         <h1 className="santo-heading-3-bold">Componentes</h1>
         <p className="santo-body-large-regular max-w-[60ch] text-text-secondary">
           Peças construídas só com tokens do Figma. Cada uma abaixo está viva — o que
-          você vê é o componente real, no tema atual. Alterne o modo no topo da home
-          ou aplique uma marca com <code className="santo-code-sm">data-brand</code>.
+          você vê é o componente real, no tema atual. Alterne o modo no topo da home.
         </p>
       </header>
 

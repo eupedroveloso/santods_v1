@@ -31,8 +31,7 @@ export function Section({
 
 /**
  * Grade de foundations. Le a estrutura do doc (para refletir tokens novos) mas
- * pinta tudo com `var(--santo-*)`, entao herda o escopo em que for montada —
- * e por isso que a mesma tela serve de preview ao vivo no Studio.
+ * pinta tudo com `var(--santo-*)`, entao herda o escopo em que for montada.
  */
 export function Foundations({ doc }: { doc: TokenDoc }) {
   const palette = namesOf(doc, "Palette", "palette/");

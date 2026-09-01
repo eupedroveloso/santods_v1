@@ -37,12 +37,6 @@ export default async function Home() {
           >
             Componentes
           </Link>
-          <Link
-            href="/studio"
-            className="santo-body-small-semibold rounded-md bg-brand-solid-default px-md py-xs text-text-on-brand hover:bg-brand-solid-hover"
-          >
-            Abrir o Studio
-          </Link>
           <ThemeToggle />
         </div>
       </header>

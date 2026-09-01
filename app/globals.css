@@ -6,9 +6,6 @@
 @import "../lib/tokens/typography.css";
 @import "../lib/tokens/theme.css";
 
-/* Marcas derivadas: cada uma vira um escopo [data-brand="<id>"]. */
-@import "../lib/tokens/brands/all.css";
-
 /* Controles que precisam de pseudo-elemento. */
 @import "../lib/ui/controls.css";
 

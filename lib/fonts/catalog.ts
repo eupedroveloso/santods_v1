@@ -86,7 +86,3 @@ export function googleFontUrl(family: string): string | null {
     : `${entry.weights.from}..${entry.weights.to}`;
   return `https://fonts.googleapis.com/css2?family=${name}:wght@${axis}&display=swap`;
 }
-
-/** Id estável do <link>, para não duplicar a mesma família. */
-export const fontLinkId = (family: string) =>
-  `santo-font-${family.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
