@@ -1,7 +1,10 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { FormEvent, ReactNode } from "react";
+import { IconButton } from "./button";
 import { Avatar } from "./data";
+import { IconTile } from "./icon-tile";
+import { ArrowUpRight, File, Plus } from "./icons";
 
 /**
  * Conversa.
@@ -28,10 +31,10 @@ export function ChatBubble({
     <div className={`flex flex-col gap-3xs ${mine ? "items-end" : "items-start"}`}>
       {time && <span className="santo-caption-small-regular text-text-tertiary">{time}</span>}
       <div
-        className={`santo-body-small-regular max-w-[85%] rounded-xl px-sm py-xs ${
+        className={`santo-body-small-regular max-w-5/6 rounded-xl px-md py-sm ${
           mine
             ? "rounded-br-xs bg-brand-solid-default text-text-on-brand"
-            : "rounded-bl-xs bg-neutral-subtle-default text-text-primary"
+            : "rounded-bl-xs bg-surface-sunken text-text-primary"
         }`}
       >
         {children}
@@ -41,7 +44,7 @@ export function ChatBubble({
           {reactions.map(([emoji, count]) => (
             <span
               key={emoji}
-              className="santo-caption-small-medium inline-flex items-center gap-3xs rounded-full border-thin border-border-subtle bg-surface-raised px-2xs py-3xs"
+              className="santo-edge santo-caption-small-medium inline-flex h-(--santo-dimension-size-24) items-center gap-3xs rounded-full bg-surface-raised px-xs shadow-xs"
             >
               <span aria-hidden>{emoji}</span>
               <span className="tabular-nums text-text-secondary">{count}</span>
@@ -58,15 +61,18 @@ export function ChatHeader({
   name,
   status,
   actions,
+  avatarSrc,
 }: {
   name: string;
   status?: string;
+  /** Foto da pessoa; sem ela, iniciais. */
+  avatarSrc?: string;
   actions?: ReactNode;
 }) {
   return (
     <div className="flex items-center gap-sm">
       <span className="relative shrink-0">
-        <Avatar name={name} size={40} />
+        <Avatar name={name} src={avatarSrc} size={40} />
         {status && (
           <span className="absolute right-0 bottom-0 size-xs rounded-full border-thick border-[var(--santo-color-surface-raised)] bg-success-solid-default" />
         )}
@@ -83,12 +89,12 @@ export function ChatHeader({
 /** Tres pontos pulsando, para quem esta digitando. */
 export function TypingIndicator() {
   return (
-    <div className="inline-flex items-center gap-3xs rounded-xl rounded-bl-xs bg-neutral-subtle-default px-sm py-xs">
+    <div className="inline-flex items-center gap-3xs rounded-xl rounded-bl-xs bg-surface-sunken px-md py-sm">
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="size-2xs animate-pulse rounded-full bg-icon-tertiary"
-          style={{ animationDelay: `${i * 150}ms` }}
+          className="santo-animate-pulse size-2xs rounded-full bg-icon-tertiary"
+          style={{ animationDelay: `calc(var(--santo-motion-duration-slow) * ${i})` }}
         />
       ))}
     </div>
@@ -99,16 +105,67 @@ export function TypingIndicator() {
 export function ChatAttachment({ name, size }: { name: string; size: string }) {
   return (
     <div className="flex items-center gap-sm">
-      <span className="grid size-2xl shrink-0 place-items-center rounded-full bg-surface-raised text-icon-primary">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ width: "var(--santo-dimension-icon-16)", height: "var(--santo-dimension-icon-16)" }}>
-          <path d="M14 3v5h5" />
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2Z" />
-        </svg>
-      </span>
+      <IconTile shape="round" tone="outline">
+        <File size={16} />
+      </IconTile>
       <span className="flex min-w-0 flex-col">
         <span className="santo-body-small-medium truncate">{name}</span>
         <span className="santo-caption-regular opacity-80">{size}</span>
       </span>
     </div>
+  );
+}
+
+/**
+ * Campo de mensagem: POCO (surface/sunken) em pilula com acoes inline — anexar
+ * a esquerda (ghost), enviar a direita (primary em circulo). Sem borda em
+ * repouso; foco = anel de campo. Enter envia; o pai guarda o texto.
+ */
+export function ChatComposer({
+  value,
+  onChange,
+  onSend,
+  onAttach,
+  placeholder = "Escreva uma mensagem…",
+  actions,
+  className = "",
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  onSend: (value: string) => void;
+  /** Sem ele, o botao de anexar some. */
+  onAttach?: () => void;
+  placeholder?: string;
+  /** Acoes extras antes do enviar (IconButton ghost pill). */
+  actions?: ReactNode;
+  className?: string;
+}) {
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    if (value.trim()) onSend(value);
+  };
+  return (
+    <form
+      onSubmit={submit}
+      className={`santo-focus-within-field flex items-center gap-2xs rounded-full bg-surface-sunken p-2xs ${className}`}
+    >
+      {onAttach && (
+        <IconButton pill size="sm" label="Anexar" onClick={onAttach}>
+          <Plus size={16} />
+        </IconButton>
+      )}
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        aria-label={placeholder}
+        // O anel e do poco inteiro (focus-within), nao do input.
+        className={`santo-body-small-regular h-(--santo-dimension-size-32) min-w-0 flex-1 bg-transparent text-text-primary outline-none placeholder:text-text-placeholder ${onAttach ? "" : "pl-sm"}`}
+      />
+      {actions}
+      <IconButton pill size="sm" variant="primary" label="Enviar" type="submit" disabled={!value.trim()}>
+        <ArrowUpRight size={16} />
+      </IconButton>
+    </form>
   );
 }

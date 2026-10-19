@@ -7,10 +7,21 @@ import type { ControlSize } from "./button";
 /**
  * Campos de entrada do SantoDS.
  *
- * Todo campo tem borda `color/border/default`, fundo `color/bg/input/*` e
- * placeholder em `color/text/placeholder` — os tres tokens existem justamente
- * para isso e nao devem ser trocados por cinzas avulsos.
+ * `variant`:
+ *   well     (padrao) POCO: surface/sunken, sem contorno em repouso, pilula
+ *            (1 linha) — campo dentro de cartao (skill santo-ui-craft, secao 9).
+ *   outline  contorno border/default sobre bg/input, raio md: formulario longo
+ *            sobre o chao, onde o poco nao se destacaria.
+ * Foco nos dois: anel brand/subtle + borda brand. Placeholder em
+ * color/text/placeholder.
  */
+
+export type FieldVariant = "well" | "outline";
+
+const LOOK: Record<FieldVariant, { box: string; idle: string }> = {
+  well: { box: "rounded-full bg-surface-sunken", idle: "border-transparent hover:bg-neutral-subtle-default" },
+  outline: { box: "rounded-md bg-input-default", idle: "border-border-default hover:border-border-strong" },
+};
 
 const SIZES: Record<ControlSize, string> = {
   sm: "h-(--santo-dimension-size-32) px-xs santo-caption-regular",
@@ -19,7 +30,7 @@ const SIZES: Record<ControlSize, string> = {
 };
 
 const BASE =
-  "w-full min-w-0 rounded-md border-thin bg-input-default text-text-primary placeholder:text-text-placeholder transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled";
+  "santo-focus-field w-full min-w-0 border-thin text-text-primary placeholder:text-text-placeholder transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled";
 
 // `size` do HTML e numerico; o nosso e a escala de controle, entao substituimos.
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
@@ -28,26 +39,28 @@ export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
   invalid?: boolean;
   /** Usa fonte mono — bom para hex, medidas e nomes de token. */
   mono?: boolean;
+  variant?: FieldVariant;
 };
 
-export function Input({ size = "md", invalid, mono, className = "", ...rest }: InputProps) {
+export function Input({ size = "md", invalid, mono, variant = "well", className = "", ...rest }: InputProps) {
   return (
     <input
       aria-invalid={invalid || undefined}
-      className={`${BASE} ${SIZES[size]} ${invalid ? "border-border-danger" : "border-border-default hover:border-border-strong"} ${mono ? "font-mono" : ""} ${className}`}
+      className={`${BASE} ${LOOK[variant].box} ${SIZES[size]} ${invalid ? "border-border-danger" : LOOK[variant].idle} ${mono ? "font-mono" : ""} ${className}`}
       {...rest}
     />
   );
 }
 
-export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean };
+export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean; variant?: FieldVariant };
 
-export function Textarea({ invalid, className = "", rows = 3, ...rest }: TextareaProps) {
+/** Multilinha: poco com raio xl (nao pilula), ou contorno com raio md. */
+export function Textarea({ invalid, variant = "well", className = "", rows = 3, ...rest }: TextareaProps) {
   return (
     <textarea
       rows={rows}
       aria-invalid={invalid || undefined}
-      className={`${BASE} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : "border-border-default hover:border-border-strong"} ${className}`}
+      className={`${BASE} ${variant === "well" ? "rounded-xl bg-surface-sunken" : LOOK.outline.box} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : LOOK[variant].idle} ${className}`}
       {...rest}
     />
   );

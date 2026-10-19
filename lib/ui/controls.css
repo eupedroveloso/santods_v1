@@ -81,43 +81,6 @@
   outline-offset: var(--santo-focus-offset);
 }
 
-/* --- barra de rolagem ---------------------------------------------------
-   O padrão do sistema ignora o tema: fica preta no claro e clara no escuro,
-   com trilha grossa. Aqui a trilha some e o polegar usa o token de borda, que
-   já é calibrado para recuar sem sumir nos dois modos. */
-
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--santo-color-border-default) transparent;
-}
-
-::-webkit-scrollbar {
-  width: var(--santo-dimension-space-12);
-  height: var(--santo-dimension-space-12);
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--santo-color-border-default);
-  border-radius: var(--santo-radius-full);
-  /* A borda transparente com background-clip afina o polegar sem estreitar a
-     área de agarre — o alvo continua clicável. */
-  border: var(--santo-dimension-space-4) solid transparent;
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--santo-color-border-strong);
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
 /* --- largura de borda ---------------------------------------------------
    O utilitário `border` do Tailwind é 1px cravado — um valor solto escondido
    num padrão. Estes amarram a espessura aos tokens border/*, para o controle
@@ -149,4 +112,186 @@
 
 @utility border-r-thin {
   border-right-width: var(--santo-border-thin);
+}
+
+/* --- xadrez atras de amostra de cor ---
+   Classe, nao style inline: uma tabela de 100 tokens tem ~300 amostras, e o
+   gradiente inline repetido custava ~130 KB de HTML so na pagina de cores.
+   @utility, e nao classe solta: entra na camada de utilitarios (nao atropela
+   outra classe) e aceita variante (hover:, dark:). */
+
+@utility santo-checker {
+  background-image:
+    linear-gradient(45deg, var(--santo-color-bg-neutral-subtle-active) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--santo-color-bg-neutral-subtle-active) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--santo-color-bg-neutral-subtle-active) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--santo-color-bg-neutral-subtle-active) 75%);
+  background-size: var(--santo-dimension-space-8) var(--santo-dimension-space-8);
+  background-position:
+    0 0,
+    0 var(--santo-dimension-space-4),
+    var(--santo-dimension-space-4) calc(var(--santo-dimension-space-4) * -1),
+    calc(var(--santo-dimension-space-4) * -1) 0;
+}
+
+/* --- barras de rolagem ---
+   Todas finas, em qualquer container com scroll: pagina, sidebar, Select,
+   CommandPalette, CodeBlock, Table. Regra global, nao por componente.
+
+   Caminho principal (Chrome, Safari, Edge, Arc): ::-webkit-scrollbar com
+   calha de space/2 (2px, o menor degrau da escala), trilha transparente,
+   polegar raio full em border/default e hover em border/strong.
+   (border/subtle chegou a ser usado e sumia: ~1,2:1 sobre a superficie.)
+
+   Firefox: scrollbar-width + scrollbar-color, mas SO dentro de
+   @supports (-moz-appearance: none), que so o Gecko reconhece. No Chrome 121+, declarar
+   scrollbar-width liga o "thin" nativo (~11px, cara de barra de sistema) e
+   faz o navegador IGNORAR o ::-webkit-scrollbar — era a barra grossa que
+   aparecia na sidebar.
+
+   Em @layer base de proposito: fora de camada esta regra venceria qualquer
+   utilitario (um scrollbar-none num carrossel, por exemplo). Regra unica —
+   nao duplique em outro arquivo. */
+
+@layer base {
+  /* Calha de space/8 delimitada por dois tracos de border/subtle (esquerda e
+     direita na vertical, cima e baixo na horizontal); polegar visivel de ~4px
+     pela borda transparente de space/2 + background-clip. */
+  ::-webkit-scrollbar {
+    width: var(--santo-dimension-space-8);
+    height: var(--santo-dimension-space-8);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-track:vertical {
+    border-left: var(--santo-border-thin) solid var(--santo-color-border-subtle);
+    border-right: var(--santo-border-thin) solid var(--santo-color-border-subtle);
+  }
+
+  ::-webkit-scrollbar-track:horizontal {
+    border-top: var(--santo-border-thin) solid var(--santo-color-border-subtle);
+    border-bottom: var(--santo-border-thin) solid var(--santo-color-border-subtle);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: var(--santo-dimension-space-2) solid transparent;
+    border-radius: var(--santo-radius-full);
+    background-color: var(--santo-color-border-default);
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--santo-color-border-strong);
+  }
+
+  @supports (-moz-appearance: none) {
+    * {
+      scrollbar-width: auto;
+      scrollbar-color: var(--santo-color-border-default) transparent;
+    }
+  }
+
+  /* A pagina reserva a calha: abrir uma rota curta depois de uma longa nao
+     faz o layout pular para o lado. */
+  html {
+    scrollbar-gutter: stable;
+  }
+}
+
+/* Container cuja borda ja encosta na calha (a sidebar com border-r): tira o
+   traco da trilha desse lado, para nao somar 2px com a borda dele. */
+@utility scrollbar-edge {
+  &::-webkit-scrollbar-track:vertical {
+    border-right-width: 0;
+  }
+  &::-webkit-scrollbar-track:horizontal {
+    border-bottom-width: 0;
+  }
+}
+
+/* Calha horizontal entre duas bordas que ja existem (ultima linha da tabela
+   em cima, borda do cartao embaixo): sem os tracos da trilha. */
+@utility scrollbar-bare {
+  &::-webkit-scrollbar-track:horizontal {
+    border-top-width: 0;
+    border-bottom-width: 0;
+  }
+}
+
+/* Para container rolavel que nao deve pular quando a barra aparece.
+   NAO use na sidebar: o WebKit reserva a calha classica (~16px) com gutter
+   stable mesmo com a barra de 2px, e sobra um vao antes do divisor. */
+@utility scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
+/* --- asset por tema ---
+   Para imagem que nao da para recolorir por token (logo em SVG com cor de
+   marca fixa): publique uma versao por tema e marque cada <img> com a classe
+   do tema em que ela aparece. Mesmos seletores de modo escuro dos tokens:
+   data-theme='dark', ou o sistema escuro sem data-theme='light'. */
+
+@layer components {
+  .santo-show-dark {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .santo-show-light {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .santo-show-dark {
+    display: block;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) .santo-show-light {
+      display: none;
+    }
+
+    :root:not([data-theme='light']) .santo-show-dark {
+      display: block;
+    }
+  }
+}
+
+/* --- foco de campo ---
+   Campos (Input, Textarea, Select, NumberField, SearchTrigger) e marcadores
+   (Checkbox, Radio, Switch) ganham anel sutil colado na borda — sem gap, como
+   uma sombra chapada — no lugar do outline forte com offset. A borda do campo
+   vai para border/brand: e ela que segura o contraste (o anel claro sozinho
+   fica abaixo de 3:1). Campo invalido mantem a borda de perigo.
+   Botoes e links seguem com o outline global de :focus-visible.
+
+   Tokens: anel bg/brand/subtle/active; largura dimension/space/4.
+   PENDENCIA FIGMA: --santo-focus-width e 2px (border/2); falta um token de
+   largura de anel (4px) e um semantico color/border/focus-ring.
+
+   Em utilities e com o pseudo repetido para vencer hover:border-* (mesma camada). */
+
+@layer utilities {
+  /* Poco com campo dentro (composer, busca em barra): o anel e do conjunto. */
+  .santo-focus-within-field:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 var(--santo-dimension-space-4) var(--santo-color-bg-brand-subtle-active);
+  }
+  /* Campo de texto: anel em qualquer foco (clique ou teclado), como todo campo.
+     Controle que e botao (Select, Checkbox, SearchTrigger...): so no teclado. */
+  :is(input, textarea).santo-focus-field:focus:focus,
+  .santo-focus-field:focus-visible:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--santo-dimension-space-4) var(--santo-color-bg-brand-subtle-active);
+  }
+
+  :is(input, textarea).santo-focus-field:not([aria-invalid="true"]):focus:focus,
+  .santo-focus-field:not([aria-invalid="true"]):focus-visible:focus-visible {
+    border-color: var(--santo-color-border-brand);
+  }
 }

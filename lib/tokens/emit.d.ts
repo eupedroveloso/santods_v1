@@ -1,4 +1,4 @@
-import type { Declaration, TokenDoc, ShadowLayer, VariableType, RawValue } from "./types";
+import type { Declaration, TokenDoc, ShadowLayer, TextStyleDef, VariableType, RawValue } from "./types";
 
 export declare const BANNER: string;
 export declare function isAlias(v: unknown): v is string;
@@ -32,6 +32,16 @@ export declare function textStyleClass(figmaName: string, prefix: string): strin
 export declare function declarations(doc: TokenDoc, mode?: string): Declaration[];
 export declare function colorDeclarations(doc: TokenDoc, mode: string): Declaration[];
 export declare function colorUtility(name: string): string;
+export declare function textStyleCss(
+  s: TextStyleDef,
+  index: Map<string, IndexEntry>,
+  tracking: Map<RawValue, string>,
+  prefix: string,
+): { fontFamily: string; fontSize: string; lineHeight: string; letterSpacing: string; fontWeight: string };
+export declare function textRoleOf(figmaName: string): string;
+export declare function shadowVarOf(name: string, prefix: string): string;
+export declare function themeKeyOf(entry: Pick<IndexEntry, "name" | "collection">): string | null;
+export declare function utilityClassOf(entry: Pick<IndexEntry, "name" | "collection">): string | null;
 export declare function emitTokensCss(doc: TokenDoc, opts?: { banner?: string; selector?: string }): string;
 export declare function emitTypographyCss(doc: TokenDoc, opts?: { banner?: string }): string;
 export declare function emitThemeCss(doc: TokenDoc, opts?: { banner?: string }): string;

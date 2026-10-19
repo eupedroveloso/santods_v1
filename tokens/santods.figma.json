@@ -15,47 +15,47 @@
       "variables": {
         "palette/brand/50": {
           "type": "COLOR",
-          "value": "#f4f1fe"
+          "value": "#edf3fb"
         },
         "palette/brand/100": {
           "type": "COLOR",
-          "value": "#e9e3fd"
+          "value": "#e2edfe"
         },
         "palette/brand/200": {
           "type": "COLOR",
-          "value": "#d5c9fc"
+          "value": "#cde2fe"
         },
         "palette/brand/300": {
           "type": "COLOR",
-          "value": "#b9a5f9"
+          "value": "#b1d0fe"
         },
         "palette/brand/400": {
           "type": "COLOR",
-          "value": "#9a79f5"
+          "value": "#8bbaff"
         },
         "palette/brand/500": {
           "type": "COLOR",
-          "value": "#7c4def"
+          "value": "#64a3fe"
         },
         "palette/brand/600": {
           "type": "COLOR",
-          "value": "#6a2fe3"
+          "value": "#4693ff"
         },
         "palette/brand/700": {
           "type": "COLOR",
-          "value": "#5a22c4"
+          "value": "#2c71cf"
         },
         "palette/brand/800": {
           "type": "COLOR",
-          "value": "#4a1d9f"
+          "value": "#1c54a0"
         },
         "palette/brand/900": {
           "type": "COLOR",
-          "value": "#3d1b80"
+          "value": "#14407c"
         },
         "palette/brand/950": {
           "type": "COLOR",
-          "value": "#250f52"
+          "value": "#021e45"
         },
         "palette/accent/50": {
           "type": "COLOR",
@@ -107,51 +107,51 @@
         },
         "palette/neutral/50": {
           "type": "COLOR",
-          "value": "#faf9fb"
+          "value": "#f8fafb"
         },
         "palette/neutral/100": {
           "type": "COLOR",
-          "value": "#f4f2f7"
+          "value": "#f0f3f8"
         },
         "palette/neutral/200": {
           "type": "COLOR",
-          "value": "#e9e6ee"
+          "value": "#e3e8ef"
         },
         "palette/neutral/300": {
           "type": "COLOR",
-          "value": "#d7d3de"
+          "value": "#ced5df"
         },
         "palette/neutral/400": {
           "type": "COLOR",
-          "value": "#8f879e"
+          "value": "#7d8ca0"
         },
         "palette/neutral/500": {
           "type": "COLOR",
-          "value": "#726b7d"
+          "value": "#636f7f"
         },
         "palette/neutral/600": {
           "type": "COLOR",
-          "value": "#5c5568"
+          "value": "#4d596a"
         },
         "palette/neutral/700": {
           "type": "COLOR",
-          "value": "#464050"
+          "value": "#394352"
         },
         "palette/neutral/800": {
           "type": "COLOR",
-          "value": "#2f2a38"
+          "value": "#242d39"
         },
         "palette/neutral/900": {
           "type": "COLOR",
-          "value": "#1c1824"
+          "value": "#131a25"
         },
         "palette/neutral/950": {
           "type": "COLOR",
-          "value": "#100d16"
+          "value": "#090f17"
         },
         "palette/neutral/1000": {
           "type": "COLOR",
-          "value": "#000000"
+          "value": "#08060b"
         },
         "palette/success/50": {
           "type": "COLOR",
@@ -1057,7 +1057,7 @@
             "TEXT_FILL"
           ],
           "values": {
-            "Light": "{palette/brand/700}",
+            "Light": "{palette/brand/800}",
             "Dark": "{palette/brand/300}"
           }
         },
@@ -1117,7 +1117,7 @@
             "TEXT_FILL"
           ],
           "values": {
-            "Light": "{palette/brand/600}",
+            "Light": "{palette/brand/700}",
             "Dark": "{palette/brand/300}"
           }
         },
@@ -1157,8 +1157,8 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/neutral/400}",
-            "Dark": "{palette/neutral/500}"
+            "Light": "{palette/neutral/300}",
+            "Dark": "{palette/neutral/700}"
           }
         },
         "color/border/strong": {
@@ -1167,8 +1167,8 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/neutral/500}",
-            "Dark": "{palette/neutral/400}"
+            "Light": "{palette/neutral/400}",
+            "Dark": "{palette/neutral/600}"
           }
         },
         "color/border/brand": {
@@ -1227,7 +1227,7 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/brand/600}",
+            "Light": "{palette/brand/700}",
             "Dark": "{palette/brand/400}"
           }
         },
@@ -1357,7 +1357,7 @@
             "SHAPE_FILL"
           ],
           "values": {
-            "Light": "{palette/brand/600}",
+            "Light": "{palette/brand/700}",
             "Dark": "{palette/brand/400}"
           }
         },

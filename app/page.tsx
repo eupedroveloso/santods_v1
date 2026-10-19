@@ -1,60 +1,66 @@
-import Link from "next/link";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
-import type { TokenDoc } from "@/lib/tokens/types";
-import { Foundations } from "./_screens/foundations";
-import { ApplicationScreen, CardsScreen, DashboardScreen } from "./_screens/showcase";
-import { ThemeToggle } from "./_components/theme-toggle";
+import { listCollections, listEffectStyles, listIdentities, listTextStyles } from "@/lib/docs/catalog";
 import { figmaSource } from "@/lib/tokens";
+import { componentsByTier, Icon, LinkCard } from "@/lib/ui";
+import { DocHeader, DocPage } from "./_docs/page-header";
+import { FIGMA_URL, groupAnchor } from "./_docs/links";
 
-export default async function Home() {
-  const doc: TokenDoc = JSON.parse(
-    await readFile(join(process.cwd(), "tokens/santods.figma.json"), "utf8"),
-  );
-  const tokenCount = Object.values(doc.collections).reduce(
-    (a, c) => a + Object.keys(c.variables).length,
-    0,
-  );
+export default function DocsHome() {
+  const collections = listCollections();
+  const textStyles = listTextStyles();
+  const effects = listEffectStyles();
+  const identities = listIdentities();
 
   return (
-    <main
-      className="mx-auto flex w-full flex-col gap-3xl px-lg py-3xl"
-      style={{ maxWidth: "var(--santo-dimension-container-xl)" }}
-    >
-      <header className="flex flex-wrap items-end justify-between gap-md border-b-thin border-border-subtle pb-lg">
-        <div className="flex flex-col gap-2xs">
-          <h1 className="santo-heading-3-bold">SantoDS v1</h1>
-          <p className="santo-body-regular text-text-secondary">
-            {tokenCount} variáveis, {Object.keys(doc.textStyles).length} text styles e{" "}
-            {Object.keys(doc.effectStyles).length} effect styles, em paridade verificada com{" "}
-            <code className="santo-code-sm">{figmaSource.fileName}</code>.
-          </p>
-        </div>
-        <div className="flex items-center gap-sm">
-          <Link
-            href="/componentes"
-            className="santo-body-small-semibold rounded-md border-thin border-border-default px-md py-xs text-text-primary hover:bg-neutral-subtle-default"
-          >
-            Componentes
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
+    <DocPage>
+      <DocHeader
+        title="Documentação"
+      />
 
-      <Foundations doc={doc} />
-
-      <section className="flex flex-col gap-lg border-t-thin border-border-subtle pt-3xl">
-        <h2 className="santo-heading-5-semibold">Componentes montados só com tokens</h2>
-        <CardsScreen />
-        <DashboardScreen />
-        <ApplicationScreen />
-      </section>
-
-      <footer className="santo-caption-regular border-t-thin border-border-subtle pt-lg text-text-tertiary">
-        {Object.entries(doc.collections)
-          .map(([name, c]) => `${name} (${Object.keys(c.variables).length}, modos: ${c.modes.join("/")})`)
-          .join(" · ")}
-      </footer>
-    </main>
+      <div className="grid grid-cols-1 gap-md md:grid-cols-2 xl:grid-cols-3">
+        <LinkCard
+          icon={<Icon.Palette size={20} />}
+          title="Tokens"
+          href="/tokens"
+          links={collections.map((c) => ({ label: `${c.name} · ${c.count}`, href: c.route }))}
+        />
+        <LinkCard
+          icon={<Icon.Type size={20} />}
+          title="Estilos"
+          href="/estilos"
+          links={[
+            { label: `Tipografia · ${textStyles.length}`, href: "/estilos/tipografia" },
+            { label: `Efeitos · ${effects.length}`, href: "/estilos/efeitos" },
+            { label: "Raio", href: `/tokens/semantic#${groupAnchor("radius")}` },
+            { label: "Espaçamento", href: `/tokens/semantic#${groupAnchor("space")}` },
+          ]}
+        />
+        <LinkCard
+          icon={<Icon.Grid size={20} />}
+          title="Componentes"
+          href="/componentes"
+          links={componentsByTier().map((t) => ({
+            label: `${t.label} · ${t.items.length}`,
+            href: `/componentes#${t.id}`,
+          }))}
+        />
+        <LinkCard
+          icon={<Icon.IdCard size={20} />}
+          title="Identidades"
+          href="/identidades"
+          links={identities.map((i) => ({ label: i.name, href: `/identidades#${i.slug}` }))}
+        />
+        <LinkCard
+          icon={<Icon.Layers size={20} />}
+          title="Overview"
+          href="/exemplos"
+          links={[{ label: "Ver as telas", href: "/exemplos" }]}
+        />
+        <LinkCard
+          icon={<Icon.Figma size={20} />}
+          title="Figma"
+          links={[{ label: `Abrir ${figmaSource.fileName}`, href: FIGMA_URL }]}
+        />
+      </div>
+    </DocPage>
   );
 }

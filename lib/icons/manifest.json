@@ -1,0 +1,655 @@
+{
+  "fileKey": "O0xV7p3taNff97XGjNjTMl",
+  "page": "Icones",
+  "generatedBy": "scripts/figma-icons.mjs build",
+  "icons": {
+    "magnifying-glass": {
+      "component": "MagnifyingGlassIcon",
+      "file": "lib/icons/magnifying-glass.tsx",
+      "figma": {
+        "name": "magnifying-glass",
+        "kind": "icon",
+        "setNodeId": "38:9545",
+        "nodeId": "38:9549",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "chevron-down": {
+      "component": "ChevronDownIcon",
+      "file": "lib/icons/chevron-down.tsx",
+      "figma": {
+        "name": "chevron-down",
+        "kind": "icon",
+        "setNodeId": "38:31255",
+        "nodeId": "38:31259",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "chevron-right": {
+      "component": "ChevronRightIcon",
+      "file": "lib/icons/chevron-right.tsx",
+      "figma": {
+        "name": "chevron-right",
+        "kind": "icon",
+        "setNodeId": "38:31281",
+        "nodeId": "38:31285",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "chevron-left": {
+      "component": "ChevronLeftIcon",
+      "file": "lib/icons/chevron-left.tsx",
+      "figma": {
+        "name": "chevron-left",
+        "kind": "icon",
+        "setNodeId": "38:31268",
+        "nodeId": "38:31272",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "chevron-up": {
+      "component": "ChevronUpIcon",
+      "file": "lib/icons/chevron-up.tsx",
+      "figma": {
+        "name": "chevron-up",
+        "kind": "icon",
+        "setNodeId": "38:31350",
+        "nodeId": "38:31354",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-rotate-left": {
+      "component": "ArrowRotateLeftIcon",
+      "file": "lib/icons/arrow-rotate-left.tsx",
+      "figma": {
+        "name": "arrow-rotate-left",
+        "kind": "icon",
+        "setNodeId": "38:29667",
+        "nodeId": "38:29671",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-rotate-right": {
+      "component": "ArrowRotateRightIcon",
+      "file": "lib/icons/arrow-rotate-right.tsx",
+      "figma": {
+        "name": "arrow-rotate-right",
+        "kind": "icon",
+        "setNodeId": "38:29723",
+        "nodeId": "38:29727",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrows-rotate": {
+      "component": "ArrowsRotateIcon",
+      "file": "lib/icons/arrows-rotate.tsx",
+      "figma": {
+        "name": "arrows-rotate",
+        "kind": "icon",
+        "setNodeId": "38:30605",
+        "nodeId": "38:30609",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-down-to-bracket": {
+      "component": "ArrowDownToBracketIcon",
+      "file": "lib/icons/arrow-down-to-bracket.tsx",
+      "figma": {
+        "name": "arrow-down-to-bracket",
+        "kind": "icon",
+        "setNodeId": "38:29009",
+        "nodeId": "38:29013",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "floppy-disk": {
+      "component": "FloppyDiskIcon",
+      "file": "lib/icons/floppy-disk.tsx",
+      "figma": {
+        "name": "floppy-disk",
+        "kind": "icon",
+        "setNodeId": "38:46806",
+        "nodeId": "38:46810",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "code": {
+      "component": "CodeIcon",
+      "file": "lib/icons/code.tsx",
+      "figma": {
+        "name": "code",
+        "kind": "icon",
+        "setNodeId": "38:6500",
+        "nodeId": "38:6504",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "sun": {
+      "component": "SunIcon",
+      "file": "lib/icons/sun.tsx",
+      "figma": {
+        "name": "sun",
+        "kind": "icon",
+        "setNodeId": "38:19812",
+        "nodeId": "38:19816",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "moon": {
+      "component": "MoonIcon",
+      "file": "lib/icons/moon.tsx",
+      "figma": {
+        "name": "moon",
+        "kind": "icon",
+        "setNodeId": "38:19076",
+        "nodeId": "38:19080",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "shuffle": {
+      "component": "ShuffleIcon",
+      "file": "lib/icons/shuffle.tsx",
+      "figma": {
+        "name": "shuffle",
+        "kind": "icon",
+        "setNodeId": "38:32747",
+        "nodeId": "38:32751",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "link": {
+      "component": "LinkIcon",
+      "file": "lib/icons/link.tsx",
+      "figma": {
+        "name": "link",
+        "kind": "icon",
+        "setNodeId": "38:52293",
+        "nodeId": "38:52297",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "link-slash": {
+      "component": "LinkSlashIcon",
+      "file": "lib/icons/link-slash.tsx",
+      "figma": {
+        "name": "link-slash",
+        "kind": "icon",
+        "setNodeId": "38:52377",
+        "nodeId": "38:52381",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "plus": {
+      "component": "PlusIcon",
+      "file": "lib/icons/plus.tsx",
+      "figma": {
+        "name": "plus",
+        "kind": "icon",
+        "setNodeId": "38:55367",
+        "nodeId": "38:55371",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "minus": {
+      "component": "MinusIcon",
+      "file": "lib/icons/minus.tsx",
+      "figma": {
+        "name": "minus",
+        "kind": "icon",
+        "setNodeId": "38:53342",
+        "nodeId": "38:53346",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "check": {
+      "component": "CheckIcon",
+      "file": "lib/icons/check.tsx",
+      "figma": {
+        "name": "check",
+        "kind": "icon",
+        "setNodeId": "38:14028",
+        "nodeId": "38:14032",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "xmark": {
+      "component": "XmarkIcon",
+      "file": "lib/icons/xmark.tsx",
+      "figma": {
+        "name": "xmark",
+        "kind": "icon",
+        "setNodeId": "38:15636",
+        "nodeId": "38:15640",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "ellipsis": {
+      "component": "EllipsisIcon",
+      "file": "lib/icons/ellipsis.tsx",
+      "figma": {
+        "name": "ellipsis",
+        "kind": "icon",
+        "setNodeId": "38:43980",
+        "nodeId": "38:43984",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "expand": {
+      "component": "ExpandIcon",
+      "file": "lib/icons/expand.tsx",
+      "figma": {
+        "name": "expand",
+        "kind": "icon",
+        "setNodeId": "38:44259",
+        "nodeId": "38:44263",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "copy": {
+      "component": "CopyIcon",
+      "file": "lib/icons/copy.tsx",
+      "figma": {
+        "name": "copy",
+        "kind": "icon",
+        "setNodeId": "38:41789",
+        "nodeId": "38:41793",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "download": {
+      "component": "DownloadIcon",
+      "file": "lib/icons/download.tsx",
+      "figma": {
+        "name": "download",
+        "kind": "icon",
+        "setNodeId": "38:43435",
+        "nodeId": "38:43439",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "palette": {
+      "component": "PaletteIcon",
+      "file": "lib/icons/palette.tsx",
+      "figma": {
+        "name": "palette",
+        "kind": "icon",
+        "setNodeId": "38:54424",
+        "nodeId": "38:54428",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-up-right": {
+      "component": "ArrowUpRightIcon",
+      "file": "lib/icons/arrow-up-right.tsx",
+      "figma": {
+        "name": "arrow-up-right",
+        "kind": "icon",
+        "setNodeId": "38:30381",
+        "nodeId": "38:30385",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-down-left": {
+      "component": "ArrowDownLeftIcon",
+      "file": "lib/icons/arrow-down-left.tsx",
+      "figma": {
+        "name": "arrow-down-left",
+        "kind": "icon",
+        "setNodeId": "38:28883",
+        "nodeId": "38:28887",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-trend-up": {
+      "component": "ArrowTrendUpIcon",
+      "file": "lib/icons/arrow-trend-up.tsx",
+      "figma": {
+        "name": "arrow-trend-up",
+        "kind": "icon",
+        "setNodeId": "38:29905",
+        "nodeId": "38:29909",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "github": {
+      "component": "GithubIcon",
+      "file": "lib/icons/github.tsx",
+      "figma": {
+        "name": "github",
+        "kind": "brand",
+        "setNodeId": "48:197",
+        "nodeId": "48:197",
+        "weight": null
+      },
+      "viewBox": "0 0 15 15"
+    },
+    "google": {
+      "component": "GoogleIcon",
+      "file": "lib/icons/google.tsx",
+      "figma": {
+        "name": "google",
+        "kind": "brand",
+        "setNodeId": "48:217",
+        "nodeId": "48:217",
+        "weight": null
+      },
+      "viewBox": "0 0 15 15"
+    },
+    "sparkles": {
+      "component": "SparklesIcon",
+      "file": "lib/icons/sparkles.tsx",
+      "figma": {
+        "name": "sparkles",
+        "kind": "icon",
+        "setNodeId": "38:59612",
+        "nodeId": "38:59616",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "figma": {
+      "component": "FigmaIcon",
+      "file": "lib/icons/figma.tsx",
+      "figma": {
+        "name": "figma",
+        "kind": "brand",
+        "setNodeId": "48:161",
+        "nodeId": "48:161",
+        "weight": null
+      },
+      "viewBox": "0 0 11 15"
+    },
+    "eyedropper": {
+      "component": "EyedropperIcon",
+      "file": "lib/icons/eyedropper.tsx",
+      "figma": {
+        "name": "eyedropper",
+        "kind": "icon",
+        "setNodeId": "38:44539",
+        "nodeId": "38:44543",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "bars": {
+      "component": "BarsIcon",
+      "file": "lib/icons/bars.tsx",
+      "figma": {
+        "name": "bars",
+        "kind": "icon",
+        "setNodeId": "38:35345",
+        "nodeId": "38:35349",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "book": {
+      "component": "BookIcon",
+      "file": "lib/icons/book.tsx",
+      "figma": {
+        "name": "book",
+        "kind": "icon",
+        "setNodeId": "38:15747",
+        "nodeId": "38:15751",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "font": {
+      "component": "FontIcon",
+      "file": "lib/icons/font.tsx",
+      "figma": {
+        "name": "font",
+        "kind": "icon",
+        "setNodeId": "38:1754",
+        "nodeId": "38:1758",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "layer-group": {
+      "component": "LayerGroupIcon",
+      "file": "lib/icons/layer-group.tsx",
+      "figma": {
+        "name": "layer-group",
+        "kind": "icon",
+        "setNodeId": "38:25499",
+        "nodeId": "38:25503",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "grid-2": {
+      "component": "Grid2Icon",
+      "file": "lib/icons/grid-2.tsx",
+      "figma": {
+        "name": "grid-2",
+        "kind": "icon",
+        "setNodeId": "38:317",
+        "nodeId": "38:321",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "id-card": {
+      "component": "IdCardIcon",
+      "file": "lib/icons/id-card.tsx",
+      "figma": {
+        "name": "id-card",
+        "kind": "icon",
+        "setNodeId": "38:947",
+        "nodeId": "38:951",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "table-cells": {
+      "component": "TableCellsIcon",
+      "file": "lib/icons/table-cells.tsx",
+      "figma": {
+        "name": "table-cells",
+        "kind": "icon",
+        "setNodeId": "38:62392",
+        "nodeId": "38:62396",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "text": {
+      "component": "TextIcon",
+      "file": "lib/icons/text.tsx",
+      "figma": {
+        "name": "text",
+        "kind": "icon",
+        "setNodeId": "38:63440",
+        "nodeId": "38:63444",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "square-dashed": {
+      "component": "SquareDashedIcon",
+      "file": "lib/icons/square-dashed.tsx",
+      "figma": {
+        "name": "square-dashed",
+        "kind": "icon",
+        "setNodeId": "38:60240",
+        "nodeId": "38:60244",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "vector-square": {
+      "component": "VectorSquareIcon",
+      "file": "lib/icons/vector-square.tsx",
+      "figma": {
+        "name": "vector-square",
+        "kind": "icon",
+        "setNodeId": "38:65963",
+        "nodeId": "38:65967",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "circle-half-stroke": {
+      "component": "CircleHalfStrokeIcon",
+      "file": "lib/icons/circle-half-stroke.tsx",
+      "figma": {
+        "name": "circle-half-stroke",
+        "kind": "icon",
+        "setNodeId": "38:39890",
+        "nodeId": "38:39894",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrows-left-right": {
+      "component": "ArrowsLeftRightIcon",
+      "file": "lib/icons/arrows-left-right.tsx",
+      "figma": {
+        "name": "arrows-left-right",
+        "kind": "icon",
+        "setNodeId": "38:34383",
+        "nodeId": "38:34387",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "list": {
+      "component": "ListIcon",
+      "file": "lib/icons/list.tsx",
+      "figma": {
+        "name": "list",
+        "kind": "icon",
+        "setNodeId": "38:1863",
+        "nodeId": "38:1867",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "icons": {
+      "component": "IconsIcon",
+      "file": "lib/icons/icons.tsx",
+      "figma": {
+        "name": "icons",
+        "kind": "icon",
+        "setNodeId": "38:50554",
+        "nodeId": "38:50558",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "shapes": {
+      "component": "ShapesIcon",
+      "file": "lib/icons/shapes.tsx",
+      "figma": {
+        "name": "shapes",
+        "kind": "icon",
+        "setNodeId": "38:58093",
+        "nodeId": "38:58097",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "cube": {
+      "component": "CubeIcon",
+      "file": "lib/icons/cube.tsx",
+      "figma": {
+        "name": "cube",
+        "kind": "icon",
+        "setNodeId": "38:42152",
+        "nodeId": "38:42156",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "puzzle-piece": {
+      "component": "PuzzlePieceIcon",
+      "file": "lib/icons/puzzle-piece.tsx",
+      "figma": {
+        "name": "puzzle-piece",
+        "kind": "icon",
+        "setNodeId": "38:3304",
+        "nodeId": "38:3308",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-left": {
+      "component": "ArrowLeftIcon",
+      "file": "lib/icons/arrow-left.tsx",
+      "figma": {
+        "name": "arrow-left",
+        "kind": "icon",
+        "setNodeId": "38:29191",
+        "nodeId": "38:29195",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "arrow-right": {
+      "component": "ArrowRightIcon",
+      "file": "lib/icons/arrow-right.tsx",
+      "figma": {
+        "name": "arrow-right",
+        "kind": "icon",
+        "setNodeId": "38:29401",
+        "nodeId": "38:29405",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "file": {
+      "component": "FileIcon",
+      "file": "lib/icons/file.tsx",
+      "figma": {
+        "name": "file",
+        "kind": "icon",
+        "setNodeId": "38:16419",
+        "nodeId": "38:16423",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    },
+    "bezier-curve": {
+      "component": "BezierCurveIcon",
+      "file": "lib/icons/bezier-curve.tsx",
+      "figma": {
+        "name": "bezier-curve",
+        "kind": "icon",
+        "setNodeId": "38:35833",
+        "nodeId": "38:35837",
+        "weight": "regular"
+      },
+      "viewBox": "0 0 16 16"
+    }
+  }
+}

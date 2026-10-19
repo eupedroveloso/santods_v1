@@ -62,7 +62,7 @@ export function NumberField({
           }}
           disabled={disabled}
           aria-label={label}
-          className={`santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 rounded-md border-thin border-border-default bg-input-default text-right font-mono tabular-nums text-text-primary disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${unit ? "pr-2xl pl-2xs" : "px-2xs"}`}
+          className={`santo-focus-field santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 rounded-full border-thin border-transparent bg-surface-sunken text-right hover:bg-neutral-subtle-default font-mono tabular-nums text-text-primary disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${unit ? "pr-2xl pl-2xs" : "px-2xs"}`}
         />
         {unit && (
           <span className="santo-caption-small-regular pointer-events-none absolute right-2xs text-text-tertiary">

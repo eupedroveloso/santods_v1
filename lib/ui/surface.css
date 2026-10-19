@@ -1,0 +1,74 @@
+/*
+ * Superficies tonais (skill santo-ui-craft, secao 2). A profundidade vem do
+ * tom e da sombra ambiente; o contorno so aparece onde o tom nao separa.
+ *
+ *   santo-edge  hairline invisivel no claro (transparente, mantem o box) e
+ *               border/subtle no escuro, onde a sombra some e o cartao
+ *               precisa do fio para nao se fundir ao chao.
+ */
+@utility santo-edge {
+  border: var(--santo-border-thin) solid transparent;
+  :root[data-theme='dark'] & {
+    border-color: var(--santo-color-border-subtle);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) & {
+      border-color: var(--santo-color-border-subtle);
+    }
+  }
+}
+
+/*
+ * Realce de linha (hover/selecao) com raio aninhado (Pedro). Duas formas:
+ *
+ *   santo-row        (a) INSET, padrao: o realce e uma pilula suave dentro do
+ *                    contêiner, raio = min(radius/sm, raio interno do Card).
+ *                    Em repouso as celulas ficam retas (hairline reta); so o
+ *                    realce arredonda as pontas.
+ *   santo-row-flush  (b) linha de ponta a ponta num Card padded=false: realce
+ *                    reto; quem arredonda os cantos externos e o contêiner,
+ *                    que recorta (overflow hidden + raio do Card).
+ *
+ * Em <tr>, o fundo vai nas celulas (tr nao tem raio); em bloco (ListRow,
+ * opcao), no proprio elemento.
+ */
+@utility santo-row {
+  --santo-row-radius: min(var(--santo-radius-sm), var(--santo-card-inner-radius, var(--santo-radius-sm)));
+  transition-property: background-color;
+  transition-duration: var(--santo-motion-duration-fast);
+  transition-timing-function: var(--santo-motion-easing-standard);
+  & > td {
+    transition-property: background-color;
+    transition-duration: var(--santo-motion-duration-fast);
+    transition-timing-function: var(--santo-motion-easing-standard);
+  }
+  &:is(tr):hover > td {
+    background-color: var(--santo-color-bg-neutral-subtle-default);
+  }
+  &:is(tr)[data-selected] > td {
+    background-color: var(--santo-color-bg-selected);
+  }
+  &:is(tr):is(:hover, [data-selected]) > td:first-child {
+    border-top-left-radius: var(--santo-row-radius);
+    border-bottom-left-radius: var(--santo-row-radius);
+  }
+  &:is(tr):is(:hover, [data-selected]) > td:last-child {
+    border-top-right-radius: var(--santo-row-radius);
+    border-bottom-right-radius: var(--santo-row-radius);
+  }
+  &:not(tr) {
+    border-radius: var(--santo-row-radius);
+  }
+}
+
+@utility santo-row-flush {
+  transition-property: background-color;
+  transition-duration: var(--santo-motion-duration-fast);
+  transition-timing-function: var(--santo-motion-easing-standard);
+  &:is(tr):hover > td {
+    background-color: var(--santo-color-bg-neutral-subtle-default);
+  }
+  &:is(tr)[data-selected] > td {
+    background-color: var(--santo-color-bg-selected);
+  }
+}

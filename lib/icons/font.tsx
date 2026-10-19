@@ -1,0 +1,12 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+// Figma: font / Weight=regular — node 38:1758
+import { IconBase, type IconProps } from "./icon-base";
+
+export function FontIcon(props: IconProps) {
+  return (
+    <IconBase {...props} viewBox="0 0 16 16" ratio={1}>
+      <path d="M8 2.40039C8.2375 2.40039 8.45 2.53789 8.5475 2.75539L12.8775 12.4004H13.4C13.7325 12.4004 14 12.6679 14 13.0004C14 13.3329 13.7325 13.6004 13.4 13.6004H11C10.6675 13.6004 10.4 13.3329 10.4 13.0004C10.4 12.6679 10.6675 12.4004 11 12.4004H11.5625L10.665 10.4004H5.335L4.4375 12.4004H5C5.3325 12.4004 5.6 12.6679 5.6 13.0004C5.6 13.3329 5.3325 13.6004 5 13.6004H2.6C2.2675 13.6004 2 13.3329 2 13.0004C2 12.6679 2.2675 12.4004 2.6 12.4004H3.1225L7.4525 2.75539C7.55 2.53789 7.7625 2.40039 8 2.40039ZM8 4.46539L5.875 9.20039H10.125L8 4.46539Z" />
+    </IconBase>
+  );
+}

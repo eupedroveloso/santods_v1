@@ -1,0 +1,62 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+
+export { IconBase, type IconProps, type IconSize } from "./icon-base";
+export { MagnifyingGlassIcon } from "./magnifying-glass";
+export { ChevronDownIcon } from "./chevron-down";
+export { ChevronRightIcon } from "./chevron-right";
+export { ChevronLeftIcon } from "./chevron-left";
+export { ChevronUpIcon } from "./chevron-up";
+export { ArrowRotateLeftIcon } from "./arrow-rotate-left";
+export { ArrowRotateRightIcon } from "./arrow-rotate-right";
+export { ArrowsRotateIcon } from "./arrows-rotate";
+export { ArrowDownToBracketIcon } from "./arrow-down-to-bracket";
+export { FloppyDiskIcon } from "./floppy-disk";
+export { CodeIcon } from "./code";
+export { SunIcon } from "./sun";
+export { MoonIcon } from "./moon";
+export { ShuffleIcon } from "./shuffle";
+export { LinkIcon } from "./link";
+export { LinkSlashIcon } from "./link-slash";
+export { PlusIcon } from "./plus";
+export { MinusIcon } from "./minus";
+export { CheckIcon } from "./check";
+export { XmarkIcon } from "./xmark";
+export { EllipsisIcon } from "./ellipsis";
+export { ExpandIcon } from "./expand";
+export { CopyIcon } from "./copy";
+export { DownloadIcon } from "./download";
+export { PaletteIcon } from "./palette";
+export { ArrowUpRightIcon } from "./arrow-up-right";
+export { ArrowDownLeftIcon } from "./arrow-down-left";
+export { ArrowTrendUpIcon } from "./arrow-trend-up";
+export { GithubIcon } from "./github";
+export { GoogleIcon } from "./google";
+export { SparklesIcon } from "./sparkles";
+export { FigmaIcon } from "./figma";
+export { EyedropperIcon } from "./eyedropper";
+export { BarsIcon } from "./bars";
+export { BookIcon } from "./book";
+export { FontIcon } from "./font";
+export { LayerGroupIcon } from "./layer-group";
+export { Grid2Icon } from "./grid-2";
+export { IdCardIcon } from "./id-card";
+export { TableCellsIcon } from "./table-cells";
+export { TextIcon } from "./text";
+export { SquareDashedIcon } from "./square-dashed";
+export { VectorSquareIcon } from "./vector-square";
+export { CircleHalfStrokeIcon } from "./circle-half-stroke";
+export { ArrowsLeftRightIcon } from "./arrows-left-right";
+export { ListIcon } from "./list";
+export { IconsIcon } from "./icons";
+export { ShapesIcon } from "./shapes";
+export { CubeIcon } from "./cube";
+export { PuzzlePieceIcon } from "./puzzle-piece";
+export { ArrowLeftIcon } from "./arrow-left";
+export { ArrowRightIcon } from "./arrow-right";
+export { FileIcon } from "./file";
+export { BezierCurveIcon } from "./bezier-curve";
+
+/** Slugs exportados (tokens/santods.icons.json tem o inventario completo). */
+export const iconSlugs = ["magnifying-glass","chevron-down","chevron-right","chevron-left","chevron-up","arrow-rotate-left","arrow-rotate-right","arrows-rotate","arrow-down-to-bracket","floppy-disk","code","sun","moon","shuffle","link","link-slash","plus","minus","check","xmark","ellipsis","expand","copy","download","palette","arrow-up-right","arrow-down-left","arrow-trend-up","github","google","sparkles","figma","eyedropper","bars","book","font","layer-group","grid-2","id-card","table-cells","text","square-dashed","vector-square","circle-half-stroke","arrows-left-right","list","icons","shapes","cube","puzzle-piece","arrow-left","arrow-right","file","bezier-curve"] as const;
+export type IconSlug = (typeof iconSlugs)[number];

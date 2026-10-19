@@ -1,0 +1,12 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+// Figma: check / Weight=regular — node 38:14032
+import { IconBase, type IconProps } from "./icon-base";
+
+export function CheckIcon(props: IconProps) {
+  return (
+    <IconBase {...props} viewBox="0 0 16 16" ratio={1}>
+      <path d="M13.3497 3.31249C13.6197 3.50499 13.6797 3.87999 13.4872 4.14999L6.88719 13.35C6.78469 13.4925 6.62469 13.585 6.44969 13.5975C6.27469 13.61 6.09969 13.55 5.97469 13.425L2.57469 10.025C2.33969 9.78999 2.33969 9.40999 2.57469 9.17749C2.80969 8.94499 3.18969 8.94249 3.42219 9.17749L6.32469 12.075L12.5122 3.44999C12.7047 3.17999 13.0797 3.11999 13.3497 3.31249Z" />
+    </IconBase>
+  );
+}

@@ -15,6 +15,17 @@ export type Segment<T extends string> = {
   title?: string;
 };
 
+/*
+ * Trilho em pilula (surface/sunken, chao) com a pastilha ativa ELEVADA
+ * (raised + shadow-xs) — o vocabulario de pilula da skill santo-ui-craft.
+ * Raio aninhado: trilho full, pastilha full (pilula dentro de pilula e
+ * concentrica por definicao).
+ */
+const SEG_SIZE = {
+  sm: "h-(--santo-dimension-size-24) px-xs santo-caption-semibold",
+  md: "h-(--santo-dimension-size-32) px-sm santo-body-small-medium",
+} as const;
+
 export function Segmented<T extends string>({
   value,
   onChange,
@@ -28,11 +39,10 @@ export function Segmented<T extends string>({
   className?: string;
   size?: "sm" | "md";
 }) {
-  const pad = size === "sm" ? "px-xs py-3xs" : "px-sm py-2xs";
   return (
     <div
       role="radiogroup"
-      className={`inline-flex shrink-0 items-center gap-3xs rounded-md border-thin border-border-subtle bg-surface-sunken p-3xs ${className}`}
+      className={`inline-flex shrink-0 items-center gap-3xs rounded-full bg-surface-sunken p-3xs ${className}`}
     >
       {options.map((o) => {
         const active = o.value === value;
@@ -43,9 +53,11 @@ export function Segmented<T extends string>({
             role="radio"
             aria-checked={active}
             title={o.title}
-            aria-label={o.title}
+            // So nomeia pelo title quando o rotulo nao e texto (icone). Com texto
+            // visivel, ele e o nome acessivel — "clicar Auto" por voz tem que funcionar.
+            aria-label={typeof o.label === "string" ? undefined : o.title}
             onClick={() => onChange(o.value)}
-            className={`santo-caption-semibold inline-flex cursor-pointer items-center gap-2xs rounded-sm whitespace-nowrap transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) ${pad} ${
+            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs rounded-full whitespace-nowrap ${SEG_SIZE[size]} ${
               active
                 ? "bg-surface-raised text-text-primary shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
@@ -59,20 +71,51 @@ export function Segmented<T extends string>({
   );
 }
 
-/** Abas em pastilha, como as do preview no alvo. */
+export type TabOption<T extends string> = {
+  value: T;
+  label: ReactNode;
+  /** Icone acima do rotulo (floating) ou antes dele (pill). */
+  icon?: ReactNode;
+  /** Contagem a direita do rotulo (pill): passe um <Count>. */
+  count?: ReactNode;
+};
+
+/**
+ * Abas em pilula.
+ *
+ * `pill` (padrao): trilho sunken com a aba ativa elevada, para trocar de vista
+ * dentro de uma regiao. `floating`: barra de navegacao flutuante no rodape
+ * (celular), raised com sombra grande e fundo desfocado, icone sobre rotulo —
+ * so em barra curta e fixa (blur e caro). Posicionar e com quem usa
+ * (`fixed bottom-md inset-x-md` ou dentro de um mock).
+ */
 export function TabBar<T extends string>({
   value,
   onChange,
   options,
+  variant = "pill",
+  label = "Abas",
   className = "",
 }: {
   value: T;
   onChange: (value: T) => void;
-  options: { value: T; label: ReactNode }[];
+  options: TabOption<T>[];
+  variant?: "pill" | "floating";
+  /** Rotulo acessivel da lista de abas. */
+  label?: string;
   className?: string;
 }) {
+  const floating = variant === "floating";
   return (
-    <div role="tablist" className={`flex min-w-0 items-center gap-3xs overflow-x-auto ${className}`}>
+    <div
+      role="tablist"
+      aria-label={label}
+      className={
+        floating
+          ? `santo-edge flex min-w-0 items-center justify-around gap-3xs rounded-full bg-surface-raised p-2xs shadow-lg backdrop-blur-md ${className}`
+          : `inline-flex max-w-full min-w-0 items-center gap-3xs overflow-x-auto rounded-full bg-surface-sunken p-3xs scrollbar-bare ${className}`
+      }
+    >
       {options.map((o) => {
         const active = o.value === value;
         return (
@@ -82,13 +125,21 @@ export function TabBar<T extends string>({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(o.value)}
-            className={`santo-body-small-medium shrink-0 cursor-pointer rounded-md px-sm py-2xs whitespace-nowrap transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) ${
-              active
-                ? "bg-neutral-subtle-active text-text-primary"
-                : "text-text-secondary hover:bg-neutral-subtle-default hover:text-text-primary"
+            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center rounded-full whitespace-nowrap ${
+              floating
+                ? `santo-caption-semibold min-w-(--santo-dimension-size-56) flex-1 flex-col gap-3xs px-sm py-xs ${
+                    active ? "bg-brand-subtle-default text-text-brand" : "text-text-tertiary hover:text-text-primary"
+                  }`
+                : `santo-body-small-medium h-(--santo-dimension-size-32) gap-xs px-md ${
+                    active
+                      ? "bg-surface-raised text-text-primary shadow-xs"
+                      : "text-text-secondary hover:text-text-primary"
+                  }`
             }`}
           >
+            {o.icon}
             {o.label}
+            {!floating && o.count}
           </button>
         );
       })}

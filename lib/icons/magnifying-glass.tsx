@@ -1,0 +1,12 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+// Figma: magnifying-glass / Weight=regular — node 38:9549
+import { IconBase, type IconProps } from "./icon-base";
+
+export function MagnifyingGlassIcon(props: IconProps) {
+  return (
+    <IconBase {...props} viewBox="0 0 16 16" ratio={1}>
+      <path d="M10.8 6.79961C10.8 4.58961 9.00998 2.79961 6.79998 2.79961C4.58998 2.79961 2.79998 4.58961 2.79998 6.79961C2.79998 9.00961 4.58998 10.7996 6.79998 10.7996C9.00998 10.7996 10.8 9.00961 10.8 6.79961ZM10.0275 10.8771C9.14248 11.5796 8.01998 11.9996 6.79998 11.9996C3.92748 11.9996 1.59998 9.67211 1.59998 6.79961C1.59998 3.92711 3.92748 1.59961 6.79998 1.59961C9.67248 1.59961 12 3.92711 12 6.79961C12 8.01961 11.58 9.14211 10.8775 10.0271L14.225 13.3746C14.46 13.6096 14.46 13.9896 14.225 14.2221C13.99 14.4546 13.61 14.4571 13.3775 14.2221L10.0275 10.8771Z" />
+    </IconBase>
+  );
+}

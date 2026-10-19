@@ -1,0 +1,747 @@
+{
+  "meta": {
+    "fileKey": "O0xV7p3taNff97XGjNjTMl",
+    "fileName": "SantoDS v1",
+    "dumpedAt": "2026-10-19",
+    "pages": [
+      {
+        "name": "Thumb",
+        "nodeId": "0:1",
+        "components": 0
+      },
+      {
+        "name": "---",
+        "nodeId": "10:19",
+        "components": 0
+      },
+      {
+        "name": "Wireframe",
+        "nodeId": "10:20",
+        "components": 0
+      },
+      {
+        "name": "Fundations",
+        "nodeId": "79:213",
+        "components": 0
+      },
+      {
+        "name": "---",
+        "nodeId": "148:146",
+        "components": 0
+      },
+      {
+        "name": "Button",
+        "nodeId": "127:49",
+        "components": 1
+      },
+      {
+        "name": "Input",
+        "nodeId": "127:50",
+        "components": 1
+      },
+      {
+        "name": "Select",
+        "nodeId": "127:51",
+        "components": 1
+      },
+      {
+        "name": "Checkbox",
+        "nodeId": "127:52",
+        "components": 1
+      },
+      {
+        "name": "Badge",
+        "nodeId": "127:53",
+        "components": 1
+      },
+      {
+        "name": "Card",
+        "nodeId": "127:54",
+        "components": 1
+      },
+      {
+        "name": "Tooltip",
+        "nodeId": "127:55",
+        "components": 1
+      },
+      {
+        "name": "Modal",
+        "nodeId": "127:56",
+        "components": 1
+      }
+    ],
+    "generatedBy": "scripts/figma-components.mjs",
+    "note": "GERADO. Nao editar a mao. Dump via scripts/figma-components.js (use_figma, somente leitura, pagina Icones fora).",
+    "summary": {
+      "figmaComponents": 8,
+      "paired": 6,
+      "pagePairs": [
+        "icon -> Página Icones"
+      ],
+      "figmaOnly": [
+        "Tooltip",
+        "Modal"
+      ],
+      "codeOnly": [
+        "breadcrumb",
+        "icon-button",
+        "card-header",
+        "card-footer",
+        "stat",
+        "divider",
+        "line-chart",
+        "area-chart",
+        "bar-chart",
+        "stacked-area-chart",
+        "axis-labels",
+        "chat-header",
+        "chat-bubble",
+        "chat-attachment",
+        "typing-indicator",
+        "chip",
+        "count",
+        "code-block",
+        "color-picker",
+        "color",
+        "command-palette",
+        "copy-button",
+        "copy-code",
+        "table",
+        "avatar",
+        "avatar-group",
+        "calendar",
+        "disclosure",
+        "empty-state",
+        "activity-item",
+        "marker",
+        "ticker",
+        "icon-tile",
+        "textarea",
+        "search-input",
+        "field",
+        "kbd",
+        "key-value",
+        "link-card",
+        "list-row",
+        "sidebar-nav",
+        "nav-section",
+        "nav-item",
+        "nav-user",
+        "pagination",
+        "number-field",
+        "overline",
+        "progress",
+        "radio-group",
+        "radio-card",
+        "search-trigger",
+        "segmented",
+        "tab-bar",
+        "skeleton",
+        "swatch",
+        "swatch-picker",
+        "color-row",
+        "table-of-contents",
+        "thumb-frame",
+        "radio",
+        "switch",
+        "setting-row",
+        "token-sample"
+      ],
+      "brokenDeclarations": []
+    }
+  },
+  "components": [
+    {
+      "name": "Button",
+      "nodeId": "125:212",
+      "type": "COMPONENT_SET",
+      "page": "Button",
+      "description": "Botao de acao. Tone define hierarquia: primary para a acao principal da tela, secondary para apoio, ghost para acoes terciarias, danger para destrutivas. Size alinha com size/control/*. Cor, espacamento, raio, altura e espessura de traco vem inteiramente de tokens.",
+      "variants": {
+        "Tone": [
+          "primary",
+          "secondary",
+          "ghost",
+          "danger"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "disabled"
+        ],
+        "Type": [
+          "default",
+          "icon",
+          "text"
+        ]
+      },
+      "properties": {
+        "Icon": "INSTANCE_SWAP"
+      },
+      "variantCount": 108,
+      "code": {
+        "slug": "button",
+        "name": "Button",
+        "source": "meta",
+        "nodeIdInMeta": "125:212"
+      }
+    },
+    {
+      "name": "Input",
+      "nodeId": "125:243",
+      "type": "COMPONENT_SET",
+      "page": "Input",
+      "description": "Campo de texto de linha unica. State cobre repouso, cursor, foco de teclado, erro e desabilitado. O anel de foco usa color/border/focus com border/thick; o estado de erro usa color/border/danger na mesma espessura, para que os dois tenham o mesmo peso visual.",
+      "variants": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "error",
+          "disabled"
+        ]
+      },
+      "properties": {},
+      "variantCount": 15,
+      "code": {
+        "slug": "input",
+        "name": "Input",
+        "source": "meta",
+        "nodeIdInMeta": "125:243"
+      }
+    },
+    {
+      "name": "Select",
+      "nodeId": "125:304",
+      "type": "COMPONENT_SET",
+      "page": "Select",
+      "description": "Seletor de opcao unica. Compartilha altura, raio, padding e estados com Input de proposito: os dois precisam alinhar quando ficam lado a lado num formulario. O caret vem da biblioteca de icones do proprio arquivo.",
+      "variants": {
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "focus",
+          "disabled"
+        ]
+      },
+      "properties": {},
+      "variantCount": 12,
+      "code": {
+        "slug": "select",
+        "name": "Select",
+        "source": "meta",
+        "nodeIdInMeta": "125:304"
+      }
+    },
+    {
+      "name": "Checkbox",
+      "nodeId": "125:332",
+      "type": "COMPONENT_SET",
+      "page": "Checkbox",
+      "description": "Caixa de selecao. Checked cobre os tres estados reais de um checkbox, inclusive indeterminate, que e obrigatorio sempre que existe selecao em lote. A marca vem dos icones check e minus da biblioteca do arquivo.",
+      "variants": {
+        "Checked": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ],
+        "State": [
+          "default",
+          "hover",
+          "disabled"
+        ]
+      },
+      "properties": {},
+      "variantCount": 9,
+      "code": {
+        "slug": "checkbox",
+        "name": "Checkbox",
+        "source": "meta",
+        "nodeIdInMeta": "125:332"
+      }
+    },
+    {
+      "name": "Badge",
+      "nodeId": "125:357",
+      "type": "COMPONENT_SET",
+      "page": "Badge",
+      "description": "Etiqueta de status. Variant subtle e o padrao para listas e tabelas, onde varios badges convivem; solid so para o status que precisa dominar a tela. Cada tom usa o par bg + text/on- correspondente, ja verificado em contraste nos dois modos.",
+      "variants": {
+        "Tone": [
+          "neutral",
+          "brand",
+          "success",
+          "warning",
+          "danger",
+          "info"
+        ],
+        "Variant": [
+          "subtle",
+          "solid"
+        ]
+      },
+      "properties": {},
+      "variantCount": 12,
+      "code": {
+        "slug": "tag",
+        "name": "Tag",
+        "source": "meta",
+        "nodeIdInMeta": "125:357"
+      }
+    },
+    {
+      "name": "Card",
+      "nodeId": "125:378",
+      "type": "COMPONENT_SET",
+      "page": "Card",
+      "description": "Superficie de conteudo agrupado. Outlined para listas densas, onde muitas sombras juntas viram ruido; elevated quando o card precisa se destacar do fundo. Composto so por instancias de Badge e Button, para provar que a hierarquia de componentes fecha.",
+      "variants": {
+        "Variant": [
+          "outlined",
+          "elevated"
+        ]
+      },
+      "properties": {},
+      "variantCount": 2,
+      "code": {
+        "slug": "card",
+        "name": "Card",
+        "source": "meta",
+        "nodeIdInMeta": "125:378"
+      }
+    },
+    {
+      "name": "Tooltip",
+      "nodeId": "125:387",
+      "type": "COMPONENT_SET",
+      "page": "Tooltip",
+      "description": "Dica curta acionada por hover ou foco. Direction indica de que lado do gatilho ele aparece. Usa surface/inverse para se separar de qualquer superficie sem depender de sombra, o que o mantem legivel nos dois modos.",
+      "variants": {
+        "Direction": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ]
+      },
+      "properties": {},
+      "variantCount": 4,
+      "code": null
+    },
+    {
+      "name": "Modal",
+      "nodeId": "125:388",
+      "type": "COMPONENT",
+      "page": "Modal",
+      "description": "Dialogo modal. Cabecalho, corpo e rodape sao frames com auto layout preenchendo a largura, entao o modal cresce com o conteudo sem nenhum valor fixo. Sombra xl e raio xl separam ele da pagina; o veu que vai atras usa color/surface/overlay.",
+      "variants": {},
+      "properties": {},
+      "variantCount": 1,
+      "code": null
+    }
+  ],
+  "pagePairs": [
+    {
+      "slug": "icon",
+      "name": "Icon",
+      "page": "Icones",
+      "pageId": "38:2",
+      "inventory": "tokens/santods.icons.json"
+    }
+  ],
+  "codeOnly": [
+    {
+      "slug": "breadcrumb",
+      "name": "Breadcrumb",
+      "source": "breadcrumb.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "icon-button",
+      "name": "IconButton",
+      "source": "button.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "card-header",
+      "name": "CardHeader",
+      "source": "card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "card-footer",
+      "name": "CardFooter",
+      "source": "card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "stat",
+      "name": "Stat",
+      "source": "card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "divider",
+      "name": "Divider",
+      "source": "card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "line-chart",
+      "name": "LineChart",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "area-chart",
+      "name": "AreaChart",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "bar-chart",
+      "name": "BarChart",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "stacked-area-chart",
+      "name": "StackedAreaChart",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "axis-labels",
+      "name": "AxisLabels",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chat-header",
+      "name": "ChatHeader",
+      "source": "chat.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chat-bubble",
+      "name": "ChatBubble",
+      "source": "chat.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chat-attachment",
+      "name": "ChatAttachment",
+      "source": "chat.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "typing-indicator",
+      "name": "TypingIndicator",
+      "source": "chat.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chip",
+      "name": "Chip",
+      "source": "chip.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "count",
+      "name": "Count",
+      "source": "chip.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "code-block",
+      "name": "CodeBlock",
+      "source": "code-block.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "color-picker",
+      "name": "ColorPicker",
+      "source": "color-picker.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "color",
+      "name": "Color",
+      "source": "color.ts",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "command-palette",
+      "name": "CommandPalette",
+      "source": "command-palette.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "copy-button",
+      "name": "CopyButton",
+      "source": "copy-button.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "copy-code",
+      "name": "CopyCode",
+      "source": "copy-code.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "table",
+      "name": "Table",
+      "source": "data.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "avatar",
+      "name": "Avatar",
+      "source": "data.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "avatar-group",
+      "name": "AvatarGroup",
+      "source": "data.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "calendar",
+      "name": "Calendar",
+      "source": "data.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "disclosure",
+      "name": "Disclosure",
+      "source": "disclosure.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "empty-state",
+      "name": "EmptyState",
+      "source": "empty-state.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "activity-item",
+      "name": "ActivityItem",
+      "source": "feed.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "marker",
+      "name": "Marker",
+      "source": "feed.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "ticker",
+      "name": "Ticker",
+      "source": "feed.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "icon-tile",
+      "name": "IconTile",
+      "source": "icon-tile.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "textarea",
+      "name": "Textarea",
+      "source": "input.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "search-input",
+      "name": "SearchInput",
+      "source": "input.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "field",
+      "name": "Field",
+      "source": "input.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "kbd",
+      "name": "Kbd",
+      "source": "kbd.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "key-value",
+      "name": "KeyValue",
+      "source": "key-value.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "link-card",
+      "name": "LinkCard",
+      "source": "link-card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "list-row",
+      "name": "ListRow",
+      "source": "list-row.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "sidebar-nav",
+      "name": "SidebarNav",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "nav-section",
+      "name": "NavSection",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "nav-item",
+      "name": "NavItem",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "nav-user",
+      "name": "NavUser",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "pagination",
+      "name": "Pagination",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "number-field",
+      "name": "NumberField",
+      "source": "number-field.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "overline",
+      "name": "Overline",
+      "source": "overline.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "progress",
+      "name": "Progress",
+      "source": "progress.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "radio-group",
+      "name": "RadioGroup",
+      "source": "radio-group.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "radio-card",
+      "name": "RadioCard",
+      "source": "radio-group.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "search-trigger",
+      "name": "SearchTrigger",
+      "source": "search-trigger.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "segmented",
+      "name": "Segmented",
+      "source": "segmented.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "tab-bar",
+      "name": "TabBar",
+      "source": "segmented.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "skeleton",
+      "name": "Skeleton",
+      "source": "skeleton.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "swatch",
+      "name": "Swatch",
+      "source": "swatch.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "swatch-picker",
+      "name": "SwatchPicker",
+      "source": "swatch-picker.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "color-row",
+      "name": "ColorRow",
+      "source": "color-row.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "table-of-contents",
+      "name": "TableOfContents",
+      "source": "table-of-contents.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "thumb-frame",
+      "name": "ThumbFrame",
+      "source": "thumb-frame.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "radio",
+      "name": "Radio",
+      "source": "toggle.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "switch",
+      "name": "Switch",
+      "source": "toggle.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "setting-row",
+      "name": "SettingRow",
+      "source": "toggle.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "token-sample",
+      "name": "TokenSample",
+      "source": "token-sample.tsx",
+      "figmaDeclared": null
+    }
+  ]
+}

@@ -1,0 +1,190 @@
+/*
+ * Movimento do SantoDS: o unico lugar com @keyframes e transicoes nomeadas.
+ * Duracao e curva sempre de motion/duration/* e motion/easing/* (Figma).
+ *
+ *   santo-transition-*  troca de estado (hover, selecao, tema): fast + standard
+ *   santo-animate-*     entrada/saida de coisa que aparece: normal + entrance/exit
+ *   santo-press         aperto de controle (botao, chip, pilula): spring
+ *   santo-collapse      abre/fecha altura (Disclosure) via grid 0fr -> 1fr
+ *
+ * Movimento reduzido: o sistema (prefers-reduced-motion) ou [data-reduced-motion]
+ * em qualquer ancestral zeram duracao (motion/duration/instant).
+ */
+
+/* ---------------------------------------------------------------- transicoes */
+
+@utility santo-transition-colors {
+  transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke;
+  transition-duration: var(--santo-motion-duration-fast);
+  transition-timing-function: var(--santo-motion-easing-standard);
+}
+
+@utility santo-transition-opacity {
+  transition-property: opacity;
+  transition-duration: var(--santo-motion-duration-normal);
+  transition-timing-function: var(--santo-motion-easing-standard);
+}
+
+@utility santo-transition-transform {
+  transition-property: transform, translate, scale, rotate;
+  transition-duration: var(--santo-motion-duration-normal);
+  transition-timing-function: var(--santo-motion-easing-standard);
+}
+
+/* Pilula que eleva ao ser selecionada: cor + sombra + posicao juntas. */
+@utility santo-transition-elevation {
+  transition-property: color, background-color, border-color, box-shadow, transform, translate;
+  transition-duration: var(--santo-motion-duration-normal);
+  transition-timing-function: var(--santo-motion-easing-standard);
+}
+
+@utility santo-transition-all {
+  transition-property: all;
+  transition-duration: var(--santo-motion-duration-normal);
+  transition-timing-function: var(--santo-motion-easing-standard);
+}
+
+/* Aperto: encolhe um pouco no :active e volta com mola. */
+@utility santo-press {
+  transition-property: color, background-color, border-color, box-shadow, transform, scale;
+  transition-duration: var(--santo-motion-duration-fast);
+  transition-timing-function: var(--santo-motion-easing-spring);
+  &:active:not(:disabled) {
+    scale: 0.96;
+  }
+}
+
+/* ---------------------------------------------------------------- keyframes */
+
+@keyframes santo-fade-in {
+  from { opacity: 0; }
+}
+@keyframes santo-fade-out {
+  to { opacity: 0; }
+}
+@keyframes santo-scale-in {
+  from { opacity: 0; scale: 0.96; }
+}
+@keyframes santo-scale-out {
+  to { opacity: 0; scale: 0.96; }
+}
+@keyframes santo-slide-in-up {
+  from { opacity: 0; translate: 0 var(--santo-space-md); }
+}
+@keyframes santo-slide-in-down {
+  from { opacity: 0; translate: 0 calc(var(--santo-space-md) * -1); }
+}
+@keyframes santo-slide-in-left {
+  from { translate: -100% 0; }
+}
+@keyframes santo-slide-in-right {
+  from { translate: 100% 0; }
+}
+@keyframes santo-slide-out-left {
+  to { translate: -100% 0; }
+}
+@keyframes santo-slide-out-right {
+  to { translate: 100% 0; }
+}
+@keyframes santo-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+@keyframes santo-pulse {
+  50% { opacity: 0.35; }
+}
+@keyframes santo-pop {
+  from { scale: 0.6; opacity: 0; }
+}
+
+/* ---------------------------------------------------------------- animacoes */
+
+@utility santo-animate-fade-in {
+  animation: santo-fade-in var(--santo-motion-duration-normal) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-fade-out {
+  animation: santo-fade-out var(--santo-motion-duration-fast) var(--santo-motion-easing-exit) both;
+}
+@utility santo-animate-scale-in {
+  animation: santo-scale-in var(--santo-motion-duration-normal) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-scale-out {
+  animation: santo-scale-out var(--santo-motion-duration-fast) var(--santo-motion-easing-exit) both;
+}
+@utility santo-animate-slide-in-up {
+  animation: santo-slide-in-up var(--santo-motion-duration-normal) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-slide-in-down {
+  animation: santo-slide-in-down var(--santo-motion-duration-normal) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-slide-in-left {
+  animation: santo-slide-in-left var(--santo-motion-duration-slow) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-slide-in-right {
+  animation: santo-slide-in-right var(--santo-motion-duration-slow) var(--santo-motion-easing-entrance) both;
+}
+@utility santo-animate-slide-out-left {
+  animation: santo-slide-out-left var(--santo-motion-duration-normal) var(--santo-motion-easing-exit) both;
+}
+@utility santo-animate-slide-out-right {
+  animation: santo-slide-out-right var(--santo-motion-duration-normal) var(--santo-motion-easing-exit) both;
+}
+/* Confirmacao curta (check do CopyButton, badge que chega). */
+@utility santo-animate-pop {
+  animation: santo-pop var(--santo-motion-duration-normal) var(--santo-motion-easing-spring) both;
+}
+/* Respiro continuo (digitando…, ao vivo). Atraso por item: style={{ animationDelay: "var(--santo-motion-duration-…)" }}. */
+@utility santo-animate-pulse {
+  animation: santo-pulse calc(var(--santo-motion-duration-slower) * 3) var(--santo-motion-easing-standard) infinite;
+}
+/* Brilho que atravessa o Skeleton. */
+@utility santo-animate-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--santo-color-bg-neutral-subtle-hover) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: santo-shimmer calc(var(--santo-motion-duration-slower) * 3) var(--santo-motion-easing-linear) infinite;
+}
+
+/* ---------------------------------------------------------------- colapso */
+
+/* Abre/fecha altura sem medir: o filho direto precisa de min-h-0 overflow-hidden. */
+@utility santo-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition-property: grid-template-rows, opacity;
+  transition-duration: var(--santo-motion-duration-normal);
+  transition-timing-function: var(--santo-motion-easing-standard);
+  opacity: 0;
+  &[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  & > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+/* ---------------------------------------------------------------- reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: var(--santo-motion-duration-instant) !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--santo-motion-duration-instant) !important;
+    scroll-behavior: auto !important;
+  }
+}
+[data-reduced-motion] *,
+[data-reduced-motion] *::before,
+[data-reduced-motion] *::after {
+  animation-duration: var(--santo-motion-duration-instant) !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: var(--santo-motion-duration-instant) !important;
+}

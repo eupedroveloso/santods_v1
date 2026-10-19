@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# orquestracao local do time de agentes (papeis do Maestri, nao e codigo)
+.maestri/

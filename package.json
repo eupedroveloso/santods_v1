@@ -10,7 +10,10 @@
     "tokens": "node scripts/build-tokens.mjs",
     "tokens:check": "node scripts/check-parity.mjs",
     "tokens:fingerprint": "node scripts/check-parity.mjs --fingerprint",
-    "design:check": "node scripts/check-design.mjs"
+    "design:check": "node scripts/check-design.mjs",
+    "lib:check": "node scripts/check-lib-first.mjs",
+    "tier:check": "node scripts/check-tier.mjs",
+    "check": "node scripts/check.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

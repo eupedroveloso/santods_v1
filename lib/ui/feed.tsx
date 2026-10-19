@@ -15,8 +15,11 @@ export function ActivityItem({
   what,
   when,
   marker,
+  avatarSrc,
 }: {
   who: string;
+  /** Foto de quem agiu; sem ela, iniciais. */
+  avatarSrc?: string;
   what: ReactNode;
   when: string;
   /** Pastilha de contexto: tipo de tarefa, arquivo, reuniao. */
@@ -24,13 +27,13 @@ export function ActivityItem({
 }) {
   return (
     <div className="flex gap-sm py-sm">
-      <Avatar name={who} size={32} className="mt-3xs" />
+      <Avatar name={who} src={avatarSrc} size={32} className="mt-3xs" />
       <div className="flex min-w-0 flex-1 flex-col gap-2xs">
         <div className="flex items-baseline justify-between gap-sm">
           <span className="santo-body-small-semibold truncate">{who}</span>
           <span className="santo-caption-regular shrink-0 text-text-tertiary">{when}</span>
         </div>
-        <p className="santo-body-small-regular text-text-secondary">{what}</p>
+        <p className="santo-body-small-regular text-text-primary">{what}</p>
         {marker}
       </div>
     </div>

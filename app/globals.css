@@ -8,6 +8,8 @@
 
 /* Controles que precisam de pseudo-elemento. */
 @import "../lib/ui/controls.css";
+@import "../lib/ui/motion.css";
+@import "../lib/ui/surface.css";
 
 body {
   background: var(--santo-color-surface-page);
@@ -15,9 +17,14 @@ body {
   font-family: var(--santo-font-sans);
 }
 
-:focus-visible {
-  outline: var(--santo-focus-width) solid var(--santo-color-border-focus);
-  outline-offset: var(--santo-focus-offset);
+/* Em @layer base para que um utilitario (outline-none) consiga tirar o anel onde
+   o contexto de foco ja e outro — campo de busca dentro de painel modal. Fora de
+   camada, esta regra venceria qualquer classe. */
+@layer base {
+  :focus-visible {
+    outline: var(--santo-focus-width) solid var(--santo-color-border-focus);
+    outline-offset: var(--santo-focus-offset);
+  }
 }
 
 ::selection {

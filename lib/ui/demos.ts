@@ -1,0 +1,94 @@
+/**
+ * Demos de todos os componentes, por slug.
+ *
+ * Modulo de cliente (as demos tem estado e handlers). O registry.ts guarda o
+ * dado; aqui fica o que renderiza. Componente novo: importe o `.demo.tsx` dele.
+ */
+import type { DemoMap } from "./registry.types";
+import { buttonDemos } from "./button.demo";
+import { ringDemos } from "./ring.demo";
+import { sparklineDemos } from "./sparkline.demo";
+import { miniBarsDemos } from "./mini-bars.demo";
+import { fabDemos } from "./fab.demo";
+import { railNavDemos } from "./rail-nav.demo";
+import { inputDemos } from "./input.demo";
+import { listboxDemos } from "./listbox.demo";
+import { numberFieldDemos } from "./number-field.demo";
+import { toggleDemos } from "./toggle.demo";
+import { swatchDemos } from "./swatch.demo";
+import { colorPickerDemos } from "./color-picker.demo";
+import { colorDemos } from "./color.demo";
+import { cardDemos } from "./card.demo";
+import { disclosureDemos } from "./disclosure.demo";
+import { segmentedDemos } from "./segmented.demo";
+import { chipDemos } from "./chip.demo";
+import { dataDemos } from "./data.demo";
+import { navDemos } from "./nav.demo";
+import { chartDemos } from "./chart.demo";
+import { chatDemos } from "./chat.demo";
+import { feedDemos } from "./feed.demo";
+import { iconsDemos } from "./icons.demo";
+import { kbdDemos } from "./kbd.demo";
+import { copyButtonDemos } from "./copy-button.demo";
+import { copyCodeDemos } from "./copy-code.demo";
+import { codeBlockDemos } from "./code-block.demo";
+import { breadcrumbDemos } from "./breadcrumb.demo";
+import { linkCardDemos } from "./link-card.demo";
+import { commandPaletteDemos } from "./command-palette.demo";
+import { progressDemos } from "./progress.demo";
+import { keyValueDemos } from "./key-value.demo";
+import { skeletonDemos } from "./skeleton.demo";
+import { thumbFrameDemos } from "./thumb-frame.demo";
+import { overlineDemos } from "./overline.demo";
+import { iconTileDemos } from "./icon-tile.demo";
+import { emptyStateDemos } from "./empty-state.demo";
+import { listRowDemos } from "./list-row.demo";
+import { radioGroupDemos } from "./radio-group.demo";
+import { tokenSampleDemos } from "./token-sample.demo";
+import { searchTriggerDemos } from "./search-trigger.demo";
+import { tableOfContentsDemos } from "./table-of-contents.demo";
+
+export const demos: DemoMap = {
+  ...buttonDemos,
+  ...ringDemos,
+  ...sparklineDemos,
+  ...miniBarsDemos,
+  ...fabDemos,
+  ...railNavDemos,
+  ...inputDemos,
+  ...listboxDemos,
+  ...numberFieldDemos,
+  ...toggleDemos,
+  ...swatchDemos,
+  ...colorPickerDemos,
+  ...colorDemos,
+  ...cardDemos,
+  ...disclosureDemos,
+  ...segmentedDemos,
+  ...chipDemos,
+  ...dataDemos,
+  ...navDemos,
+  ...chartDemos,
+  ...chatDemos,
+  ...feedDemos,
+  ...iconsDemos,
+  ...kbdDemos,
+  ...copyButtonDemos,
+  ...copyCodeDemos,
+  ...codeBlockDemos,
+  ...breadcrumbDemos,
+  ...linkCardDemos,
+  ...commandPaletteDemos,
+  ...progressDemos,
+  ...keyValueDemos,
+  ...skeletonDemos,
+  ...thumbFrameDemos,
+  ...overlineDemos,
+  ...iconTileDemos,
+  ...emptyStateDemos,
+  ...listRowDemos,
+  ...radioGroupDemos,
+  ...tokenSampleDemos,
+  ...searchTriggerDemos,
+  ...tableOfContentsDemos,
+};

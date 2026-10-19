@@ -1,20 +1,30 @@
-"use client";
-
+import { Children } from "react";
 import type { ReactNode } from "react";
-import { ChevronLeft, ChevronRight } from "./icons";
+import { AvatarImage } from "./avatar-image";
+import { Check } from "./icons";
 
 /**
- * Exibicao de dado: avatar, tabela e calendario.
+ * Exibicao de dado: avatar e tabela (o calendario mora em calendar.tsx).
  * Tudo que o preview precisa para parecer produto, sem virar produto.
+ *
+ * Sem "use client" de proposito: a tabela sem selecao renderiza no servidor
+ * (tabela de 100 tokens nao precisa ir como JS para o navegador). Selecao e
+ * acoes por linha usam funcoes, entao so existem quando quem monta e cliente.
  */
 
 export function Avatar({
   name,
   size = 32,
+  src,
+  alt,
   className = "",
 }: {
   name: string;
   size?: 24 | 32 | 40;
+  /** Foto (quadrada). Sem src, ou se falhar, aparecem as iniciais. */
+  src?: string;
+  /** Texto alternativo da foto; padrao: o nome. */
+  alt?: string;
   className?: string;
 }) {
   const initials = name
@@ -25,13 +35,33 @@ export function Avatar({
     .join("")
     .toUpperCase();
   const text = size === 24 ? "santo-caption-small-semibold" : "santo-caption-semibold";
+  const letters = <span aria-hidden={src ? true : undefined}>{initials}</span>;
   return (
     <span
       title={name}
-      className={`inline-flex shrink-0 items-center justify-center rounded-full bg-neutral-subtle-active text-text-secondary ${text} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-neutral-subtle-active text-text-secondary ${text} ${className}`}
       style={{ width: `var(--santo-dimension-size-${size})`, height: `var(--santo-dimension-size-${size})` }}
     >
-      {initials}
+      {src ? <AvatarImage src={src} alt={alt ?? name} size={size} fallback={letters} /> : letters}
+    </span>
+  );
+}
+
+/**
+ * Avatares sobrepostos (quem esta num documento, num time). Cada um ganha um
+ * anel da cor da superficie, para o recorte ler sobre qualquer fundo.
+ */
+export function AvatarGroup({ children, className = "" }: { children: ReactNode; className?: string }) {
+  return (
+    <span className={`inline-flex items-center ${className}`}>
+      {Children.map(children, (child, i) => (
+        <span
+          className={`inline-flex rounded-full ${i > 0 ? "-ml-xs" : ""}`}
+          style={{ boxShadow: "0 0 0 var(--santo-border-thick) var(--santo-color-surface-raised)" }}
+        >
+          {child}
+        </span>
+      ))}
     </span>
   );
 }
@@ -41,72 +71,132 @@ export type Column<T> = {
   header: ReactNode;
   /** Alinha a direita — use para numero. */
   numeric?: boolean;
-  render: (row: T) => ReactNode;
+  /**
+   * Como desenhar a celula a partir da linha. Sem `render`, a celula e
+   * `row[key]` ja renderizada (ReactNode). Isso so importa quando as linhas
+   * atravessam do servidor para um componente cliente que monta a tabela —
+   * funcao nao atravessa essa fronteira, elemento sim. Num Server Component a
+   * tabela aceita `render` normalmente.
+   */
+  render?: (row: T) => ReactNode;
+  /**
+   * Largura da coluna, degrau de dimension/space (px). Com `layout="fixed"`,
+   * colunas sem largura repartem o resto — e tabelas empilhadas com as mesmas
+   * larguras alinham coluna a coluna.
+   */
+  width?: ColumnWidth;
+};
+
+export type ColumnWidth = 48 | 56 | 64 | 72 | 80 | 88 | 96 | 104 | 112 | 120 | 128 | 144 | 160 | 176 | 192 | 208 | 224 | 240 | 256 | 288 | 320 | 384;
+
+/** Linha com celulas ja renderizadas, por chave de coluna. `key` vira a chave React. */
+export type CellRow = { key: string } & Record<string, ReactNode>;
+
+const cellOf = <T,>(column: Column<T>, row: T): ReactNode =>
+  column.render ? column.render(row) : ((row as Record<string, ReactNode>)[column.key] ?? null);
+
+const keyOf = (row: unknown, index: number) => {
+  const key = (row as { key?: unknown }).key;
+  return typeof key === "string" ? key : String(index);
 };
 
 /**
- * Tabela compacta.
+ * Tabela compacta (skill santo-ui-craft, secao 8): cabecalho TONAL (faixa
+ * surface/sunken em pilula larga, sem borda), linhas separadas por hairline,
+ * numero a direita com tabular-nums, hover tonal. Sem borda por celula.
  *
  * `selected` liga a coluna de selecao; `rowAction` acrescenta a coluna de acoes
- * no fim. As duas sao opcionais para a mesma tabela servir de lista simples e
- * de grade com selecao.
+ * no fim. `layout="fixed"` trava a largura das colunas (Column.width) e faz o
+ * texto longo quebrar em vez de vazar.
  */
 export function Table<T>({
   columns,
   rows,
-  getKey,
+  getKey = keyOf,
   className = "",
   selected,
   onToggleRow,
   onToggleAll,
   rowAction,
+  layout = "auto",
+  flush = false,
 }: {
   columns: Column<T>[];
   rows: T[];
-  getKey: (row: T, index: number) => string;
+  /**
+   * Padrao: `row.key`, senao o indice. Com `selected`, passe sempre: chave por
+   * indice faz a selecao trocar de linha quando a ordem muda.
+   */
+  getKey?: (row: T, index: number) => string;
   className?: string;
   /** Chaves selecionadas. Passar (mesmo vazio) liga a coluna de selecao. */
   selected?: Set<string>;
   onToggleRow?: (key: string) => void;
   onToggleAll?: () => void;
   rowAction?: (row: T) => ReactNode;
+  /** fixed: table-layout fixo, larguras de Column.width, texto quebra. */
+  layout?: "auto" | "fixed";
+  /**
+   * Realce de linha. Padrao (inset): pilula suave com raio aninhado, para a
+   * tabela dentro de Card com padding. `flush`: tabela que ocupa o Card
+   * inteiro (padded=false) — realce reto, cabecalho em faixa reta, e o
+   * contêiner recorta os cantos com o raio do Card.
+   */
+  flush?: boolean;
 }) {
+  const fixed = layout === "fixed";
+  const wrap = fixed ? "break-words" : "whitespace-nowrap";
   const selectable = selected !== undefined;
   const allSelected = selectable && rows.length > 0 && rows.every((r, i) => selected.has(getKey(r, i)));
 
   return (
-    <div className={`overflow-x-auto ${className}`}>
-      <table className="w-full border-collapse">
+    <div
+      className={`overflow-x-auto scrollbar-bare ${className}`}
+      style={flush ? { borderRadius: "var(--santo-card-inner-radius)" } : undefined}
+    >
+      <table className={`w-full border-separate border-spacing-0 ${fixed ? "table-fixed" : ""}`}>
+        <colgroup>
+          {selectable && <col className="w-(--santo-dimension-space-48)" />}
+          {columns.map((c) => (
+            <col key={c.key} style={c.width ? { width: `var(--santo-dimension-space-${c.width})` } : undefined} />
+          ))}
+          {rowAction && <col className="w-(--santo-dimension-space-56)" />}
+        </colgroup>
         <thead>
-          <tr>
+          {/* Faixa tonal: o fundo e das celulas, com as pontas arredondadas. */}
+          <tr className="santo-caption-semibold text-text-secondary">
             {selectable && (
-              <th scope="col" className="w-0 border-b-thin border-border-subtle px-sm py-xs">
+              <th scope="col" className={`${flush ? "" : "rounded-l-full"} bg-surface-sunken px-sm py-xs`}>
                 <CheckCell checked={allSelected} onChange={() => onToggleAll?.()} label="Selecionar todas as linhas" />
               </th>
             )}
-            {columns.map((c) => (
+            {columns.map((c, ci) => (
               <th
                 key={c.key}
                 scope="col"
-                className={`santo-caption-semibold border-b-thin border-border-subtle px-sm py-xs whitespace-nowrap text-text-secondary ${c.numeric ? "text-right" : "text-left"}`}
+                className={`bg-surface-sunken px-sm py-xs ${wrap} ${c.numeric ? "text-right" : "text-left"} ${
+                  ci === 0 && !selectable ? `${flush ? "" : "rounded-l-full"} pl-md` : ""
+                } ${ci === columns.length - 1 && !rowAction ? `${flush ? "" : "rounded-r-full"} pr-md` : ""}`}
               >
                 {c.header}
               </th>
             ))}
-            {rowAction && <th scope="col" className="w-0 border-b-thin border-border-subtle px-sm py-xs" />}
+            {rowAction && <th scope="col" className={`${flush ? "" : "rounded-r-full"} bg-surface-sunken px-sm py-xs`} />}
           </tr>
         </thead>
         <tbody>
           {rows.map((row, i) => {
             const key = getKey(row, i);
+            const last = i === rows.length - 1;
+            const cell = `${last ? "" : "border-b-thin border-border-subtle"} px-sm py-sm`;
             return (
               <tr
                 key={key}
                 data-selected={selectable && selected.has(key) ? "" : undefined}
-                className="transition-colors duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default data-selected:bg-selected"
+                className={flush ? "santo-row-flush" : "santo-row"}
               >
                 {selectable && (
-                  <td className="border-b-thin border-border-subtle px-sm py-xs">
+                  <td className={cell}>
                     <CheckCell
                       checked={selected.has(key)}
                       onChange={() => onToggleRow?.(key)}
@@ -114,19 +204,17 @@ export function Table<T>({
                     />
                   </td>
                 )}
-                {columns.map((c) => (
+                {columns.map((c, ci) => (
                   <td
                     key={c.key}
-                    className={`santo-body-small-regular border-b-thin border-border-subtle px-sm py-xs ${c.numeric ? "text-right tabular-nums" : "text-left"}`}
+                    className={`santo-body-small-regular ${cell} ${fixed ? "break-words" : ""} ${c.numeric ? "text-right tabular-nums" : "text-left"} ${
+                      ci === 0 && !selectable ? "pl-md" : ""
+                    } ${ci === columns.length - 1 && !rowAction ? "pr-md" : ""}`}
                   >
-                    {c.render(row)}
+                    {cellOf(c, row)}
                   </td>
                 ))}
-                {rowAction && (
-                  <td className="border-b-thin border-border-subtle px-sm py-xs text-right">
-                    {rowAction(row)}
-                  </td>
-                )}
+                {rowAction && <td className={`${cell} text-right`}>{rowAction(row)}</td>}
               </tr>
             );
           })}
@@ -153,125 +241,13 @@ function CheckCell({
       aria-checked={checked}
       aria-label={label}
       onClick={onChange}
-      className={`grid size-md cursor-pointer place-items-center rounded-xs border-thin transition-colors duration-(--santo-motion-duration-fast) ${
+      className={`santo-focus-field grid size-md cursor-pointer place-items-center rounded-xs border-thin transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) ${
         checked
           ? "border-border-brand bg-brand-solid-default text-text-on-brand"
           : "border-border-default bg-input-default hover:border-border-strong"
       }`}
     >
-      {checked && (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" style={{ width: "var(--santo-dimension-icon-12)", height: "var(--santo-dimension-icon-12)" }}>
-          <path d="m4 12 5 5L20 6" />
-        </svg>
-      )}
+      {checked && <Check size={12} />}
     </button>
-  );
-}
-
-const WEEKDAYS = ["D", "S", "T", "Q", "Q", "S", "S"];
-
-/**
- * Grade de um mês.
- *
- * As células têm **tamanho fixo** e a grade é `w-fit`. Não é detalhe: com
- * `aspect-square` num cartão largo, cada dia vira um quadrado de 70px e o mês
- * deixa de parecer um mês. Tamanho fixo mantém a proporção certa em qualquer
- * container, sem depender de `max-width` para segurar.
- *
- * O intervalo é uma faixa contínua desenhada no invólucro da célula —
- * arredondada só nas pontas e nas quebras de semana. O dia de hoje é um disco
- * do mesmo tamanho da faixa, então os dois se alinham em vez de brigar.
- *
- * Estática de propósito: existe para o preview mostrar densidade de texto
- * pequeno e estados de seleção, não para escolher data.
- */
-export function Calendar({
-  month,
-  year,
-  startWeekday,
-  days,
-  selected = [],
-  today,
-  className = "",
-}: {
-  month: string;
-  year: number;
-  /** 0 = domingo. Em que coluna o dia 1 começa. */
-  startWeekday: number;
-  days: number;
-  selected?: number[];
-  today?: number;
-  className?: string;
-}) {
-  const cells: (number | null)[] = [
-    ...Array.from({ length: startWeekday }, () => null),
-    ...Array.from({ length: days }, (_, i) => i + 1),
-  ];
-  while (cells.length % 7 !== 0) cells.push(null);
-
-  const isSelected = (day: number | null) => day !== null && selected.includes(day);
-
-  return (
-    <div className={`mx-auto flex w-fit flex-col gap-2xs ${className}`}>
-      <div className="flex items-center justify-between gap-2xs">
-        <button
-          type="button"
-          aria-label="Mês anterior"
-          className="grid size-xl cursor-pointer place-items-center rounded-md text-text-tertiary transition-colors duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
-        >
-          <ChevronLeft size={16} />
-        </button>
-        <span className="santo-body-small-semibold">
-          {month} {year}
-        </span>
-        <button
-          type="button"
-          aria-label="Próximo mês"
-          className="grid size-xl cursor-pointer place-items-center rounded-md text-text-tertiary transition-colors duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
-        >
-          <ChevronRight size={16} />
-        </button>
-      </div>
-
-      <div className="grid grid-cols-7">
-        {WEEKDAYS.map((d, i) => (
-          <span
-            key={i}
-            className="santo-caption-small-medium grid h-lg w-2xl place-items-center text-text-tertiary"
-          >
-            {d}
-          </span>
-        ))}
-
-        {cells.map((day, i) => {
-          if (day === null) return <span key={`vazio-${i}`} className="size-2xl" />;
-
-          const selectedNow = isSelected(day);
-          // Ponta da faixa: vizinho fora da seleção, ou quebra de semana.
-          const joinLeft = selectedNow && isSelected(cells[i - 1] ?? null) && i % 7 !== 0;
-          const joinRight = selectedNow && isSelected(cells[i + 1] ?? null) && i % 7 !== 6;
-          const isToday = day === today;
-
-          return (
-            <span
-              key={day}
-              className={`grid size-2xl place-items-center ${selectedNow ? "bg-neutral-subtle-active" : ""} ${joinLeft ? "" : "rounded-l-full"} ${joinRight ? "" : "rounded-r-full"}`}
-            >
-              <span
-                className={`santo-caption-regular grid size-2xl place-items-center rounded-full tabular-nums ${
-                  isToday
-                    ? "bg-neutral-solid-default text-text-on-neutral"
-                    : selectedNow
-                      ? "text-text-primary"
-                      : "text-text-secondary"
-                }`}
-              >
-                {day}
-              </span>
-            </span>
-          );
-        })}
-      </div>
-    </div>
   );
 }

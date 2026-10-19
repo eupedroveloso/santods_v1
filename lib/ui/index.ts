@@ -13,6 +13,7 @@ export * as Icon from "./icons";
 
 export { Button, IconButton } from "./button";
 export type { ButtonProps, ButtonVariant, ControlSize, IconButtonProps } from "./button";
+export { buttonClass } from "./button-class";
 
 export { Input, Textarea, SearchInput, Field } from "./input";
 export type { InputProps, TextareaProps, FieldProps } from "./input";
@@ -20,9 +21,12 @@ export type { InputProps, TextareaProps, FieldProps } from "./input";
 export { Tag, Chip, Count } from "./chip";
 export type { ChipProps, Intent } from "./chip";
 
-export { Card, CardHeader, Stat, Divider } from "./card";
+export { Card, CardHeader, CardFooter, Stat, Divider } from "./card";
+export type { CardVariant, CardPadding, CardRadius } from "./card";
 
-export { Swatch, SwatchPicker, ColorRow } from "./swatch";
+export { Swatch } from "./swatch";
+export { SwatchPicker } from "./swatch-picker";
+export { ColorRow } from "./color-row";
 export type { SwatchSize } from "./swatch";
 
 export { ColorPicker } from "./color-picker";
@@ -38,16 +42,66 @@ export type { Segment } from "./segmented";
 export { LineChart, AreaChart, BarChart, StackedAreaChart, AxisLabels } from "./chart";
 export type { ChartProps } from "./chart";
 
-export { Avatar, Table, Calendar } from "./data";
-export type { Column } from "./data";
+export { Avatar, AvatarGroup, Table } from "./data";
+export { Calendar } from "./calendar";
+export type { Column, CellRow, ColumnWidth } from "./data";
 
 export { Checkbox, Radio, Switch, SettingRow } from "./toggle";
 
 export { Select } from "./listbox";
 export type { SelectOption } from "./listbox";
 
-export { ChatBubble, ChatHeader, ChatAttachment, TypingIndicator } from "./chat";
+export { ChatBubble, ChatHeader, ChatAttachment, ChatComposer, TypingIndicator } from "./chat";
 
 export { ActivityItem, Marker, Ticker } from "./feed";
 
-export { SidebarNav, NavSection, NavItem, NavUser, Pagination } from "./nav";
+export { SidebarNav, NavSection, NavSub, NavItem, NavUser, Pagination } from "./nav";
+
+export { Kbd } from "./kbd";
+export { CopyButton } from "./copy-button";
+export { CopyCode } from "./copy-code";
+export { CodeBlock } from "./code-block";
+export { Breadcrumb } from "./breadcrumb";
+export type { Crumb } from "./breadcrumb";
+export { LinkCard } from "./link-card";
+export type { CardLink } from "./link-card";
+export { CommandPalette } from "./command-palette";
+export type { CommandItem } from "./command-palette";
+
+export { Progress } from "./progress";
+export { useModal } from "./use-modal";
+export { useModKey } from "./use-mod-key";
+export { DURATION, readDuration, usePresence, type MotionDuration } from "./motion";
+export { KeyValue } from "./key-value";
+export { Skeleton } from "./skeleton";
+export type { SkeletonTone, SkeletonWidth, SkeletonHeight } from "./skeleton";
+export { ThumbFrame } from "./thumb-frame";
+export { Overline } from "./overline";
+export { IconTile } from "./icon-tile";
+export { EmptyState } from "./empty-state";
+export { ListRow } from "./list-row";
+export { RadioGroup, RadioCard } from "./radio-group";
+export type { RadioCardOption } from "./radio-group";
+export { TokenSample } from "./token-sample";
+export type { TokenSampleVariant } from "./token-sample";
+export { SearchTrigger } from "./search-trigger";
+export { TableOfContents } from "./table-of-contents";
+export type { TocItem } from "./table-of-contents";
+
+// Registro de componentes (metadado puro) — as demos ficam em ./demos, so cliente.
+export {
+  components,
+  getComponent,
+  componentsByCategory,
+  componentsByTier,
+  CATEGORIES,
+  CATEGORY_LABEL,
+  TIERS,
+  TIER_LABEL,
+} from "./registry";
+export type { ComponentMeta, ComponentCategory, ComponentTier, ComponentDemos, Demo, Playground, Control } from "./registry.types";
+export { Ring, type RingSize, type RingTone } from "./ring";
+export { Sparkline, type SparklineSize } from "./sparkline";
+export { MiniBars, type MiniBarsSize } from "./mini-bars";
+export { Fab, type FabPosition, type FabSize, type FabTone } from "./fab";
+export { RailItem, RailNav } from "./rail-nav";

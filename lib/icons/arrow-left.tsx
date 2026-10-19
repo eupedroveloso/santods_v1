@@ -1,0 +1,12 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+// Figma: arrow-left / Weight=regular — node 38:29195
+import { IconBase, type IconProps } from "./icon-base";
+
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <IconBase {...props} viewBox="0 0 16 16" ratio={1}>
+      <path d="M1.775 7.57496C1.54 7.80996 1.54 8.18996 1.775 8.42246L5.97501 12.625C6.21 12.86 6.59 12.86 6.8225 12.625C7.05501 12.39 7.0575 12.01 6.8225 11.7775L3.6475 8.59996H13.8C14.1325 8.59996 14.4 8.33246 14.4 7.99996C14.4 7.66746 14.1325 7.39996 13.8 7.39996H3.6475L6.82501 4.22496C7.06001 3.98996 7.06001 3.60996 6.82501 3.37746C6.59 3.14496 6.21001 3.14246 5.97751 3.37746L1.775 7.57496Z" />
+    </IconBase>
+  );
+}

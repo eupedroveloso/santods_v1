@@ -59,6 +59,7 @@ export function Select<T extends string>({
   label,
   size = "md",
   pill,
+  variant = "well",
   mono,
   disabled,
   className = "",
@@ -71,7 +72,10 @@ export function Select<T extends string>({
   /** Rótulo acessível do gatilho. */
   label: string;
   size?: ControlSize;
+  /** Raio: pilula por padrao no `well`, md no `outline`. */
   pill?: boolean;
+  /** Mesmo vocabulario do Input: `well` (poco, padrao) ou `outline`. */
+  variant?: "well" | "outline";
   mono?: boolean;
   disabled?: boolean;
   className?: string;
@@ -250,7 +254,13 @@ export function Select<T extends string>({
         disabled={disabled}
         onClick={toggle}
         onKeyDown={onKeyDown}
-        className={`relative flex w-full min-w-0 cursor-pointer items-center gap-2xs border-thin bg-input-default text-left text-text-primary transition-colors duration-(--santo-motion-duration-fast) hover:border-border-strong disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${pill ? "rounded-full" : "rounded-md"} ${open ? "border-border-brand" : "border-border-default"}`}
+        className={`santo-focus-field relative flex w-full min-w-0 cursor-pointer items-center gap-2xs border-thin text-left text-text-primary santo-transition-colors disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${
+          (pill ?? variant === "well") ? "rounded-full" : "rounded-md"
+        } ${
+          variant === "well"
+            ? `bg-surface-sunken hover:bg-neutral-subtle-default ${open ? "border-border-brand" : "border-transparent"}`
+            : `bg-input-default hover:border-border-strong ${open ? "border-border-brand" : "border-border-default"}`
+        }`}
       >
         {selected?.leading}
         <span
@@ -260,7 +270,7 @@ export function Select<T extends string>({
           {selected?.label ?? placeholder}
         </span>
         <span
-          className="pointer-events-none absolute right-xs text-text-tertiary transition-transform duration-(--santo-motion-duration-fast)"
+          className="pointer-events-none absolute right-xs text-text-tertiary transition-transform ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast)"
           style={{ transform: open ? "rotate(180deg)" : undefined }}
         >
           <ChevronDown size={16} />
@@ -270,8 +280,11 @@ export function Select<T extends string>({
       {open && placement && (
         <div
           ref={panelRef}
-          className="fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden rounded-lg border-thin border-border-subtle bg-surface-raised shadow-lg"
+          className="santo-animate-scale-in fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden rounded-lg border-thin border-border-subtle bg-surface-raised shadow-lg"
           style={{
+            // Raio aninhado das opcoes: painel lg - p-3xs da lista - borda.
+            ["--santo-card-inner-radius" as string]:
+              "max(var(--santo-radius-xs), calc(var(--santo-radius-lg) - var(--santo-space-3xs) - var(--santo-border-thin)))",
             left: placement.left,
             top: placement.top,
             width: placement.width,
@@ -330,7 +343,7 @@ export function Select<T extends string>({
                       aria-disabled={option.disabled}
                       onClick={() => commit(option)}
                       onMouseEnter={() => setActiveIndex(index)}
-                      className={`flex cursor-pointer items-center gap-xs rounded-md px-xs py-2xs ${
+                      className={`santo-row flex cursor-pointer items-center gap-xs px-xs py-2xs ${
                         option.disabled
                           ? "cursor-not-allowed text-text-disabled"
                           : isActive

@@ -12,7 +12,7 @@ import { Check } from "./icons";
  */
 
 const BOX =
-  "grid size-md shrink-0 place-items-center rounded-xs border-thin transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)";
+  "santo-focus-field grid size-md shrink-0 place-items-center rounded-xs border-thin transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)";
 
 export function Checkbox({
   checked,
@@ -56,6 +56,24 @@ export function Checkbox({
         </label>
       )}
     </div>
+  );
+}
+
+/**
+ * O marcador do Radio, sem interacao — para quem ja e o alvo de clique (o
+ * RadioCard inteiro e o botao; um <button> dentro de outro e HTML invalido).
+ * Mesmos tokens do Radio, por construcao.
+ */
+export function RadioMark({ checked, disabled }: { checked: boolean; disabled?: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={`${BOX} rounded-full bg-input-default ${
+        disabled ? "border-border-disabled" : checked ? "border-border-brand" : "border-border-default"
+      }`}
+    >
+      {checked && <span className="size-2xs rounded-full bg-brand-solid-default" />}
+    </span>
   );
 }
 
@@ -124,12 +142,14 @@ export function Switch({
       aria-label={label}
       disabled={disabled}
       onClick={() => onChange(!checked)}
-      className={`relative inline-flex h-lg w-2xl shrink-0 cursor-pointer items-center rounded-full p-3xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed disabled:bg-disabled ${
-        checked ? "bg-brand-solid-default" : "bg-neutral-subtle-active"
+      // Desligado+desabilitado e ligado+desabilitado precisam continuar
+      // distinguiveis: o ligado vira brand/subtle, nao o mesmo cinza.
+      className={`santo-focus-field relative inline-flex h-lg w-2xl shrink-0 cursor-pointer items-center rounded-full p-3xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed ${
+        checked ? "bg-brand-solid-default disabled:bg-brand-subtle-active" : "bg-neutral-subtle-active disabled:bg-disabled"
       } ${className}`}
     >
       <span
-        className="size-md rounded-full bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)"
+        className="size-md rounded-full bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring)"
         style={{ transform: checked ? "translateX(100%)" : "translateX(0)" }}
       />
     </button>

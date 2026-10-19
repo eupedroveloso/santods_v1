@@ -1,0 +1,69 @@
+# Icones exportados do Figma (pagina Icones) para lib/icons/.
+# Unico arquivo de lib/icons/ editado a mao: o resto e gerado por
+#   node scripts/figma-icons.mjs build <dir-dos-svgs>
+# Uma linha por slug (ver regra de slug em scripts/figma-icons.mjs).
+# Peso opcional: slug:light | slug:regular (padrao) | slug:solid | slug:duotone.
+# Icone de marca (frame Brand) nao tem peso.
+# O texto depois de "#" e comentario; use para registrar de onde veio o pedido.
+
+# --- lib/ui/icons.tsx (equivalencia com o desenho atual) ---
+magnifying-glass        # Search
+chevron-down            # ChevronDown
+chevron-right           # ChevronRight
+chevron-left            # ChevronLeft
+chevron-up              # (par do conjunto chevron-*)
+arrow-rotate-left       # Undo — duvida: undo / rotate-left tambem existem
+arrow-rotate-right      # Redo — duvida: redo / rotate-right tambem existem
+arrows-rotate           # Reset — duvida: o atual e uma seta circular unica (rotate?)
+arrow-down-to-bracket   # Import — duvida: file-import se a acao for "importar arquivo"
+floppy-disk             # Save
+code                    # Code
+sun                     # Sun
+moon                    # Moon
+shuffle                 # Shuffle
+link                    # Link
+link-slash              # Unlink
+plus                    # Plus
+minus                   # Minus
+check                   # Check
+xmark                   # Close
+ellipsis                # More
+expand                  # Expand — duvida: up-right-and-down-left-from-center (setas diagonais)
+copy                    # Copy
+download                # Download
+palette                 # Palette
+arrow-up-right          # ArrowUpRight
+arrow-down-left         # ArrowDownLeft
+arrow-trend-up          # TrendUp
+github                  # Github (marca)
+google                  # Google (marca)
+sparkles                # Sparkles
+figma                   # Figma (marca)
+eyedropper              # Eyedropper
+bars                    # Menu
+book                    # Book
+font                    # Type — duvida: text
+layer-group             # Layers
+grid-2                  # Grid — duvida: table-cells
+id-card                 # IdCard
+
+# --- sidebar das docs ---
+table-cells             # Overview (alternativa a grid-2)
+text                    # Tipografia (alternativa a font)
+square-dashed           # Raio
+vector-square           # Raio (alternativa)
+circle-half-stroke      # Sombra / tema Auto
+arrows-left-right       # Espacamento
+list                    # Todos os tokens
+icons                   # Icones
+shapes                  # Icones (alternativa)
+cube                    # Componentes
+puzzle-piece            # Componentes (alternativa)
+arrow-left              # navegacao
+arrow-right             # navegacao
+
+# --- SVG inline desenhado a mao fora de icons.tsx (Ateliê) ---
+file                    # ChatAttachment (lib/ui/chat.tsx); o visto da CheckCell (data.tsx) usa check
+
+# --- sidebar: Movimento (Ateliê) ---
+bezier-curve            # Movimento (/estilos/movimento)

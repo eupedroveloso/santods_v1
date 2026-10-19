@@ -361,7 +361,7 @@ function Channel({
           if (e.key === "Enter") (e.target as HTMLInputElement).blur();
         }}
         aria-label={label}
-        className={`santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 rounded-md border-thin border-border-default bg-input-default px-2xs text-center text-text-primary ${mono ? "font-mono" : "tabular-nums"}`}
+        className={`santo-focus-field santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 rounded-md border-thin border-border-default bg-input-default px-2xs text-center text-text-primary ${mono ? "font-mono" : "tabular-nums"}`}
       />
       <span className="santo-caption-small-medium text-text-tertiary">{label}</span>
     </label>
