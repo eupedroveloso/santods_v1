@@ -2,68 +2,69 @@
 # Unico arquivo de lib/icons/ editado a mao: o resto e gerado por
 #   node scripts/figma-icons.mjs build <dir-dos-svgs>
 # Uma linha por slug (ver regra de slug em scripts/figma-icons.mjs).
-# Peso opcional: slug:light | slug:regular (padrao) | slug:solid | slug:duotone.
+# Peso opcional: slug:light, slug:regular (padrao), slug:solid, slug:duotone.
+# Apelidos pt-BR para a busca da galeria depois de "|": magnifying-glass | lupa, buscar
 # Icone de marca (frame Brand) nao tem peso.
 # O texto depois de "#" e comentario; use para registrar de onde veio o pedido.
 
 # --- lib/ui/icons.tsx (equivalencia com o desenho atual) ---
-magnifying-glass        # Search
-chevron-down            # ChevronDown
-chevron-right           # ChevronRight
-chevron-left            # ChevronLeft
-chevron-up              # (par do conjunto chevron-*)
-arrow-rotate-left       # Undo — duvida: undo / rotate-left tambem existem
-arrow-rotate-right      # Redo — duvida: redo / rotate-right tambem existem
-arrows-rotate           # Reset — duvida: o atual e uma seta circular unica (rotate?)
-arrow-down-to-bracket   # Import — duvida: file-import se a acao for "importar arquivo"
-floppy-disk             # Save
-code                    # Code
-sun                     # Sun
-moon                    # Moon
-shuffle                 # Shuffle
-link                    # Link
-link-slash              # Unlink
-plus                    # Plus
-minus                   # Minus
-check                   # Check
-xmark                   # Close
-ellipsis                # More
-expand                  # Expand — duvida: up-right-and-down-left-from-center (setas diagonais)
-copy                    # Copy
-download                # Download
-palette                 # Palette
-arrow-up-right          # ArrowUpRight
-arrow-down-left         # ArrowDownLeft
-arrow-trend-up          # TrendUp
-github                  # Github (marca)
-google                  # Google (marca)
-sparkles                # Sparkles
-figma                   # Figma (marca)
-eyedropper              # Eyedropper
-bars                    # Menu
-book                    # Book
-font                    # Type — duvida: text
-layer-group             # Layers
-grid-2                  # Grid — duvida: table-cells
-id-card                 # IdCard
+magnifying-glass | lupa, buscar, pesquisar, procurar                    # Search
+chevron-down | seta, baixo, expandir, abrir                             # ChevronDown
+chevron-right | seta, direita, avançar, próximo                         # ChevronRight
+chevron-left | seta, esquerda, voltar, anterior                         # ChevronLeft
+chevron-up | seta, cima, recolher                                       # (par do conjunto chevron-*)
+arrow-rotate-left | desfazer, voltar, girar                             # Undo — duvida: undo / rotate-left tambem existem
+arrow-rotate-right | refazer, girar                                     # Redo — duvida: redo / rotate-right tambem existem
+arrows-rotate | atualizar, recarregar, sincronizar, redefinir           # Reset — duvida: o atual e uma seta circular unica (rotate?)
+arrow-down-to-bracket | importar, baixar                                # Import — duvida: file-import se a acao for "importar arquivo"
+floppy-disk | salvar, disquete, gravar                                  # Save
+code | código, programação                                              # Code
+sun | sol, claro, tema claro, dia                                       # Sun
+moon | lua, escuro, tema escuro, noite                                  # Moon
+shuffle | aleatório, embaralhar, misturar                               # Shuffle
+link | link, corrente, vincular                                         # Link
+link-slash | desvincular, link quebrado, remover link                   # Unlink
+plus | mais, adicionar, novo, criar                                     # Plus
+minus | menos, remover, subtrair                                        # Minus
+check | visto, confirmar, ok, concluído, marcar                         # Check
+xmark | fechar, x, cancelar, remover                                    # Close
+ellipsis | mais opções, reticências, menu                               # More
+expand | expandir, tela cheia, ampliar, maximizar                       # Expand — duvida: up-right-and-down-left-from-center (setas diagonais)
+copy | copiar, duplicar                                                 # Copy
+download | baixar, salvar                                               # Download
+palette | paleta, cor, cores                                            # Palette
+arrow-up-right | seta, diagonal, abrir, externo                         # ArrowUpRight
+arrow-down-left | seta, diagonal, entrada                               # ArrowDownLeft
+arrow-trend-up | tendência, crescimento, alta, gráfico                  # TrendUp
+github | github, git, repositório                                       # Github (marca)
+google | google, login                                                  # Google (marca)
+sparkles | brilho, mágica, ia, novidade, destaque                       # Sparkles
+figma | figma, design                                                   # Figma (marca)
+eyedropper | conta-gotas, pipeta, seletor de cor                        # Eyedropper
+bars | menu, hambúrguer, navegação                                      # Menu
+book | livro, documentação, guia                                        # Book
+font | fonte, tipografia, letra                                         # Type — duvida: text
+layer-group | camadas, empilhar                                         # Layers
+grid-2 | grade, mosaico, visão geral                                    # Grid — duvida: table-cells
+id-card | identidade, crachá, marca, cartão                             # IdCard
 
 # --- sidebar das docs ---
-table-cells             # Overview (alternativa a grid-2)
-text                    # Tipografia (alternativa a font)
-square-dashed           # Raio
-vector-square           # Raio (alternativa)
-circle-half-stroke      # Sombra / tema Auto
-arrows-left-right       # Espacamento
-list                    # Todos os tokens
-icons                   # Icones
-shapes                  # Icones (alternativa)
-cube                    # Componentes
-puzzle-piece            # Componentes (alternativa)
-arrow-left              # navegacao
-arrow-right             # navegacao
+table-cells | tabela, grade, células                                    # Overview (alternativa a grid-2)
+text | texto, tipografia                                                # Tipografia (alternativa a font)
+square-dashed | quadrado tracejado, raio, seleção                       # Raio
+vector-square | vetor, raio, forma, canto                               # Raio (alternativa)
+circle-half-stroke | contraste, meio círculo, sombra, tema automático   # Sombra / tema Auto
+arrows-left-right | setas, espaçamento, horizontal, largura             # Espacamento
+list | lista, itens, tokens                                             # Todos os tokens
+icons | ícones, símbolos                                                # Icones
+shapes | formas, ícones                                                 # Icones (alternativa)
+cube | cubo, componente, bloco                                          # Componentes
+puzzle-piece | quebra-cabeça, peça, componente                          # Componentes (alternativa)
+arrow-left | seta, esquerda, voltar                                     # navegacao
+arrow-right | seta, direita, avançar, ir                                # navegacao
 
 # --- SVG inline desenhado a mao fora de icons.tsx (Ateliê) ---
-file                    # ChatAttachment (lib/ui/chat.tsx); o visto da CheckCell (data.tsx) usa check
+file | arquivo, documento, anexo                                        # ChatAttachment (lib/ui/chat.tsx); o visto da CheckCell (data.tsx) usa check
 
 # --- sidebar: Movimento (Ateliê) ---
-bezier-curve            # Movimento (/estilos/movimento)
+bezier-curve | curva, bézier, movimento, animação                       # Movimento (/estilos/movimento)

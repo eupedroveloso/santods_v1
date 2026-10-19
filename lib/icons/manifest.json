@@ -20,6 +20,12 @@
         "nodeId": "38:9549",
         "weight": "regular"
       },
+      "aliases": [
+        "lupa",
+        "buscar",
+        "pesquisar",
+        "procurar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "chevron-down": {
@@ -32,6 +38,12 @@
         "nodeId": "38:31259",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "baixo",
+        "expandir",
+        "abrir"
+      ],
       "viewBox": "0 0 16 16"
     },
     "chevron-right": {
@@ -44,6 +56,12 @@
         "nodeId": "38:31285",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "direita",
+        "avançar",
+        "próximo"
+      ],
       "viewBox": "0 0 16 16"
     },
     "chevron-left": {
@@ -56,6 +74,12 @@
         "nodeId": "38:31272",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "esquerda",
+        "voltar",
+        "anterior"
+      ],
       "viewBox": "0 0 16 16"
     },
     "chevron-up": {
@@ -68,6 +92,11 @@
         "nodeId": "38:31354",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "cima",
+        "recolher"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-rotate-left": {
@@ -80,6 +109,11 @@
         "nodeId": "38:29671",
         "weight": "regular"
       },
+      "aliases": [
+        "desfazer",
+        "voltar",
+        "girar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-rotate-right": {
@@ -92,6 +126,10 @@
         "nodeId": "38:29727",
         "weight": "regular"
       },
+      "aliases": [
+        "refazer",
+        "girar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrows-rotate": {
@@ -104,6 +142,12 @@
         "nodeId": "38:30609",
         "weight": "regular"
       },
+      "aliases": [
+        "atualizar",
+        "recarregar",
+        "sincronizar",
+        "redefinir"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-down-to-bracket": {
@@ -116,6 +160,10 @@
         "nodeId": "38:29013",
         "weight": "regular"
       },
+      "aliases": [
+        "importar",
+        "baixar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "floppy-disk": {
@@ -128,6 +176,11 @@
         "nodeId": "38:46810",
         "weight": "regular"
       },
+      "aliases": [
+        "salvar",
+        "disquete",
+        "gravar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "code": {
@@ -140,6 +193,10 @@
         "nodeId": "38:6504",
         "weight": "regular"
       },
+      "aliases": [
+        "código",
+        "programação"
+      ],
       "viewBox": "0 0 16 16"
     },
     "sun": {
@@ -152,6 +209,12 @@
         "nodeId": "38:19816",
         "weight": "regular"
       },
+      "aliases": [
+        "sol",
+        "claro",
+        "tema claro",
+        "dia"
+      ],
       "viewBox": "0 0 16 16"
     },
     "moon": {
@@ -164,6 +227,12 @@
         "nodeId": "38:19080",
         "weight": "regular"
       },
+      "aliases": [
+        "lua",
+        "escuro",
+        "tema escuro",
+        "noite"
+      ],
       "viewBox": "0 0 16 16"
     },
     "shuffle": {
@@ -176,6 +245,11 @@
         "nodeId": "38:32751",
         "weight": "regular"
       },
+      "aliases": [
+        "aleatório",
+        "embaralhar",
+        "misturar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "link": {
@@ -188,6 +262,11 @@
         "nodeId": "38:52297",
         "weight": "regular"
       },
+      "aliases": [
+        "link",
+        "corrente",
+        "vincular"
+      ],
       "viewBox": "0 0 16 16"
     },
     "link-slash": {
@@ -200,6 +279,11 @@
         "nodeId": "38:52381",
         "weight": "regular"
       },
+      "aliases": [
+        "desvincular",
+        "link quebrado",
+        "remover link"
+      ],
       "viewBox": "0 0 16 16"
     },
     "plus": {
@@ -212,6 +296,12 @@
         "nodeId": "38:55371",
         "weight": "regular"
       },
+      "aliases": [
+        "mais",
+        "adicionar",
+        "novo",
+        "criar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "minus": {
@@ -224,6 +314,11 @@
         "nodeId": "38:53346",
         "weight": "regular"
       },
+      "aliases": [
+        "menos",
+        "remover",
+        "subtrair"
+      ],
       "viewBox": "0 0 16 16"
     },
     "check": {
@@ -236,6 +331,13 @@
         "nodeId": "38:14032",
         "weight": "regular"
       },
+      "aliases": [
+        "visto",
+        "confirmar",
+        "ok",
+        "concluído",
+        "marcar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "xmark": {
@@ -248,6 +350,12 @@
         "nodeId": "38:15640",
         "weight": "regular"
       },
+      "aliases": [
+        "fechar",
+        "x",
+        "cancelar",
+        "remover"
+      ],
       "viewBox": "0 0 16 16"
     },
     "ellipsis": {
@@ -260,6 +368,11 @@
         "nodeId": "38:43984",
         "weight": "regular"
       },
+      "aliases": [
+        "mais opções",
+        "reticências",
+        "menu"
+      ],
       "viewBox": "0 0 16 16"
     },
     "expand": {
@@ -272,6 +385,12 @@
         "nodeId": "38:44263",
         "weight": "regular"
       },
+      "aliases": [
+        "expandir",
+        "tela cheia",
+        "ampliar",
+        "maximizar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "copy": {
@@ -284,6 +403,10 @@
         "nodeId": "38:41793",
         "weight": "regular"
       },
+      "aliases": [
+        "copiar",
+        "duplicar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "download": {
@@ -296,6 +419,10 @@
         "nodeId": "38:43439",
         "weight": "regular"
       },
+      "aliases": [
+        "baixar",
+        "salvar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "palette": {
@@ -308,6 +435,11 @@
         "nodeId": "38:54428",
         "weight": "regular"
       },
+      "aliases": [
+        "paleta",
+        "cor",
+        "cores"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-up-right": {
@@ -320,6 +452,12 @@
         "nodeId": "38:30385",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "diagonal",
+        "abrir",
+        "externo"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-down-left": {
@@ -332,6 +470,11 @@
         "nodeId": "38:28887",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "diagonal",
+        "entrada"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-trend-up": {
@@ -344,6 +487,12 @@
         "nodeId": "38:29909",
         "weight": "regular"
       },
+      "aliases": [
+        "tendência",
+        "crescimento",
+        "alta",
+        "gráfico"
+      ],
       "viewBox": "0 0 16 16"
     },
     "github": {
@@ -356,6 +505,11 @@
         "nodeId": "48:197",
         "weight": null
       },
+      "aliases": [
+        "github",
+        "git",
+        "repositório"
+      ],
       "viewBox": "0 0 15 15"
     },
     "google": {
@@ -368,6 +522,10 @@
         "nodeId": "48:217",
         "weight": null
       },
+      "aliases": [
+        "google",
+        "login"
+      ],
       "viewBox": "0 0 15 15"
     },
     "sparkles": {
@@ -380,6 +538,13 @@
         "nodeId": "38:59616",
         "weight": "regular"
       },
+      "aliases": [
+        "brilho",
+        "mágica",
+        "ia",
+        "novidade",
+        "destaque"
+      ],
       "viewBox": "0 0 16 16"
     },
     "figma": {
@@ -392,6 +557,10 @@
         "nodeId": "48:161",
         "weight": null
       },
+      "aliases": [
+        "figma",
+        "design"
+      ],
       "viewBox": "0 0 11 15"
     },
     "eyedropper": {
@@ -404,6 +573,11 @@
         "nodeId": "38:44543",
         "weight": "regular"
       },
+      "aliases": [
+        "conta-gotas",
+        "pipeta",
+        "seletor de cor"
+      ],
       "viewBox": "0 0 16 16"
     },
     "bars": {
@@ -416,6 +590,11 @@
         "nodeId": "38:35349",
         "weight": "regular"
       },
+      "aliases": [
+        "menu",
+        "hambúrguer",
+        "navegação"
+      ],
       "viewBox": "0 0 16 16"
     },
     "book": {
@@ -428,6 +607,11 @@
         "nodeId": "38:15751",
         "weight": "regular"
       },
+      "aliases": [
+        "livro",
+        "documentação",
+        "guia"
+      ],
       "viewBox": "0 0 16 16"
     },
     "font": {
@@ -440,6 +624,11 @@
         "nodeId": "38:1758",
         "weight": "regular"
       },
+      "aliases": [
+        "fonte",
+        "tipografia",
+        "letra"
+      ],
       "viewBox": "0 0 16 16"
     },
     "layer-group": {
@@ -452,6 +641,10 @@
         "nodeId": "38:25503",
         "weight": "regular"
       },
+      "aliases": [
+        "camadas",
+        "empilhar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "grid-2": {
@@ -464,6 +657,11 @@
         "nodeId": "38:321",
         "weight": "regular"
       },
+      "aliases": [
+        "grade",
+        "mosaico",
+        "visão geral"
+      ],
       "viewBox": "0 0 16 16"
     },
     "id-card": {
@@ -476,6 +674,12 @@
         "nodeId": "38:951",
         "weight": "regular"
       },
+      "aliases": [
+        "identidade",
+        "crachá",
+        "marca",
+        "cartão"
+      ],
       "viewBox": "0 0 16 16"
     },
     "table-cells": {
@@ -488,6 +692,11 @@
         "nodeId": "38:62396",
         "weight": "regular"
       },
+      "aliases": [
+        "tabela",
+        "grade",
+        "células"
+      ],
       "viewBox": "0 0 16 16"
     },
     "text": {
@@ -500,6 +709,10 @@
         "nodeId": "38:63444",
         "weight": "regular"
       },
+      "aliases": [
+        "texto",
+        "tipografia"
+      ],
       "viewBox": "0 0 16 16"
     },
     "square-dashed": {
@@ -512,6 +725,11 @@
         "nodeId": "38:60244",
         "weight": "regular"
       },
+      "aliases": [
+        "quadrado tracejado",
+        "raio",
+        "seleção"
+      ],
       "viewBox": "0 0 16 16"
     },
     "vector-square": {
@@ -524,6 +742,12 @@
         "nodeId": "38:65967",
         "weight": "regular"
       },
+      "aliases": [
+        "vetor",
+        "raio",
+        "forma",
+        "canto"
+      ],
       "viewBox": "0 0 16 16"
     },
     "circle-half-stroke": {
@@ -536,6 +760,12 @@
         "nodeId": "38:39894",
         "weight": "regular"
       },
+      "aliases": [
+        "contraste",
+        "meio círculo",
+        "sombra",
+        "tema automático"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrows-left-right": {
@@ -548,6 +778,12 @@
         "nodeId": "38:34387",
         "weight": "regular"
       },
+      "aliases": [
+        "setas",
+        "espaçamento",
+        "horizontal",
+        "largura"
+      ],
       "viewBox": "0 0 16 16"
     },
     "list": {
@@ -560,6 +796,11 @@
         "nodeId": "38:1867",
         "weight": "regular"
       },
+      "aliases": [
+        "lista",
+        "itens",
+        "tokens"
+      ],
       "viewBox": "0 0 16 16"
     },
     "icons": {
@@ -572,6 +813,10 @@
         "nodeId": "38:50558",
         "weight": "regular"
       },
+      "aliases": [
+        "ícones",
+        "símbolos"
+      ],
       "viewBox": "0 0 16 16"
     },
     "shapes": {
@@ -584,6 +829,10 @@
         "nodeId": "38:58097",
         "weight": "regular"
       },
+      "aliases": [
+        "formas",
+        "ícones"
+      ],
       "viewBox": "0 0 16 16"
     },
     "cube": {
@@ -596,6 +845,11 @@
         "nodeId": "38:42156",
         "weight": "regular"
       },
+      "aliases": [
+        "cubo",
+        "componente",
+        "bloco"
+      ],
       "viewBox": "0 0 16 16"
     },
     "puzzle-piece": {
@@ -608,6 +862,11 @@
         "nodeId": "38:3308",
         "weight": "regular"
       },
+      "aliases": [
+        "quebra-cabeça",
+        "peça",
+        "componente"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-left": {
@@ -620,6 +879,11 @@
         "nodeId": "38:29195",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "esquerda",
+        "voltar"
+      ],
       "viewBox": "0 0 16 16"
     },
     "arrow-right": {
@@ -632,6 +896,12 @@
         "nodeId": "38:29405",
         "weight": "regular"
       },
+      "aliases": [
+        "seta",
+        "direita",
+        "avançar",
+        "ir"
+      ],
       "viewBox": "0 0 16 16"
     },
     "file": {
@@ -644,6 +914,11 @@
         "nodeId": "38:16423",
         "weight": "regular"
       },
+      "aliases": [
+        "arquivo",
+        "documento",
+        "anexo"
+      ],
       "viewBox": "0 0 16 16"
     },
     "bezier-curve": {
@@ -656,6 +931,12 @@
         "nodeId": "38:35837",
         "weight": "regular"
       },
+      "aliases": [
+        "curva",
+        "bézier",
+        "movimento",
+        "animação"
+      ],
       "viewBox": "0 0 16 16"
     }
   }

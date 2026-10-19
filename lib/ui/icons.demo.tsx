@@ -12,7 +12,7 @@ import { SearchInput } from "./input";
 import { OVERLINE } from "./text-class";
 import type { DemoMap } from "./registry.types";
 
-type Entry = { slug: string; component: string; figma: { nodeId: string; kind: string } };
+type Entry = { slug: string; component: string; aliases?: string[]; figma: { nodeId: string; kind: string } };
 
 /** A grade sai do manifest gerado da pagina Icones do Figma — nao de uma lista a mao. */
 const ENTRIES = Object.entries(manifest.icons as Record<string, Omit<Entry, "slug">>).map(([slug, e]) => ({
@@ -35,7 +35,10 @@ function IconGallery() {
   const [query, setQuery] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
   const q = fold(query.trim());
-  const visible = ENTRIES.filter((e) => !q || fold(e.slug).includes(q) || fold(e.component).includes(q));
+  // Acha pelo nome do Figma (ingles) e pelos apelidos pt-BR do manifest.
+  const visible = ENTRIES.filter(
+    (e) => !q || fold(e.slug).includes(q) || fold(e.component).includes(q) || (e.aliases ?? []).some((a) => fold(a).includes(q)),
+  );
   const copy = (name: string) => {
     navigator.clipboard?.writeText(name).then(() => {
       setCopied(name);

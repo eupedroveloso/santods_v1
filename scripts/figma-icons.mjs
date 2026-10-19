@@ -12,7 +12,8 @@
  * LOCAL regeneravel em tokens/.cache/ (ignorado pelo git), nunca versionado.
  *
  * ICONE NOVO:
- *   1. adicione o slug em lib/icons/needed.txt (slug ou slug:solid|light|duotone);
+ *   1. adicione o slug em lib/icons/needed.txt (slug ou slug:solid|light|duotone), com os
+ *      apelidos pt-BR da busca depois de "|": `magnifying-glass | lupa, buscar`;
  *   2. se tokens/.cache/santods.icons.json nao existir, rode o inventario (passos 1-2 abaixo, via MCP);
  *   3. `plan` mostra o nodeId; baixe o SVG (MCP download_assets) e rode `build <svg-dir>`.
  * Sem cache, `plan`/`build` ainda resolvem os slugs ja exportados pelo manifest.json; so slug NOVO
@@ -202,7 +203,10 @@ function loadNeeded() {
     .filter(Boolean);
   const missing = [];
   const wanted = [];
-  for (const line of lines) {
+  for (const raw of lines) {
+    // `slug[:peso] | apelido, apelido` — apelidos pt-BR para a busca da galeria.
+    const [line, aliasPart = ''] = raw.split('|').map((x) => x.trim());
+    const aliases = aliasPart.split(',').map((a) => a.trim()).filter(Boolean);
     const [slug, weightArg] = line.split(':');
     const icon = icons[slug];
     if (!icon) {
@@ -215,12 +219,12 @@ function loadNeeded() {
     }
     if (icon.kind === 'brand') {
       if (weightArg) fail(`${slug} e icone de marca: nao tem peso (${line}).`);
-      wanted.push({ slug, icon, weight: null, nodeId: icon.nodeId });
+      wanted.push({ slug, icon, weight: null, nodeId: icon.nodeId, aliases });
       continue;
     }
     const weight = weightArg ?? 'regular';
     if (!meta.weights.includes(weight)) fail(`Peso invalido em "${line}". Validos: ${meta.weights.join(', ')}.`);
-    wanted.push({ slug, icon, weight, nodeId: icon.variants[weight] });
+    wanted.push({ slug, icon, weight, nodeId: icon.variants[weight], aliases });
   }
   if (missing.length && !fromCache) {
     fail(`Icone(s) novo(s) em needed.txt, fora do manifest atual: ${missing.join(', ')}\n\n${INVENTORY_HELP}`);
@@ -391,6 +395,8 @@ ${paths.map((p) => `      <path ${attrs(p)} />`).join('\n')}
       component: name,
       file: `lib/icons/${w.slug}.tsx`,
       figma: { name: w.icon.name, kind: w.icon.kind, setNodeId: w.icon.nodeId, nodeId: w.nodeId, weight: w.weight },
+      /** Apelidos pt-BR para busca (lib/icons/needed.txt). */
+      aliases: w.aliases,
       viewBox,
     };
   }
