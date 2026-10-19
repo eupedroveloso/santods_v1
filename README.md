@@ -18,7 +18,8 @@ Tudo que o arquivo tem de token e style, sem exceção:
 | **Effect styles** | 7 | none, xs, sm, md, lg, xl, 2xl |
 
 345 variáveis no total. A página `Icones` do Figma (≈24,5 mil nós de uma
-biblioteca Font Awesome colada lá) **não** faz parte dos tokens e ficou de fora.
+biblioteca Font Awesome colada lá) **não** faz parte dos tokens, mas é a **única
+fonte de ícones** do SantoDS — veja [Ícones](#ícones).
 
 ## Como usar
 
@@ -64,6 +65,28 @@ Para checar ou sincronizar com o Figma, use o agente **`figma-parity`**
 (`.claude/agents/figma-parity.md`). Ele roda `scripts/figma-fingerprint.js`
 dentro do Figma via MCP, compara os hashes com `npm run tokens:fingerprint` e só
 puxa o dump completo se algo divergir. A checagem barata cabe em uma chamada.
+
+## Ícones
+
+Os ícones saem **só** da página `Icones` do Figma, e **só os que estão em uso**
+entram no git: `lib/icons/` (um componente React por ícone, `svg/`, `index.ts`,
+`manifest.json`), gerado por `scripts/figma-icons.mjs` a partir de
+`lib/icons/needed.txt` — o único arquivo de lá editado à mão.
+
+O inventário da página inteira (≈5,4 mil ícones, 1 MB) é **cache local**
+regenerável em `tokens/.cache/santods.icons.json`, ignorado pelo git.
+
+Ícone novo:
+
+1. adicione o slug em `lib/icons/needed.txt` (`slug` ou `slug:solid|light|duotone`);
+2. se `tokens/.cache/santods.icons.json` não existir, gere o inventário: rode
+   `scripts/figma-icons.js` via MCP `use_figma` (só leitura) e depois
+   `node scripts/figma-icons.mjs inventory <dir>`;
+3. `node scripts/figma-icons.mjs plan` mostra o nodeId; baixe o SVG (MCP
+   `download_assets`) e rode `node scripts/figma-icons.mjs build <dir-dos-svgs>`.
+
+Sem o cache, `plan` e `build` ainda funcionam para os ícones já exportados (leem o
+`manifest.json`); só um slug novo pede o inventário, e o erro explica como.
 
 ## Componentes
 

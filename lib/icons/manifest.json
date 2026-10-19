@@ -1,6 +1,13 @@
 {
   "fileKey": "O0xV7p3taNff97XGjNjTMl",
   "page": "Icones",
+  "pageId": "38:2",
+  "weights": [
+    "light",
+    "regular",
+    "solid",
+    "duotone"
+  ],
   "generatedBy": "scripts/figma-icons.mjs build",
   "icons": {
     "magnifying-glass": {

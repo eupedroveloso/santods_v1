@@ -15,8 +15,21 @@ import type { ReactNode } from "react";
  * centro do icone do pai. Contagem em pilula a direita (`count`).
  */
 
-export function SidebarNav({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <nav className={`flex flex-col gap-3xs ${className}`}>{children}</nav>;
+export function SidebarNav({
+  children,
+  label = "Seções",
+  className = "",
+}: {
+  children: ReactNode;
+  /** Nome do landmark: com trilho + painel ha dois <nav>, cada um precisa do seu. */
+  label?: string;
+  className?: string;
+}) {
+  return (
+    <nav aria-label={label} className={`flex flex-col gap-3xs ${className}`}>
+      {children}
+    </nav>
+  );
 }
 
 /**

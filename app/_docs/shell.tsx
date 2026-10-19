@@ -301,7 +301,7 @@ function Sidebar({
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-md">
         <SearchTrigger onClick={onSearch} />
-        <SidebarNav>
+        <SidebarNav label={AREAS.find((a) => a.id === area)?.label ?? "Seções"}>
           {groups.map((group) => (
             <NavSection key={group.title || "inicio"} title={group.title || undefined}>
               {group.items.map((item) => (

@@ -2,10 +2,21 @@
 /**
  * Icones do SantoDS — vem UNICA E EXCLUSIVAMENTE da pagina Icones do Figma.
  *
- *   node scripts/figma-icons.mjs inventory <dump-dir>   grava tokens/santods.icons.json
+ *   node scripts/figma-icons.mjs inventory <dump-dir>   grava o cache tokens/.cache/santods.icons.json
  *   node scripts/figma-icons.mjs plan                   lista as variantes a exportar (needed.txt)
  *   node scripts/figma-icons.mjs build <svg-dir>        gera lib/icons/ a partir dos SVGs baixados
  *   node scripts/figma-icons.mjs build                  regera lib/icons/ a partir de lib/icons/svg/
+ *
+ * O QUE VAI PARA O GIT: so os icones em uso — lib/icons/ (componentes, svg/, index.ts,
+ * manifest.json) e needed.txt. O inventario da pagina inteira (~5.4k icones, 1 MB) e CACHE
+ * LOCAL regeneravel em tokens/.cache/ (ignorado pelo git), nunca versionado.
+ *
+ * ICONE NOVO:
+ *   1. adicione o slug em lib/icons/needed.txt (slug ou slug:solid|light|duotone);
+ *   2. se tokens/.cache/santods.icons.json nao existir, rode o inventario (passos 1-2 abaixo, via MCP);
+ *   3. `plan` mostra o nodeId; baixe o SVG (MCP download_assets) e rode `build <svg-dir>`.
+ * Sem cache, `plan`/`build` ainda resolvem os slugs ja exportados pelo manifest.json; so slug NOVO
+ * exige o inventario, e o erro diz isso.
  *
  * Fluxo:
  *   1. scripts/figma-icons.js (use_figma, so leitura) -> <dump-dir>/inventory-<n>.json
@@ -28,7 +39,8 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const INVENTORY = resolve(root, 'tokens/santods.icons.json');
+const INVENTORY = resolve(root, 'tokens/.cache/santods.icons.json');
+const MANIFEST = resolve(root, 'lib/icons/manifest.json');
 const OUT = resolve(root, 'lib/icons');
 const NEEDED = resolve(OUT, 'needed.txt');
 const SVG_CACHE = resolve(OUT, 'svg');
@@ -151,17 +163,39 @@ function inventory(dir) {
   };
   // Uma linha por icone: ~5.4k entradas, legivel em diff sem inflar o arquivo.
   const rows = Object.entries(icons).map(([slug, icon]) => `  ${JSON.stringify(slug)}: ${JSON.stringify(icon)}`);
+  mkdirSync(dirname(INVENTORY), { recursive: true });
   writeFileSync(INVENTORY, `{\n"meta": ${JSON.stringify(out.meta, null, 2)},\n"icons": {\n${rows.join(',\n')}\n}\n}\n`);
   console.log(
-    `tokens/santods.icons.json — ${out.meta.counts.sets} sets (x${meta.weights.length} pesos) + ${out.meta.counts.brands} marcas = ${out.meta.counts.total} icones.`,
+    `tokens/.cache/santods.icons.json (cache local, fora do git) — ${out.meta.counts.sets} sets (x${meta.weights.length} pesos) + ${out.meta.counts.brands} marcas = ${out.meta.counts.total} icones.`,
   );
 }
 
 /* ----------------------------------------------------------------- needed */
 
+/**
+ * Fonte dos metadados: o inventario em cache; sem ele, o manifest versionado (que so conhece os
+ * icones ja exportados). Devolve { icons, meta, fromCache }.
+ */
+function loadSource() {
+  if (existsSync(INVENTORY)) return { ...JSON.parse(readFileSync(INVENTORY, 'utf8')), fromCache: true };
+  if (!existsSync(MANIFEST)) fail(INVENTORY_HELP);
+  const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8'));
+  const icons = {};
+  for (const [slug, e] of Object.entries(manifest.icons)) {
+    icons[slug] = e.figma.kind === 'brand'
+      ? { name: e.figma.name, kind: 'brand', nodeId: e.figma.nodeId }
+      : { name: e.figma.name, kind: 'icon', nodeId: e.figma.setNodeId, variants: { [e.figma.weight]: e.figma.nodeId } };
+  }
+  const meta = { fileKey: manifest.fileKey, page: manifest.page, pageId: manifest.pageId, weights: manifest.weights ?? ['light', 'regular', 'solid', 'duotone'] };
+  return { icons, meta, fromCache: false };
+}
+
+const INVENTORY_HELP = `Falta o inventario da pagina Icones (cache local tokens/.cache/santods.icons.json, fora do git).
+Para gera-lo: rode scripts/figma-icons.js via MCP use_figma (so leitura) com CHUNK = 0, 1, 2... ate done,
+grave cada retorno como <dir>/inventory-<CHUNK>.json e rode: node scripts/figma-icons.mjs inventory <dir>`;
+
 function loadNeeded() {
-  if (!existsSync(INVENTORY)) fail('Falta tokens/santods.icons.json. Rode `inventory` primeiro.');
-  const { icons, meta } = JSON.parse(readFileSync(INVENTORY, 'utf8'));
+  const { icons, meta, fromCache } = loadSource();
   const lines = readFileSync(NEEDED, 'utf8')
     .split('\n')
     .map((l) => l.replace(/#.*/, '').trim())
@@ -175,6 +209,10 @@ function loadNeeded() {
       missing.push(slug);
       continue;
     }
+    if (!fromCache && icon.kind === 'icon' && !icon.variants[weightArg ?? 'regular']) {
+      missing.push(line);
+      continue;
+    }
     if (icon.kind === 'brand') {
       if (weightArg) fail(`${slug} e icone de marca: nao tem peso (${line}).`);
       wanted.push({ slug, icon, weight: null, nodeId: icon.nodeId });
@@ -183,6 +221,9 @@ function loadNeeded() {
     const weight = weightArg ?? 'regular';
     if (!meta.weights.includes(weight)) fail(`Peso invalido em "${line}". Validos: ${meta.weights.join(', ')}.`);
     wanted.push({ slug, icon, weight, nodeId: icon.variants[weight] });
+  }
+  if (missing.length && !fromCache) {
+    fail(`Icone(s) novo(s) em needed.txt, fora do manifest atual: ${missing.join(', ')}\n\n${INVENTORY_HELP}`);
   }
   if (missing.length) {
     const hint = (s) => {
@@ -356,7 +397,7 @@ ${paths.map((p) => `      <path ${attrs(p)} />`).join('\n')}
 
   writeFileSync(
     join(OUT, 'manifest.json'),
-    `${JSON.stringify({ fileKey: meta.fileKey ?? null, page: meta.page, generatedBy: 'scripts/figma-icons.mjs build', icons: manifest }, null, 2)}\n`,
+    `${JSON.stringify({ fileKey: meta.fileKey ?? null, page: meta.page, pageId: meta.pageId ?? null, weights: meta.weights, generatedBy: 'scripts/figma-icons.mjs build', icons: manifest }, null, 2)}\n`,
   );
   const slugs = Object.keys(manifest);
   writeFileSync(
@@ -365,7 +406,7 @@ ${paths.map((p) => `      <path ${attrs(p)} />`).join('\n')}
 export { IconBase, type IconProps, type IconSize } from "./icon-base";
 ${slugs.map((s) => `export { ${manifest[s].component} } from "./${s}";`).join('\n')}
 
-/** Slugs exportados (tokens/santods.icons.json tem o inventario completo). */
+/** Slugs exportados (o inventario completo da pagina e cache local: tokens/.cache/santods.icons.json). */
 export const iconSlugs = ${JSON.stringify(slugs)} as const;
 export type IconSlug = (typeof iconSlugs)[number];
 `,

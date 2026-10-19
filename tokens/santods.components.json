@@ -97,6 +97,7 @@
         "chat-header",
         "chat-bubble",
         "chat-attachment",
+        "chat-composer",
         "typing-indicator",
         "chip",
         "count",
@@ -112,6 +113,7 @@
         "calendar",
         "disclosure",
         "empty-state",
+        "fab",
         "activity-item",
         "marker",
         "ticker",
@@ -123,8 +125,10 @@
         "key-value",
         "link-card",
         "list-row",
+        "mini-bars",
         "sidebar-nav",
         "nav-section",
+        "nav-sub",
         "nav-item",
         "nav-user",
         "pagination",
@@ -133,10 +137,14 @@
         "progress",
         "radio-group",
         "radio-card",
+        "rail-nav",
+        "rail-item",
+        "ring",
         "search-trigger",
         "segmented",
         "tab-bar",
         "skeleton",
+        "sparkline",
         "swatch",
         "swatch-picker",
         "color-row",
@@ -361,7 +369,7 @@
       "name": "Icon",
       "page": "Icones",
       "pageId": "38:2",
-      "inventory": "tokens/santods.icons.json"
+      "inventory": "lib/icons/manifest.json"
     }
   ],
   "codeOnly": [
@@ -450,6 +458,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "chat-composer",
+      "name": "ChatComposer",
+      "source": "chat.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "typing-indicator",
       "name": "TypingIndicator",
       "source": "chat.tsx",
@@ -524,7 +538,7 @@
     {
       "slug": "calendar",
       "name": "Calendar",
-      "source": "data.tsx",
+      "source": "calendar.tsx",
       "figmaDeclared": null
     },
     {
@@ -537,6 +551,12 @@
       "slug": "empty-state",
       "name": "EmptyState",
       "source": "empty-state.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "fab",
+      "name": "Fab",
+      "source": "fab.tsx",
       "figmaDeclared": null
     },
     {
@@ -606,6 +626,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "mini-bars",
+      "name": "MiniBars",
+      "source": "mini-bars.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "sidebar-nav",
       "name": "SidebarNav",
       "source": "nav.tsx",
@@ -614,6 +640,12 @@
     {
       "slug": "nav-section",
       "name": "NavSection",
+      "source": "nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "nav-sub",
+      "name": "NavSub",
       "source": "nav.tsx",
       "figmaDeclared": null
     },
@@ -666,6 +698,24 @@
       "figmaDeclared": null
     },
     {
+      "slug": "rail-nav",
+      "name": "RailNav",
+      "source": "rail-nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "rail-item",
+      "name": "RailItem",
+      "source": "rail-nav.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "ring",
+      "name": "Ring",
+      "source": "ring.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "search-trigger",
       "name": "SearchTrigger",
       "source": "search-trigger.tsx",
@@ -687,6 +737,12 @@
       "slug": "skeleton",
       "name": "Skeleton",
       "source": "skeleton.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "sparkline",
+      "name": "Sparkline",
+      "source": "sparkline.tsx",
       "figmaDeclared": null
     },
     {

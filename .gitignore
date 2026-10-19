@@ -42,3 +42,6 @@ next-env.d.ts
 
 # orquestracao local do time de agentes (papeis do Maestri, nao e codigo)
 .maestri/
+
+# cache local regeneravel (inventario de icones do Figma: node scripts/figma-icons.mjs inventory)
+tokens/.cache/

@@ -79,13 +79,13 @@ const components = figmaSide.components.map((c) => ({ ...c, code: pairOf(c) }));
 
 /**
  * Par com uma PAGINA inteira (`figma: { name: "Pagina <nome>" }`): hoje so o Icon,
- * cujo par e a pagina Icones, inventariada em tokens/santods.icons.json.
+ * cujo par e a pagina Icones (exportados em lib/icons/manifest.json).
  */
-const ICONS = resolve(root, 'tokens/santods.icons.json');
-const iconsPage = existsSync(ICONS) ? JSON.parse(readFileSync(ICONS, 'utf8')).meta : null;
+const ICONS_MANIFEST = resolve(root, 'lib/icons/manifest.json');
+const iconsPage = existsSync(ICONS_MANIFEST) ? JSON.parse(readFileSync(ICONS_MANIFEST, 'utf8')) : null;
 const pagePairs = metas
   .filter((m) => iconsPage && m.figma?.name === `Página ${iconsPage.page}`)
-  .map((m) => ({ slug: m.slug, name: m.name, page: iconsPage.page, pageId: iconsPage.pageId, inventory: 'tokens/santods.icons.json' }));
+  .map((m) => ({ slug: m.slug, name: m.name, page: iconsPage.page, pageId: iconsPage.pageId, inventory: 'lib/icons/manifest.json' }));
 
 const pairedSlugs = new Set([
   ...components.flatMap((c) => (c.code ? [c.code.slug] : [])),
