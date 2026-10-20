@@ -51,6 +51,7 @@ import { kbdMeta } from "./kbd.meta";
 import { copyButtonMeta } from "./copy-button.meta";
 import { copyCodeMeta } from "./copy-code.meta";
 import { codeBlockMeta } from "./code-block.meta";
+import { markdownViewMeta } from "./markdown-view.meta";
 import { breadcrumbMeta } from "./breadcrumb.meta";
 import { linkCardMeta } from "./link-card.meta";
 import { commandPaletteMeta } from "./command-palette.meta";
@@ -135,6 +136,7 @@ const ALL: ComponentMeta[] = [
   ...copyButtonMeta,
   ...copyCodeMeta,
   ...codeBlockMeta,
+  ...markdownViewMeta,
   ...breadcrumbMeta,
   ...linkCardMeta,
   ...commandPaletteMeta,

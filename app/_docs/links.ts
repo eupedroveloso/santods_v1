@@ -41,7 +41,8 @@ export type NavIcon =
   | "IconsIcon"
   | "IdCardIcon"
   | "CubeIcon"
-  | "BezierCurveIcon";
+  | "BezierCurveIcon"
+  | "FileIcon";
 export type NavLink = { label: string; href: string; icon?: NavIcon };
 export type NavGroup = { title: string; items: NavLink[] };
 /** badge: selo curto exibido a direita no ⌘K (ex.: "Primitivo"), em vez de texto corrido. */

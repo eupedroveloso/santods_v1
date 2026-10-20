@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Breadcrumb, Divider, type Crumb } from "@/lib/ui";
+import { Breadcrumb, Divider, TableOfContents, type Crumb, type TocItem } from "@/lib/ui";
 
 /**
  * Coluna de conteudo das paginas de docs: ocupa toda a largura que sobra ao
@@ -9,6 +9,8 @@ import { Breadcrumb, Divider, type Crumb } from "@/lib/ui";
 export function DocPage({
   children,
   layout = "doc",
+  crumbs,
+  toc,
 }: {
   children: ReactNode;
   /**
@@ -18,8 +20,36 @@ export function DocPage({
    * conteudo inteira, altura minima = viewport menos a topbar. Sem cabecalho nem
    * indice "Nesta pagina": quem desenha e a tela.
    */
-  layout?: "doc" | "full";
+  /**
+   * `reading`: tela de LEITURA DENSA (documento do contexto). O texto vai numa
+   * coluna centrada com medida de leitura (container/sm = 640px, ~70 caracteres
+   * em body), margens laterais maiores (space/2xl a partir de md) e o "Nesta
+   * pagina" a direita (lg+). A trilha vem por `crumbs` (fica de ponta a ponta,
+   * fora da coluna); o DocHeader dentro vai sem crumbs.
+   */
+  layout?: "doc" | "full" | "reading";
+  /** Com `reading`: a trilha da pagina. */
+  crumbs?: Crumb[];
+  /** Com `reading`: o indice "Nesta pagina" (so aparece com 2+ itens). */
+  toc?: TocItem[];
 }) {
+  if (layout === "reading") {
+    return (
+      <div className="flex w-full min-w-0 flex-1 flex-col gap-3xl">
+        {crumbs && <CrumbBar crumbs={crumbs} />}
+        <div className="flex justify-center gap-3xl md:px-2xl">
+          <div className="flex w-full min-w-0 max-w-(--santo-dimension-container-sm) flex-col gap-3xl">{children}</div>
+          {toc && toc.length > 1 && (
+            <aside className="hidden w-(--santo-dimension-space-224) shrink-0 lg:block">
+              <div className="sticky top-[calc(var(--santo-dimension-size-56)+var(--santo-space-4xl))] max-h-[calc(100dvh-var(--santo-dimension-size-56)-var(--santo-space-4xl)-var(--santo-space-4xl))] overflow-y-auto scrollbar-bare">
+                <TableOfContents items={toc} />
+              </div>
+            </aside>
+          )}
+        </div>
+      </div>
+    );
+  }
   if (layout === "full") {
     return (
       <div className="-mx-md -my-2xl flex min-h-[calc(100dvh-var(--santo-dimension-size-56))] min-w-0 flex-1 flex-col lg:-mx-3xl">
@@ -61,11 +91,7 @@ export function DocHeader({
 }) {
   return (
     <>
-      {crumbs && (
-        <div className="sticky top-(--santo-dimension-size-56) z-(--santo-layer-docked) -mx-md -mt-2xl -mb-xl border-b-thin border-border-subtle bg-surface-page px-md py-xs lg:-mx-3xl lg:px-3xl">
-          <Breadcrumb items={crumbs} />
-        </div>
-      )}
+      {crumbs && <CrumbBar crumbs={crumbs} />}
       <header className={`flex flex-col gap-sm ${divided ? "-mb-md" : ""}`}>
         <div className="flex flex-wrap items-end justify-between gap-sm">
           <h1 className="santo-heading-5-semibold">{title}</h1>
@@ -82,6 +108,15 @@ export function DocHeader({
         {divided && <Divider className="mt-sm" />}
       </header>
     </>
+  );
+}
+
+/** Barra da trilha, sticky sob a topbar, de ponta a ponta da coluna de conteudo (ver DocHeader). */
+function CrumbBar({ crumbs }: { crumbs: Crumb[] }) {
+  return (
+    <div className="sticky top-(--santo-dimension-size-56) z-(--santo-layer-docked) -mx-md -mt-2xl -mb-xl border-b-thin border-border-subtle bg-surface-page px-md py-xs lg:-mx-3xl lg:px-3xl">
+      <Breadcrumb items={crumbs} />
+    </div>
   );
 }
 

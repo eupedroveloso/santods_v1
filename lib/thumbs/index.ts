@@ -89,6 +89,7 @@ import { KbdThumb } from "./kbd.thumb";
 import { CopyButtonThumb } from "./copy-button.thumb";
 import { CopyCodeThumb } from "./copy-code.thumb";
 import { CodeBlockThumb } from "./code-block.thumb";
+import { MarkdownViewThumb } from "./markdown-view.thumb";
 import { IconThumb } from "./icon.thumb";
 import { SkeletonThumb } from "./skeleton.thumb";
 import { ThumbFrameThumb } from "./thumb-frame.thumb";
@@ -214,6 +215,7 @@ export const thumbs: Record<string, ComponentType> = {
   "copy-button": CopyButtonThumb,
   "copy-code": CopyCodeThumb,
   "code-block": CodeBlockThumb,
+  "markdown-view": MarkdownViewThumb,
   icon: IconThumb,
   skeleton: SkeletonThumb,
   "thumb-frame": ThumbFrameThumb,

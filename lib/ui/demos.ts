@@ -47,6 +47,7 @@ import { kbdDemos } from "./kbd.demo";
 import { copyButtonDemos } from "./copy-button.demo";
 import { copyCodeDemos } from "./copy-code.demo";
 import { codeBlockDemos } from "./code-block.demo";
+import { markdownViewDemos } from "./markdown-view.demo";
 import { breadcrumbDemos } from "./breadcrumb.demo";
 import { linkCardDemos } from "./link-card.demo";
 import { commandPaletteDemos } from "./command-palette.demo";
@@ -110,6 +111,7 @@ export const demos: DemoMap = {
   ...copyButtonDemos,
   ...copyCodeDemos,
   ...codeBlockDemos,
+  ...markdownViewDemos,
   ...breadcrumbDemos,
   ...linkCardDemos,
   ...commandPaletteDemos,

@@ -60,14 +60,16 @@ export function LinkCard({
         {description && <p className="santo-body-small-regular text-text-secondary">{description}</p>}
       </div>
       {links && links.length > 0 && (
-        // flex-1: num indice esticado (CardGrid stretch) a lista preenche o cartao; cada
-        // linha cresce por igual, entao o cartao curto nao fica com buraco embaixo.
-        <ul className="-mx-xs flex flex-1 flex-col gap-3xs">
+        // Linha de altura FIXA (size/40), igual em todo cartao, com gap constante: a
+        // lista nunca estica nem encolhe para preencher. Num indice esticado (CardGrid
+        // stretch) quem iguala a fileira e o CARTAO; a sobra fica no fim (excecao de
+        // navegacao, santo-ui-craft secao 12, item 11).
+        <ul className="-mx-xs flex flex-col gap-3xs">
           {links.map((l) => (
-            <li key={l.href} className="flex flex-1">
+            <li key={l.href}>
               <Link
                 href={l.href}
-                className="santo-body-small-medium flex flex-1 items-center justify-between gap-xs rounded-md px-xs py-2xs text-text-secondary transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
+                className="santo-body-small-medium flex h-(--santo-dimension-size-40) items-center justify-between gap-xs rounded-md px-xs text-text-secondary transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
               >
                 <span className="min-w-0 truncate">{l.label}</span>
                 <ChevronRight size={16} />

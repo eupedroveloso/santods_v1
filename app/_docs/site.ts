@@ -1,6 +1,7 @@
 import { listCollections, searchIndex } from "@/lib/docs/catalog";
 import { components, TIERS, TIER_LABEL } from "@/lib/ui/registry";
 import { VIEWS } from "@/app/exemplos/_views";
+import { listContext } from "./contexto";
 import { groupAnchor, type NavGroup, type SearchItem } from "./links";
 
 /**
@@ -15,6 +16,11 @@ export function docsNav(): NavGroup[] {
     {
       title: "",
       items: [{ label: "Docs home", href: "/", icon: "BookIcon" }],
+    },
+    // Contexto do sistema: um item por arquivo de public/contexto, na ordem do indice.
+    {
+      title: "Contexto",
+      items: listContext().map((d) => ({ label: d.titulo, href: d.page, icon: "FileIcon" as const })),
     },
     // Uma entrada por visualizacao de /exemplos, gerada do registro da Galeria.
     {
@@ -67,6 +73,7 @@ export function docsSearch(): SearchItem[] {
     { label: "Movimento", href: "/estilos/movimento", hint: "motion duração curva", group: "Páginas" },
     { label: "Identidades", href: "/identidades", group: "Páginas" },
     ...VIEWS.map((v) => ({ label: `Exemplos · ${v.label}`, href: `/exemplos#${v.slug}`, group: "Páginas" })),
+    ...listContext().map((d) => ({ label: `Contexto · ${d.titulo}`, href: d.page, hint: d.arquivo, group: "Páginas" })),
   ];
   const comps: SearchItem[] = components.map((c) => ({
     label: c.name,

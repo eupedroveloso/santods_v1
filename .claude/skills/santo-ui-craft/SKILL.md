@@ -143,6 +143,19 @@ círculo geométrico; bloco, superfície, faixa e controle nunca. Tudo vem de `l
   (data, contagem, status) à direita em caption/Count/Tag. Sem subhead embaixo.
 - Máximo 3 tamanhos e 2 pesos por região. Overline (`OVERLINE`) para rótulo de
   seção.
+- **Doc enxuta (Pedro, 2026-10-19: "não usar excesso de subheads e textos de
+  descrição"):** bloco = Overline + título (ou só Overline) e o conteúdo. Sem
+  subhead e sem parágrafo de apoio por bloco, salvo quando o conteúdo exige
+  (ex.: um aviso que muda o que a pessoa faz). Em lista, cada linha mostra
+  título + identificador + meta; descrição, se ficar, é UMA linha de caption
+  (`line-clamp-1`) — texto longo mora na página de destino, não na lista.
+- **Texto denso = medida de leitura (Pedro, 2026-10-19):** tela de leitura
+  (documento, guia) não corre o texto na largura inteira. Use
+  `DocPage layout="reading"`: coluna centrada em `container/sm` (~70 caracteres
+  em body), margens laterais `space/2xl` a partir de md, "Nesta página" à
+  direita; corpo em `MarkdownView` (body 16 com `type/leading/28`, blocos a
+  `space/lg`). Só em tela de leitura — painel, índice e catálogo seguem com a
+  largura toda.
 
 ## 6. Micro-visualização
 
@@ -266,4 +279,8 @@ Reprova se qualquer item falhar:
         cartão esticado além do conteúdo (vão interno entre o último bloco e a
         borda = padding do cartão), grade via `CardGrid` alinhada ao topo,
         nenhum `min-h`/`mt-auto`/`flex-1` criando vão vazio.
+        **Exceção de navegação:** cartão de índice (LinkCard numa fileira com
+        `CardGrid stretch`) tem altura mínima = a do maior irmão; a linha de
+        link tem altura FIXA (size/40) e gap constante em todos os cartões —
+        nunca cresce nem encolhe para preencher. A sobra fica no fim do cartão.
 12. [ ] Motion com tokens e reduced-motion; sem blur em lista longa.

@@ -70,6 +70,7 @@ export { Kbd } from "./kbd";
 export { CopyButton } from "./copy-button";
 export { CopyCode } from "./copy-code";
 export { CodeBlock } from "./code-block";
+export { headingId, MarkdownView, markdownHeadings } from "./markdown-view";
 export { Breadcrumb } from "./breadcrumb";
 export type { Crumb } from "./breadcrumb";
 export { LinkCard } from "./link-card";

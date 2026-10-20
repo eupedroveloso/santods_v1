@@ -231,6 +231,7 @@ Composições com significado de produto: navegação, conversa, dado, documenta
 | | quando usar |
 |---|---|
 | `CodeBlock` | Trecho para copiar (import, JSX, classe). Fundo `surface/sunken`: código é conteúdo embutido, não cartão. |
+| `MarkdownView` | Documento em Markdown (contexto do sistema, guias) desenhado com a lib: títulos `santo-*` com âncora (`markdownHeadings` alimenta o `TableOfContents`), parágrafo body-small, listas aninhadas, `Table`, código cercado em `CodeBlock`, citação em poço (`surface/sunken`) e `Divider`. Server component sem dependência; não é CommonMark completo (HTML cru não passa, comentário some). |
 | `CopyButton` | Copia texto que a pessoa vai colar em outro lugar. O ícone vira um visto por um instante. |
 | `CopyCode` | Nome curto em mono + copiar (var CSS, classe, token) em linha de tabela ou ficha. Sem valor, travessão. Raio `radius/xs` (code inline não é pastilha). `truncate` corta com reticências em coluna estreita (title com o valor inteiro; copia o inteiro; botão não encolhe). |
 
@@ -266,7 +267,7 @@ Cartões prontos, **alimentados por dado** e montados só com a lib. Regra dura 
 | `ActivityCard` | Feed com abas que filtram por `kind`, itens quem/o quê/quando com pastilha, ação em FAB. |
 | `ChartCard` | Série principal do painel: título + total + períodos e o gráfico (`kind` area/line/bar, `stacked`) direto no cartão, sem poço. `range`/`onRangeChange` = período **controlado** de fora (filtro do `DashboardHeader`): o cartão segue o valor e não mostra o próprio Segmented. |
 | `BreakdownCard` | Partes de um total: `kind="bars"` (barras horizontais por categoria, valor na ponta) ou `kind="donut"` (até 5 fatias, total no centro, legenda com a parte). Alimentado por dado (`BreakdownItem`), hover e teclado do gráfico. |
-| `DownloadList` | Arquivos para baixar (contexto do sistema, materiais): item `featured` (o pacote completo) no topo com IconTile brand e Button primário "Baixar"; depois um arquivo por linha — ícone de documento, título + nome do arquivo em mono, descrição em até 2 linhas, tamanho (`formatBytes`) e IconButton ghost de download (`<a download>`). Hairline entre linhas, sem caixa. Alimentada por dado. |
+| `DownloadList` | Arquivos para baixar (contexto do sistema, materiais): item `featured` (o pacote completo) no topo com IconTile brand e Button primário "Baixar"; depois um arquivo por linha — ícone de documento, título + nome do arquivo em mono, tamanho (`formatBytes`) e IconButton ghost de download (`<a download>`). Lista enxuta: `description`, se houver, é uma linha de caption. Com `viewHref` a linha inteira abre a página de leitura e o botão continua baixando. Hairline entre linhas, sem caixa. Alimentada por dado. |
 | `AppFrame` | Tela de app dentro de página: chão rebaixado, trilho de ícones, painel de navegação em árvore opcional, conteúdo `stack` ou `split`. |
 
 `EmptyState` também aceita `action` por dado (`{ label, onClick }` vira Button), para a tela de exemplo não montar o botão.
