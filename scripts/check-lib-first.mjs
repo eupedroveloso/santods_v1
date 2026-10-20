@@ -16,6 +16,16 @@
  *      item de navegacao feito a mao (link com hover:bg + raio + padding).
  *   B. className com aparencia passada a componente da lib (cor, raio, sombra,
  *      borda, tipografia): o componente precisa de uma variante.
+ *   C. grade montada inline (`grid` + `grid-cols-*`/`gridTemplateColumns`): toda
+ *      fileira de cartoes ou pecas irmas e CardGrid, que alinha ao topo e nao
+ *      deixa margem morta (principio 4 do Pedro).
+ *   D. composicao inline em tela de exemplo (regra dura do Pedro, Fase C): em
+ *      app/exemplos, fora da moldura da pagina, a tela SO compoe blocos — os
+ *      componentes da categoria `blocos` de lib/ui (StatCard, ChatCard…),
+ *      alimentados por dado, mais o que ja e uma superficie inteira
+ *      (EXAMPLE_ALLOW). Card, CardHeader, Stat, KeyValue, ListRow, Field…
+ *      soltos na tela = cartao montado inline; markup cru alem de div e
+ *      texto inline (strong, em) tambem. Falta um bloco? Crie em lib/ui.
  *
  * Excecao declarada: comentario `lib-first-ok: <motivo>` na linha da tag ou na
  * de cima. Sem motivo nao vale. As excecoes aparecem na saida — isencao que
@@ -33,6 +43,33 @@ const indexTs = readFileSync(resolve(root, 'lib/ui/index.ts'), 'utf8');
 const LIB = new Set();
 for (const m of indexTs.matchAll(/export \{([^}]+)\} from/g)) {
   for (const name of m[1].split(',').map((s) => s.trim())) if (/^[A-Z]/.test(name)) LIB.add(name);
+}
+
+/** Categoria de cada componente, lida dos metas (regra D). */
+const CATEGORY = new Map();
+for (const f of readdirSync(resolve(root, 'lib/ui')).filter((f) => f.endsWith('.meta.ts'))) {
+  const src = readFileSync(resolve(root, 'lib/ui', f), 'utf8');
+  for (const m of src.matchAll(/name:\s*"([^"]+)"[\s\S]*?category:\s*"([^"]+)"/g)) CATEGORY.set(m[1], m[2]);
+}
+
+/** Regra D: telas de exemplo (conteudo), fora a moldura da pagina. */
+const EXAMPLE_ROOT = 'app/exemplos/';
+const EXAMPLE_CHROME = new Set(['app/exemplos/page.tsx', 'app/exemplos/views-nav.tsx', 'app/exemplos/_block.tsx']);
+/** Fora da categoria blocos, so o que ja e superficie inteira ou layout de grade. */
+const EXAMPLE_ALLOW = new Set(['CardGrid', 'EmptyState', 'Ticker']);
+/** Markup cru permitido na tela de exemplo: layout e enfase de texto dentro de dado. */
+const EXAMPLE_RAW_OK = new Set(['div', 'strong', 'em', 'br']);
+
+function auditExample({ name }) {
+  if (LIB.has(name)) {
+    const cat = CATEGORY.get(name);
+    if (cat !== 'blocos' && !EXAMPLE_ALLOW.has(name)) {
+      return [['D', `<${name}> na tela de exemplo — cartao montado inline; use um bloco de lib/ui (categoria blocos) ou crie um`]];
+    }
+  } else if (/^[a-z]/.test(name) && !EXAMPLE_RAW_OK.has(name)) {
+    return [['D', `<${name}> cru na tela de exemplo — so div de layout e texto inline; o resto vem de um bloco de lib/ui`]];
+  }
+  return [];
 }
 
 /** Elemento HTML cru -> componente da lib que ja faz o papel. */
@@ -171,6 +208,10 @@ function auditTag({ name, attrs }) {
     }
   }
 
+  if (/^[a-z]/.test(name) && classes.includes('grid') && (has(classes, /^grid-cols-/) || /gridTemplateColumns/.test(attrs))) {
+    found.push(['C', `<${name}> monta grade inline — use CardGrid (alinha ao topo, sem margem morta)`]);
+  }
+
   if (LIB.has(name)) {
     const overrides = classes.map((c) => [c, appearanceOf(c)]).filter(([, kind]) => kind);
     if (overrides.length) {
@@ -202,9 +243,10 @@ for (const file of files) {
   const rel = relative(root, file);
   const okLines = new Map();
   const src = stripComments(readFileSync(file, 'utf8'), okLines);
+  const example = rel.startsWith(EXAMPLE_ROOT) && !EXAMPLE_CHROME.has(rel);
   for (const tag of jsxTags(src)) {
     const line = src.slice(0, tag.index).split('\n').length;
-    for (const [rule, msg] of auditTag(tag)) {
+    for (const [rule, msg] of [...auditTag(tag), ...(example ? auditExample(tag) : [])]) {
       const why = okLines.get(line) ?? okLines.get(line - 1);
       (why ? exempted : problems).push(`${rel}:${line}  [${rule}] ${msg}${why ? `  (isento: ${why})` : ''}`);
     }
@@ -218,8 +260,12 @@ if (exempted.length) {
 }
 if (problems.length) {
   const a = problems.filter((p) => p.includes('[A]')).length;
-  console.error(`\n${problems.length} achado(s) lib-first — ${a} de markup que replica a lib [A], ${problems.length - a} de aparencia sobrescrita [B]:`);
+  const c = problems.filter((p) => p.includes('[C]')).length;
+  const d = problems.filter((p) => p.includes('[D]')).length;
+  console.error(
+    `\n${problems.length} achado(s) lib-first — ${a} de markup que replica a lib [A], ${problems.length - a - c - d} de aparencia sobrescrita [B], ${c} de grade inline [C], ${d} de composicao inline em exemplo [D]:`,
+  );
   problems.forEach((p) => console.error('  ' + p));
   process.exit(1);
 }
-console.log('\nOK — toda tela compoe a partir de lib/ui, sem markup replicado nem aparencia sobrescrita.');
+console.log('\nOK — toda tela compoe a partir de lib/ui, sem markup replicado, aparencia sobrescrita, grade inline nem cartao montado em exemplo.');
