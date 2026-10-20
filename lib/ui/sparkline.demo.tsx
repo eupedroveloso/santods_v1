@@ -5,6 +5,7 @@ import type { DemoMap } from "./registry.types";
 import { Sparkline, type SparklineSize } from "./sparkline";
 
 const SERIES = [12, 18, 14, 22, 19, 27, 24, 31, 29, 36];
+const WEEKS = SERIES.map((_, i) => `sem. ${i + 1}`);
 
 const TONE: Record<string, string> = {
   current: "text-icon-primary",
@@ -26,13 +27,13 @@ export const sparklineDemos: DemoMap = {
       layout: "stretch",
       Preview: ({ values: v }) => (
         <div className={`mx-auto w-full max-w-(--santo-dimension-space-240) ${TONE[v.tone as string]}`}>
-          <Sparkline values={SERIES} size={v.size as SparklineSize} area={v.area as boolean} dot={v.dot as boolean} fluid={v.fluid as boolean} label="Receita, 10 semanas" />
+          <Sparkline values={SERIES} size={v.size as SparklineSize} area={v.area as boolean} dot={v.dot as boolean} fluid={v.fluid as boolean} label="Receita, 10 semanas" labels={WEEKS} />
         </div>
       ),
       code: (v) =>
         `<div className="${TONE[v.tone as string]}">\n  ${jsx(
           "Sparkline",
-          { values: "{receita}", size: v.size as string, area: v.area as boolean, dot: v.dot ? undefined : "{false}", fluid: v.fluid as boolean },
+          { values: "{receita}", labels: "{semanas}", label: "Receita, 10 semanas", size: v.size as string, area: v.area as boolean, dot: v.dot ? undefined : "{false}", fluid: v.fluid as boolean },
           undefined,
           { size: "md" },
         )}\n</div>`,

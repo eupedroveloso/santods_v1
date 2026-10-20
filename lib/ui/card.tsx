@@ -71,6 +71,7 @@ export function Card({
   radius,
   header,
   footer,
+  footerFlush = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -87,10 +88,15 @@ export function Card({
   header?: ReactNode;
   /** double: rodape na moldura, fora do painel (CardFooter). */
   footer?: ReactNode;
+  /**
+   * double: rodape com a largura e o raio do PAINEL (bloco de codigo sob um
+   * preview), em vez do recuo de acoes. Bordas coincidem com as do painel.
+   */
+  footerFlush?: boolean;
 }) {
   if (variant === "double") {
     return (
-      <DoubleCard className={className} radius={radius ?? "xl"} padded={padded} padding={padding} header={header} footer={footer}>
+      <DoubleCard className={className} radius={radius ?? "xl"} padded={padded} padding={padding} header={header} footer={footer} footerFlush={footerFlush}>
         {children}
       </DoubleCard>
     );
@@ -127,6 +133,7 @@ function DoubleCard({
   padding,
   header,
   footer,
+  footerFlush,
 }: {
   children: ReactNode;
   className: string;
@@ -135,6 +142,7 @@ function DoubleCard({
   padding?: CardPadding;
   header?: ReactNode;
   footer?: ReactNode;
+  footerFlush: boolean;
 }) {
   const outer = `var(--santo-radius-${radius})`;
   // Recuo real = p-xs + o fio do santo-edge (1px): o painel fica concentrico.
@@ -166,7 +174,15 @@ function DoubleCard({
       >
         {children}
       </div>
-      {footer && <div className="flex min-w-0 items-center gap-sm px-md pb-2xs">{footer}</div>}
+      {footer &&
+        (footerFlush ? (
+          // Mesma largura do painel (o p-xs da moldura) e o mesmo raio dele.
+          <div className="flex min-w-0" style={{ "--santo-card-inner-radius": panel } as CSSProperties}>
+            {footer}
+          </div>
+        ) : (
+          <div className="flex min-w-0 items-center gap-sm px-md pb-2xs">{footer}</div>
+        ))}
     </div>
   );
 }
@@ -253,9 +269,11 @@ export function Stat({
         <span className="santo-body-small-medium text-text-secondary">{label}</span>
         {action}
       </div>
-      <div className="flex items-end justify-between gap-md">
+      {/* flex-wrap: sem largura para numero + viz lado a lado, o viz desce para a linha de baixo
+          (ml-auto o mantem a direita) em vez de passar por cima do numero. */}
+      <div className="flex flex-wrap items-end justify-between gap-md">
         <div className="flex min-w-0 flex-col gap-3xs">
-          <span className={`${valueClass} tracking-tight text-text-primary tabular-nums`}>{value}</span>
+          <span className={`${valueClass} tracking-tight whitespace-nowrap text-text-primary tabular-nums`}>{value}</span>
           {(unit || delta) && (
             <span className="santo-caption-medium flex flex-wrap items-center gap-xs text-text-tertiary">
               {unit}
@@ -263,7 +281,7 @@ export function Stat({
             </span>
           )}
         </div>
-        {viz && <div className="flex shrink-0 items-end text-icon-brand">{viz}</div>}
+        {viz && <div className="ml-auto flex shrink-0 items-end text-icon-brand">{viz}</div>}
       </div>
     </div>
   );

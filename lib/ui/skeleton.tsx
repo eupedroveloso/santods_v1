@@ -389,30 +389,49 @@ function MiniBars({ values, highlight }: { values: number[]; highlight?: number 
 /**
  * Anel de progresso (Ring): trilha no tom base, arco em enfase. `value` de 0
  * a 100. O tamanho segue a escala de size; o traco e border/heavy.
+ * `segments` (porcentagens que somam ate 100) vira donut: a primeira fatia em
+ * enfase, as outras alternando strong/base, com um vao entre elas.
  */
-function Ring({ value = 65, size = "md" }: { value?: number; size?: "sm" | "md" | "lg" }) {
+function Ring({ value = 65, size = "md", segments }: { value?: number; size?: "sm" | "md" | "lg"; segments?: number[] }) {
   const box = { sm: "size-lg", md: "size-xl", lg: "size-3xl" }[size];
   const c = 2 * Math.PI * 16;
+  const arcs = segments ?? [Math.min(100, Math.max(0, value))];
+  const tones = ["var(--santo-color-icon-tertiary)", "var(--santo-color-bg-neutral-subtle-active)", "var(--santo-color-bg-neutral-subtle-hover)"];
   return (
-    <svg viewBox="0 0 40 40" className={`block shrink-0 -rotate-90 ${box}`}>
-      <circle
-        cx="20"
-        cy="20"
-        r="16"
-        fill="none"
-        stroke="var(--santo-color-bg-neutral-subtle-hover)"
-        style={{ strokeWidth: "var(--santo-border-heavy)" }}
-      />
-      <circle
-        cx="20"
-        cy="20"
-        r="16"
-        fill="none"
-        stroke="var(--santo-color-icon-tertiary)"
-        strokeLinecap="round"
-        strokeDasharray={`${(c * Math.min(100, Math.max(0, value))) / 100} ${c}`}
-        style={{ strokeWidth: "var(--santo-border-heavy)" }}
-      />
+    // Giro de -90° DENTRO do SVG (<g transform>), nao por CSS: a miniatura vive num <foreignObject>,
+    // e o WebKit desenha elemento com transform CSS ali dentro fora do lugar (o anel vazava do cartao).
+    <svg viewBox="0 0 40 40" className={`block shrink-0 ${box}`}>
+      <g transform="rotate(-90 20 20)">
+      {!segments && (
+        <circle
+          cx="20"
+          cy="20"
+          r="16"
+          fill="none"
+          stroke="var(--santo-color-bg-neutral-subtle-hover)"
+          style={{ strokeWidth: "var(--santo-border-heavy)" }}
+        />
+      )}
+      {arcs.map((v, i) => {
+        // Vao entre fatias: um degrau de traco (o mesmo border/heavy do anel) em comprimento de arco.
+        const len = (c * v) / 100 - (segments ? 4 : 0);
+        const offset = -(c * arcs.slice(0, i).reduce((a, b) => a + b, 0)) / 100;
+        return (
+          <circle
+            key={i}
+            cx="20"
+            cy="20"
+            r="16"
+            fill="none"
+            stroke={segments ? tones[i === 0 ? 0 : 1 + ((i - 1) % 2)] : "var(--santo-color-icon-tertiary)"}
+            strokeLinecap={segments ? "butt" : "round"}
+            strokeDasharray={`${Math.max(len, 0)} ${c}`}
+            strokeDashoffset={offset}
+            style={{ strokeWidth: "var(--santo-border-heavy)" }}
+          />
+        );
+      })}
+      </g>
     </svg>
   );
 }

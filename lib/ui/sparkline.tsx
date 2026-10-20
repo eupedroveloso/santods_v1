@@ -1,5 +1,8 @@
+"use client";
+
 import { useId } from "react";
 import { resolved } from "@/lib/tokens";
+import { CURSOR_MOTION, SURFACE_RING, TOOLTIP_CLASS, formatValue, smoothPath, tooltipAlign, useChartCursor } from "./chart-kit";
 
 export type SparklineSize = "sm" | "md" | "lg";
 
@@ -23,28 +26,6 @@ const WIDTH: Record<SparklineSize, string> = {
 
 const STROKE = parseFloat(resolved["border/thick"]);
 
-const DOT_RING = {
-  raised: "border-surface-raised",
-  sunken: "border-surface-sunken",
-  page: "border-surface-page",
-} as const;
-
-/** Curva suave por Catmull-Rom convertida em Bezier — mesma de chart.tsx. */
-function smoothPath(points: { x: number; y: number }[]) {
-  if (points.length < 2) return "";
-  let d = `M ${points[0].x} ${points[0].y}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const p0 = points[i - 1] ?? points[i];
-    const p1 = points[i];
-    const p2 = points[i + 1];
-    const p3 = points[i + 2] ?? p2;
-    d += ` C ${p1.x + (p2.x - p0.x) / 6} ${p1.y + (p2.y - p0.y) / 6}, ${p2.x - (p3.x - p1.x) / 6} ${
-      p2.y - (p3.y - p1.y) / 6
-    }, ${p2.x} ${p2.y}`;
-  }
-  return d;
-}
-
 /**
  * Linha de tendência sem eixo, do tamanho de uma linha de texto.
  *
@@ -52,6 +33,11 @@ function smoothPath(points: { x: number; y: number }[]) {
  * ou caindo" sem pedir leitura de gráfico. Pinta com currentColor: a cor vem do
  * pai. `area` põe um degradê do mesmo tom até transparente; `dot` marca o valor
  * atual na ponta. Para gráfico de verdade, com eixo e grade, use chart.tsx.
+ *
+ * Com `label` ela vira interativa: o ponteiro (ou as setas, com foco) anda
+ * pelos pontos, o ponto acompanha e uma bolha acima mostra o valor e o
+ * rótulo do x (`labels`). Leitor de tela ouve o ponto em foco (aria-live).
+ * `interactive={false}` desliga numa linha de tabela densa.
  */
 export function Sparkline({
   values,
@@ -61,6 +47,9 @@ export function Sparkline({
   label,
   fluid = false,
   surface = "raised",
+  labels,
+  format = formatValue,
+  interactive,
   className = "",
 }: {
   values: number[];
@@ -72,10 +61,18 @@ export function Sparkline({
   /** Ocupa a largura do pai (grafico de cartao inteiro) em vez da largura do tamanho. */
   fluid?: boolean;
   /** Fundo atras da linha: o anel do ponto final recorta nessa cor, sem halo. */
-  surface?: keyof typeof DOT_RING;
+  surface?: keyof typeof SURFACE_RING;
+  /** Rotulo de cada ponto no tooltip: ["jan", "fev", …]. */
+  labels?: string[];
+  /** Formata o valor no tooltip. */
+  format?: (v: number) => string;
+  /** Hover e teclado. Padrao: ligado quando ha `label`. */
+  interactive?: boolean;
   className?: string;
 }) {
   const gradient = useId();
+  const live = interactive ?? Boolean(label);
+  const { active, handlers } = useChartCursor(values.length);
   const h = parseFloat(HEIGHT[size].px);
   const max = Math.max(...values);
   const min = Math.min(...values);
@@ -88,13 +85,16 @@ export function Sparkline({
   }));
   const line = smoothPath(pts);
   const last = pts[pts.length - 1];
+  const at = active === null ? last : pts[active];
 
   return (
     <div
       className={`relative shrink-0 ${fluid ? "w-full" : WIDTH[size]} ${HEIGHT[size].box} ${className}`}
-      role={label ? "img" : undefined}
+      role={label ? (live ? "group" : "img") : undefined}
+      aria-roledescription={live ? "gráfico" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
+      {...(live ? handlers : {})}
     >
       <svg viewBox={`0 0 100 ${h}`} preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible">
         {area && (
@@ -119,12 +119,28 @@ export function Sparkline({
           strokeLinejoin="round"
         />
       </svg>
-      {dot && last && (
+      {(dot || active !== null) && at && (
         // Ponto em HTML: num SVG esticado um <circle> viraria elipse.
         <span
-          className={`absolute size-xs -translate-x-1/2 -translate-y-1/2 rounded-full border-thick bg-current ${DOT_RING[surface]}`}
-          style={{ left: `${last.x}%`, top: `${(last.y / h) * 100}%` }}
+          aria-hidden
+          className={`pointer-events-none absolute size-xs -translate-x-1/2 -translate-y-1/2 rounded-full border-thick bg-current ${SURFACE_RING[surface]} ${CURSOR_MOTION}`}
+          style={{ left: `${at.x}%`, top: `${(at.y / h) * 100}%` }}
         />
+      )}
+      {active !== null && (
+        <span
+          aria-hidden
+          className={`${TOOLTIP_CLASS} bottom-full mb-2xs ${tooltipAlign(pts[active].x)} ${CURSOR_MOTION}`}
+          style={{ left: `${pts[active].x}%` }}
+        >
+          {labels?.[active] && <span className="santo-caption-medium text-text-tertiary">{labels[active]}</span>}
+          <span className="santo-body-small-semibold text-text-primary tabular-nums">{format(values[active])}</span>
+        </span>
+      )}
+      {live && (
+        <span className="sr-only" aria-live="polite">
+          {active === null ? "" : `${labels?.[active] ? `${labels[active]}: ` : ""}${format(values[active])}`}
+        </span>
       )}
     </div>
   );

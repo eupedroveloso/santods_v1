@@ -19,6 +19,7 @@ export const miniBarsDemos: DemoMap = {
           size={v.size as MiniBarsSize}
           highlight={v.highlight === "nenhum" ? undefined : Number(v.highlight)}
           label="Pedidos, últimos 7 dias"
+          labels={["seg", "ter", "qua", "qui", "sex", "sáb", "dom"]}
           className="text-icon-brand"
         />
       ),

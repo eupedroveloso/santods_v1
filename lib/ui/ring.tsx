@@ -1,5 +1,8 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useState, type ReactNode } from "react";
 import { resolved } from "@/lib/tokens";
+import { TOOLTIP_CLASS } from "./chart-kit";
 
 export type RingTone = "current" | "brand" | "accent" | "success" | "warning" | "danger" | "info";
 export type RingSize = "sm" | "md" | "lg";
@@ -49,6 +52,10 @@ const TONE: Record<RingTone, string> = {
  * acento só: o arco leva a cor, a trilha fica em neutral/subtle/active,
  * que segue visível dentro de poço. O rótulo do meio
  * é opcional; no `sm` prefira deixar o número fora do anel.
+ *
+ * Interativo por padrão: hover ou foco (é uma parada de Tab) engrossa o arco
+ * e abre uma bolha com o rótulo e o valor (`detail` troca o "72%" por algo
+ * como "350 de 500"). `interactive={false}` num anel decorativo em lista.
  */
 export function Ring({
   value,
@@ -56,6 +63,8 @@ export function Ring({
   size = "md",
   tone = "current",
   children,
+  detail,
+  interactive = true,
   className = "",
 }: {
   /** 0 a 100. Fora disso e cortado. */
@@ -66,13 +75,19 @@ export function Ring({
   tone?: RingTone;
   /** Conteudo central: "72%", um icone. */
   children?: ReactNode;
+  /** Valor no tooltip. Padrao: a porcentagem. */
+  detail?: ReactNode;
+  /** Hover, foco e tooltip. */
+  interactive?: boolean;
   className?: string;
 }) {
+  const [open, setOpen] = useState(false);
   const pct = Math.min(100, Math.max(0, value));
   const s = SIZES[size];
   const side = parseFloat(s.side);
-  const stroke = parseFloat(s.stroke);
-  const r = (side - stroke) / 2;
+  // Em foco, o arco engrossa um degrau (border/thick), sem mudar o lado do anel.
+  const stroke = parseFloat(s.stroke) + (open ? parseFloat(resolved["border/thick"]) : 0);
+  const r = (side - parseFloat(s.stroke) - parseFloat(resolved["border/thick"])) / 2;
   const c = side / 2;
   return (
     <div
@@ -82,9 +97,23 @@ export function Ring({
       aria-valuemax={100}
       aria-valuenow={Math.round(pct)}
       className={`relative inline-grid shrink-0 place-items-center ${s.box} ${TONE[tone]} ${className}`}
+      {...(interactive && {
+        tabIndex: 0,
+        onPointerEnter: () => setOpen(true),
+        onPointerLeave: () => setOpen(false),
+        onFocus: () => setOpen(true),
+        onBlur: () => setOpen(false),
+      })}
     >
       <svg viewBox={`0 0 ${side} ${side}`} className="absolute inset-0 size-full -rotate-90" aria-hidden>
-        <circle cx={c} cy={c} r={r} fill="none" strokeWidth={stroke} className="stroke-neutral-subtle-active" />
+        <circle
+          cx={c}
+          cy={c}
+          r={r}
+          fill="none"
+          strokeWidth={stroke}
+          className="stroke-neutral-subtle-active transition-[stroke-width] duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)"
+        />
         {pct > 0 && (
           <circle
             cx={c}
@@ -98,12 +127,18 @@ export function Ring({
             pathLength={100}
             strokeDasharray="100 100"
             strokeDashoffset={100 - pct}
-            className="transition-[stroke-dashoffset] duration-(--santo-motion-duration-slow) ease-(--santo-motion-easing-standard) motion-reduce:transition-none"
+            className="transition-[stroke-dashoffset,stroke-width] duration-(--santo-motion-duration-slow) ease-(--santo-motion-easing-standard) motion-reduce:transition-none"
           />
         )}
       </svg>
       {children != null && (
         <span className={`relative text-text-primary tabular-nums ${s.text}`}>{children}</span>
+      )}
+      {open && (
+        <span aria-hidden className={`${TOOLTIP_CLASS} bottom-full left-1/2 mb-2xs -translate-x-1/2`}>
+          <span className="santo-caption-medium text-text-tertiary">{label}</span>
+          <span className="santo-body-small-semibold text-text-primary tabular-nums">{detail ?? `${Math.round(pct)}%`}</span>
+        </span>
       )}
     </div>
   );
