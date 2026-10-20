@@ -1,14 +1,19 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
 
 /**
  * Trilho vertical estreito de ícones.
  *
  * Use como primeira coluna de uma aplicação com várias áreas: o trilho troca de
  * área, o painel ao lado (SidebarNav) mostra as seções da área. É chão (nível
- * 0, `surface/sunken`) em cápsula; o item ativo é a pílula elevada (raised +
- * sombra). Itens são círculos de `size/40` dentro de `space/2xs`: o raio do item
- * fica concêntrico ao do trilho. `footer` vai para o pé (conta, ajustes).
+ * 0, `surface/sunken`); o item ativo é a pastilha elevada (raised +
+ * sombra). Itens são quadrados de `size/40` com o raio de controle dentro de
+ * `space/2xs`: o trilho leva control + 2xs (`RADIUS_TRACK`), concêntrico. `footer` vem logo depois dos itens (conta,
+ * ajustes), separado por `space/xs`.
+ *
+ * Altura = conteúdo + padding (`h-fit`), nunca esticado pela coluna: sem faixa
+ * vazia no trilho (princípio 4 do Pedro). Quem posiciona é o pai.
  */
 export function RailNav({
   children,
@@ -25,10 +30,10 @@ export function RailNav({
   return (
     <nav
       aria-label={label}
-      className={`flex h-full w-fit flex-col items-center gap-2xs rounded-full bg-surface-sunken p-2xs ${className}`}
+      className={`flex h-fit w-fit flex-col items-center gap-2xs ${RADIUS_TRACK} bg-surface-sunken p-2xs ${className}`}
     >
       {children}
-      {footer && <div className="mt-auto flex flex-col items-center gap-2xs">{footer}</div>}
+      {footer && <div className="flex flex-col items-center gap-2xs pt-xs">{footer}</div>}
     </nav>
   );
 }
@@ -56,7 +61,7 @@ export function RailItem({
   onClick?: () => void;
 }) {
   const name = dot ? `${label}, há novidades` : label;
-  const className = `relative grid size-(--santo-dimension-size-40) shrink-0 cursor-pointer place-items-center rounded-full santo-transition-elevation ${
+  const className = `relative grid size-(--santo-dimension-size-40) shrink-0 cursor-pointer place-items-center ${RADIUS_CONTROL} santo-transition-elevation ${
     active
       ? "bg-surface-raised text-icon-primary shadow-xs"
       : "text-icon-tertiary hover:bg-neutral-subtle-hover hover:text-icon-secondary"
