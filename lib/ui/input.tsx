@@ -3,12 +3,13 @@
 import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from "react";
 import { Search } from "./icons";
 import type { ControlSize } from "./button";
+import { RADIUS_CONTROL } from "./radius";
 
 /**
  * Campos de entrada do SantoDS.
  *
  * `variant`:
- *   well     (padrao) POCO: surface/sunken, sem contorno em repouso, pilula
+ *   well     (padrao) POCO: surface/sunken, sem contorno em repouso, pastilha
  *            (1 linha) — campo dentro de cartao (skill santo-ui-craft, secao 9).
  *   outline  contorno border/default sobre bg/input, raio md: formulario longo
  *            sobre o chao, onde o poco nao se destacaria.
@@ -19,8 +20,8 @@ import type { ControlSize } from "./button";
 export type FieldVariant = "well" | "outline";
 
 const LOOK: Record<FieldVariant, { box: string; idle: string }> = {
-  well: { box: "rounded-full bg-surface-sunken", idle: "border-transparent hover:bg-neutral-subtle-default" },
-  outline: { box: "rounded-md bg-input-default", idle: "border-border-default hover:border-border-strong" },
+  well: { box: `${RADIUS_CONTROL} bg-surface-sunken`, idle: "border-transparent hover:bg-neutral-subtle-default" },
+  outline: { box: `${RADIUS_CONTROL} bg-input-default`, idle: "border-border-default hover:border-border-strong" },
 };
 
 const SIZES: Record<ControlSize, string> = {
@@ -54,13 +55,13 @@ export function Input({ size = "md", invalid, mono, variant = "well", className 
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean; variant?: FieldVariant };
 
-/** Multilinha: poco com raio xl (nao pilula), ou contorno com raio md. */
+/** Multilinha: poco ou contorno, com o raio de controle — irmao do Input de uma linha (mesmo degrau). */
 export function Textarea({ invalid, variant = "well", className = "", rows = 3, ...rest }: TextareaProps) {
   return (
     <textarea
       rows={rows}
       aria-invalid={invalid || undefined}
-      className={`${BASE} ${variant === "well" ? "rounded-xl bg-surface-sunken" : LOOK.outline.box} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : LOOK[variant].idle} ${className}`}
+      className={`${BASE} ${variant === "well" ? `${RADIUS_CONTROL} bg-surface-sunken` : LOOK.outline.box} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : LOOK[variant].idle} ${className}`}
       {...rest}
     />
   );
@@ -73,7 +74,7 @@ export function SearchInput({ size = "md", className = "", ...rest }: InputProps
       <span className="pointer-events-none absolute left-sm text-text-tertiary">
         <Search size={16} />
       </span>
-      <Input size={size} className={`rounded-full pl-3xl ${className}`} {...rest} />
+      <Input size={size} className={`pl-3xl ${className}`} {...rest} />
     </div>
   );
 }

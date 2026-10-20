@@ -1,3 +1,5 @@
+import { RADIUS_CONTROL } from "./radius";
+
 /**
  * Classes do botao do SantoDS, num modulo sem "use client".
  *
@@ -15,7 +17,7 @@ export type ControlSize = "sm" | "md" | "lg";
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
     "bg-brand-solid-default text-text-on-brand hover:bg-brand-solid-hover active:bg-brand-solid-active",
-  // Pilula elevada: raised + sombra curta + hairline subtle nos DOIS temas — o
+  // Pastilha elevada: raised + sombra curta + hairline subtle nos DOIS temas — o
   // secundario quase sempre mora num cartao raised, e raised sobre raised o
   // tom nao separa (skill santo-ui-craft, secao 2).
   secondary:
@@ -56,19 +58,18 @@ const ICON_BOX: Record<ControlSize, string> = {
  * `<button>` dentro de `<a>` e HTML invalido, e copiar as classes a mao e o
  * caminho para o link e o botao divergirem.
  *
- * Pilula e o PADRAO (skill santo-ui-craft: controle compacto = radius/full);
- * `pill: false` da o retangulo radius/md, so para botao colado em campo ou
- * em grade densa.
+ * Raio de CONTROLE (principio 5 do Pedro: sem borda 100% arredondada) —
+ * `RADIUS_CONTROL` de radius.ts. `pill` ficou sem efeito: mantido so por
+ * compatibilidade de API.
  */
 export function buttonClass({
   variant = "secondary",
   size = "md",
   icon = false,
   block = false,
-  pill = true,
 }: { variant?: ButtonVariant; size?: ControlSize; icon?: boolean; block?: boolean; pill?: boolean } = {}) {
   const s = SIZES[size];
   const box = icon ? ICON_BOX[size] : `${s.box} ${s.text} ${s.gap} whitespace-nowrap`;
-  return `inline-flex shrink-0 cursor-pointer items-center justify-center ${pill ? "rounded-full" : "rounded-md"} ${box} ${VARIANTS[variant]} ${MOTION} ${DISABLED} ${block ? "w-full min-w-0" : ""}`;
+  return `inline-flex shrink-0 cursor-pointer items-center justify-center ${RADIUS_CONTROL} ${box} ${VARIANTS[variant]} ${MOTION} ${DISABLED} ${block ? "w-full min-w-0" : ""}`;
 }
 

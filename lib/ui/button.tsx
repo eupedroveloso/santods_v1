@@ -13,7 +13,7 @@ export type { ButtonVariant, ControlSize };
  *
  * Escolha da variante:
  *   primary    a acao principal da tela. No maximo uma por area.
- *   secondary  acoes de apoio: pilula elevada (raised + sombra curta).
+ *   secondary  acoes de apoio: pastilha elevada (raised + sombra curta).
  *   ghost      acoes de barra de ferramentas, onde contorno viraria ruido.
  *   danger     acao destrutiva, sempre com rotulo explicito do que sera perdido.
  *   subtle     preenchimento suave, para segmentos e estados selecionados.
@@ -33,7 +33,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
    * que reparte a largura.
    */
   block?: boolean;
-  /** Pilula (radius/full) e o padrao; `pill={false}` da o retangulo radius/md. */
+  /** @deprecated Sem efeito: todo botao leva o raio de controle (principio 5 do Pedro). */
   pill?: boolean;
 };
 
@@ -67,7 +67,7 @@ export type IconButtonProps = Omit<ButtonProps, "leading" | "trailing" | "block"
   label: string;
 };
 
-/** Botao so com icone: circulo por padrao, quadrado com `pill={false}`. O `label` vira aria-label e title. */
+/** Botao so com icone: quadrado com o raio de controle. O `label` vira aria-label e title. */
 export function IconButton({
   variant = "ghost",
   size = "md",

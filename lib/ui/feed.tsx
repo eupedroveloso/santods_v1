@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Avatar } from "./data";
+import { RADIUS_BADGE } from "./radius";
 
 /**
  * Feed de atividade.
@@ -43,7 +44,7 @@ export function ActivityItem({
 /** Marcador de contexto do feed: icone + rotulo, contorno leve. */
 export function Marker({ icon, children }: { icon?: ReactNode; children: ReactNode }) {
   return (
-    <span className="santo-caption-regular inline-flex w-fit items-center gap-2xs rounded-md border-thin border-border-subtle px-2xs py-3xs text-text-secondary">
+    <span className={`santo-caption-regular inline-flex w-fit items-center gap-2xs ${RADIUS_BADGE} border-thin border-border-subtle px-xs py-3xs text-text-secondary`}>
       {icon}
       {children}
     </span>

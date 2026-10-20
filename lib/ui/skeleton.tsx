@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
  * de `strong` — nunca preto nem neutro quase preto (regra do Pedro).
  *
  * Anatomia anti-generico (skill santo-ui-craft): profundidade por tom, nao por
- * contorno; controle compacto em pilula; campo e poco; ativo e pilula elevada.
+ * contorno; controle compacto em pastilha; campo e poco; ativo e pastilha elevada.
  * Gramatica completa em .claude/skills/santo-vitrine/SKILL.md.
  */
 
@@ -16,7 +16,7 @@ import type { ReactNode } from "react";
  * Tom de preenchimento, do mais apagado ao de enfase. `raised` e a cor do
  * cartao: forma clara sobre a forma de enfase (punho de switch, aba ativa).
  * `sunken` e o nivel 2 (poco, trilho): mais fundo que o cartao nos dois temas
- * — e o que deixa a pilula elevada parecer elevada tambem no escuro.
+ * — e o que deixa a pastilha elevada parecer elevada tambem no escuro.
  */
 export type SkeletonTone = "sunken" | "raised" | "soft" | "base" | "strong" | "emphasis";
 
@@ -87,7 +87,7 @@ function Bar({
 }) {
   const h = { sm: "h-2xs", md: "h-xs", lg: "h-sm" }[size];
   return (
-    <span className={`block min-w-0 shrink rounded-full ${h} ${WIDTH[w]} ${TONE[tone]} ${animated ? SHIMMER : ""}`} />
+    <span className={`block min-w-0 shrink rounded-xs ${h} ${WIDTH[w]} ${TONE[tone]} ${animated ? SHIMMER : ""}`} />
   );
 }
 
@@ -96,7 +96,7 @@ function Bar({
  * `className` so para layout (flex-col, gap, padding, alinhamento) — nunca
  * aparencia. Sem `h`, a altura vem dos filhos. `outline` poe a hairline
  * subtle — so em amostra de cor ou onde o tom nao separa. `elevated` e a
- * pilula/painel nivel 1 sobre trilho: tom raised + shadow-xs.
+ * pastilha/painel nivel 1 sobre trilho: tom raised + shadow-xs.
  */
 function Block({
   w = "full",
@@ -154,7 +154,7 @@ function Circle({
 }
 
 /**
- * Botao em pilula. `primary` e a unica enfase do cartao; `soft` e o
+ * Botao em pastilha. `primary` e a unica enfase do cartao; `soft` e o
  * secundario tonal (sem contorno). `square` vira botao de icone redondo.
  * `float` e o FAB: sombra grande de coisa que flutua.
  */
@@ -175,19 +175,18 @@ function Button({
   const box = square
     ? { sm: "size-md", md: "size-lg" }[size]
     : `${{ sm: "h-md", md: "h-lg" }[size]} ${WIDTH[w ?? (size === "sm" ? "sm" : "md")]}`;
-  return <span className={`block shrink-0 rounded-full ${box} ${look} ${float ? "shadow-lg" : ""}`} />;
+  return <span className={`block shrink-0 rounded-xs ${box} ${look} ${float ? "shadow-lg" : ""}`} />;
 }
 
 /**
  * Campo-poco: tom rebaixado, sem contorno, placeholder dentro.
  * `leading`/`trailing` recebem outra forma (Circle, Chip, Button square) — as
- * acoes moram dentro do poco. Uma linha e pilula, como o Input `well` da lib;
- * `pill={false}` e o retangulo; `multiline` (textarea) fica no raio do piso.
+ * acoes moram dentro do poco. Uma linha e pastilha, como o Input `well` da lib;
+ * Raio do piso (xs) em uma linha e em multilinha: na escala da miniatura o controle cai no piso.
  */
 function Field({
   w = "full",
   multiline = false,
-  pill,
   caret = false,
   placeholder = "sm",
   leading,
@@ -195,6 +194,7 @@ function Field({
 }: {
   w?: SkeletonWidth;
   multiline?: boolean;
+  /** @deprecated Sem efeito: campo leva o piso xs (principio 5 do Pedro). */
   pill?: boolean;
   /** Cursor em enfase depois do placeholder: o protagonista de um campo. */
   caret?: boolean;
@@ -204,13 +204,13 @@ function Field({
 }) {
   return (
     <div
-      className={`flex shrink-0 gap-2xs bg-surface-sunken ${(pill ?? !multiline) ? "rounded-full pr-3xs pl-xs" : "rounded-xs px-xs"} ${
+      className={`flex shrink-0 gap-2xs bg-surface-sunken ${multiline ? "px-xs" : "pr-3xs pl-xs"} rounded-xs ${
         WIDTH[w]
       } ${multiline ? "h-3xl items-start py-xs" : "h-lg items-center"}`}
     >
       {leading}
       {placeholder && <Bar w={placeholder} size="sm" tone="strong" />}
-      {caret && <span className="block h-sm w-3xs shrink-0 rounded-full bg-icon-tertiary" />}
+      {caret && <span className="block h-sm w-3xs shrink-0 rounded-xs bg-icon-tertiary" />}
       {trailing && <div className="ml-auto flex items-center gap-3xs">{trailing}</div>}
     </div>
   );
@@ -226,8 +226,11 @@ function Chip({
   tone = "soft",
   elevated = false,
   align = "center",
+  badge = false,
   children,
 }: {
+  /** Tag/Badge/Count: a unica forma em capsula fora do circulo (excecao do Pedro). */
+  badge?: boolean;
   w?: SkeletonWidth;
   tone?: SkeletonTone;
   elevated?: boolean;
@@ -237,7 +240,7 @@ function Chip({
   const look = elevated ? "bg-surface-raised shadow-xs" : TONE[tone];
   const justify = { start: "justify-start", center: "justify-center", end: "justify-end" }[align];
   return (
-    <div className={`flex h-md shrink-0 items-center gap-3xs rounded-full px-3xs ${justify} ${WIDTH[w]} ${look}`}>
+    <div className={`flex h-md shrink-0 items-center gap-3xs ${badge ? "rounded-full" : "rounded-xs"} px-3xs ${justify} ${WIDTH[w]} ${look}`}>
       {children}
     </div>
   );
@@ -257,7 +260,7 @@ function Check({ shape = "square", on = false }: { shape?: "square" | "round"; o
 /**
  * Linha de lista ou tabela: formas lado a lado com hairline embaixo. Na
  * ultima linha, `divider={false}`. `selected` e a opcao realcada de uma lista
- * (tom, raio do piso); `active` e o item de nav ativo: pilula elevada, para
+ * (tom, raio do piso); `active` e o item de nav ativo: pastilha elevada, para
  * ficar sobre um trilho (Block tone="sunken").
  */
 function Row({
@@ -272,7 +275,7 @@ function Row({
   active?: boolean;
 }) {
   const look = active
-    ? "rounded-full bg-surface-raised px-2xs shadow-xs"
+    ? "rounded-xs bg-surface-raised px-2xs shadow-xs"
     : selected
       ? "rounded-xs bg-neutral-subtle-default px-2xs"
       : "";
@@ -367,7 +370,7 @@ function Line({
 }
 
 /**
- * Micro-viz de barrinhas (MiniBars): pilulas finas, so a destacada em enfase.
+ * Micro-viz de barrinhas (MiniBars): pastilhas finas, so a destacada em enfase.
  * Valores de 1 a 4 na escala; ao lado de um numero, nunca com eixo.
  */
 function MiniBars({ values, highlight }: { values: number[]; highlight?: number }) {
@@ -377,7 +380,7 @@ function MiniBars({ values, highlight }: { values: number[]; highlight?: number 
       {values.map((v, i) => (
         <span
           key={i}
-          className={`block w-2xs rounded-full ${step[Math.min(step.length, Math.max(1, v)) - 1]} ${
+          className={`block w-2xs rounded-xs ${step[Math.min(step.length, Math.max(1, v)) - 1]} ${
             i === highlight ? TONE.emphasis : TONE.base
           }`}
         />

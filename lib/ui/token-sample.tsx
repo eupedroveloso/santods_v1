@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Swatch } from "./swatch";
+import { RADIUS_BAR } from "./radius";
 
 export type TokenSampleVariant = "swatch" | "shadow" | "radius" | "bar" | "line" | "text" | "easing" | "duration";
 
@@ -131,7 +132,7 @@ function DurationSample({ value, className }: { value: string; className: string
     <span
       tabIndex={0}
       aria-label={`Duração ${value}`}
-      className={`group relative block h-md w-full rounded-full bg-neutral-subtle-default ${className}`}
+      className={`group relative block h-md w-full ${RADIUS_BAR} bg-neutral-subtle-default ${className}`}
     >
       <span
         className="absolute top-0 left-0 size-md rounded-full bg-brand-solid-default group-hover:left-[calc(100%-var(--santo-space-md))] group-focus-visible:left-[calc(100%-var(--santo-space-md))]"

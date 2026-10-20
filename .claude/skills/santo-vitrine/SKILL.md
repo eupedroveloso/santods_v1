@@ -16,8 +16,8 @@ Peças (só estas): `ThumbFrame` (`lib/ui/thumb-frame.tsx`) e `Skeleton`
 `lib/thumbs/<slug>.thumb.tsx`, registrada em `lib/thumbs/index.ts`.
 
 A anatomia segue a skill **santo-ui-craft** (regra ANTI-GENÉRICO do Pedro):
-profundidade por **tom**, não por contorno; controle compacto em **pílula**;
-campo é **poço**; ativo é **pílula elevada sobre trilho**; nav em **trilho**;
+profundidade por **tom**, não por contorno; controle compacto em **pastilha** (sem cápsula — princípio 5 do Pedro);
+campo é **poço**; ativo é **pastilha elevada sobre trilho**; nav em **trilho**;
 micro-viz (anel, sparkline, barrinhas). A miniatura de um componente mostra a
 anatomia que o componente tem — quando ele muda, a thumb muda junto.
 
@@ -42,7 +42,9 @@ anatomia que o componente tem — quando ele muda, a thumb muda junto.
   fórmula** (santo-ui-craft §3; o Vigia mede no DOM): raio interno = raio do
   pai − respiro, mínimo `radius/xs`. Com `sm` (8) e respiro 12/16, tudo dentro
   do cartão cai no piso, **`xs`**: bloco, poço multilinha, item `selected`.
-  Controle compacto, pílula e círculo: `full`. Não existe `none`.
+  Controle compacto e trilho também caem no piso `xs` (na lib são `radius/md`
+  e `radius/lg`; na escala da miniatura viram o piso). `full` **só** em círculo
+  (`Circle`, `Check round`). Não existe `none`.
 - **Visual**: nível 1 tonal — `surface/raised` + `shadow/sm`, `radius-sm`, **sem borda**
   (o tom separa do poço nos dois temas). Coluna flex com `gap-xs`.
 - **Respiro** (`pad`): `md` para peça isolada; `sm` para conteúdo denso (vale
@@ -64,11 +66,11 @@ anatomia que o componente tem — quando ele muda, a thumb muda junto.
 | Ênfase (ação primária) | `icon/tertiary` (tom `emphasis`): neutral/400 no claro, neutral/500 no escuro — um degrau acima de `strong`. **Nunca preto nem neutro quase preto** (neutral/900+, `surface/inverse`, `bg/neutral/solid`): regra do Pedro, a ênfase é por tom, não por contraste duro |
 | Forma clara sobre a ênfase | `surface/raised` (tom `raised`): punho de switch, aba ativa |
 | Contorno | **só** em amostra de cor (`outline`, `border/subtle`) e na caixa desligada do `Check` (`border/default`). Nada de botão, chip, campo ou painel contornado. `border/strong` nunca |
-| Raio | `xs` (piso) em cartão, bloco, poço multilinha, célula · `full` em todo controle compacto (botão, chip, tag, count, segmented, aba, item ativo, trilho, FAB, campo em barra), barra e avatar. Nada entre os dois |
+| Raio | `xs` (piso) em tudo: cartão, bloco, poço, célula, controle compacto (botão, chip, segmented, aba, item ativo, trilho, FAB, campo), barra · `full` em círculo (avatar, ponto, radio) e em **badge/tag** (Tag, Count: `Chip badge` — exceção do Pedro). Nada entre os dois |
 | Tamanho | só a escala de espaço (`w-md`…`w-8xl`, `h-2xs`…`h-5xl`, `size-xs`…`size-xl`) e `--santo-dimension-space-*` |
 
 Nada de hex, de colchete com número, de `bg-brand-*`/`success`/`danger`, de
-`text-*` (não há texto). Sombra: `sm` no cartão, `xs` em pílula/painel
+`text-*` (não há texto). Sombra: `sm` no cartão, `xs` em pastilha/painel
 elevado, `lg` só no FAB.
 
 ## Formas canônicas (`Skeleton.*`)
@@ -76,17 +78,17 @@ elevado, `lg` só no FAB.
 | Forma | Uso | Padrão |
 | --- | --- | --- |
 | `Bar` | linha de texto | `size` lg título/número (strong), md corpo (base), sm metadado/unidade; largura `2xs`…`2xl`/`full`/`fill` |
-| `Block` | imagem, painel, bolha, célula, tile, poço, trilho | tom soft, raio xs (ou `full`); aceita filhos; `elevated` = nível 1 sobre trilho; `outline` só em amostra; largura `fit` abraça o conteúdo |
+| `Block` | imagem, painel, bolha, célula, tile, poço, trilho | tom soft, raio xs (`full` existe na API, mas não use em thumb: só círculo é redondo); aceita filhos; `elevated` = nível 1 sobre trilho; `outline` só em amostra; largura `fit` abraça o conteúdo |
 | `Circle` | avatar, ponto de status, ícone abstrato | `xs`…`xl`, tom strong; `ring` separa avatares sobrepostos |
-| `Button` | botão em pílula | `primary` (ênfase), `soft` (secundário tonal); `square` = botão de ícone redondo; `float` = FAB |
-| `Field` | campo-poço | `sunken`, sem contorno; ações em `leading`/`trailing` dentro do poço; uma linha é **pílula por padrão** (como o Input `well` da lib; `pill={false}` = retângulo); `multiline` fica `xs`; `caret` = cursor em ênfase (protagonista) |
-| `Chip` | tag, filtro, contador, tecla, trilho de switch | pílula `h-md`; `elevated` = selecionado sobre trilho; `align` posiciona o punho |
+| `Button` | botão (pastilha, raio do piso) | `primary` (ênfase), `soft` (secundário tonal); `square` = botão de ícone quadrado; `float` = FAB |
+| `Field` | campo-poço | `sunken`, sem contorno; ações em `leading`/`trailing` dentro do poço; uma linha ou várias, sempre no piso `xs` (`pill` sem efeito); `multiline` fica `xs`; `caret` = cursor em ênfase (protagonista) |
+| `Chip` | tag, filtro, contador, tecla, trilho de switch | pastilha `h-md`, raio do piso (`badge` = cápsula, só para Tag/Count/Marker); `elevated` = selecionado sobre trilho; `align` posiciona o punho |
 | `Check` | checkbox (`square`) e radio (`round`) | desligado = contorno default; `on` = ênfase |
-| `Row` | linha de lista/tabela/nav | hairline embaixo; `divider={false}` na última; `selected` = opção realçada (tom, xs); `active` = item de nav ativo (pílula elevada) |
+| `Row` | linha de lista/tabela/nav | hairline embaixo; `divider={false}` na última; `selected` = opção realçada (tom, xs); `active` = item de nav ativo (pastilha elevada) |
 | `Rule` | hairline / conector de árvore | horizontal ou `vertical`; `emphasis` só quando o divisor é o protagonista |
 | `Bars` | gráfico de barras (com eixo) | valores 1–8; `highlight` = uma barra em ênfase |
 | `Line` | gráfico de linha/área; `spark` = Sparkline | pontos 0–10; `area`; `second` = segunda série; `spark` baixo e sem eixo |
-| `MiniBars` | micro-viz de barrinhas | valores 1–4; pílulas finas; `highlight` em ênfase |
+| `MiniBars` | micro-viz de barrinhas | valores 1–4; barras finas no piso; `highlight` em ênfase |
 | `Ring` | micro-viz de progresso | `value` 0–100; trilha base, arco em ênfase; `sm`/`md`/`lg` |
 
 Carregamento (fora das thumbs): `Bar`/`Block` aceitam `animated`
@@ -94,15 +96,15 @@ Carregamento (fora das thumbs): `Bar`/`Block` aceitam `animated`
 
 Composições recorrentes (copie, não reinvente):
 - **Bloco de texto**: `Bar lg strong` + `Bar sm` mais curta.
-- **Switch**: `Chip w="xs" tone="emphasis" align="end"` com `Circle xs raised`
-  (ligado); `tone="strong" align="start"` (desligado).
+- **Switch**: `Chip w="xs" tone="emphasis" align="end"` com `Block w="xs" h="xs" elevated`
+  (ligado); `tone="strong" align="start"` (desligado). Punho em pastilha, não círculo.
 - **Swatch**: `Block w="xs" h="lg" outline radius="xs"`.
 - **Valor à direita**: envolva em `<div className="ml-auto">`.
 - **Chevron/ícone pequeno**: `Block w="2xs" h="xs" tone="strong" radius="xs"`.
-- **Trilho + ativo** (Segmented, abas, nav, rail): `Block tone="sunken"
-  radius="full"` com `p-3xs`; dentro, a peça ativa `elevated radius="full"`
+- **Trilho + ativo** (Segmented, abas, nav, rail): `Block tone="sunken"`
+  com `p-3xs`; dentro, a peça ativa `elevated`
   (ou `Chip elevated` / `Row active`), as demais só tom.
-- **Nav em trilho**: coluna `Block w="fit" tone="sunken" radius="full"` com
+- **Nav em trilho**: coluna `Block w="fit" tone="sunken"` com
   círculos (um elevado) + painel ao lado; subitens com `Rule vertical` como
   conector de árvore e recuo `pl-2xs`.
 - **Stat**: metadado `Bar sm` + número `Bar lg strong` com unidade `Bar xs sm`
@@ -151,8 +153,8 @@ Composições recorrentes (copie, não reinvente):
 5. **Ritmo**: `gap-xs` dentro do cartão, `gap-2xs` dentro de um grupo,
    `gap-3xs` entre peças coladas (botões de stepper, células).
 6. **Raio aninhado**: ver “Moldura e proporção”. Piso `xs`; controle
-   compacto em pílula (`full`).
-7. **Níveis**: cartão (1) → poço/trilho `sunken` (2) → pílula elevada (1
+   compacto também no piso; `full` só em círculo.
+7. **Níveis**: cartão (1) → poço/trilho `sunken` (2) → pastilha elevada (1
    sobre 2). Nunca poço dentro de poço; nunca mais que 3 níveis.
 
 ## Proibições
@@ -175,9 +177,9 @@ Composições recorrentes (copie, não reinvente):
 - [ ] Primitivo sozinho; semântico com anatomia mínima reconhecível.
 - [ ] Exatamente um protagonista em `emphasis` (`tone`, `Button` primary, `Check on`, `highlight`, `Line`, `Ring`, `caret`, `Rule emphasis`); nenhum preto ou quase preto.
 - [ ] Anatomia santo-ui-craft: sem contorno fora de amostra/check; controles
-      em pílula; campo-poço; trilho `sunken` + ativo elevado; micro-viz onde o
+      em pastilha (sem cápsula); campo-poço; trilho `sunken` + ativo elevado; micro-viz onde o
       componente tem.
-- [ ] Raio aninhado: só `xs` (piso) e `full`; nada de `none`.
+- [ ] Raio aninhado: só `xs` (piso) e `full` em círculo; nada de `none`, nada de cápsula.
 - [ ] Nada vaza nem passa da altura do cartão (olhar renderizado, não só o
       código; no card mais estreito, 192, e no largo).
 - [ ] Claro e escuro conferidos (`data-theme="dark"`).

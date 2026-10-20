@@ -2,6 +2,7 @@ import { Children } from "react";
 import type { ReactNode } from "react";
 import { AvatarImage } from "./avatar-image";
 import { Check } from "./icons";
+import { RADIUS_CONTROL_END, RADIUS_CONTROL_START } from "./radius";
 
 /**
  * Exibicao de dado: avatar e tabela (o calendario mora em calendar.tsx).
@@ -102,7 +103,7 @@ const keyOf = (row: unknown, index: number) => {
 
 /**
  * Tabela compacta (skill santo-ui-craft, secao 8): cabecalho TONAL (faixa
- * surface/sunken em pilula larga, sem borda), linhas separadas por hairline,
+ * surface/sunken em pastilha larga, sem borda), linhas separadas por hairline,
  * numero a direita com tabular-nums, hover tonal. Sem borda por celula.
  *
  * `selected` liga a coluna de selecao; `rowAction` acrescenta a coluna de acoes
@@ -137,7 +138,7 @@ export function Table<T>({
   /** fixed: table-layout fixo, larguras de Column.width, texto quebra. */
   layout?: "auto" | "fixed";
   /**
-   * Realce de linha. Padrao (inset): pilula suave com raio aninhado, para a
+   * Realce de linha. Padrao (inset): pastilha suave com raio aninhado, para a
    * tabela dentro de Card com padding. `flush`: tabela que ocupa o Card
    * inteiro (padded=false) — realce reto, cabecalho em faixa reta, e o
    * contêiner recorta os cantos com o raio do Card.
@@ -163,10 +164,10 @@ export function Table<T>({
           {rowAction && <col className="w-(--santo-dimension-space-56)" />}
         </colgroup>
         <thead>
-          {/* Faixa tonal: o fundo e das celulas, com as pontas arredondadas. */}
+          {/* Faixa tonal: o fundo e das celulas, pontas no raio de controle (nao e capsula). */}
           <tr className="santo-caption-semibold text-text-secondary">
             {selectable && (
-              <th scope="col" className={`${flush ? "" : "rounded-l-full"} bg-surface-sunken px-sm py-xs`}>
+              <th scope="col" className={`${flush ? "" : RADIUS_CONTROL_START} bg-surface-sunken px-sm py-xs`}>
                 <CheckCell checked={allSelected} onChange={() => onToggleAll?.()} label="Selecionar todas as linhas" />
               </th>
             )}
@@ -175,13 +176,13 @@ export function Table<T>({
                 key={c.key}
                 scope="col"
                 className={`bg-surface-sunken px-sm py-xs ${wrap} ${c.numeric ? "text-right" : "text-left"} ${
-                  ci === 0 && !selectable ? `${flush ? "" : "rounded-l-full"} pl-md` : ""
-                } ${ci === columns.length - 1 && !rowAction ? `${flush ? "" : "rounded-r-full"} pr-md` : ""}`}
+                  ci === 0 && !selectable ? `${flush ? "" : RADIUS_CONTROL_START} pl-md` : ""
+                } ${ci === columns.length - 1 && !rowAction ? `${flush ? "" : RADIUS_CONTROL_END} pr-md` : ""}`}
               >
                 {c.header}
               </th>
             ))}
-            {rowAction && <th scope="col" className={`${flush ? "" : "rounded-r-full"} bg-surface-sunken px-sm py-xs`} />}
+            {rowAction && <th scope="col" className={`${flush ? "" : RADIUS_CONTROL_END} bg-surface-sunken px-sm py-xs`} />}
           </tr>
         </thead>
         <tbody>

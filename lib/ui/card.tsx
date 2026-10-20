@@ -1,22 +1,30 @@
 import type { CSSProperties, ReactNode } from "react";
 import type { ShadowName } from "@/lib/tokens";
+import { RADIUS_CONTROL_VAR, RADIUS_TRACK_VAR } from "./radius";
 import { OVERLINE } from "./text-class";
 
 /**
  * Cartao: superficie que agrupa um assunto so.
  *
  * Profundidade por TOM (skill santo-ui-craft): chao (page/sunken) -> cartao
- * (raised) -> poco (sunken dentro do raised). Sem borda 1px visivel por padrao:
- * o contorno e `santo-edge`, invisivel no claro e hairline no escuro, onde a
- * sombra some. `variant` escolhe o papel — nunca ajuste solto na tela:
+ * (raised). Sem borda 1px visivel por padrao: o contorno e `santo-edge`,
+ * invisivel no claro e hairline no escuro, onde a sombra some. `variant`
+ * escolhe o papel — nunca ajuste solto na tela:
  *   raised    (padrao) nivel 1: surface/raised + sombra ambiente, raio xl. O cartao da pagina.
- *   well      nivel 2: poco DENTRO de um cartao (surface/sunken, sem contorno),
- *             raio = raio interno do pai. Campo, lista embutida, slot de grafico.
- *   inset     bloco dentro de um cartao no tom do chao (surface/page), raio do pai.
- *   sunken    nivel 0: regiao rebaixada que contem cartoes (canvas, trilho).
+ *             Dentro de uma moldura `sunken` vira radius/lg sozinho (irmao do trilho).
+ *   sunken    nivel 0: MOLDURA que contem cartoes e trilho (canvas de app). Raio
+ *             concentrico: o do filho (lg) + o padding.
  *   outlined  so contorno (border/default): opcao escolhida, sem fundo nem sombra.
  *   dashed    contorno tracejado: lugar vazio, alvo de "adicionar".
  *   double    moldura (chao) + painel (cartao): cabecalho e rodape na moldura.
+ *   well/inset GRUPO sem caixa (regra do Pedro, 2026-10-19: nada de box escuro
+ *             em volta de tile, Stat, KeyValue ou lista dentro de cartao). So
+ *             empilha com o gap do padding; separe por espaco ou Divider. Poco
+ *             de verdade so em campo (Input/Textarea `well`) e codigo (CodeBlock).
+ *
+ * Equilibrio de raio (skill santo-ui-craft §3): moldura justa = filho + padding;
+ * filhos de um cartao folgado (padding >= raio) levam o degrau da familia deles
+ * — o piso do raio interno e o raio de controle, nunca abaixo.
  */
 
 export type CardVariant = "raised" | "well" | "inset" | "sunken" | "outlined" | "dashed" | "double";
@@ -25,8 +33,8 @@ export type CardRadius = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 
 const SURFACE: Record<CardVariant, string> = {
   raised: "santo-edge bg-surface-raised",
-  well: "bg-surface-sunken",
-  inset: "bg-surface-page",
+  well: "",
+  inset: "",
   sunken: "bg-surface-sunken",
   outlined: "border-thin border-border-default",
   dashed: "border-thin border-dashed border-border-default",
@@ -39,26 +47,20 @@ const PADDING: Record<CardPadding, string> = {
   lg: "gap-md p-lg",
 };
 
-/** Raio padrao: radius/xl (16) no maximo (Pedro). well e inset nao tem: herdam o raio interno do pai. */
-const DEFAULT_RADIUS: Record<Exclude<CardVariant, "inset" | "well">, CardRadius> = {
-  raised: "xl",
-  sunken: "xl",
-  outlined: "xl",
-  dashed: "xl",
-  double: "xl",
-};
+/** Grupo sem caixa (well/inset): so o ritmo do padding pedido, sem fundo nem recuo. */
+const GROUP_GAP: Record<CardPadding, string> = { sm: "gap-xs", md: "gap-sm", lg: "gap-md" };
 
-/** Os que leem o raio do pai (nivel 2): nao redefinem a var que leem. */
-const NESTED = new Set<CardVariant>(["well", "inset"]);
+/** Variantes que viraram grupo sem caixa: nao tem raio, fundo nem padding. */
+const GROUP = new Set<CardVariant>(["well", "inset"]);
 
 /**
- * Raio aninhado (regra do Pedro): o Card expoe a seus filhos o raio interno
- * --santo-card-inner-radius = max(radius/xs, raio - padding); sem padding, o
- * proprio raio (filho colado herda o do pai). well/inset leem esse valor do
- * pai e por isso nao o redefinem.
+ * Raio interno exposto aos filhos: --santo-card-inner-radius =
+ * max(raio de controle, raio - padding). Concentrico quando a moldura e justa;
+ * num cartao folgado o filho fica no degrau de controle, igual aos irmaos
+ * (botao, campo, codigo). Sem padding, o proprio raio (filho colado herda).
  */
 function innerRadius(radius: string, pad: CardPadding | null) {
-  return pad ? `max(var(--santo-radius-xs), calc(${radius} - var(--santo-space-${pad})))` : radius;
+  return pad ? `max(${RADIUS_CONTROL_VAR}, calc(${radius} - var(--santo-space-${pad})))` : radius;
 }
 
 export function Card({
@@ -82,7 +84,7 @@ export function Card({
   padded?: boolean;
   /** Densidade do preenchimento. Padrao: lg no raised e no double, md nas demais. */
   padding?: CardPadding;
-  /** Raio explicito (token). Moldura que envolve cartoes: raio do filho + padding. */
+  /** Raio explicito (token). Sem ele, o raio sai da regra de equilibrio. */
   radius?: CardRadius;
   /** double: cabecalho na moldura, fora do painel. */
   header?: ReactNode;
@@ -96,20 +98,26 @@ export function Card({
 }) {
   if (variant === "double") {
     return (
-      <DoubleCard className={className} radius={radius ?? "xl"} padded={padded} padding={padding} header={header} footer={footer} footerFlush={footerFlush}>
+      <DoubleCard className={className} radius={radius} padded={padded} padding={padding} header={header} footer={footer} footerFlush={footerFlush}>
         {children}
       </DoubleCard>
     );
   }
+  if (GROUP.has(variant)) {
+    return <div className={`flex min-w-0 flex-col ${GROUP_GAP[padding ?? "md"]} ${className}`}>{children}</div>;
+  }
   const pad = padded ? (padding ?? (variant === "raised" ? "lg" : "md")) : null;
-  const own =
-    radius !== undefined
-      ? `var(--santo-radius-${radius})`
-      : NESTED.has(variant)
-        ? "var(--santo-card-inner-radius, var(--santo-radius-xl))"
-        : `var(--santo-radius-${DEFAULT_RADIUS[variant as keyof typeof DEFAULT_RADIUS]})`;
-  const style: CSSProperties & Record<string, string> = { borderRadius: own };
-  if (!NESTED.has(variant) || radius !== undefined) style["--santo-card-inner-radius"] = innerRadius(own, pad);
+  const style: CSSProperties & Record<string, string> = {};
+  let own: string;
+  if (radius !== undefined) own = `var(--santo-radius-${radius})`;
+  else if (variant === "sunken") {
+    // Moldura de cartoes: o filho (raised) vira lg, a moldura = lg + padding.
+    own = pad ? `calc(${RADIUS_TRACK_VAR} + var(--santo-space-${pad}))` : RADIUS_TRACK_VAR;
+  } else own = "var(--santo-card-nested, var(--santo-radius-xl))";
+  style.borderRadius = own;
+  style["--santo-card-inner-radius"] = innerRadius(own, pad);
+  // Moldura avisa os cartoes filhos; um cartao avisa os netos que ja nao estao na moldura.
+  style["--santo-card-nested"] = variant === "sunken" ? RADIUS_TRACK_VAR : "initial";
   if (variant === "raised") style.boxShadow = `var(--santo-shadow-${elevation})`;
   return (
     <div className={`flex min-w-0 flex-col ${SURFACE[variant]} ${pad ? PADDING[pad] : ""} ${className}`} style={style}>
@@ -119,11 +127,12 @@ export function Card({
 }
 
 /**
- * Borda dupla (regra do Pedro): moldura no tom do chao (surface/sunken, raio
- * grande) com um PAINEL raised recuado por space/xs, raio = externo - recuo e
- * sombra curta — o painel e a pilula elevada da moldura. Cabecalho e rodape
- * ficam na moldura; o conteudo vive no painel. Para o que agrupa varias
- * coisas: demo, playground, modal, paleta de busca, gaveta.
+ * Borda dupla (regra do Pedro): moldura no tom do chao (surface/sunken) com um
+ * PAINEL raised recuado por space/xs e sombra curta — o painel e a pastilha
+ * elevada da moldura. Cabecalho e rodape ficam na moldura; o conteudo vive no
+ * painel. Para o que agrupa varias coisas: demo, playground, modal, paleta de
+ * busca, gaveta. Raio concentrico de dentro para fora: painel radius/lg,
+ * moldura = painel + recuo + fio (`radius` explicito inverte: painel = moldura - recuo).
  */
 function DoubleCard({
   children,
@@ -137,21 +146,23 @@ function DoubleCard({
 }: {
   children: ReactNode;
   className: string;
-  radius: CardRadius;
+  radius?: CardRadius;
   padded: boolean;
   padding?: CardPadding;
   header?: ReactNode;
   footer?: ReactNode;
   footerFlush: boolean;
 }) {
-  const outer = `var(--santo-radius-${radius})`;
-  // Recuo real = p-xs + o fio do santo-edge (1px): o painel fica concentrico.
-  const panel = `max(var(--santo-radius-xs), calc(${outer} - var(--santo-space-xs) - var(--santo-border-thin)))`;
+  // Recuo real = p-xs + o fio do santo-edge (1px): painel e moldura concentricos.
+  const inset = "var(--santo-space-xs) + var(--santo-border-thin)";
+  const outer = radius ? `var(--santo-radius-${radius})` : `calc(${RADIUS_TRACK_VAR} + ${inset})`;
+  const panel = radius ? `max(${RADIUS_CONTROL_VAR}, calc(${outer} - ${inset}))` : RADIUS_TRACK_VAR;
   const pad = padded ? (padding ?? "lg") : null;
   const panelStyle: CSSProperties & Record<string, string> = {
     borderRadius: panel,
     boxShadow: "var(--santo-shadow-xs)",
-    "--santo-card-inner-radius": pad ? `max(var(--santo-radius-xs), calc(${panel} - var(--santo-space-${pad})))` : panel,
+    "--santo-card-inner-radius": pad ? `max(${RADIUS_CONTROL_VAR}, calc(${panel} - var(--santo-space-${pad})))` : panel,
+    "--santo-card-nested": "initial",
   };
   return (
     <div
@@ -160,8 +171,8 @@ function DoubleCard({
         {
           borderRadius: outer,
           boxShadow: "var(--santo-shadow-sm)",
-          // Cabecalho e rodape vivem na moldura a space/xs + space/md da borda.
-          "--santo-card-inner-radius": `max(var(--santo-radius-xs), calc(${outer} - var(--santo-space-xs) - var(--santo-space-md)))`,
+          // Cabecalho e rodape vivem na moldura: controles deles no degrau de controle.
+          "--santo-card-inner-radius": RADIUS_CONTROL_VAR,
         } as CSSProperties
       }
     >
@@ -262,7 +273,9 @@ export function Stat({
   size?: "sm" | "md" | "lg";
   className?: string;
 }) {
-  const valueClass = { sm: "santo-heading-5-bold", md: "santo-heading-3-bold", lg: "santo-heading-1-bold" }[size];
+  // Escala do numero (Pedro: numeros menores, na base): sm heading-6 (24), md
+  // heading-5 (30, padrao de cartao), lg heading-3 (48, so o numero da tela).
+  const valueClass = { sm: "santo-heading-6-bold", md: "santo-heading-5-bold", lg: "santo-heading-3-bold" }[size];
   return (
     <div className={`flex flex-col gap-sm ${className}`}>
       <div className="flex items-center justify-between gap-sm">

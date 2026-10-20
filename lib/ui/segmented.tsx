@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
 
 /**
  * Controle segmentado: escolha unica entre 2 e 4 opcoes visiveis ao mesmo tempo.
@@ -16,10 +17,10 @@ export type Segment<T extends string> = {
 };
 
 /*
- * Trilho em pilula (surface/sunken, chao) com a pastilha ativa ELEVADA
- * (raised + shadow-xs) — o vocabulario de pilula da skill santo-ui-craft.
- * Raio aninhado: trilho full, pastilha full (pilula dentro de pilula e
- * concentrica por definicao).
+ * Trilho em pastilha (surface/sunken, chao) com a pastilha ativa ELEVADA
+ * (raised + shadow-xs) — o vocabulario de pastilha da skill santo-ui-craft.
+ * Raio aninhado (principio 5 do Pedro): pastilha com o raio de controle
+ * (RADIUS_CONTROL) e trilho com p-2xs + RADIUS_TRACK = controle + 2xs, concentrico.
  */
 const SEG_SIZE = {
   sm: "h-(--santo-dimension-size-24) px-xs santo-caption-semibold",
@@ -32,17 +33,20 @@ export function Segmented<T extends string>({
   options,
   className = "",
   size = "sm",
+  block = false,
 }: {
   value: T;
   onChange: (value: T) => void;
   options: Segment<T>[];
   className?: string;
   size?: "sm" | "md";
+  /** Largura do pai, abas iguais: irmao de campo/botao de largura total no mesmo cartao. */
+  block?: boolean;
 }) {
   return (
     <div
       role="radiogroup"
-      className={`inline-flex shrink-0 items-center gap-3xs rounded-full bg-surface-sunken p-3xs ${className}`}
+      className={`${block ? "flex w-full" : "inline-flex"} max-w-full min-w-0 shrink-0 items-center gap-3xs ${RADIUS_TRACK} bg-surface-sunken p-2xs ${className}`}
     >
       {options.map((o) => {
         const active = o.value === value;
@@ -57,7 +61,7 @@ export function Segmented<T extends string>({
             // visivel, ele e o nome acessivel — "clicar Auto" por voz tem que funcionar.
             aria-label={typeof o.label === "string" ? undefined : o.title}
             onClick={() => onChange(o.value)}
-            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs rounded-full whitespace-nowrap ${SEG_SIZE[size]} ${
+            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs ${RADIUS_CONTROL} whitespace-nowrap ${block ? "min-w-0 flex-1" : ""} ${SEG_SIZE[size]} ${
               active
                 ? "bg-surface-raised text-text-primary shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
@@ -81,7 +85,7 @@ export type TabOption<T extends string> = {
 };
 
 /**
- * Abas em pilula.
+ * Abas em pastilha.
  *
  * `pill` (padrao): trilho sunken com a aba ativa elevada, para trocar de vista
  * dentro de uma regiao. `floating`: barra de navegacao flutuante no rodape
@@ -112,8 +116,8 @@ export function TabBar<T extends string>({
       aria-label={label}
       className={
         floating
-          ? `santo-edge flex min-w-0 items-center justify-around gap-3xs rounded-full bg-surface-raised p-2xs shadow-lg backdrop-blur-md ${className}`
-          : `inline-flex max-w-full min-w-0 items-center gap-3xs overflow-x-auto rounded-full bg-surface-sunken p-3xs scrollbar-bare ${className}`
+          ? `santo-edge flex min-w-0 items-center justify-around gap-3xs ${RADIUS_TRACK} bg-surface-raised p-2xs shadow-lg backdrop-blur-md ${className}`
+          : `inline-flex max-w-full min-w-0 items-center gap-3xs overflow-x-auto ${RADIUS_TRACK} bg-surface-sunken p-2xs scrollbar-bare ${className}`
       }
     >
       {options.map((o) => {
@@ -125,7 +129,7 @@ export function TabBar<T extends string>({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(o.value)}
-            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center rounded-full whitespace-nowrap ${
+            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center ${RADIUS_CONTROL} whitespace-nowrap ${
               floating
                 ? `santo-caption-semibold min-w-(--santo-dimension-size-56) flex-1 flex-col gap-3xs px-sm py-xs ${
                     active ? "bg-brand-subtle-default text-text-brand" : "text-text-tertiary hover:text-text-primary"

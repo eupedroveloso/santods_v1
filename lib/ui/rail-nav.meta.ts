@@ -8,7 +8,7 @@ export const railNavMeta: ComponentMeta[] = [
     tier: "primitivo",
     source: "rail-nav.tsx",
     description:
-      "Primeira coluna de aplicação com várias áreas: troca de área por ícone, o painel ao lado (SidebarNav) mostra as seções. Ativo em pílula elevada.",
+      "Primeira coluna de aplicação com várias áreas: troca de área por ícone, o painel ao lado (SidebarNav) mostra as seções. Ativo em pastilha elevada.",
     related: ["rail-item", "sidebar-nav"],
   },
   {

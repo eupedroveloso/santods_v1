@@ -68,3 +68,10 @@ file | arquivo, documento, anexo                                        # ChatAt
 
 # --- sidebar: Movimento (Ateliê) ---
 bezier-curve | curva, bézier, movimento, animação                       # Movimento (/estilos/movimento)
+
+# --- Landing (Ateliê, 2026-10-19) ---
+star:solid | estrela, avaliação, nota                                   # Rating (lib/ui/rating.tsx)
+star-half-stroke:solid | meia estrela, avaliação                        # Rating, meia estrela
+play:solid | play, tocar, assistir, vídeo                               # VslBlock idle e "Continuar assistindo"
+user | usuário, conta, perfil, login                                     # LandingHeader, botão Login (hoje id-card)
+right-to-bracket | entrar, login, acessar                               # LandingHeader, alternativa ao user

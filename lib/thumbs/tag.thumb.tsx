@@ -5,11 +5,11 @@ export function TagThumb() {
   return (
     <ThumbFrame pad="md">
       <div className="flex flex-wrap justify-center gap-2xs">
-        <S.Chip w="md" tone="soft">
+        <S.Chip badge w="md" tone="soft">
           <S.Circle size="xs" tone="strong" />
           <S.Bar w="xs" size="sm" tone="strong" />
         </S.Chip>
-        <S.Chip w="md" tone="base">
+        <S.Chip badge w="md" tone="base">
           <S.Circle size="xs" tone="emphasis" />
           <S.Bar w="sm" size="sm" tone="strong" />
         </S.Chip>

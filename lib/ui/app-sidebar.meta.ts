@@ -8,7 +8,7 @@ export const appSidebarMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "app-sidebar.tsx",
     description:
-      "Sidebar completa de app ou documentação: trilho de áreas no topo, colado à busca, e o painel de seções da área ativa agrupado por NavSection. Para poucas áreas grandes com muitas seções.",
-    related: ["rail-nav", "sidebar-nav", "nav-section", "search-trigger"],
+      "Sidebar de app ou documentação numa coluna só: busca no topo e todos os grupos já abertos com seus itens, item ativo elevado e trazido para a vista. Sem trilho de ícones.",
+    related: ["sidebar-nav", "nav-section", "nav-item", "search-trigger"],
   },
 ];

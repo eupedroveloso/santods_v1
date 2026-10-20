@@ -16,7 +16,7 @@ export default function DocsHome() {
         title="Documentação"
       />
 
-      <CardGrid columns={{ md: 2, xl: 3 }} gap="md">
+      <CardGrid columns={{ md: 2, xl: 3 }} gap="md" masonry={false} stretch>
         <LinkCard
           icon={<Icon.Palette size={20} />}
           title="Tokens"

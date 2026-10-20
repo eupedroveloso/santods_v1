@@ -88,6 +88,28 @@ regenerável em `tokens/.cache/santods.icons.json`, ignorado pelo git.
 Sem o cache, `plan` e `build` ainda funcionam para os ícones já exportados (leem o
 `manifest.json`); só um slug novo pede o inventário, e o erro explica como.
 
+### Alternativa ao MCP: API REST do Figma
+
+Quando o OAuth do MCP não está disponível, o passo 3 pode usar um token pessoal da API
+REST do Figma. O token fica no `.env.local` como `FIGMA_TOKEN` e `FIGMA_FILE_KEY`; esse
+arquivo é ignorado pelo git, e o token **nunca** é impresso, colado em nota ou commitado.
+
+```sh
+node --env-file=.env.local scripts/figma-icons-rest.mjs <dir-dos-svgs> --build
+```
+
+O script roda o `plan` e copia para `<dir>` os SVGs já versionados em `lib/icons/svg/`.
+Só as variantes novas são baixadas, por `GET /v1/images/:key?ids=…&format=svg`, e salvas
+como `<nodeId>.svg`. Com `--build`, ele já roda o `figma-icons.mjs build`. Ele só lê o
+Figma.
+
+- Em 2026-10-19 o REST deu os mesmos paths que o MCP nos 56 ícones de set.
+- Nos 3 ícones de marca (`github`, `google`, `figma`), o REST exporta outra geometria, com
+  `clip-path` e outras coordenadas. Por isso o padrão não rebaixa o que já existe. Não use
+  `--all` para ícones de marca sem conferir.
+- O REST não lê o inventário da página: para um slug que não está no cache, o
+  `tokens/.cache/santods.icons.json` continua vindo do MCP (`scripts/figma-icons.js`).
+
 ## Componentes
 
 `lib/ui/` — peças construídas só com tokens: ação, entrada, cor, estrutura, dado,

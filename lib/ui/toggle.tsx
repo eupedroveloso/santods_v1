@@ -3,6 +3,7 @@
 import { useId } from "react";
 import type { ReactNode } from "react";
 import { Check } from "./icons";
+import { RADIUS_CONTROL, RADIUS_CONTROL_VAR } from "./radius";
 
 /**
  * Controles booleanos: caixa, radio e chave.
@@ -120,7 +121,15 @@ export function Radio({
   );
 }
 
-/** Chave liga/desliga. Use quando o efeito e imediato; caixa quando ha um Salvar. */
+/**
+ * Chave liga/desliga. Use quando o efeito e imediato; caixa quando ha um Salvar.
+ *
+ * Geometria concentrica (principio 5 do Pedro: sem capsula): trilho size
+ * 24 x 40 (`h-lg w-2xl`) com o raio de controle e folga `space/2xs` igual nos
+ * quatro lados; punho = 24 - 2 x 4 = 16 (`size-md`), PASTILHA com raio =
+ * raio do trilho - folga (8 - 4 = radius/xs). Curso = 40 - 2 x 4 - 16 = 16 =
+ * a largura do punho, entao `translateX(100%)` encosta na folga do outro lado.
+ */
 export function Switch({
   checked,
   onChange,
@@ -144,13 +153,16 @@ export function Switch({
       onClick={() => onChange(!checked)}
       // Desligado+desabilitado e ligado+desabilitado precisam continuar
       // distinguiveis: o ligado vira brand/subtle, nao o mesmo cinza.
-      className={`santo-focus-field relative inline-flex h-lg w-2xl shrink-0 cursor-pointer items-center rounded-full p-3xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed ${
+      className={`santo-focus-field relative inline-flex h-lg w-2xl shrink-0 cursor-pointer items-center ${RADIUS_CONTROL} p-2xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed ${
         checked ? "bg-brand-solid-default disabled:bg-brand-subtle-active" : "bg-neutral-subtle-active disabled:bg-disabled"
       } ${className}`}
     >
       <span
-        className="size-md rounded-full bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring)"
-        style={{ transform: checked ? "translateX(100%)" : "translateX(0)" }}
+        className="size-md bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring)"
+        style={{
+          transform: checked ? "translateX(100%)" : "translateX(0)",
+          borderRadius: `calc(${RADIUS_CONTROL_VAR} - var(--santo-space-2xs))`,
+        }}
       />
     </button>
   );

@@ -29,7 +29,11 @@ export declare function shadowCss(effects: ShadowLayer[] | undefined): string;
 export declare function fontStacks(prefix: string): { sans: string; mono: string };
 export declare function trackingByPercent(index: Map<string, IndexEntry>): Map<RawValue, string>;
 export declare function textStyleClass(figmaName: string, prefix: string): string;
-export declare function declarations(doc: TokenDoc, mode?: string): Declaration[];
+export declare const BRAND_COLLECTIONS: readonly string[];
+export type BrandMode = { mode: string; id: string; name: string; isDefault: boolean };
+export declare function brandModes(doc: TokenDoc): BrandMode[];
+export declare function brandDependents(index: Map<string, IndexEntry>): Set<string>;
+export declare function declarations(doc: TokenDoc, mode?: string, brand?: string): Declaration[];
 export declare function colorDeclarations(doc: TokenDoc, mode: string): Declaration[];
 export declare function colorUtility(name: string): string;
 export declare function textStyleCss(

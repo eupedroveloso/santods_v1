@@ -33,16 +33,6 @@ export const financeCardsMeta: ComponentMeta[] = [
     related: ["invest-card", "number-field"],
   },
   {
-    name: "TransactionRow",
-    slug: "transaction-row",
-    category: "blocos",
-    tier: "semantico",
-    source: "finance-cards.tsx",
-    description:
-      "Uma movimentação: seta de entrada/saída, título, categoria · data, valor assinado (entrada em success) e ações ghost.",
-    related: ["transactions-card", "list-row"],
-  },
-  {
     name: "TransactionsCard",
     slug: "transactions-card",
     category: "blocos",

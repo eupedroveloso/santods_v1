@@ -16,6 +16,17 @@ import { miniBarsMeta } from "./mini-bars.meta";
 import { fabMeta } from "./fab.meta";
 import { railNavMeta } from "./rail-nav.meta";
 import { appSidebarMeta } from "./app-sidebar.meta";
+import { brandLogoMeta } from "./brand-logo.meta";
+import { brandSwitchMeta } from "./brand-switch.meta";
+import { brandCardMeta } from "./brand-card.meta";
+import { dashboardHeaderMeta } from "./dashboard-header.meta";
+import { transactionRowMeta } from "./transaction-row.meta";
+import { landingSectionsMeta } from "./landing-sections.meta";
+import { ratingMeta } from "./rating.meta";
+import { ctaButtonMeta } from "./cta-button.meta";
+import { youtubeEmbedMeta } from "./youtube-embed.meta";
+import { landingMeta } from "./landing.meta";
+import { socialProofToastMeta } from "./social-proof-toast.meta";
 import { inputMeta } from "./input.meta";
 import { listboxMeta } from "./listbox.meta";
 import { numberFieldMeta } from "./number-field.meta";
@@ -87,6 +98,17 @@ const ALL: ComponentMeta[] = [
   ...fabMeta,
   ...railNavMeta,
   ...appSidebarMeta,
+  ...brandLogoMeta,
+  ...brandSwitchMeta,
+  ...brandCardMeta,
+  ...dashboardHeaderMeta,
+  ...transactionRowMeta,
+  ...landingSectionsMeta,
+  ...ratingMeta,
+  ...ctaButtonMeta,
+  ...youtubeEmbedMeta,
+  ...landingMeta,
+  ...socialProofToastMeta,
   ...inputMeta,
   ...listboxMeta,
   ...numberFieldMeta,

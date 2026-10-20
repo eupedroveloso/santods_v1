@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { TONE, type ChartTone } from "./chart-kit";
+import { RADIUS_BAR, RADIUS_CONTROL } from "./radius";
 
 export type ChartLegendItem = {
   name: ReactNode;
@@ -52,9 +53,9 @@ export function ChartLegend({
         const dim = active !== null && active !== i;
         const key =
           mark === "line" ? (
-            <span aria-hidden className={`h-3xs w-sm shrink-0 rounded-full santo-transition-colors ${TONE[dim ? "muted" : tone].bg}`} />
+            <span aria-hidden className={`h-3xs w-sm shrink-0 ${RADIUS_BAR} santo-transition-colors ${TONE[dim ? "muted" : tone].bg}`} />
           ) : (
-            <span aria-hidden className={`size-xs shrink-0 rounded-xs santo-transition-colors ${TONE[dim ? "muted" : tone].bg}`} />
+            <span aria-hidden className={`size-xs shrink-0 ${RADIUS_BAR} santo-transition-colors ${TONE[dim ? "muted" : tone].bg}`} />
           );
         const body = (
           <>
@@ -76,7 +77,7 @@ export function ChartLegend({
             {interactive ? (
               <button
                 type="button"
-                className={`flex min-w-0 flex-1 items-center gap-xs rounded-xs ${layout === "column" ? "py-3xs" : ""}`}
+                className={`flex min-w-0 flex-1 items-center gap-xs ${RADIUS_CONTROL} ${layout === "column" ? "py-3xs" : ""}`}
                 aria-pressed={active === i}
                 onPointerEnter={() => onActiveChange?.(i)}
                 onFocus={() => onActiveChange?.(i)}

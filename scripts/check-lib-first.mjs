@@ -54,9 +54,11 @@ for (const f of readdirSync(resolve(root, 'lib/ui')).filter((f) => f.endsWith('.
 
 /** Regra D: telas de exemplo (conteudo), fora a moldura da pagina. */
 const EXAMPLE_ROOT = 'app/exemplos/';
-const EXAMPLE_CHROME = new Set(['app/exemplos/page.tsx', 'app/exemplos/views-nav.tsx', 'app/exemplos/_block.tsx']);
+const EXAMPLE_CHROME = new Set(['app/exemplos/page.tsx', 'app/exemplos/views-nav.tsx', 'app/exemplos/_block.tsx', 'app/exemplos/_views.ts']);
+/** Telas de exemplo ainda fora da regra D. Vazio desde a juncao com feat/graficos. */
+const EXAMPLE_PENDING = new Set([]);
 /** Fora da categoria blocos, so o que ja e superficie inteira ou layout de grade. */
-const EXAMPLE_ALLOW = new Set(['CardGrid', 'EmptyState', 'Ticker']);
+const EXAMPLE_ALLOW = new Set(['CardGrid', 'EmptyState', 'Ticker', 'YouTubeEmbed']);
 /** Markup cru permitido na tela de exemplo: layout e enfase de texto dentro de dado. */
 const EXAMPLE_RAW_OK = new Set(['div', 'strong', 'em', 'br']);
 
@@ -243,7 +245,7 @@ for (const file of files) {
   const rel = relative(root, file);
   const okLines = new Map();
   const src = stripComments(readFileSync(file, 'utf8'), okLines);
-  const example = rel.startsWith(EXAMPLE_ROOT) && !EXAMPLE_CHROME.has(rel);
+  const example = rel.startsWith(EXAMPLE_ROOT) && !EXAMPLE_CHROME.has(rel) && !EXAMPLE_PENDING.has(rel);
   for (const tag of jsxTags(src)) {
     const line = src.slice(0, tag.index).split('\n').length;
     for (const [rule, msg] of [...auditTag(tag), ...(example ? auditExample(tag) : [])]) {
@@ -268,4 +270,4 @@ if (problems.length) {
   problems.forEach((p) => console.error('  ' + p));
   process.exit(1);
 }
-console.log('\nOK — toda tela compoe a partir de lib/ui, sem markup replicado, aparencia sobrescrita, grade inline nem cartao montado em exemplo.');
+console.log('\nOK — toda tela compoe a partir de lib/ui, sem markup replicado, aparencia sobrescrita, grade inline nem composicao inline em exemplo.');

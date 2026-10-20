@@ -21,6 +21,7 @@ import {
 } from "./chart-kit";
 import { ChartLegend } from "./chart-legend";
 import { ChartTooltip } from "./chart-tooltip";
+import { RADIUS_BAR } from "./radius";
 
 /*
  * Graficos do SantoDS: SVG e HTML puros, pintados por token, sem biblioteca.
@@ -514,6 +515,7 @@ export function BarChart({
 
   /* Uma faixa: as barras de uma categoria (lado a lado ou empilhadas). */
   const bars = (j: number) => {
+    // Ponta de dado com o raio de RADIUS_BAR (xs) so do lado do valor; a base fica reta.
     const end = horizontal ? "rounded-r-xs" : "rounded-t-xs";
     if (stacked) {
       return (
@@ -584,7 +586,7 @@ export function BarChart({
               {grid && <ChartGrid lines={ticks.length} orientation="vertical" className={direct ? "right-3xl" : ""} />}
               <div className={`relative flex flex-col ${direct ? "pr-3xl" : ""}`}>
                 {xs.map((_, j) => (
-                  <span key={j} className={`flex h-xl items-center rounded-xs santo-transition-colors ${wash(j)}`}>
+                  <span key={j} className={`flex h-xl items-center ${RADIUS_BAR} santo-transition-colors ${wash(j)}`}>
                     {bars(j)}
                   </span>
                 ))}
@@ -623,7 +625,7 @@ export function BarChart({
           {xs.map((_, j) => (
             <span
               key={j}
-              className={`flex h-full min-w-0 flex-1 items-end justify-center rounded-xs px-2xs santo-transition-colors ${wash(j)}`}
+              className={`flex h-full min-w-0 flex-1 items-end justify-center ${RADIUS_BAR} px-2xs santo-transition-colors ${wash(j)}`}
             >
               {bars(j)}
             </span>

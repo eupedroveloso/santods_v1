@@ -128,7 +128,7 @@ export default function MovimentoPage() {
               <SectionLabel>Duração</SectionLabel>
               <Count>{durations.length}</Count>
             </span>
-            <Card padding="sm">
+            <Card padding="md">
               <Table layout="fixed" columns={durationColumns} rows={durations} getKey={(d) => d.slug} />
             </Card>
           </section>
@@ -138,7 +138,7 @@ export default function MovimentoPage() {
               <SectionLabel>Curva</SectionLabel>
               <Count>{easings.length}</Count>
             </span>
-            <Card padding="sm">
+            <Card padding="md">
               <Table layout="fixed" columns={easingColumns} rows={easings} getKey={(e) => e.slug} />
             </Card>
           </section>

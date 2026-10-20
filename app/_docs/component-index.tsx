@@ -94,7 +94,7 @@ export function ComponentIndex({ tiers }: { tiers: IndexTier[] }) {
           {sections.map((s) => (
             <section key={anchor(s.tier, s.id)} id={anchor(s.tier, s.id)} className="flex scroll-mt-6xl flex-col gap-sm">
               <SectionLabel>{s.label}</SectionLabel>
-              <CardGrid minItem="space-192" gap="md" masonry={false}>
+              <CardGrid minItem="space-192" gap="md" masonry={false} stretch>
                 {s.items.map((c) => {
                   const Thumb = thumbs[c.slug];
                   return (

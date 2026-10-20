@@ -12,6 +12,17 @@ import { miniBarsDemos } from "./mini-bars.demo";
 import { fabDemos } from "./fab.demo";
 import { railNavDemos } from "./rail-nav.demo";
 import { appSidebarDemos } from "./app-sidebar.demo";
+import { brandLogoDemos } from "./brand-logo.demo";
+import { brandSwitchDemos } from "./brand-switch.demo";
+import { brandCardDemos } from "./brand-card.demo";
+import { dashboardHeaderDemos } from "./dashboard-header.demo";
+import { transactionRowDemos } from "./transaction-row.demo";
+import { landingSectionsDemos } from "./landing-sections.demo";
+import { ratingDemos } from "./rating.demo";
+import { ctaButtonDemos } from "./cta-button.demo";
+import { youtubeEmbedDemos } from "./youtube-embed.demo";
+import { landingDemos } from "./landing.demo";
+import { socialProofToastDemos } from "./social-proof-toast.demo";
 import { inputDemos } from "./input.demo";
 import { listboxDemos } from "./listbox.demo";
 import { numberFieldDemos } from "./number-field.demo";
@@ -62,6 +73,17 @@ export const demos: DemoMap = {
   ...fabDemos,
   ...railNavDemos,
   ...appSidebarDemos,
+  ...brandLogoDemos,
+  ...brandSwitchDemos,
+  ...brandCardDemos,
+  ...dashboardHeaderDemos,
+  ...transactionRowDemos,
+  ...landingSectionsDemos,
+  ...ratingDemos,
+  ...ctaButtonDemos,
+  ...youtubeEmbedDemos,
+  ...landingDemos,
+  ...socialProofToastDemos,
   ...inputDemos,
   ...listboxDemos,
   ...numberFieldDemos,

@@ -7,7 +7,7 @@ import { RECIPES, type RecipeClass } from "./recipes";
 
 /** A demo de cada receita de recipes.ts. */
 const tile = (
-  <IconTile shape="round" size="lg">
+  <IconTile shape="round" tone="brand" size="lg">
     <Icon.Sparkles size={20} />
   </IconTile>
 );
@@ -33,7 +33,7 @@ const DEMO: Record<RecipeClass, (on: boolean) => ReactNode> = {
   "santo-animate-slide-in-right": () => <span className="santo-animate-slide-in-right">{tile}</span>,
   "santo-animate-pop": () => <span className="santo-animate-pop">{tile}</span>,
   "santo-animate-pulse": () => <span className="santo-animate-pulse flex w-full">{bars}</span>,
-  "santo-animate-shimmer": () => <Skeleton.Block h="xl" radius="full" animated />,
+  "santo-animate-shimmer": () => <Skeleton.Block h="xl" animated />,
   "santo-collapse": (on) => (
     <div className="santo-collapse w-full" data-open={!on}>
       <div>{bars}</div>

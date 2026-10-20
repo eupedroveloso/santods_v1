@@ -3,13 +3,15 @@
  * O SwatchPicker (swatch-picker.tsx) e o ColorRow (color-row.tsx) compoem este.
  */
 
-export type SwatchSize = "xs" | "sm" | "md";
+export type SwatchSize = "xs" | "sm" | "md" | "lg";
 
 /** Tamanho da amostra, compartilhado com o SwatchPicker. */
 export const SWATCH_BOX: Record<SwatchSize, string> = {
   xs: "size-(--santo-dimension-space-12)",
   sm: "size-(--santo-dimension-size-20)",
   md: "size-(--santo-dimension-size-28)",
+  /** Amostra de destaque (ficha de marca). */
+  lg: "size-(--santo-dimension-size-48)",
 };
 
 /** Xadrez atras da cor, para alfa parcial ficar legivel: `.santo-checker` em controls.css. */

@@ -7,7 +7,6 @@ import {
   InvestCard,
   LimitCard,
   PaymentsCard,
-  TransactionRow,
   TransactionsCard,
   type Payment,
   type Transaction,
@@ -138,25 +137,6 @@ export const financeCardsDemos: DemoMap = {
           currency: "{moeda}",
           onCurrencyChange: "{setMoeda}",
           notes: v.notes ? undefined : "{false}",
-        }),
-    },
-    demos: [],
-  },
-  "transaction-row": {
-    playground: {
-      controls: [{ kind: "select", prop: "kind", label: "Movimento", options: ["entrada", "saída"], initial: "saída" }],
-      layout: "stretch",
-      Preview: ({ values: v }) => (
-        <div className={narrow}>
-          <TransactionRow divider={false} transaction={v.kind === "entrada" ? TRANSACTIONS[0] : TRANSACTIONS[1]} />
-        </div>
-      ),
-      code: (v) =>
-        jsx("TransactionRow", {
-          transaction:
-            v.kind === "entrada"
-              ? `{{ title: "Salário", category: "Receita", date: "15 out.", amount: 8200 }}`
-              : `{{ title: "Mercado Bom Preço", category: "Alimentação", date: "14 out.", amount: -312.4 }}`,
         }),
     },
     demos: [],

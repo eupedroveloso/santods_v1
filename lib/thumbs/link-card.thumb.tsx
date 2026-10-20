@@ -4,7 +4,8 @@ import { ThumbFrame } from "@/lib/ui/thumb-frame";
 export function LinkCardThumb() {
   return (
     <ThumbFrame>
-      <S.Block w="xs" h="lg" tone="emphasis" />
+      {/* Icone sem caixa: um glifo pequeno, nao um tile */}
+      <S.Block w="2xs" h="xs" tone="emphasis" />
       <S.Bar w="lg" size="lg" tone="strong" />
       <S.Bar w="xl" size="sm" />
       <div className="flex flex-col">

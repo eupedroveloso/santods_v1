@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { ChevronDown, ChevronRight } from "./icons";
+import { RADIUS_CONTROL } from "./radius";
 
 /**
  * Grupo colapsavel do editor.
@@ -76,7 +77,7 @@ export function Disclosure({
           type="button"
           onClick={onToggle}
           aria-expanded={open}
-          className="santo-caption-small-semibold inline-flex cursor-pointer items-center gap-2xs rounded-full bg-neutral-subtle-default px-xs py-3xs tracking-wide text-text-secondary uppercase transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-hover hover:text-text-primary"
+          className={`santo-caption-small-semibold inline-flex cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} bg-neutral-subtle-default px-xs py-3xs tracking-wide text-text-secondary uppercase transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-hover hover:text-text-primary`}
         >
           {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
           {label}

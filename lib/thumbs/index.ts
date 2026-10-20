@@ -26,6 +26,25 @@ import { ColorThumb } from "./color.thumb";
 import { CardThumb } from "./card.thumb";
 import { CardGridThumb } from "./card-grid.thumb";
 import { AppSidebarThumb } from "./app-sidebar.thumb";
+import { BrandLogoThumb } from "./brand-logo.thumb";
+import { BrandSwitchThumb } from "./brand-switch.thumb";
+import { BrandCardThumb } from "./brand-card.thumb";
+import { DashboardHeaderThumb } from "./dashboard-header.thumb";
+import { TransactionRowThumb } from "./transaction-row.thumb";
+import { BentoGridThumb } from "./bento-grid.thumb";
+import { SectionIntroThumb } from "./section-intro.thumb";
+import { LogoStripThumb } from "./logo-strip.thumb";
+import { ShowcaseStripThumb } from "./showcase-strip.thumb";
+import { HeroCardThumb } from "./hero-card.thumb";
+import { RatingThumb } from "./rating.thumb";
+import { CtaButtonThumb } from "./cta-button.thumb";
+import { YouTubeEmbedThumb } from "./youtube-embed.thumb";
+import { LandingPageThumb } from "./landing-page.thumb";
+import { LandingHeaderThumb } from "./landing-header.thumb";
+import { LandingHeroThumb } from "./landing-hero.thumb";
+import { LandingOfferThumb } from "./landing-offer.thumb";
+import { SocialProofRowThumb } from "./social-proof-row.thumb";
+import { SocialProofToastThumb } from "./social-proof-toast.thumb";
 import { CardHeaderThumb } from "./card-header.thumb";
 import { StatThumb } from "./stat.thumb";
 import { DividerThumb } from "./divider.thumb";
@@ -94,7 +113,6 @@ import { StatCardThumb } from "./stat-card.thumb";
 import { GoalsCardThumb } from "./goals-card.thumb";
 import { InvestCardThumb } from "./invest-card.thumb";
 import { LimitCardThumb } from "./limit-card.thumb";
-import { TransactionRowThumb } from "./transaction-row.thumb";
 import { TransactionsCardThumb } from "./transactions-card.thumb";
 import { PaymentsCardThumb } from "./payments-card.thumb";
 import { DailyGoalCardThumb } from "./daily-goal-card.thumb";
@@ -131,6 +149,25 @@ export const thumbs: Record<string, ComponentType> = {
   card: CardThumb,
   "card-grid": CardGridThumb,
   "app-sidebar": AppSidebarThumb,
+  "brand-logo": BrandLogoThumb,
+  "brand-switch": BrandSwitchThumb,
+  "brand-card": BrandCardThumb,
+  "dashboard-header": DashboardHeaderThumb,
+  "transaction-row": TransactionRowThumb,
+  "bento-grid": BentoGridThumb,
+  "section-intro": SectionIntroThumb,
+  "logo-strip": LogoStripThumb,
+  "showcase-strip": ShowcaseStripThumb,
+  "hero-card": HeroCardThumb,
+  "rating": RatingThumb,
+  "cta-button": CtaButtonThumb,
+  "youtube-embed": YouTubeEmbedThumb,
+  "landing-page": LandingPageThumb,
+  "landing-header": LandingHeaderThumb,
+  "landing-hero": LandingHeroThumb,
+  "landing-offer": LandingOfferThumb,
+  "social-proof-row": SocialProofRowThumb,
+  "social-proof-toast": SocialProofToastThumb,
   "card-header": CardHeaderThumb,
   stat: StatThumb,
   divider: DividerThumb,
@@ -199,7 +236,6 @@ export const thumbs: Record<string, ComponentType> = {
   "goals-card": GoalsCardThumb,
   "invest-card": InvestCardThumb,
   "limit-card": LimitCardThumb,
-  "transaction-row": TransactionRowThumb,
   "transactions-card": TransactionsCardThumb,
   "payments-card": PaymentsCardThumb,
   "daily-goal-card": DailyGoalCardThumb,

@@ -1,6 +1,7 @@
 "use client";
 
 import { CURSOR_MOTION, TOOLTIP_CLASS, formatValue, tooltipAlign, useChartCursor } from "./chart-kit";
+import { RADIUS_BAR } from "./radius";
 
 export type MiniBarsSize = "sm" | "md" | "lg";
 
@@ -76,7 +77,7 @@ export function MiniBars({
       {values.map((v, i) => (
         <span
           key={i}
-          className={`shrink-0 rounded-full santo-transition-colors ${WIDTH[size]} ${
+          className={`shrink-0 ${RADIUS_BAR} santo-transition-colors ${WIDTH[size]} ${
             hi === undefined || hi === i ? "bg-current" : "bg-neutral-subtle-active"
           }`}
           style={{ height: `${(Math.max(v, 0) / max) * 100}%` }}

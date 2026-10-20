@@ -24,7 +24,7 @@ export default function EstilosPage() {
 
       <section className="flex flex-col gap-sm">
         <SectionLabel>Estilos</SectionLabel>
-        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md">
+        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md" masonry={false} stretch>
           <LinkCard
             icon={<Icon.Type size={16} />}
             title="Tipografia"

@@ -24,7 +24,7 @@ export function ComponentDemos({ slug }: { slug: string }) {
   const file = getComponent(slug)?.source ?? `${slug}.tsx`;
   if (!entry || (!entry.playground && entry.demos.length === 0)) {
     return (
-      <p className="santo-body-small-regular rounded-xl border-thin border-border-subtle bg-surface-sunken p-lg text-text-secondary">
+      <p className="santo-body-small-regular text-text-secondary">
         Este componente ainda não tem demo registrada em lib/ui.
       </p>
     );

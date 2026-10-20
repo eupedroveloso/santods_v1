@@ -100,7 +100,7 @@ export type { TocItem } from "./table-of-contents";
 // Blocos: cartoes prontos alimentados por dado — a tela de exemplo so os compoe.
 export { StatCard } from "./stat-card";
 export type { StatTrend, StatDetail } from "./stat-card";
-export { GoalsCard, InvestCard, LimitCard, TransactionsCard, TransactionRow, PaymentsCard } from "./finance-cards";
+export { GoalsCard, InvestCard, LimitCard, TransactionsCard, PaymentsCard } from "./finance-cards";
 export type { Goal, Transaction, Payment, PaymentStatus } from "./finance-cards";
 export {
   DailyGoalCard,
@@ -134,4 +134,22 @@ export { MiniBars, type MiniBarsSize } from "./mini-bars";
 export { Fab, type FabPosition, type FabSize, type FabTone } from "./fab";
 export { RailItem, RailNav } from "./rail-nav";
 export { AppSidebar } from "./app-sidebar";
-export type { AppSidebarArea, AppSidebarGroup, AppSidebarItem } from "./app-sidebar";
+export { BrandLogo, BRAND_LOGOS, BRAND_MARKS, brandLogoFile, hasBrandLogo, hasBrandMark } from "./brand-logo";
+export type { BrandId, BrandLogoSize } from "./brand-logo";
+export { BrandSwitch } from "./brand-switch";
+export { BrandCard } from "./brand-card";
+export { DashboardHeader } from "./dashboard-header";
+export { TransactionRow } from "./transaction-row";
+export type { BrandCardColor } from "./brand-card";
+export { Rating } from "./rating";
+export { CtaButton } from "./cta-button";
+export { YouTubeEmbed, parseYouTubeId } from "./youtube-embed";
+export { LandingPage, LandingHero, LandingOffer, SocialProofRow } from "./landing";
+export { LandingHeader } from "./landing-header";
+export { HeroCard, ShowcaseStrip, LogoStrip, SectionIntro, BentoGrid } from "./landing-sections";
+export type { ShowcaseItem, IntroPart, BentoItem } from "./landing-sections";
+export type { LandingNavLink } from "./landing-header";
+export type { LandingPerson } from "./landing";
+export { SocialProofToast } from "./social-proof-toast";
+export type { BrandOption } from "./brand-switch";
+export type { AppSidebarGroup, AppSidebarItem } from "./app-sidebar";

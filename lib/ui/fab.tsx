@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { RADIUS_CONTROL } from "./radius";
 
 export type FabTone = "brand" | "raised";
 export type FabSize = "md" | "lg";
@@ -72,7 +73,7 @@ export function Fab({
       type={type}
       aria-label={extended ? undefined : label}
       title={extended ? undefined : label}
-      className={`inline-flex shrink-0 cursor-pointer items-center justify-center rounded-full shadow-lg santo-press hover:shadow-xl active:shadow-md disabled:cursor-not-allowed disabled:bg-disabled disabled:text-text-disabled disabled:shadow-none ${
+      className={`inline-flex shrink-0 cursor-pointer items-center justify-center ${RADIUS_CONTROL} shadow-lg santo-press hover:shadow-xl active:shadow-md disabled:cursor-not-allowed disabled:bg-disabled disabled:text-text-disabled disabled:shadow-none ${
         TONE[tone]
       } ${extended ? `${s.extended} ${s.text}` : s.round} ${position ? POSITION[position] : ""} ${className}`}
       style={position ? { bottom: SAFE_BOTTOM, ...style } : style}

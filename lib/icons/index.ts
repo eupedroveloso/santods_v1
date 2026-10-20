@@ -56,7 +56,12 @@ export { ArrowLeftIcon } from "./arrow-left";
 export { ArrowRightIcon } from "./arrow-right";
 export { FileIcon } from "./file";
 export { BezierCurveIcon } from "./bezier-curve";
+export { StarIcon } from "./star";
+export { StarHalfStrokeIcon } from "./star-half-stroke";
+export { PlayIcon } from "./play";
+export { UserIcon } from "./user";
+export { RightToBracketIcon } from "./right-to-bracket";
 
 /** Slugs exportados (o inventario completo da pagina e cache local: tokens/.cache/santods.icons.json). */
-export const iconSlugs = ["magnifying-glass","chevron-down","chevron-right","chevron-left","chevron-up","arrow-rotate-left","arrow-rotate-right","arrows-rotate","arrow-down-to-bracket","floppy-disk","code","sun","moon","shuffle","link","link-slash","plus","minus","check","xmark","ellipsis","expand","copy","download","palette","arrow-up-right","arrow-down-left","arrow-trend-up","github","google","sparkles","figma","eyedropper","bars","book","font","layer-group","grid-2","id-card","table-cells","text","square-dashed","vector-square","circle-half-stroke","arrows-left-right","list","icons","shapes","cube","puzzle-piece","arrow-left","arrow-right","file","bezier-curve"] as const;
+export const iconSlugs = ["magnifying-glass","chevron-down","chevron-right","chevron-left","chevron-up","arrow-rotate-left","arrow-rotate-right","arrows-rotate","arrow-down-to-bracket","floppy-disk","code","sun","moon","shuffle","link","link-slash","plus","minus","check","xmark","ellipsis","expand","copy","download","palette","arrow-up-right","arrow-down-left","arrow-trend-up","github","google","sparkles","figma","eyedropper","bars","book","font","layer-group","grid-2","id-card","table-cells","text","square-dashed","vector-square","circle-half-stroke","arrows-left-right","list","icons","shapes","cube","puzzle-piece","arrow-left","arrow-right","file","bezier-curve","star","star-half-stroke","play","user","right-to-bracket"] as const;
 export type IconSlug = (typeof iconSlugs)[number];

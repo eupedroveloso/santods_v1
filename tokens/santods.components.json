@@ -83,8 +83,13 @@
         "Modal"
       ],
       "codeOnly": [
+        "app-sidebar",
+        "brand-card",
+        "brand-logo",
+        "brand-switch",
         "breadcrumb",
         "icon-button",
+        "card-grid",
         "card-header",
         "card-footer",
         "stat",
@@ -107,6 +112,7 @@
         "command-palette",
         "copy-button",
         "copy-code",
+        "cta-button",
         "table",
         "avatar",
         "avatar-group",
@@ -123,6 +129,11 @@
         "field",
         "kbd",
         "key-value",
+        "landing-page",
+        "landing-header",
+        "landing-hero",
+        "social-proof-row",
+        "landing-offer",
         "link-card",
         "list-row",
         "mini-bars",
@@ -139,11 +150,13 @@
         "radio-card",
         "rail-nav",
         "rail-item",
+        "rating",
         "ring",
         "search-trigger",
         "segmented",
         "tab-bar",
         "skeleton",
+        "social-proof-toast",
         "sparkline",
         "swatch",
         "swatch-picker",
@@ -153,7 +166,8 @@
         "radio",
         "switch",
         "setting-row",
-        "token-sample"
+        "token-sample",
+        "youtube-embed"
       ],
       "brokenDeclarations": []
     }
@@ -374,6 +388,30 @@
   ],
   "codeOnly": [
     {
+      "slug": "app-sidebar",
+      "name": "AppSidebar",
+      "source": "app-sidebar.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "brand-card",
+      "name": "BrandCard",
+      "source": "brand-card.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "brand-logo",
+      "name": "BrandLogo",
+      "source": "brand-logo.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "brand-switch",
+      "name": "BrandSwitch",
+      "source": "brand-switch.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "breadcrumb",
       "name": "Breadcrumb",
       "source": "breadcrumb.tsx",
@@ -383,6 +421,12 @@
       "slug": "icon-button",
       "name": "IconButton",
       "source": "button.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "card-grid",
+      "name": "CardGrid",
+      "source": "card-grid.tsx",
       "figmaDeclared": null
     },
     {
@@ -518,6 +562,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "cta-button",
+      "name": "CtaButton",
+      "source": "cta-button.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "table",
       "name": "Table",
       "source": "data.tsx",
@@ -611,6 +661,36 @@
       "slug": "key-value",
       "name": "KeyValue",
       "source": "key-value.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "landing-page",
+      "name": "LandingPage",
+      "source": "landing.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "landing-header",
+      "name": "LandingHeader",
+      "source": "landing-header.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "landing-hero",
+      "name": "LandingHero",
+      "source": "landing.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "social-proof-row",
+      "name": "SocialProofRow",
+      "source": "landing.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "landing-offer",
+      "name": "LandingOffer",
+      "source": "landing.tsx",
       "figmaDeclared": null
     },
     {
@@ -710,6 +790,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "rating",
+      "name": "Rating",
+      "source": "rating.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "ring",
       "name": "Ring",
       "source": "ring.tsx",
@@ -737,6 +823,12 @@
       "slug": "skeleton",
       "name": "Skeleton",
       "source": "skeleton.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "social-proof-toast",
+      "name": "SocialProofToast",
+      "source": "social-proof-toast.tsx",
       "figmaDeclared": null
     },
     {
@@ -797,6 +889,12 @@
       "slug": "token-sample",
       "name": "TokenSample",
       "source": "token-sample.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "youtube-embed",
+      "name": "YouTubeEmbed",
+      "source": "youtube-embed.tsx",
       "figmaDeclared": null
     }
   ]

@@ -52,8 +52,10 @@ const ROW_STEP = "var(--santo-space-3xs)";
  * hidratar (ou sem JS) a grade e a comum, alinhada ao topo, com vao entre
  * fileiras; e um filho que ocupa todas as colunas espera a coluna mais alta.
  *
- * `masonry={false}` para pecas de altura igual (miniaturas, amostras, demos):
- * grade comum alinhada ao topo. `columns` por breakpoint (`{ md: 2, "2xl": 3 }`,
+ * `masonry={false}` = GRADE FIXA: colunas de largura igual, uma calha so,
+ * topos alinhados por fileira e `col-span-*` previsivel. Use em composicao com
+ * spans (painel de app, preview de marca) e em pecas de altura igual
+ * (miniaturas, amostras, demos). Masonry com span misturado desalinha. `columns` por breakpoint (`{ md: 2, "2xl": 3 }`,
  * base 1); `minItem` troca as colunas fixas por auto-fill com celula minima de token.
  */
 export function CardGrid({
@@ -63,6 +65,7 @@ export function CardGrid({
   autoFit = false,
   gap = "lg",
   masonry = true,
+  stretch = false,
   className = "",
 }: {
   children: ReactNode;
@@ -75,6 +78,13 @@ export function CardGrid({
   gap?: keyof typeof GAP;
   /** Empilha por coluna sem vao (padrao). Desligue para pecas de altura igual. */
   masonry?: boolean;
+  /**
+   * Grade fixa (`masonry={false}`) com a fileira na MESMA altura: so para irmaos da
+   * mesma natureza — indice de cartoes de navegacao (LinkCard), onde o conteudo
+   * do cartao cresce para preencher (lista de links estica). Conteudo
+   * heterogeneo nunca: use masonry (sem margem morta).
+   */
+  stretch?: boolean;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -123,9 +133,12 @@ export function CardGrid({
     style.gridAutoRows = ROW_STEP;
     style.rowGap = 0;
     style.columnGap = GAP_VAR[gap];
+    // Cada span inclui o gap de baixo; o ultimo de cada coluna deixaria um gap
+    // sobrando no fim da grade (margem morta). Devolve esse gap.
+    style.marginBottom = `calc(-1 * ${GAP_VAR[gap]})`;
   }
   return (
-    <div ref={ref} className={`grid min-w-0 items-start ${GAP[gap]} ${cols} ${className}`} style={style}>
+    <div ref={ref} className={`grid min-w-0 ${stretch && !masonry ? "items-stretch" : "items-start"} ${GAP[gap]} ${cols} ${className}`} style={style}>
       {children}
     </div>
   );

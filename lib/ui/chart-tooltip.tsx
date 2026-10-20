@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { CURSOR_MOTION, TONE, TOOLTIP_CLASS, tooltipAlign, type ChartTone } from "./chart-kit";
+import { RADIUS_BAR } from "./radius";
 
 export type ChartTooltipRow = {
   /** Nome da serie: vem depois do valor, em texto secundario. */
@@ -14,9 +15,9 @@ export type ChartKeyMark = "line" | "rect";
 
 function Key({ tone = "brand", mark }: { tone?: ChartTone; mark: ChartKeyMark }) {
   return mark === "line" ? (
-    <span aria-hidden className={`h-3xs w-xs shrink-0 rounded-full ${TONE[tone].bg}`} />
+    <span aria-hidden className={`h-3xs w-xs shrink-0 ${RADIUS_BAR} ${TONE[tone].bg}`} />
   ) : (
-    <span aria-hidden className={`size-xs shrink-0 rounded-xs ${TONE[tone].bg}`} />
+    <span aria-hidden className={`size-xs shrink-0 ${RADIUS_BAR} ${TONE[tone].bg}`} />
   );
 }
 

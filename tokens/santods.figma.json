@@ -4,330 +4,579 @@
     "fileName": "SantoDS v1",
     "libraryKey": "lk-e3530ce5583296e6504cad0424a69e5bb267518cdfbdc55f6abf1e10b480c47d980a354fd2ff5bd54aa460e09294ce4bdadc3d583060274efa0838ee1b7e1e29",
     "cssPrefix": "santo",
-    "note": "Espelho canônico das Variables e Styles do Figma. NÃO editar à mão — regenerar via .claude/agents/figma-parity.md. Aliases são escritos como {caminho/da/variavel}."
+    "note": "Espelho canônico das Variables e Styles do Figma. NÃO editar à mão — regenerar via .claude/agents/figma-parity.md. Aliases são escritos como {caminho/da/variavel}.",
+    "aheadOfFigma": {
+      "collections": [
+        "Palette",
+        "Brand"
+      ],
+      "mode": "VTSD",
+      "since": "2026-10-19",
+      "by": "scripts/apply-brand-mode.mjs",
+      "why": "OAuth do MCP do Figma indisponivel; excecao autorizada pelo Pedro, uma vez.",
+      "reconcile": ".claude/agents/figma-parity.md, secao \"Reconciliacao: snapshot a frente do Figma\""
+    }
   },
   "collections": {
     "Palette": {
       "modes": [
-        "Santo"
+        "Santo",
+        "VTSD"
       ],
       "defaultMode": "Santo",
       "variables": {
         "palette/brand/50": {
           "type": "COLOR",
-          "value": "#edf3fb"
+          "values": {
+            "Santo": "#edf3fb",
+            "VTSD": "#edf4f3"
+          }
         },
         "palette/brand/100": {
           "type": "COLOR",
-          "value": "#e2edfe"
+          "values": {
+            "Santo": "#e2edfe",
+            "VTSD": "#e0f0ed"
+          }
         },
         "palette/brand/200": {
           "type": "COLOR",
-          "value": "#cde2fe"
+          "values": {
+            "Santo": "#cde2fe",
+            "VTSD": "#cae6e1"
+          }
         },
         "palette/brand/300": {
           "type": "COLOR",
-          "value": "#b1d0fe"
+          "values": {
+            "Santo": "#b1d0fe",
+            "VTSD": "#aad6d0"
+          }
         },
         "palette/brand/400": {
           "type": "COLOR",
-          "value": "#8bbaff"
+          "values": {
+            "Santo": "#8bbaff",
+            "VTSD": "#7dc4bc"
+          }
         },
         "palette/brand/500": {
           "type": "COLOR",
-          "value": "#64a3fe"
+          "values": {
+            "Santo": "#64a3fe",
+            "VTSD": "#4ab2a7"
+          }
         },
         "palette/brand/600": {
           "type": "COLOR",
-          "value": "#4693ff"
+          "values": {
+            "Santo": "#4693ff",
+            "VTSD": "#00a99d"
+          }
         },
         "palette/brand/700": {
           "type": "COLOR",
-          "value": "#2c71cf"
+          "values": {
+            "Santo": "#2c71cf",
+            "VTSD": "#008077"
+          }
         },
         "palette/brand/800": {
           "type": "COLOR",
-          "value": "#1c54a0"
+          "values": {
+            "Santo": "#1c54a0",
+            "VTSD": "#006159"
+          }
         },
         "palette/brand/900": {
           "type": "COLOR",
-          "value": "#14407c"
+          "values": {
+            "Santo": "#14407c",
+            "VTSD": "#004944"
+          }
         },
         "palette/brand/950": {
           "type": "COLOR",
-          "value": "#021e45"
+          "values": {
+            "Santo": "#021e45",
+            "VTSD": "#002421"
+          }
         },
         "palette/accent/50": {
           "type": "COLOR",
-          "value": "#fef9ec"
+          "values": {
+            "Santo": "#fef9ec",
+            "VTSD": "#fef9ec"
+          }
         },
         "palette/accent/100": {
           "type": "COLOR",
-          "value": "#fcf0cb"
+          "values": {
+            "Santo": "#fcf0cb",
+            "VTSD": "#fcf0cb"
+          }
         },
         "palette/accent/200": {
           "type": "COLOR",
-          "value": "#f9e093"
+          "values": {
+            "Santo": "#f9e093",
+            "VTSD": "#f9e093"
+          }
         },
         "palette/accent/300": {
           "type": "COLOR",
-          "value": "#f5ca5a"
+          "values": {
+            "Santo": "#f5ca5a",
+            "VTSD": "#f5ca5a"
+          }
         },
         "palette/accent/400": {
           "type": "COLOR",
-          "value": "#f2b62f"
+          "values": {
+            "Santo": "#f2b62f",
+            "VTSD": "#f2b62f"
+          }
         },
         "palette/accent/500": {
           "type": "COLOR",
-          "value": "#e89f13"
+          "values": {
+            "Santo": "#e89f13",
+            "VTSD": "#e89f13"
+          }
         },
         "palette/accent/600": {
           "type": "COLOR",
-          "value": "#cd7d0d"
+          "values": {
+            "Santo": "#cd7d0d",
+            "VTSD": "#cd7d0d"
+          }
         },
         "palette/accent/700": {
           "type": "COLOR",
-          "value": "#a85b0f"
+          "values": {
+            "Santo": "#a85b0f",
+            "VTSD": "#a85b0f"
+          }
         },
         "palette/accent/800": {
           "type": "COLOR",
-          "value": "#8a4813"
+          "values": {
+            "Santo": "#8a4813",
+            "VTSD": "#8a4813"
+          }
         },
         "palette/accent/900": {
           "type": "COLOR",
-          "value": "#743b16"
+          "values": {
+            "Santo": "#743b16",
+            "VTSD": "#743b16"
+          }
         },
         "palette/accent/950": {
           "type": "COLOR",
-          "value": "#431d06"
+          "values": {
+            "Santo": "#431d06",
+            "VTSD": "#431d06"
+          }
         },
         "palette/neutral/0": {
           "type": "COLOR",
-          "value": "#ffffff"
+          "values": {
+            "Santo": "#ffffff",
+            "VTSD": "#ffffff"
+          }
         },
         "palette/neutral/50": {
           "type": "COLOR",
-          "value": "#f8fafb"
+          "values": {
+            "Santo": "#f8fafb",
+            "VTSD": "#fafafa"
+          }
         },
         "palette/neutral/100": {
           "type": "COLOR",
-          "value": "#f0f3f8"
+          "values": {
+            "Santo": "#f0f3f8",
+            "VTSD": "#f3f3f3"
+          }
         },
         "palette/neutral/200": {
           "type": "COLOR",
-          "value": "#e3e8ef"
+          "values": {
+            "Santo": "#e3e8ef",
+            "VTSD": "#e7e7e7"
+          }
         },
         "palette/neutral/300": {
           "type": "COLOR",
-          "value": "#ced5df"
+          "values": {
+            "Santo": "#ced5df",
+            "VTSD": "#d4d4d4"
+          }
         },
         "palette/neutral/400": {
           "type": "COLOR",
-          "value": "#7d8ca0"
+          "values": {
+            "Santo": "#7d8ca0",
+            "VTSD": "#8b8b8b"
+          }
         },
         "palette/neutral/500": {
           "type": "COLOR",
-          "value": "#636f7f"
+          "values": {
+            "Santo": "#636f7f",
+            "VTSD": "#6e6e6e"
+          }
         },
         "palette/neutral/600": {
           "type": "COLOR",
-          "value": "#4d596a"
+          "values": {
+            "Santo": "#4d596a",
+            "VTSD": "#585858"
+          }
         },
         "palette/neutral/700": {
           "type": "COLOR",
-          "value": "#394352"
+          "values": {
+            "Santo": "#394352",
+            "VTSD": "#424242"
+          }
         },
         "palette/neutral/800": {
           "type": "COLOR",
-          "value": "#242d39"
+          "values": {
+            "Santo": "#242d39",
+            "VTSD": "#2c2c2c"
+          }
         },
         "palette/neutral/900": {
           "type": "COLOR",
-          "value": "#131a25"
+          "values": {
+            "Santo": "#131a25",
+            "VTSD": "#1a1a1a"
+          }
         },
         "palette/neutral/950": {
           "type": "COLOR",
-          "value": "#090f17"
+          "values": {
+            "Santo": "#090f17",
+            "VTSD": "#0f0f0f"
+          }
         },
         "palette/neutral/1000": {
           "type": "COLOR",
-          "value": "#08060b"
+          "values": {
+            "Santo": "#08060b",
+            "VTSD": "#070707"
+          }
         },
         "palette/success/50": {
           "type": "COLOR",
-          "value": "#ecfdf3"
+          "values": {
+            "Santo": "#ecfdf3",
+            "VTSD": "#ecfdf3"
+          }
         },
         "palette/success/100": {
           "type": "COLOR",
-          "value": "#d1fadf"
+          "values": {
+            "Santo": "#d1fadf",
+            "VTSD": "#d1fadf"
+          }
         },
         "palette/success/200": {
           "type": "COLOR",
-          "value": "#a6f4c5"
+          "values": {
+            "Santo": "#a6f4c5",
+            "VTSD": "#a6f4c5"
+          }
         },
         "palette/success/300": {
           "type": "COLOR",
-          "value": "#6ce9a6"
+          "values": {
+            "Santo": "#6ce9a6",
+            "VTSD": "#6ce9a6"
+          }
         },
         "palette/success/400": {
           "type": "COLOR",
-          "value": "#32d583"
+          "values": {
+            "Santo": "#32d583",
+            "VTSD": "#32d583"
+          }
         },
         "palette/success/500": {
           "type": "COLOR",
-          "value": "#12b76a"
+          "values": {
+            "Santo": "#12b76a",
+            "VTSD": "#12b76a"
+          }
         },
         "palette/success/600": {
           "type": "COLOR",
-          "value": "#039855"
+          "values": {
+            "Santo": "#039855",
+            "VTSD": "#039855"
+          }
         },
         "palette/success/700": {
           "type": "COLOR",
-          "value": "#027a48"
+          "values": {
+            "Santo": "#027a48",
+            "VTSD": "#027a48"
+          }
         },
         "palette/success/800": {
           "type": "COLOR",
-          "value": "#05603a"
+          "values": {
+            "Santo": "#05603a",
+            "VTSD": "#05603a"
+          }
         },
         "palette/success/900": {
           "type": "COLOR",
-          "value": "#054f31"
+          "values": {
+            "Santo": "#054f31",
+            "VTSD": "#054f31"
+          }
         },
         "palette/success/950": {
           "type": "COLOR",
-          "value": "#023321"
+          "values": {
+            "Santo": "#023321",
+            "VTSD": "#023321"
+          }
         },
         "palette/warning/50": {
           "type": "COLOR",
-          "value": "#fffaeb"
+          "values": {
+            "Santo": "#fffaeb",
+            "VTSD": "#fffaeb"
+          }
         },
         "palette/warning/100": {
           "type": "COLOR",
-          "value": "#fef0c7"
+          "values": {
+            "Santo": "#fef0c7",
+            "VTSD": "#fef0c7"
+          }
         },
         "palette/warning/200": {
           "type": "COLOR",
-          "value": "#fedf89"
+          "values": {
+            "Santo": "#fedf89",
+            "VTSD": "#fedf89"
+          }
         },
         "palette/warning/300": {
           "type": "COLOR",
-          "value": "#fec84b"
+          "values": {
+            "Santo": "#fec84b",
+            "VTSD": "#fec84b"
+          }
         },
         "palette/warning/400": {
           "type": "COLOR",
-          "value": "#fdb022"
+          "values": {
+            "Santo": "#fdb022",
+            "VTSD": "#fdb022"
+          }
         },
         "palette/warning/500": {
           "type": "COLOR",
-          "value": "#f79009"
+          "values": {
+            "Santo": "#f79009",
+            "VTSD": "#f79009"
+          }
         },
         "palette/warning/600": {
           "type": "COLOR",
-          "value": "#dc6803"
+          "values": {
+            "Santo": "#dc6803",
+            "VTSD": "#dc6803"
+          }
         },
         "palette/warning/700": {
           "type": "COLOR",
-          "value": "#b54708"
+          "values": {
+            "Santo": "#b54708",
+            "VTSD": "#b54708"
+          }
         },
         "palette/warning/800": {
           "type": "COLOR",
-          "value": "#93370d"
+          "values": {
+            "Santo": "#93370d",
+            "VTSD": "#93370d"
+          }
         },
         "palette/warning/900": {
           "type": "COLOR",
-          "value": "#7a2e0e"
+          "values": {
+            "Santo": "#7a2e0e",
+            "VTSD": "#7a2e0e"
+          }
         },
         "palette/warning/950": {
           "type": "COLOR",
-          "value": "#4e1d09"
+          "values": {
+            "Santo": "#4e1d09",
+            "VTSD": "#4e1d09"
+          }
         },
         "palette/danger/50": {
           "type": "COLOR",
-          "value": "#fef3f2"
+          "values": {
+            "Santo": "#fef3f2",
+            "VTSD": "#fef3f2"
+          }
         },
         "palette/danger/100": {
           "type": "COLOR",
-          "value": "#fee4e2"
+          "values": {
+            "Santo": "#fee4e2",
+            "VTSD": "#fee4e2"
+          }
         },
         "palette/danger/200": {
           "type": "COLOR",
-          "value": "#fecdca"
+          "values": {
+            "Santo": "#fecdca",
+            "VTSD": "#fecdca"
+          }
         },
         "palette/danger/300": {
           "type": "COLOR",
-          "value": "#fda29b"
+          "values": {
+            "Santo": "#fda29b",
+            "VTSD": "#fda29b"
+          }
         },
         "palette/danger/400": {
           "type": "COLOR",
-          "value": "#f97066"
+          "values": {
+            "Santo": "#f97066",
+            "VTSD": "#f97066"
+          }
         },
         "palette/danger/500": {
           "type": "COLOR",
-          "value": "#f04438"
+          "values": {
+            "Santo": "#f04438",
+            "VTSD": "#f04438"
+          }
         },
         "palette/danger/600": {
           "type": "COLOR",
-          "value": "#d92d20"
+          "values": {
+            "Santo": "#d92d20",
+            "VTSD": "#d92d20"
+          }
         },
         "palette/danger/700": {
           "type": "COLOR",
-          "value": "#b42318"
+          "values": {
+            "Santo": "#b42318",
+            "VTSD": "#b42318"
+          }
         },
         "palette/danger/800": {
           "type": "COLOR",
-          "value": "#912018"
+          "values": {
+            "Santo": "#912018",
+            "VTSD": "#912018"
+          }
         },
         "palette/danger/900": {
           "type": "COLOR",
-          "value": "#7a271a"
+          "values": {
+            "Santo": "#7a271a",
+            "VTSD": "#7a271a"
+          }
         },
         "palette/danger/950": {
           "type": "COLOR",
-          "value": "#55160c"
+          "values": {
+            "Santo": "#55160c",
+            "VTSD": "#55160c"
+          }
         },
         "palette/info/50": {
           "type": "COLOR",
-          "value": "#eff8ff"
+          "values": {
+            "Santo": "#eff8ff",
+            "VTSD": "#eff8ff"
+          }
         },
         "palette/info/100": {
           "type": "COLOR",
-          "value": "#d1e9ff"
+          "values": {
+            "Santo": "#d1e9ff",
+            "VTSD": "#d1e9ff"
+          }
         },
         "palette/info/200": {
           "type": "COLOR",
-          "value": "#b2ddff"
+          "values": {
+            "Santo": "#b2ddff",
+            "VTSD": "#b2ddff"
+          }
         },
         "palette/info/300": {
           "type": "COLOR",
-          "value": "#84caff"
+          "values": {
+            "Santo": "#84caff",
+            "VTSD": "#84caff"
+          }
         },
         "palette/info/400": {
           "type": "COLOR",
-          "value": "#53b1fd"
+          "values": {
+            "Santo": "#53b1fd",
+            "VTSD": "#53b1fd"
+          }
         },
         "palette/info/500": {
           "type": "COLOR",
-          "value": "#2e90fa"
+          "values": {
+            "Santo": "#2e90fa",
+            "VTSD": "#2e90fa"
+          }
         },
         "palette/info/600": {
           "type": "COLOR",
-          "value": "#1570ef"
+          "values": {
+            "Santo": "#1570ef",
+            "VTSD": "#1570ef"
+          }
         },
         "palette/info/700": {
           "type": "COLOR",
-          "value": "#175cd3"
+          "values": {
+            "Santo": "#175cd3",
+            "VTSD": "#175cd3"
+          }
         },
         "palette/info/800": {
           "type": "COLOR",
-          "value": "#1849a9"
+          "values": {
+            "Santo": "#1849a9",
+            "VTSD": "#1849a9"
+          }
         },
         "palette/info/900": {
           "type": "COLOR",
-          "value": "#194185"
+          "values": {
+            "Santo": "#194185",
+            "VTSD": "#194185"
+          }
         },
         "palette/info/950": {
           "type": "COLOR",
-          "value": "#102a56"
+          "values": {
+            "Santo": "#102a56",
+            "VTSD": "#102a56"
+          }
         }
       }
     },
@@ -2299,36 +2548,52 @@
     },
     "Brand": {
       "modes": [
-        "Santo"
+        "Santo",
+        "VTSD"
       ],
       "defaultMode": "Santo",
       "variables": {
         "brand/id": {
           "type": "STRING",
-          "value": "santo"
+          "values": {
+            "Santo": "santo",
+            "VTSD": "vtsd"
+          }
         },
         "brand/name": {
           "type": "STRING",
-          "value": "Santo"
+          "values": {
+            "Santo": "Santo",
+            "VTSD": "Venda Todo Santo Dia"
+          }
         },
         "brand/family/sans": {
           "type": "STRING",
-          "value": "Albert Sans",
+          "values": {
+            "Santo": "Albert Sans",
+            "VTSD": "Sora"
+          },
           "scopes": [
             "FONT_FAMILY"
           ],
-          "description": "Albert Sans — a voz do Santo. Cobre os 11 papéis de texto, do heading-1 ao caption-small."
+          "description": "Família sans da marca. Cobre os 11 papéis de texto, do heading-1 ao caption-small."
         },
         "brand/family/mono": {
           "type": "STRING",
-          "value": "JetBrains Mono",
+          "values": {
+            "Santo": "JetBrains Mono",
+            "VTSD": "JetBrains Mono"
+          },
           "scopes": [
             "FONT_FAMILY"
           ]
         },
         "brand/shape/radius-base": {
           "type": "FLOAT",
-          "value": "{dimension/radius/8}",
+          "values": {
+            "Santo": "{dimension/radius/8}",
+            "VTSD": "{dimension/radius/8}"
+          },
           "scopes": [
             "CORNER_RADIUS"
           ]

@@ -29,7 +29,7 @@ export default function TokensPage() {
 
       <section className="flex flex-col gap-sm">
         <SectionLabel>Coleções</SectionLabel>
-        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md">
+        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md" masonry={false} stretch>
           {collections.map((c) => {
             const groups = getCollection(c.slug)?.groups ?? [];
             return (

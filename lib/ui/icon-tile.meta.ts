@@ -7,7 +7,7 @@ export const iconTileMeta: ComponentMeta[] = [
     category: "estrutura",
     tier: "primitivo",
     source: "icon-tile.tsx",
-    description: "Ícone dentro de uma caixa: marcador de linha de lista, de estado vazio, de anexo.",
+    description: "Ícone num slot de tamanho de token, sem caixa por padrão: marcador de linha de lista, de estado vazio, de anexo. Caixa tonal (brand, subtle, outline) só quando a cor carrega significado.",
     related: ["list-row", "empty-state"],
   },
 ];

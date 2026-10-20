@@ -4,12 +4,12 @@ import { ExampleViews } from "./views-nav";
 
 export const metadata: Metadata = {
   title: "Exemplos",
-  description: "O SantoDS em uso real: finanças, cartões, painel e aplicação montados só com tokens e componentes.",
+  description: "O SantoDS em uso real: telas de exemplo (dashboard e landing) montadas só com tokens e componentes.",
 };
 
 export default function ExemplosPage() {
   return (
-    <DocPage>
+    <DocPage layout="full">
       <ExampleViews />
     </DocPage>
   );

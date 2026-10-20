@@ -8,12 +8,12 @@ import { Table, type Column } from "./data";
 import * as Icon from "./icons";
 import { Field, Input, Textarea } from "./input";
 import { KeyValue } from "./key-value";
-import { ListRow } from "./list-row";
 import { Pagination } from "./nav";
 import { NumberField } from "./number-field";
 import { Overline } from "./overline";
 import { Ring } from "./ring";
 import { Segmented, type Segment } from "./segmented";
+import { TransactionRow } from "./transaction-row";
 
 /*
  * Blocos de financas: cartoes prontos, montados SO com a lib e alimentados
@@ -138,7 +138,8 @@ export function InvestCard<T extends string>({
       </Field>
       <Segmented size="md" className="self-start" value={orderType} onChange={onOrderTypeChange} options={orderTypes} />
       <Summary items={summary} />
-      <Button variant="primary" block onClick={onSubmit}>
+      {/* mt-auto: numa fileira esticada (CardGrid stretch) a acao ancora no fim. */}
+      <Button variant="primary" block className="mt-auto" onClick={onSubmit}>
         {submitLabel}
       </Button>
     </Card>
@@ -150,7 +151,8 @@ export function InvestCard<T extends string>({
 /**
  * Limite com faixa: o valor e o numero grande, ajustado por NumberField
  * (arrasta ou digita), moeda em Segmented no cabecalho e nota opcional. Use
- * para teto configuravel (limite de pagamento, orcamento diario).
+ * para teto configuravel (limite de pagamento, orcamento diario); `summary`
+ * acrescenta o resumo (usado hoje) antes da acao.
  */
 export function LimitCard<C extends string>({
   title = "Limite diário",
@@ -163,6 +165,7 @@ export function LimitCard<C extends string>({
   currency,
   onCurrencyChange,
   notes = true,
+  summary,
   submitLabel = "Salvar limite",
   onSubmit,
   className = "",
@@ -178,6 +181,8 @@ export function LimitCard<C extends string>({
   onCurrencyChange: (value: C) => void;
   /** Campo de observacao opcional. */
   notes?: boolean;
+  /** Resumo chave × valor depois de um Divider ("Usado hoje"). */
+  summary?: { label: string; value: string }[];
   submitLabel?: string;
   onSubmit?: () => void;
   className?: string;
@@ -193,7 +198,8 @@ export function LimitCard<C extends string>({
           <Textarea placeholder="Por que este limite?" />
         </Field>
       )}
-      <Button block onClick={onSubmit}>
+      {summary && <Summary items={summary} />}
+      <Button block className="mt-auto" onClick={onSubmit}>
         {submitLabel}
       </Button>
     </Card>
@@ -204,57 +210,19 @@ export function LimitCard<C extends string>({
 
 export type Transaction = { title: string; category: string; date: string; amount: number };
 
-/**
- * Uma transacao: seta de entrada/saida (sem caixa), titulo, categoria · data
- * e o valor assinado a direita (entrada em text/success), com acoes ghost.
- * Use em extrato e lista de movimentacao; `divider` separa da proxima.
- */
-export function TransactionRow({
-  transaction: t,
-  divider = true,
-  onMore,
-}: {
-  transaction: Transaction;
-  divider?: boolean;
-  onMore?: () => void;
-}) {
-  const income = t.amount > 0;
-  return (
-    <ListRow
-      divider={divider}
-      leading={
-        // Sem caixa em volta do icone (Pedro: tile dentro de cartao nao ganha poco); o slot fixo alinha a coluna.
-        <span aria-hidden className="grid size-2xl shrink-0 place-items-center text-icon-secondary">
-          {income ? <Icon.ArrowDownLeft size={16} /> : <Icon.ArrowUpRight size={16} />}
-        </span>
-      }
-      title={t.title}
-      meta={`${t.category} · ${t.date}`}
-      trailing={
-        <span className="flex items-center gap-sm">
-          <span className={`santo-body-small-semibold ${income ? "text-text-success" : "text-text-primary"}`}>
-            {income ? "+" : "−"}
-            {Math.abs(t.amount).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-          </span>
-          <IconButton label={`Ações de ${t.title}`} size="sm" variant="ghost" onClick={onMore}>
-            <Icon.More size={16} />
-          </IconButton>
-        </span>
-      }
-    />
-  );
-}
-
 /** Extrato curto: cabecalho com contagem e "Ver todas", linhas de TransactionRow. */
 export function TransactionsCard({
   title = "Transações",
   transactions,
   onViewAll,
+  onAction,
   className = "",
 }: {
   title?: string;
   transactions: Transaction[];
   onViewAll?: () => void;
+  /** Liga o botao de acoes de cada linha. */
+  onAction?: (transaction: Transaction) => void;
   className?: string;
 }) {
   return (
@@ -269,8 +237,13 @@ export function TransactionsCard({
         }
       />
       <div className="flex flex-col">
-        {transactions.map((t) => (
-          <TransactionRow key={`${t.title}-${t.date}`} transaction={t} />
+        {transactions.map((t, i) => (
+          <TransactionRow
+            key={`${t.title}-${t.date}`}
+            {...t}
+            divider={i < transactions.length - 1}
+            onAction={onAction && (() => onAction(t))}
+          />
         ))}
       </div>
     </Card>

@@ -21,6 +21,9 @@ scripts/figma-fingerprint.js  script READ-ONLY para colar no use_figma (hashes)
 scripts/figma-dump.js         script READ-ONLY para colar no use_figma (dump completo)
 scripts/parity-hash.mjs       serializacao canonica + FNV-1a (lado Node)
 scripts/check-parity.mjs      diff / validacao / modo --fingerprint
+scripts/figma-brand-mode.js   script de ESCRITA para o use_figma: cria/atualiza um modo de marca (fonte da spec)
+scripts/apply-brand-mode.mjs  EXCECAO: aplica o mesmo modo ao snapshot sem Figma (deixa meta.aheadOfFigma)
+scripts/brand-ramp.mjs        gera as rampas brand/neutral de uma marca nova (so imprime)
 scripts/build-tokens.mjs      snapshot -> arquivos gerados
 lib/tokens/emit.mjs           emissores puros (rodam no Node E no browser)
 lib/tokens/tokens.css         GERADO  variaveis --santo-* (Light + Dark)
@@ -41,17 +44,86 @@ Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.m
 4. **Todos os hashes iguais** (incluindo `count`, `modes`, `paintStyles`, `gridStyles`): a paridade esta 100%. Diga isso e pare. Nao gere arquivo, nao mexa em nada.
 5. **Algum hash diferente**: siga para o fluxo de sincronizacao.
 
-Hashes de referencia da ultima sincronizacao confirmada — se baterem com o Figma e com o snapshot, nada mudou dos dois lados:
+Hashes de referencia (atualizado 2026-10-19, Compasso). Hash do snapshot = `npm run tokens:fingerprint`.
 
-| grupo | hash | qtd |
-|---|---|---|
-| Palette | `68ef7ea6` | 79 |
-| Color | `eba05d3f` | 102 |
-| Primitives | `4de7b0d8` | 129 |
-| Brand | `fd41c33f` | 5 |
-| Semantic | `35d0642d` | 30 |
-| textStyles | `11753486` | 68 |
-| effectStyles | `a60e77cc` | 7 |
+> **ATENCAO: Palette e Brand estao A FRENTE do Figma (snapshot > Figma).** O modo de marca
+> `VTSD` foi aplicado ao snapshot por `scripts/apply-brand-mode.mjs`, excecao autorizada pelo
+> Pedro porque o OAuth do MCP estava indisponivel. Enquanto isso valer, o Figma NAO deve bater
+> com o snapshot nessas duas colecoes, e `tokens:check` e `tokens:fingerprint` imprimem um AVISO.
+> Para fechar, siga [Reconciliacao](#reconciliacao-snapshot-a-frente-do-figma).
+
+| grupo | hash do snapshot | qtd | modos | estado |
+|---|---|---|---|---|
+| Palette | `1bbb4c8a` | 79 | Santo/VTSD | **A FRENTE do Figma.** Hoje o Figma deve dar `d1839b24` (so Santo, rampa azul) ou `68ef7ea6` (rampa roxa antiga); R1 ainda nao confirmado |
+| Color | `05578c0b` | 102 | Light/Dark | snapshot local; **R1 nao confirmado no Figma** (a tabela antiga dizia `eba05d3f`, o hash de antes do commit 0ca5a94) |
+| Primitives | `4de7b0d8` | 129 | Value | confirmado |
+| Brand | `c8d4ef77` | 5 | Santo/VTSD | **A FRENTE do Figma.** Hoje o Figma deve dar `fd41c33f` (so Santo, description antiga) |
+| Semantic | `35d0642d` | 30 | Value | confirmado |
+| textStyles | `11753486` | 68 | | confirmado |
+| effectStyles | `a60e77cc` | 7 | | confirmado |
+
+Depois da reconciliacao, o fingerprint do Figma tem de dar exatamente os hashes do snapshot
+acima, e a coluna "estado" volta a "confirmado".
+
+## Divergencia conhecida: styles (Figma a frente do snapshot, visto via REST em 2026-10-19)
+
+O Figma foi publicado em 2026-10-19 às 18:20 UTC e tem mudanças em styles que o snapshot
+ainda não tem. Comparação pelos nós de definição dos 74 styles publicados
+(`GET /v1/files/:key/styles` + `/nodes`):
+
+- **Text styles (68): todos renomeados.** `Albert Sans/<papel>/<peso>` virou
+  `Text/<papel>/<peso>`, e `JetBrains Mono/code/md|sm` virou `Text/code-md|code-sm/regular`.
+  Família, peso, tamanho, entrelinha, tracking, caixa e decoração continuam iguais nos 68.
+  Além disso, **o `letterSpacing` passou a ser ligado a uma variável** nos 68.
+- **Impacto no código quando sincronizar:** as classes `.santo-<papel>-<peso>` dos 66 de
+  texto ficam iguais. As de código mudam: `.santo-code-md` vira `.santo-code-md-regular`,
+  e o papel `--text-code` vira `--text-code-md` e `--text-code-sm`. Quem usa
+  `santo-code-*` / `text-code` quebra. Avisar o Ateliê antes do `--write`.
+- **Effect styles:** o publicado não tem o `none` (pode existir local sem publicar; a REST
+  não vê). Os 6 restantes estão ligados a variáveis (raio, spread, cor), e a camada principal
+  de xs, sm, md, lg e 2xl tem alpha `0x1a` no Figma contra `0x14`/`0x17`/`0x1f` no snapshot.
+- **Variáveis novas no Figma:** os styles apontam para 70 VariableIDs. Os de tracking e de
+  sombra não existem no snapshot (não há nenhuma variável de sombra nele). A REST não diz o
+  nome (precisa do escopo Enterprise), então **só o dump via MCP confirma** o que entrou.
+- **Componentes:** sem divergência. O dump REST (`scripts/figma-components-rest.mjs`) bate
+  100% com o inventário: os mesmos 8 componentes, descriptions, variantes e contagens.
+
+Ação: no próximo dump via MCP, rodar `check-parity`, mostrar a lista ao Pedro antes do
+`--write` e coordenar a troca de `santo-code-*` com o Ateliê.
+
+## Reconciliacao: snapshot a frente do Figma
+
+Vale enquanto `tokens/santods.figma.json` tiver `meta.aheadOfFigma`. O check imprime o aviso.
+
+> **Só pelo MCP (OAuth).** Testado em 2026-10-19 com o token REST do Pedro (`.env.local`,
+> conta owner, plano Pro): `GET /v1/files/:key/variables/local` e `/variables/published`
+> responderam **403**, "This endpoint requires the file_variables:read scope". A API REST de
+> Variables (leitura e `POST /v1/files/:key/variables`) é exclusiva do Enterprise, então
+> esse escopo não existe para o token. Ler variáveis (fingerprint, dump, R1) e escrever o
+> modo VTSD dependem do `use_figma` via MCP. A REST serve para ícones (`/v1/images`),
+> styles, components e nodes.
+
+1. **OAuth.** Autentique o MCP do Figma (plugin figma). Se a URL expirou, gere outra com
+   `authenticate` e passe ao Pedro.
+2. **R1 antes de tudo.** Rode `scripts/figma-fingerprint.js` e compare Color, e Palette no
+   modo Santo, com o snapshot. Se Color nao der `05578c0b`, o snapshot do Santo esta errado:
+   pare e reporte o diff antes de escrever qualquer coisa no Figma.
+3. **Escrita.** Cole `scripts/figma-brand-mode.js` no `use_figma` com `DRY_RUN = true`.
+   Confira o plano: modo VTSD criado em Palette e Brand, 79 + 5 valores e 1 description
+   (`brand/family/sans`). Depois rode com `DRY_RUN = false`. A spec (MODE, SPEC,
+   DESCRIPTIONS) e a mesma que o `apply-brand-mode.mjs` usou.
+4. **Dump.** Cole `scripts/figma-dump.js` e grave a saida no scratchpad.
+5. **Diff vazio.** `node scripts/check-parity.mjs <dump.json>` tem de responder
+   `PARIDADE OK` seguido do aviso "O Figma ja alcancou o snapshot". Qualquer DIVERGENCIA aqui
+   significa que os dois caminhos nao produziram o mesmo resultado: pare e investigue, nao
+   rode `--write`.
+6. **Fechar.** `node scripts/check-parity.mjs <dump.json> --write` grava o dump e remove
+   `meta.aheadOfFigma`. A saida diz se os bytes bateram. A ordem de chaves da Color no snapshot
+   (`type, scopes, values`) e mais antiga que a do dump (`type, values, scopes`), entao a
+   primeira gravacao pode acusar "DIFERENTES (so ordem/formato)", com os valores iguais.
+7. `npm run tokens && npm run tokens:check` (sem AVISO) e `npm run tokens:fingerprint`.
+   A saida gerada nao pode mudar: confira com `git diff lib/tokens`.
+8. Atualize a tabela acima (estado "confirmado") e apague o aviso de "A FRENTE".
 
 ## Fluxo de sincronizacao (Figma -> codigo)
 
