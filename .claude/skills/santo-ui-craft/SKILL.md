@@ -1,6 +1,6 @@
 ---
 name: santo-ui-craft
-description: Estratégia de criação de UI do SantoDS (regra ANTI-GENÉRICO do Pedro). Use SEMPRE antes de criar, recriar ou revisar componente, card, tela, nav, lista, campo, dashboard ou qualquer superfície visual; quando alguém disser "está com cara de Tailwind", "genérico", "sem graça", "padrão"; e como rubrica de aprovação do Vigia. Define superfícies tonais, raio por nível, vocabulário de pílula, hierarquia número+unidade, micro-visualização, nav em trilho, listas, campo-poço, FAB, processo e checklist.
+description: Estratégia de criação de UI do SantoDS (regra ANTI-GENÉRICO do Pedro). Use SEMPRE antes de criar, recriar ou revisar componente, card, tela, nav, lista, campo, dashboard ou qualquer superfície visual; quando alguém disser "está com cara de Tailwind", "genérico", "sem graça", "padrão"; e como rubrica de aprovação do Exorcista. Define superfícies tonais, raio por nível, vocabulário de pílula, hierarquia número+unidade, micro-visualização, nav em trilho, listas, campo-poço, FAB, processo e checklist.
 ---
 
 # SantoDS — craft de interface (anti-genérico)
@@ -61,7 +61,7 @@ Regras:
   repouso de card `shadow-xs`/`shadow-sm`; card de destaque / tab bar
   flutuante / FAB `shadow-lg`–`shadow-xl`; modal `shadow-2xl`. **Nunca** sombra
   em cada linha de lista.
-- Pendência de token (Compasso): falta uma sombra **ambiente grande e suave**
+- Pendência de token (Escriba): falta uma sombra **ambiente grande e suave**
   (blur alto, y médio, opacidade ~5–8%) entre `md` e `xl`. Até existir, use
   `shadow-sm` em repouso e `shadow-lg` em destaque; não invente `box-shadow`.
 - Escuro: sombra quase some — o nível 1 se separa pelo tom (`raised` mais claro
@@ -111,7 +111,7 @@ passar do teto porque é derivada (regra 3), não escolhida.
 | Tile de ícone, thumb, avatar quadrado | inner do pai; avatar sempre círculo |
 
 Fórmula inegociável: **interno = externo − padding** em moldura justa; em
-cartão folgado, mínimo = raio de controle; filho colado herda o raio do pai. O Vigia mede no DOM.
+cartão folgado, mínimo = raio de controle; filho colado herda o raio do pai. O Exorcista mede no DOM.
 
 ## 4. Vocabulário de pastilha (sem cápsula)
 
@@ -257,7 +257,7 @@ clicável. Nunca um retângulo reto encostando na borda arredondada do card.
   não em cada linha; anime `transform`/`opacity`, não `box-shadow`/`height` em
   massa; imagens WebP em tamanho certo, `next/image`, lazy fora da dobra.
 
-## 12. Checklist de aprovação (rubrica do Vigia)
+## 12. Checklist de aprovação (rubrica do Exorcista)
 
 Reprova se qualquer item falhar:
 

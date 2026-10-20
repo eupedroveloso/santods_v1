@@ -39,7 +39,7 @@ anatomia que o componente tem — quando ele muda, a thumb muda junto.
   é um desenho em escala, não um elemento aninhado de verdade, então o cartão
   **não** sai da fórmula a partir do card do índice. Ele usa **`radius-sm`**,
   que é a leitura de um card `2xl` em miniatura. **Dali para dentro vale a
-  fórmula** (santo-ui-craft §3; o Vigia mede no DOM): raio interno = raio do
+  fórmula** (santo-ui-craft §3; o Exorcista mede no DOM): raio interno = raio do
   pai − respiro, mínimo `radius/xs`. Com `sm` (8) e respiro 12/16, tudo dentro
   do cartão cai no piso, **`xs`**: bloco, poço multilinha, item `selected`.
   Controle compacto e trilho também caem no piso `xs` (na lib são `radius/md`

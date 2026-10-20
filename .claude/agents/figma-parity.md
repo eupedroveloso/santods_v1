@@ -44,7 +44,7 @@ Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.m
 4. **Todos os hashes iguais** (incluindo `count`, `modes`, `paintStyles`, `gridStyles`): a paridade esta 100%. Diga isso e pare. Nao gere arquivo, nao mexa em nada.
 5. **Algum hash diferente**: siga para o fluxo de sincronizacao.
 
-Hashes de referencia (atualizado 2026-10-19, Compasso). Hash do snapshot = `npm run tokens:fingerprint`.
+Hashes de referencia (atualizado 2026-10-19, Escriba). Hash do snapshot = `npm run tokens:fingerprint`.
 
 > **ATENCAO: Palette e Brand estao A FRENTE do Figma (snapshot > Figma).** O modo de marca
 > `VTSD` foi aplicado ao snapshot por `scripts/apply-brand-mode.mjs`, excecao autorizada pelo
@@ -78,7 +78,7 @@ ainda não tem. Comparação pelos nós de definição dos 74 styles publicados
 - **Impacto no código quando sincronizar:** as classes `.santo-<papel>-<peso>` dos 66 de
   texto ficam iguais. As de código mudam: `.santo-code-md` vira `.santo-code-md-regular`,
   e o papel `--text-code` vira `--text-code-md` e `--text-code-sm`. Quem usa
-  `santo-code-*` / `text-code` quebra. Avisar o Ateliê antes do `--write`.
+  `santo-code-*` / `text-code` quebra. Avisar o Iluminador antes do `--write`.
 - **Effect styles:** o publicado não tem o `none` (pode existir local sem publicar; a REST
   não vê). Os 6 restantes estão ligados a variáveis (raio, spread, cor), e a camada principal
   de xs, sm, md, lg e 2xl tem alpha `0x1a` no Figma contra `0x14`/`0x17`/`0x1f` no snapshot.
@@ -89,7 +89,7 @@ ainda não tem. Comparação pelos nós de definição dos 74 styles publicados
   100% com o inventário: os mesmos 8 componentes, descriptions, variantes e contagens.
 
 Ação: no próximo dump via MCP, rodar `check-parity`, mostrar a lista ao Pedro antes do
-`--write` e coordenar a troca de `santo-code-*` com o Ateliê.
+`--write` e coordenar a troca de `santo-code-*` com o Iluminador.
 
 ## Reconciliacao: snapshot a frente do Figma
 
