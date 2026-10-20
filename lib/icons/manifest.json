@@ -938,6 +938,92 @@
         "animação"
       ],
       "viewBox": "0 0 16 16"
+    },
+    "star": {
+      "component": "StarIcon",
+      "file": "lib/icons/star.tsx",
+      "figma": {
+        "name": "star",
+        "kind": "icon",
+        "setNodeId": "38:19619",
+        "nodeId": "38:19626",
+        "weight": "solid"
+      },
+      "aliases": [
+        "estrela",
+        "avaliação",
+        "nota"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "star-half-stroke": {
+      "component": "StarHalfStrokeIcon",
+      "file": "lib/icons/star-half-stroke.tsx",
+      "figma": {
+        "name": "star-half-stroke",
+        "kind": "icon",
+        "setNodeId": "38:19702",
+        "nodeId": "38:19709",
+        "weight": "solid"
+      },
+      "aliases": [
+        "meia estrela",
+        "avaliação"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "play": {
+      "component": "PlayIcon",
+      "file": "lib/icons/play.tsx",
+      "figma": {
+        "name": "play",
+        "kind": "icon",
+        "setNodeId": "38:24104",
+        "nodeId": "38:24111",
+        "weight": "solid"
+      },
+      "aliases": [
+        "play",
+        "tocar",
+        "assistir",
+        "vídeo"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "user": {
+      "component": "UserIcon",
+      "file": "lib/icons/user.tsx",
+      "figma": {
+        "name": "user",
+        "kind": "icon",
+        "setNodeId": "38:26968",
+        "nodeId": "38:26972",
+        "weight": "regular"
+      },
+      "aliases": [
+        "usuário",
+        "conta",
+        "perfil",
+        "login"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "right-to-bracket": {
+      "component": "RightToBracketIcon",
+      "file": "lib/icons/right-to-bracket.tsx",
+      "figma": {
+        "name": "right-to-bracket",
+        "kind": "icon",
+        "setNodeId": "38:56923",
+        "nodeId": "38:56927",
+        "weight": "regular"
+      },
+      "aliases": [
+        "entrar",
+        "login",
+        "acessar"
+      ],
+      "viewBox": "0 0 16 16"
     }
   }
 }
