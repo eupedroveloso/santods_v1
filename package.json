@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/build-contexto.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/build-contexto.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -13,7 +15,8 @@
     "design:check": "node scripts/check-design.mjs",
     "lib:check": "node scripts/check-lib-first.mjs",
     "tier:check": "node scripts/check-tier.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "contexto": "node scripts/build-contexto.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

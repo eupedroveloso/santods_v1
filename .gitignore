@@ -45,3 +45,12 @@ next-env.d.ts
 
 # cache local regeneravel (inventario de icones do Figma: node scripts/figma-icons.mjs inventory)
 tokens/.cache/
+
+# contexto para download: gerados por scripts/build-contexto.mjs (prebuild/predev).
+# Os .md escritos a mao (00, 01, 04) ficam versionados.
+public/contexto/02-tokens.md
+public/contexto/03-componentes.md
+public/contexto/05-regras-e-rubricas.md
+public/contexto/06-figma.md
+public/contexto/santods-contexto-completo.txt
+public/contexto/indice.json

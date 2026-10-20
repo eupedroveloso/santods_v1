@@ -66,6 +66,38 @@ Para checar ou sincronizar com o Figma, use o agente **`figma-parity`**
 dentro do Figma via MCP, compara os hashes com `npm run tokens:fingerprint` e só
 puxa o dump completo se algo divergir. A checagem barata cabe em uma chamada.
 
+## Contexto para download
+
+`public/contexto/` guarda o pacote que a home oferece para baixar: o necessário para
+replicar a arquitetura do SantoDS.
+
+- **Escritos à mão e versionados:** `00-leia-me`, `01-arquitetura` e
+  `04-site-de-documentacao`.
+- **Gerados por `scripts/build-contexto.mjs` e ignorados pelo git:**
+  - `02-tokens.md`: coleções, modos, valores, aliases resolvidos, styles e convenções;
+  - `03-componentes.md`: inventário de `lib/ui` com props extraídas pelo TypeScript e par
+    no Figma;
+  - `05-regras-e-rubricas.md`: `AGENTS.md`, as skills e os manuais dos agentes, integrais e
+    com o cabeçalho de origem;
+  - `06-figma.md`: paridade, estado atual, ícones e dívidas;
+  - `santods-contexto-completo.txt`: todos os .md concatenados;
+  - `indice.json`: para a UI de download.
+
+```bash
+npm run contexto   # regera; roda sozinho antes de `npm run build` e `npm run dev`
+```
+
+O gerador entra pelos hooks `prebuild` e `predev`, e não por `npm run check`, porque ele
+**escreve** arquivos que o site serve. Eles precisam existir antes do `next build` e do
+`next dev`, e o `check` é QA sem efeito colateral.
+
+Convenção de todo `.md` dali:
+- a primeira linha é `# Título`;
+- o blockquote (`> …`) logo abaixo é o resumo que vai para o `indice.json`.
+
+O gerador não lê `.env*`. Ele recusa gravar se a saída tiver um caminho absoluto da
+máquina ou algo com cara de token.
+
 ## Ícones
 
 Os ícones saem **só** da página `Icones` do Figma, e **só os que estão em uso**
