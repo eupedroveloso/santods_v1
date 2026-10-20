@@ -10,11 +10,9 @@ import {
   CommandPalette,
   Icon,
   IconButton,
-  SearchTrigger,
+  AppSidebar,
   NavItem,
   NavSection,
-  RailItem,
-  RailNav,
   SidebarNav,
   Tag,
   useModal,
@@ -285,40 +283,22 @@ function Sidebar({
   const area = picked?.path === pathname ? picked.area : routeArea;
   const groups = nav.filter((g) => AREAS.find((a) => a.id === area)?.groups.includes(g.title));
   return (
-    <div className="flex gap-xs">
-      <div className="sticky top-0 self-start">
-        <RailNav label="Áreas da documentação">
-          {AREAS.map((a) => (
-            <RailItem
-              key={a.id}
-              icon={<NavGlyph name={a.icon} size={20} />}
-              label={a.label}
-              active={area === a.id}
-              onClick={() => setPicked({ path: pathname, area: a.id })}
-            />
-          ))}
-        </RailNav>
-      </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-md">
-        <SearchTrigger onClick={onSearch} />
-        <SidebarNav label={AREAS.find((a) => a.id === area)?.label ?? "Seções"}>
-          {groups.map((group) => (
-            <NavSection key={group.title || "inicio"} title={group.title || undefined}>
-              {group.items.map((item) => (
-                <NavItem
-                  key={item.href}
-                  href={item.href}
-                  active={isActive(item.href, pathname, hash, nav)}
-                  onClick={onNavigate}
-                  icon={item.icon ? <NavGlyph name={item.icon} /> : undefined}
-                >
-                  {item.label}
-                </NavItem>
-              ))}
-            </NavSection>
-          ))}
-        </SidebarNav>
-      </div>
-    </div>
+    <AppSidebar
+      railLabel="Áreas da documentação"
+      areas={AREAS.map((a) => ({ id: a.id, label: a.label, icon: <NavGlyph name={a.icon} size={20} /> }))}
+      area={area}
+      onAreaChange={(id) => setPicked({ path: pathname, area: id })}
+      onSearch={onSearch}
+      onNavigate={onNavigate}
+      groups={groups.map((group) => ({
+        title: group.title || undefined,
+        items: group.items.map((item) => ({
+          href: item.href,
+          label: item.label,
+          icon: item.icon ? <NavGlyph name={item.icon} /> : undefined,
+          active: isActive(item.href, pathname, hash, nav),
+        })),
+      }))}
+    />
   );
 }

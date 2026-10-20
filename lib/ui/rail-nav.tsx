@@ -8,7 +8,11 @@ import type { ReactNode } from "react";
  * área, o painel ao lado (SidebarNav) mostra as seções da área. É chão (nível
  * 0, `surface/sunken`) em cápsula; o item ativo é a pílula elevada (raised +
  * sombra). Itens são círculos de `size/40` dentro de `space/2xs`: o raio do item
- * fica concêntrico ao do trilho. `footer` vai para o pé (conta, ajustes).
+ * fica concêntrico ao do trilho. `footer` vem logo depois dos itens (conta,
+ * ajustes), separado por `space/xs`.
+ *
+ * Altura = conteúdo + padding (`h-fit`), nunca esticado pela coluna: sem faixa
+ * vazia no trilho (princípio 4 do Pedro). Quem posiciona é o pai.
  */
 export function RailNav({
   children,
@@ -25,10 +29,10 @@ export function RailNav({
   return (
     <nav
       aria-label={label}
-      className={`flex h-full w-fit flex-col items-center gap-2xs rounded-full bg-surface-sunken p-2xs ${className}`}
+      className={`flex h-fit w-fit flex-col items-center gap-2xs rounded-full bg-surface-sunken p-2xs ${className}`}
     >
       {children}
-      {footer && <div className="mt-auto flex flex-col items-center gap-2xs">{footer}</div>}
+      {footer && <div className="flex flex-col items-center gap-2xs pt-xs">{footer}</div>}
     </nav>
   );
 }

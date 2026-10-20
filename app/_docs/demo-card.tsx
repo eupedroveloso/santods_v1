@@ -36,6 +36,7 @@ export function DemoCard({
       <Card
         variant="double"
         padded={false}
+        footerFlush
         header={
           <div className="flex min-w-0 flex-1 items-center justify-between gap-sm">
             <h2 className="santo-body-small-semibold text-text-primary">{title}</h2>
@@ -54,7 +55,7 @@ export function DemoCard({
         footer={code && showCode ? <CodeBlock code={code} title={codeTitle} className="flex-1" /> : undefined}
       >
         <div
-          className={`flex min-h-(--santo-dimension-space-192) min-w-0 flex-col justify-center p-xl ${
+          className={`flex min-w-0 flex-col justify-center p-xl ${
             layout === "center" ? "items-center" : "items-stretch"
           }`}
         >

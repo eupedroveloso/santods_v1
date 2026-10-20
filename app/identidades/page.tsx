@@ -6,7 +6,7 @@ import {
   listIdentities,
   type IdentityEntry,
 } from "@/lib/docs/catalog";
-import { Card, CardHeader, Tag, TokenSample } from "@/lib/ui";
+import { Card, CardGrid, CardHeader, Tag, TokenSample } from "@/lib/ui";
 import { SantoLogo } from "../_docs/logo";
 import { BrandPreview } from "./brand-preview";
 import {
@@ -60,7 +60,7 @@ export default function IdentidadesPage() {
           title="Produtos"
           count={identities.length}
         />
-        <div className="grid grid-cols-1 gap-lg">
+        <CardGrid columns={{ base: 1 }}>
           {identities.map((identity) => (
             <IdentityCard
               key={identity.slug}
@@ -71,7 +71,7 @@ export default function IdentidadesPage() {
               isDefault={identity.mode === brand?.defaultMode}
             />
           ))}
-        </div>
+        </CardGrid>
       </section>
 
       <p className="santo-caption-regular flex flex-wrap items-center gap-sm">
@@ -131,13 +131,13 @@ function IdentityCard({
             </div>
           </div>
 
-          {/* Os dois paineis esticam ate a mesma altura; as amostras de raio e
-              de sombra dividem as mesmas colunas, entao amostra e rotulo caem
-              na mesma linha de base nas duas fileiras. */}
-          <div className="grid grid-cols-1 gap-lg xl:grid-cols-2">
+          {/* Cada painel com a altura do conteudo (sem margem morta). As amostras
+              de raio e de sombra dividem as mesmas colunas, entao amostra e
+              rotulo caem na mesma linha de base nas duas fileiras. */}
+          <CardGrid columns={{ xl: 2 }}>
             <div className="flex flex-col gap-xs">
               <SectionLabel>Tipografia</SectionLabel>
-              <Card variant="inset" padding="md" className="flex-1 justify-between">
+              <Card variant="inset" padding="md">
                 <div className="flex flex-col gap-3xs">
                   <span
                     className="santo-heading-4-semibold"
@@ -161,28 +161,28 @@ function IdentityCard({
 
             <div className="flex flex-col gap-xs">
               <SectionLabel>Raio e sombra</SectionLabel>
-              <Card variant="inset" padding="md" className="flex-1 justify-between">
+              <Card variant="inset" padding="md">
                 {/* Raio e sombra em duas grades com o MESMO molde de colunas: amostra e
                     rotulo caem na mesma coluna nas duas fileiras, e a 375 viram 4 colunas. */}
                 {[
                   radii.map((r) => ({ key: r.name, title: r.cssVar, label: r.leaf, sample: <TokenSample variant="radius" value={`var(${r.cssVar})`} /> })),
                   shadows.map((sh) => ({ key: sh.name, title: sh.cssVar, label: sh.name, sample: <TokenSample variant="shadow" value={`var(${sh.cssVar})`} /> })),
                 ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-x-sm gap-y-md sm:grid-cols-8">
+                  <CardGrid key={i} columns={{ base: 4, sm: 8 }} gap="md" masonry={false}>
                     {row.map((it) => (
                       <div key={it.key} className="flex flex-col items-start gap-xs" title={it.title}>
                         {it.sample}
                         <span className="santo-caption-small-regular text-text-tertiary">{it.label}</span>
                       </div>
                     ))}
-                  </div>
+                  </CardGrid>
                 ))}
                 <span className="santo-caption-regular text-text-secondary">
                   Raio base: <span className="santo-code-sm">{identity.radiusBase.css}</span>
                 </span>
               </Card>
             </div>
-          </div>
+          </CardGrid>
         </div>
 
         <div className="flex flex-col gap-xs border-t-thin border-border-subtle bg-surface-sunken p-lg">

@@ -33,6 +33,7 @@ Reconheça e recuse. Qualquer item abaixo numa entrega = volta.
 | Campo com borda 1px dentro de card branco | Formulário cru | Campo-poço (sunken) com ações inline (§9) |
 | Várias cores de acento numa mesma região | Ruído | **Um** acento (brand) por região; resto monocromático |
 | Texto explicativo sob título de card/componente | Proibido (regra de subhead zero) | Ícone, badge, Count, cor, agrupamento |
+| Cartão esticado até a altura do vizinho, com buraco entre o conteúdo e o rodapé | Margem morta (princípio 4 do Pedro) | `CardGrid` alinhado ao topo; cartão na altura do conteúdo |
 
 ## 2. Superfícies: profundidade por TOM
 
@@ -151,7 +152,14 @@ clicável. Nunca um retângulo reto encostando na borda arredondada do card.
 2. **Níveis tonais** — atribua 0/1/2 a cada região (§2).
 3. **Raio** — moldura → interno → controles (§3), calculado.
 4. **Ritmo de espaço** — dentro do grupo < entre grupos; padding igual em
-   irmãos; um grid por página; alturas de irmãos iguais.
+   irmãos; um grid por página, sempre `CardGrid` de `lib/ui` (nunca `grid`
+   inline em `app/`). **Sem margem morta** (Pedro, 2026-10-19, revoga a regra
+   antiga de "alturas de irmãos iguais"): cartão tem a altura do seu
+   conteúdo. A grade alinha ao topo e encaixa em fluxo denso; nada de esticar
+   irmão para igualar fileira, nem `mt-auto`/`flex-1` para empurrar rodapé
+   para o fundo de um cartão esticado. Igualar altura só quando os irmãos já
+   são naturalmente iguais (quatro `Stat` do mesmo molde). Palco, poço e
+   painel também sem `min-h` decorativo: altura = conteúdo + padding.
 5. **Acento único** — escolha o único elemento em brand da região.
 6. **Estado e motion** — hover tonal, selecionado elevado, foco visível,
    entrada com `santo-animate-*`, transição com `santo-transition-*`
@@ -190,6 +198,8 @@ Reprova se qualquer item falhar:
 9. [ ] Campo dentro de card é poço; ações inline.
 10. [ ] Tudo de token/componente da lib (`npm run check` verde, salvo dívida
         anotada).
-11. [ ] Claro, escuro e 375px conferidos; alturas de irmãos iguais (diff ≤
-        `space/sm`).
+11. [ ] Claro, escuro e 375px conferidos; **sem margem morta**: nenhum
+        cartão esticado além do conteúdo (vão interno entre o último bloco e a
+        borda = padding do cartão), grade via `CardGrid` alinhada ao topo,
+        nenhum `min-h`/`mt-auto`/`flex-1` criando vão vazio.
 12. [ ] Motion com tokens e reduced-motion; sem blur em lista longa.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getCollection, listCollections } from "@/lib/docs/catalog";
-import { Count, LinkCard, Tag } from "@/lib/ui";
+import { CardGrid, Count, LinkCard, Tag } from "@/lib/ui";
 import { DocHeader, DocPage, SectionLabel } from "../_docs/page-header";
 import { groupAnchor } from "../_docs/links";
 
@@ -29,7 +29,7 @@ export default function TokensPage() {
 
       <section className="flex flex-col gap-sm">
         <SectionLabel>Coleções</SectionLabel>
-        <div className="grid gap-md sm:grid-cols-2 lg:grid-cols-3">
+        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md">
           {collections.map((c) => {
             const groups = getCollection(c.slug)?.groups ?? [];
             return (
@@ -46,7 +46,7 @@ export default function TokensPage() {
               />
             );
           })}
-        </div>
+        </CardGrid>
       </section>
     </DocPage>
   );

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import {
+  CardGrid,
   Avatar,
   Button,
   Card,
@@ -63,7 +64,7 @@ export function BrandPreview({ name }: { name: string }) {
           <RailItem icon={<Icon.Book size={20} />} label="Materiais" />
         </RailNav>
 
-        <div className="grid min-w-0 flex-1 grid-cols-1 gap-md md:grid-cols-2 xl:grid-cols-12">
+        <CardGrid columns={{ md: 2, xl: 12 }} gap="md" className="flex-1">
           <Card className="xl:col-span-4">
             <Stat
               label="Receita"
@@ -104,7 +105,7 @@ export function BrandPreview({ name }: { name: string }) {
                 />
               ))}
             </div>
-            <Fab className="mt-auto self-end" extended icon={<Icon.Plus size={16} />} label="Novo projeto" />
+            <Fab className="self-end" extended icon={<Icon.Plus size={16} />} label="Novo projeto" />
           </Card>
 
           <Card className="md:col-span-2 xl:col-span-5">
@@ -126,7 +127,7 @@ export function BrandPreview({ name }: { name: string }) {
                 control={<Switch checked={notify} onChange={setNotify} label="Notificações" />}
               />
             </Card>
-            <div className="mt-auto flex gap-xs">
+            <div className="flex gap-xs">
               <Button variant="ghost" className="flex-1">
                 Cancelar
               </Button>
@@ -168,7 +169,7 @@ export function BrandPreview({ name }: { name: string }) {
               </IconButton>
             </div>
           </Card>
-        </div>
+        </CardGrid>
       </div>
     </Card>
   );

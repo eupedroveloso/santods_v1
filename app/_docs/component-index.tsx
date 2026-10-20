@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { thumbs } from "@/lib/thumbs";
-import { Count, LinkCard, SearchInput, Segmented, TableOfContents, type ComponentTier, type TocItem } from "@/lib/ui";
+import { CardGrid, Count, LinkCard, SearchInput, Segmented, TableOfContents, type ComponentTier, type TocItem } from "@/lib/ui";
 import { DocHeader, SectionLabel } from "./page-header";
 
 export type IndexItem = { slug: string; name: string };
@@ -94,7 +94,7 @@ export function ComponentIndex({ tiers }: { tiers: IndexTier[] }) {
           {sections.map((s) => (
             <section key={anchor(s.tier, s.id)} id={anchor(s.tier, s.id)} className="flex scroll-mt-6xl flex-col gap-sm">
               <SectionLabel>{s.label}</SectionLabel>
-              <div className="grid grid-cols-[repeat(auto-fill,minmax(var(--santo-dimension-space-192),1fr))] gap-md">
+              <CardGrid minItem="space-192" gap="md" masonry={false}>
                 {s.items.map((c) => {
                   const Thumb = thumbs[c.slug];
                   return (
@@ -107,7 +107,7 @@ export function ComponentIndex({ tiers }: { tiers: IndexTier[] }) {
                     />
                   );
                 })}
-              </div>
+              </CardGrid>
             </section>
           ))}
         </div>

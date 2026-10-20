@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { listEffectStyles, listMotion, listTextStyles } from "@/lib/docs/catalog";
-import { Count, Icon, LinkCard } from "@/lib/ui";
+import { CardGrid, Count, Icon, LinkCard } from "@/lib/ui";
 import { DocHeader, DocPage, SectionLabel } from "../_docs/page-header";
 import { groupAnchor, rolesOf, TYPE_GROUPS } from "./_parts/groups";
 
@@ -24,7 +24,7 @@ export default function EstilosPage() {
 
       <section className="flex flex-col gap-sm">
         <SectionLabel>Estilos</SectionLabel>
-        <div className="grid gap-md sm:grid-cols-2 lg:grid-cols-3">
+        <CardGrid columns={{ sm: 2, lg: 3 }} gap="md">
           <LinkCard
             icon={<Icon.Type size={16} />}
             title="Tipografia"
@@ -53,7 +53,7 @@ export default function EstilosPage() {
               { label: "Receitas", href: `${motion.route}#receitas` },
             ]}
           />
-        </div>
+        </CardGrid>
       </section>
     </DocPage>
   );

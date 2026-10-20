@@ -1,6 +1,6 @@
 import { listCollections, listEffectStyles, listIdentities, listTextStyles } from "@/lib/docs/catalog";
 import { figmaSource } from "@/lib/tokens";
-import { componentsByTier, Icon, LinkCard } from "@/lib/ui";
+import { CardGrid, componentsByTier, Icon, LinkCard } from "@/lib/ui";
 import { DocHeader, DocPage } from "./_docs/page-header";
 import { FIGMA_URL, groupAnchor } from "./_docs/links";
 
@@ -16,7 +16,7 @@ export default function DocsHome() {
         title="Documentação"
       />
 
-      <div className="grid grid-cols-1 gap-md md:grid-cols-2 xl:grid-cols-3">
+      <CardGrid columns={{ md: 2, xl: 3 }} gap="md">
         <LinkCard
           icon={<Icon.Palette size={20} />}
           title="Tokens"
@@ -60,7 +60,7 @@ export default function DocsHome() {
           title="Figma"
           links={[{ label: `Abrir ${figmaSource.fileName}`, href: FIGMA_URL }]}
         />
-      </div>
+      </CardGrid>
     </DocPage>
   );
 }

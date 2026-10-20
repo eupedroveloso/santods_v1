@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { Button, Card, Chip, CopyCode, Icon, IconButton, IconTile, Skeleton, Switch } from "@/lib/ui";
+import { Button, Card, CardGrid, Chip, CopyCode, Icon, IconButton, IconTile, Skeleton, Switch } from "@/lib/ui";
 import { RECIPES, type RecipeClass } from "./recipes";
 
 /** A demo de cada receita de recipes.ts. */
@@ -69,11 +69,11 @@ function RecipeCard({ recipe }: { recipe: (typeof RECIPES)[number] }) {
 
 export function MotionRecipes() {
   return (
-    <div className="grid gap-md sm:grid-cols-2">
+    <CardGrid columns={{ sm: 2 }} gap="md">
       {RECIPES.map((r) => (
         <RecipeCard key={r.cls} recipe={r} />
       ))}
-    </div>
+    </CardGrid>
   );
 }
 
