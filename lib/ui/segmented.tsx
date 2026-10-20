@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
+import { RADIUS_CONTROL, RADIUS_CONTROL_VAR } from "./radius";
 
 /**
  * Controle segmentado: escolha unica entre 2 e 4 opcoes visiveis ao mesmo tempo.
@@ -20,8 +20,20 @@ export type Segment<T extends string> = {
  * Trilho em pastilha (surface/sunken, chao) com a pastilha ativa ELEVADA
  * (raised + shadow-xs) — o vocabulario de pastilha da skill santo-ui-craft.
  * Raio aninhado (principio 5 do Pedro): pastilha com o raio de controle
- * (RADIUS_CONTROL) e trilho com p-2xs + RADIUS_TRACK = controle + 2xs, concentrico.
+ * (RADIUS_CONTROL). O trilho deriva o raio do controle + o próprio padding:
+ * radius/lg é fixo e não acompanha uma mudança de raio da marca.
  */
+const TRACK_PADDING = "var(--santo-space-2xs)";
+const TRACK_STYLE = {
+  padding: TRACK_PADDING,
+  borderRadius: `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING})`,
+};
+const FLOATING_TRACK_STYLE = {
+  ...TRACK_STYLE,
+  // santo-edge acrescenta um fio entre o padding e a borda exterior.
+  borderRadius: `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING} + var(--santo-border-thin))`,
+};
+
 const SEG_SIZE = {
   sm: "h-(--santo-dimension-size-24) px-xs santo-caption-semibold",
   md: "h-(--santo-dimension-size-32) px-sm santo-body-small-medium",
@@ -46,7 +58,8 @@ export function Segmented<T extends string>({
   return (
     <div
       role="radiogroup"
-      className={`${block ? "flex w-full" : "inline-flex"} max-w-full min-w-0 shrink-0 items-center gap-3xs ${RADIUS_TRACK} bg-surface-sunken p-2xs ${className}`}
+      style={TRACK_STYLE}
+      className={`${block ? "flex w-full" : "inline-flex"} max-w-full min-w-0 shrink-0 items-center gap-3xs bg-surface-sunken ${className}`}
     >
       {options.map((o) => {
         const active = o.value === value;
@@ -114,10 +127,11 @@ export function TabBar<T extends string>({
     <div
       role="tablist"
       aria-label={label}
+      style={floating ? FLOATING_TRACK_STYLE : TRACK_STYLE}
       className={
         floating
-          ? `santo-edge flex min-w-0 items-center justify-around gap-3xs ${RADIUS_TRACK} bg-surface-raised p-2xs shadow-lg backdrop-blur-md ${className}`
-          : `inline-flex max-w-full min-w-0 items-center gap-3xs overflow-x-auto ${RADIUS_TRACK} bg-surface-sunken p-2xs scrollbar-bare ${className}`
+          ? `santo-edge flex min-w-0 items-center justify-around gap-3xs bg-surface-raised shadow-lg backdrop-blur-md ${className}`
+          : `inline-flex max-w-full min-w-0 items-center gap-3xs overflow-x-auto bg-surface-sunken scrollbar-bare ${className}`
       }
     >
       {options.map((o) => {

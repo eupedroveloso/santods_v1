@@ -106,6 +106,7 @@ function Block({
   outline = false,
   elevated = false,
   animated = false,
+  track = false,
   children,
   className = "",
 }: {
@@ -117,12 +118,18 @@ function Block({
   elevated?: boolean;
   /** Placeholder de carregamento: brilho correndo. Nunca nas thumbs. */
   animated?: boolean;
+  /** Trilho de miniatura: raio xs do filho + padding 3xs, igual nos quatro lados. */
+  track?: boolean;
   children?: ReactNode;
   className?: string;
 }) {
   const r = radius === "full" ? "rounded-full" : "rounded-xs";
   return (
     <div
+      style={track ? {
+        padding: "var(--santo-space-3xs)",
+        borderRadius: "calc(var(--santo-radius-xs) + var(--santo-space-3xs))",
+      } : undefined}
       className={`flex shrink-0 ${WIDTH[w]} ${h ? HEIGHT[h] : ""} ${r} ${TONE[elevated ? "raised" : tone]} ${
         outline ? "border-thin border-border-subtle" : ""
       } ${elevated ? "shadow-xs" : ""} ${animated ? SHIMMER : ""} ${className}`}

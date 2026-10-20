@@ -15,7 +15,7 @@ export const segmentedMeta: ComponentMeta[] = [
     name: "TabBar",
     slug: "tab-bar",
     category: "estrutura",
-    tier: "primitivo",
+    tier: "semantico",
     source: "segmented.tsx",
     description: "Abas em pastilha, para trocar de vista dentro da mesma página.",
     related: ["segmented", "chip"],

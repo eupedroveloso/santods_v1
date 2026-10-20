@@ -12,29 +12,34 @@ const RANGES = [
   { value: "30d", label: "30 dias" },
   { value: "7d", label: "7 dias" },
 ];
+const ICON_RANGES = [
+  { value: "3m", label: <Icon.Grid size={16} />, title: "Grade" },
+  { value: "30d", label: <Icon.ListIcon size={16} />, title: "Lista" },
+  { value: "7d", label: <Icon.Code size={16} />, title: "Código" },
+];
 
 function SegmentedPlayground({ values: v }: { values: ControlValues }) {
   const [value, setValue] = useState("30d");
   return (
-    <Segmented
-      size={v.size as "sm" | "md"}
-      value={value}
-      onChange={setValue}
-      options={RANGES.slice(0, Number(v.count) === 2 ? 2 : 3)}
-    />
+    <div className="w-full max-w-(--santo-dimension-space-384)">
+      <Segmented
+        size={v.size as "sm" | "md"}
+        block={Boolean(v.block)}
+        value={value}
+        onChange={setValue}
+        options={(v.icons ? ICON_RANGES : RANGES).slice(0, Number(v.count) === 2 ? 2 : 3)}
+      />
+    </div>
   );
 }
 
 function IconOnly() {
-  const [mode, setMode] = useState<"claro" | "escuro">("claro");
+  const [mode, setMode] = useState("30d");
   return (
     <Segmented
       value={mode}
       onChange={setMode}
-      options={[
-        { value: "claro", label: <Icon.Sun size={16} />, title: "Claro" },
-        { value: "escuro", label: <Icon.Moon size={16} />, title: "Escuro" },
-      ]}
+      options={ICON_RANGES}
     />
   );
 }
@@ -45,7 +50,7 @@ function FullWidth() {
     <div className="w-full max-w-(--santo-dimension-space-320)">
       <Segmented
         size="md"
-        className="w-full"
+        block
         value={value}
         onChange={setValue}
         options={[
@@ -97,6 +102,8 @@ export const segmentedDemos: DemoMap = {
       controls: [
         { kind: "select", prop: "size", label: "Tamanho", options: ["sm", "md"], initial: "md" },
         { kind: "select", prop: "count", label: "Opções", options: ["2", "3"], initial: "3" },
+        { kind: "boolean", prop: "icons", label: "Só ícones", initial: false },
+        { kind: "boolean", prop: "block", label: "Largura total", initial: false },
       ],
       Preview: SegmentedPlayground,
       code: (v) =>
@@ -104,9 +111,10 @@ export const segmentedDemos: DemoMap = {
           "Segmented",
           {
             size: v.size as string,
+            block: v.block,
             value: "{periodo}",
             onChange: "{setPeriodo}",
-            options: Number(v.count) === 2 ? `{[{ value: "3m", label: "3 meses" }, { value: "30d", label: "30 dias" }]}` : "{periodos}",
+            options: v.icons ? "{opcoesComIcones}" : Number(v.count) === 2 ? `{[{ value: "3m", label: "3 meses" }, { value: "30d", label: "30 dias" }]}` : "{periodos}",
           },
           undefined,
           { size: "sm" },
@@ -119,15 +127,16 @@ export const segmentedDemos: DemoMap = {
   value={modo}
   onChange={setModo}
   options={[
-    { value: "claro", label: <Icon.Sun size={16} />, title: "Claro" },
-    { value: "escuro", label: <Icon.Moon size={16} />, title: "Escuro" },
+    { value: "grade", label: <Icon.Grid size={16} />, title: "Grade" },
+    { value: "lista", label: <Icon.ListIcon size={16} />, title: "Lista" },
+    { value: "codigo", label: <Icon.Code size={16} />, title: "Código" },
   ]}
 />`,
         Preview: IconOnly,
       },
       {
         title: "Largura total",
-        code: `<Segmented size="md" className="w-full" … />`,
+        code: `<Segmented size="md" block … />`,
         Preview: FullWidth,
       },
     ],
