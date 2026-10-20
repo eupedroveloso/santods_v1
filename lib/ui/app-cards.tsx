@@ -174,6 +174,8 @@ export function ChartCard<T extends string>({
   meta,
   ranges,
   initialRange,
+  range: controlled,
+  onRangeChange,
   kind = "area",
   stacked = false,
   format,
@@ -184,13 +186,22 @@ export function ChartCard<T extends string>({
   meta?: string;
   ranges: ChartRange<T>[];
   initialRange?: T;
+  /**
+   * Periodo CONTROLADO de fora (ex.: o filtro do DashboardHeader): o cartao
+   * segue esse valor e nao mostra o proprio Segmented. Sem ele, o cartao tem os
+   * periodos dele.
+   */
+  range?: T;
+  onRangeChange?: (value: T) => void;
   kind?: "area" | "line" | "bar";
   /** Area ou barra empilhada. */
   stacked?: boolean;
   format?: (v: number) => string;
   className?: string;
 }) {
-  const [range, setRange] = useState<T>(initialRange ?? ranges[0].value);
+  const [own, setOwn] = useState<T>(initialRange ?? ranges[0].value);
+  const range = controlled ?? own;
+  const setRange = (v: T) => (onRangeChange ? onRangeChange(v) : setOwn(v));
   const current = ranges.find((r) => r.value === range) ?? ranges[0];
   const props = { series: current.series, labels: current.labels, label: `${title}, ${String(current.label)}`, format, height: 192 as const };
   return (
@@ -198,7 +209,7 @@ export function ChartCard<T extends string>({
       <CardHeader
         title={title}
         meta={meta ? <Count>{meta}</Count> : undefined}
-        action={ranges.length > 1 && <Segmented value={range} onChange={setRange} options={ranges} />}
+        action={controlled === undefined && ranges.length > 1 && <Segmented value={range} onChange={setRange} options={ranges} />}
       />
       {kind === "line" ? (
         <LineChart {...props} />

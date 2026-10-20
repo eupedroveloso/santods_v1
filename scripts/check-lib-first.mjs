@@ -139,7 +139,8 @@ function* jsxTags(src) {
       else if (c === '>' && depth === 0) break;
     }
     yield { name: m[1], attrs: src.slice(re.lastIndex, i), index: m.index };
-    re.lastIndex = i;
+    // Nao pula os atributos: JSX passado em prop (filter={<Segmented />},
+    // leading={<Ring />}) tambem e tag da tela e precisa ser auditado.
   }
 }
 

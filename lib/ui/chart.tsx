@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, type CSSProperties, type PointerEvent, type ReactNode } from "react";
+import {
+  useState,
+  type CSSProperties,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { resolved } from "@/lib/tokens";
 import { AxisLabels } from "./chart-axis";
 import { ChartGrid } from "./chart-grid";
@@ -51,7 +56,9 @@ export type ChartSeries = {
 /** Altura da area de plotagem, em degraus de dimension/space. */
 export type ChartHeight = 40 | 48 | 56 | 64 | 96 | 128 | 160 | 192 | 224 | 256;
 
-const heightOf = (h: ChartHeight): CSSProperties => ({ height: `var(--santo-dimension-space-${h})` });
+const heightOf = (h: ChartHeight): CSSProperties => ({
+  height: `var(--santo-dimension-space-${h})`,
+});
 
 const STROKE: CSSProperties = { strokeWidth: "var(--santo-border-thick)" };
 
@@ -76,13 +83,21 @@ type BaseProps = {
 };
 
 /** Junta `values` (uma serie) e `series` (varias) numa lista so. */
-function normalize(values?: number[], series?: ChartSeries[], color?: string): ChartSeries[] {
+function normalize(
+  values?: number[],
+  series?: ChartSeries[],
+  color?: string,
+): ChartSeries[] {
   if (series?.length) return series;
   return [{ name: "Valor", values: values ?? [], color }];
 }
 
 /** Cor da serie: classe do tom, ou a var crua de compatibilidade. Recua para `muted` quando outra esta em foco. */
-function paint(s: ChartSeries, i: number, dim: boolean): { className: string; style?: CSSProperties } {
+function paint(
+  s: ChartSeries,
+  i: number,
+  dim: boolean,
+): { className: string; style?: CSSProperties } {
   if (dim) return { className: TONE.muted.text };
   if (s.color) return { className: "", style: { color: s.color } };
   return { className: TONE[toneAt(i, s.tone)].text };
@@ -90,7 +105,11 @@ function paint(s: ChartSeries, i: number, dim: boolean): { className: string; st
 
 /** Lavagem da area: o par subtle do tom. Cor crua (compatibilidade) nao tem par, cai na lavagem neutra. */
 const washOf = (s: ChartSeries, i: number, dim: boolean) =>
-  dim ? TONE.muted.wash : s.color ? TONE.neutral.wash : TONE[toneAt(i, s.tone)].wash;
+  dim
+    ? TONE.muted.wash
+    : s.color
+      ? TONE.neutral.wash
+      : TONE[toneAt(i, s.tone)].wash;
 
 /* ----------------------------------------------------------------- moldura */
 
@@ -126,12 +145,17 @@ function Frame({
         {/* Eixo y na altura exata da plotagem: os ticks casam com a grade. */}
         {yTicks && (
           <div className="shrink-0" style={heightOf(height)}>
-            <AxisLabels orientation="y" labels={[...yTicks].reverse().map(formatTick)} />
+            <AxisLabels
+              orientation="y"
+              labels={[...yTicks].reverse().map(formatTick)}
+            />
           </div>
         )}
         <div className="flex min-w-0 flex-1 flex-col gap-xs">
           {children}
-          {xLabels && <AxisLabels labels={xLabels} mode={xMode} active={active} />}
+          {xLabels && (
+            <AxisLabels labels={xLabels} mode={xMode} active={active} />
+          )}
         </div>
       </div>
       {table}
@@ -152,40 +176,53 @@ function DataTable({
   format: (v: number) => string;
 }) {
   return (
-    <table className="sr-only">
-      {label && <caption>{label}</caption>}
-      <thead>
-        <tr>
-          <th scope="col">Série</th>
-          {labels.map((l, i) => (
-            <th key={i} scope="col">
-              {l}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {series.map((s, i) => (
-          <tr key={i}>
-            <th scope="row">{s.name}</th>
-            {labels.map((_, j) => (
-              <td key={j}>{s.values[j] === undefined ? "—" : format(s.values[j])}</td>
+    // div.sr-only, nao table.sr-only: a tabela ignora o width 1px e crescia
+    // com o conteudo, criando rolagem horizontal no celular.
+    <div className="sr-only">
+      <table>
+        {label && <caption>{label}</caption>}
+        <thead>
+          <tr>
+            <th scope="col">Série</th>
+            {labels.map((l, i) => (
+              <th key={i} scope="col">
+                {l}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {series.map((s, i) => (
+            <tr key={i}>
+              <th scope="row">{s.name}</th>
+              {labels.map((_, j) => (
+                <td key={j}>
+                  {s.values[j] === undefined ? "—" : format(s.values[j])}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
 /** Frase do ponto em foco, para o anuncio aria-live: "mar.: Receita 12, Custos 8". */
-const readout = (title: string | undefined, rows: { name: string; value: string }[]) =>
+const readout = (
+  title: string | undefined,
+  rows: { name: string; value: string }[],
+) =>
   `${title ? `${title}: ` : ""}${rows.map((r) => `${r.name} ${r.value}`).join(", ")}`;
 
 /** Atributos do alvo de interacao (ou de imagem estatica). */
 function plotA11y(interactive: boolean, label: string | undefined) {
   return interactive
-    ? { role: "group", "aria-roledescription": "gráfico", "aria-label": label ?? "Gráfico" }
+    ? {
+        role: "group",
+        "aria-roledescription": "gráfico",
+        "aria-label": label ?? "Gráfico",
+      }
     : { role: "img", "aria-label": label ?? "Gráfico" };
 }
 
@@ -228,7 +265,9 @@ function TrendChart({
 
   // Empilhada: cada serie soma as de baixo no mesmo indice.
   const tops = series.map((s) => s.values.slice());
-  if (stacked) for (let i = 1; i < tops.length; i++) tops[i] = tops[i].map((v, j) => v + (tops[i - 1][j] ?? 0));
+  if (stacked)
+    for (let i = 1; i < tops.length; i++)
+      tops[i] = tops[i].map((v, j) => v + (tops[i - 1][j] ?? 0));
 
   const all = tops.flat();
   const lo = area || stacked ? Math.min(0, ...all) : Math.min(...all);
@@ -236,12 +275,15 @@ function TrendChart({
   const t0 = ticks[0];
   const span = ticks[ticks.length - 1] - t0 || 1;
   const yOf = (v: number) => 100 - ((v - t0) / span) * 100;
-  const pts = tops.map((vals) => vals.map((v, i) => ({ x: xAt(i, n), y: yOf(v) })));
+  const pts = tops.map((vals) =>
+    vals.map((v, i) => ({ x: xAt(i, n), y: yOf(v) })),
+  );
   const base = yOf(Math.max(0, t0));
 
   const band = (upper: Point[], lower?: Point[]) => {
     const top = smoothPath(upper);
-    if (!lower) return `${top} L ${upper[upper.length - 1].x} ${base} L ${upper[0].x} ${base} Z`;
+    if (!lower)
+      return `${top} L ${upper[upper.length - 1].x} ${base} L ${upper[0].x} ${base} Z`;
     return `${top} ${smoothPath([...lower].reverse()).replace(/^M/, "L")} Z`;
   };
 
@@ -251,7 +293,8 @@ function TrendChart({
       ? []
       : series.map((s, i) => ({
           name: s.name,
-          value: s.values[active] === undefined ? "—" : format(s.values[active]),
+          value:
+            s.values[active] === undefined ? "—" : format(s.values[active]),
           tone: s.color ? undefined : toneAt(i, s.tone),
         }));
   const ax = active === null ? 0 : xAt(active, n);
@@ -268,13 +311,18 @@ function TrendChart({
         showLegend && (
           <ChartLegend
             mark={area ? "rect" : "line"}
-            items={series.map((s, i) => ({ name: s.name, tone: toneAt(i, s.tone) }))}
+            items={series.map((s, i) => ({
+              name: s.name,
+              tone: toneAt(i, s.tone),
+            }))}
             active={focusSeries}
             onActiveChange={interactive ? setFocusSeries : undefined}
           />
         )
       }
-      table={<DataTable label={label} labels={xs} series={series} format={format} />}
+      table={
+        <DataTable label={label} labels={xs} series={series} format={format} />
+      }
     >
       <div
         className="relative min-w-0 touch-pan-y"
@@ -283,7 +331,12 @@ function TrendChart({
         {...(interactive ? handlers : {})}
       >
         {grid && <ChartGrid lines={ticks.length} />}
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible" aria-hidden>
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 size-full overflow-visible"
+          aria-hidden
+        >
           {(area || stacked) &&
             pts
               .map((p, i) => ({ p, i }))
@@ -330,19 +383,34 @@ function TrendChart({
             <span key={`d${i}`} aria-hidden>
               {dots &&
                 p.map((q, j) => (
-                  <span key={j} className={`${dotClass} ${c.className}`} style={{ left: `${q.x}%`, top: `${q.y}%`, ...c.style }} />
+                  <span
+                    key={j}
+                    className={`${dotClass} ${c.className}`}
+                    style={{ left: `${q.x}%`, top: `${q.y}%`, ...c.style }}
+                  />
                 ))}
               {!dots && at !== null && p[at] && (
                 <span
                   className={`${dotClass} ${c.className} ${CURSOR_MOTION}`}
-                  style={{ left: `${p[at].x}%`, top: `${p[at].y}%`, ...c.style }}
+                  style={{
+                    left: `${p[at].x}%`,
+                    top: `${p[at].y}%`,
+                    ...c.style,
+                  }}
                 />
               )}
             </span>
           );
         })}
 
-        {active !== null && <ChartTooltip x={ax} title={labels?.[active]} rows={rows} mark={area ? "rect" : "line"} />}
+        {active !== null && (
+          <ChartTooltip
+            x={ax}
+            title={labels?.[active]}
+            rows={rows}
+            mark={area ? "rect" : "line"}
+          />
+        )}
         {interactive && (
           <span className="sr-only" aria-live="polite">
             {active === null ? "" : readout(labels?.[active], rows)}
@@ -402,7 +470,12 @@ export function StackedAreaChart({
   className = "",
 }: {
   /** Da base para o topo. */
-  series: { values: number[]; color?: string; tone?: ChartTone; name?: string }[];
+  series: {
+    values: number[];
+    color?: string;
+    tone?: ChartTone;
+    name?: string;
+  }[];
   labels?: string[];
   height?: ChartHeight;
   className?: string;
@@ -416,7 +489,12 @@ export function StackedAreaChart({
       height={height}
       labels={labels}
       className={className}
-      series={series.map((s, i) => ({ name: s.name ?? `Série ${i + 1}`, values: s.values, color: s.color, tone: s.tone }))}
+      series={series.map((s, i) => ({
+        name: s.name ?? `Série ${i + 1}`,
+        values: s.values,
+        color: s.color,
+        tone: s.tone,
+      }))}
     />
   );
 }
@@ -463,38 +541,57 @@ export function BarChart({
   /** Cor crua da serie unica (compatibilidade). Prefira `series[].tone`. */
   fill?: string;
 }) {
-  const series = normalize(values, input, fill).map((s) => ({ ...s, values: s.values.map((v) => Math.max(0, v)) }));
+  const series = normalize(values, input, fill).map((s) => ({
+    ...s,
+    values: s.values.map((v) => Math.max(0, v)),
+  }));
   const n = Math.max(1, ...series.map((s) => s.values.length));
   const xs = labels ?? Array.from({ length: n }, (_, i) => String(i + 1));
   const horizontal = orientation === "horizontal";
-  const { active, handlers } = useChartCursor(n, { mode: "band", axis: horizontal ? "y" : "x" });
+  const { active, handlers } = useChartCursor(n, {
+    mode: "band",
+    axis: horizontal ? "y" : "x",
+  });
   const [focusSeries, setFocusSeries] = useState<number | null>(null);
   const stacked = mode === "stacked" && series.length > 1;
   const single = series.length === 1;
-  const hi = highlight === undefined ? undefined : highlight < 0 ? n + highlight : highlight;
+  const hi =
+    highlight === undefined
+      ? undefined
+      : highlight < 0
+        ? n + highlight
+        : highlight;
   const direct = valueLabels ?? (horizontal && single);
 
-  const totals = Array.from({ length: n }, (_, j) => series.reduce((a, s) => a + (s.values[j] ?? 0), 0));
-  const peak = stacked ? Math.max(...totals) : Math.max(...series.flatMap((s) => s.values));
+  const totals = Array.from({ length: n }, (_, j) =>
+    series.reduce((a, s) => a + (s.values[j] ?? 0), 0),
+  );
+  const peak = stacked
+    ? Math.max(...totals)
+    : Math.max(...series.flatMap((s) => s.values));
   const ticks = niceTicks(0, peak || 1, 4);
   const top = ticks[ticks.length - 1] || 1;
   const pct = (v: number) => `${(v / top) * 100}%`;
 
   const dimmed = (si: number, j: number) =>
-    (focusSeries !== null && focusSeries !== si) || (single && hi !== undefined && j !== hi);
+    (focusSeries !== null && focusSeries !== si) ||
+    (single && hi !== undefined && j !== hi);
   const toneOf = (si: number, j: number) => {
     if (dimmed(si, j)) return TONE.muted.bg;
     return series[si].color ? "" : TONE[toneAt(si, series[si].tone)].bg;
   };
   const colorStyle = (si: number, j: number): CSSProperties | undefined =>
-    series[si].color && !dimmed(si, j) ? { background: series[si].color } : undefined;
+    series[si].color && !dimmed(si, j)
+      ? { background: series[si].color }
+      : undefined;
 
   const rows =
     active === null
       ? []
       : series.map((s, i) => ({
           name: s.name,
-          value: s.values[active] === undefined ? "—" : format(s.values[active]),
+          value:
+            s.values[active] === undefined ? "—" : format(s.values[active]),
           tone: s.color ? undefined : toneAt(i, s.tone),
         }));
   const legendNode = (legend ?? series.length >= 2) && (
@@ -504,7 +601,9 @@ export function BarChart({
       onActiveChange={interactive ? setFocusSeries : undefined}
     />
   );
-  const table = <DataTable label={label} labels={xs} series={series} format={format} />;
+  const table = (
+    <DataTable label={label} labels={xs} series={series} format={format} />
+  );
   const live = interactive && (
     <span className="sr-only" aria-live="polite">
       {active === null ? "" : readout(xs[active], rows)}
@@ -521,7 +620,9 @@ export function BarChart({
       return (
         <span
           className={`flex gap-3xs ${horizontal ? "h-md flex-row" : "w-full max-w-(--santo-dimension-space-24) flex-col-reverse"}`}
-          style={horizontal ? { width: pct(totals[j]) } : { height: pct(totals[j]) }}
+          style={
+            horizontal ? { width: pct(totals[j]) } : { height: pct(totals[j]) }
+          }
         >
           {series.map((s, si) => {
             const last = series.slice(si + 1).every((t) => !t.values[j]);
@@ -529,7 +630,10 @@ export function BarChart({
               <span
                 key={si}
                 className={`min-h-0 min-w-0 santo-transition-colors ${toneOf(si, j)} ${last ? end : ""}`}
-                style={{ flex: `${s.values[j] ?? 0} 1 0`, ...colorStyle(si, j) }}
+                style={{
+                  flex: `${s.values[j] ?? 0} 1 0`,
+                  ...colorStyle(si, j),
+                }}
               />
             );
           })}
@@ -537,19 +641,32 @@ export function BarChart({
       );
     }
     return (
-      <span className={`flex gap-3xs ${horizontal ? "w-full flex-col justify-center" : "h-full w-full items-end justify-center"}`}>
+      <span
+        className={`flex gap-3xs ${horizontal ? "w-full flex-col justify-center" : "h-full w-full items-end justify-center"}`}
+      >
         {series.map((s, si) => (
           <span
             key={si}
             className={`relative block santo-transition-colors ${end} ${toneOf(si, j)} ${
-              horizontal ? (single ? "h-md" : "h-xs") : "w-full max-w-(--santo-dimension-space-24)"
+              horizontal
+                ? single
+                  ? "h-md"
+                  : "h-xs"
+                : "w-full max-w-(--santo-dimension-space-24)"
             }`}
-            style={{ ...(horizontal ? { width: pct(s.values[j] ?? 0) } : { height: pct(s.values[j] ?? 0) }), ...colorStyle(si, j) }}
+            style={{
+              ...(horizontal
+                ? { width: pct(s.values[j] ?? 0) }
+                : { height: pct(s.values[j] ?? 0) }),
+              ...colorStyle(si, j),
+            }}
           >
             {direct && single && (
               <span
                 className={`santo-caption-small-medium absolute whitespace-nowrap text-text-secondary tabular-nums ${
-                  horizontal ? "left-full top-1/2 ml-2xs -translate-y-1/2" : "bottom-full left-1/2 mb-3xs -translate-x-1/2"
+                  horizontal
+                    ? "left-full top-1/2 ml-2xs -translate-y-1/2"
+                    : "bottom-full left-1/2 mb-3xs -translate-x-1/2"
                 }`}
               >
                 {format(s.values[j] ?? 0)}
@@ -564,7 +681,13 @@ export function BarChart({
   if (horizontal) {
     const ty = active === null ? 0 : ((active + 0.5) / n) * 100;
     const tx =
-      active === null ? 0 : ((stacked ? totals[active] : Math.max(...series.map((s) => s.values[active] ?? 0))) / top) * 100;
+      active === null
+        ? 0
+        : ((stacked
+            ? totals[active]
+            : Math.max(...series.map((s) => s.values[active] ?? 0))) /
+            top) *
+          100;
     return (
       <div className={`flex min-w-0 flex-col gap-sm ${className}`}>
         {legendNode}
@@ -582,19 +705,47 @@ export function BarChart({
             ))}
           </div>
           <div className="flex min-w-0 flex-1 flex-col gap-xs">
-            <div className="relative min-w-0 touch-pan-x" {...plotA11y(interactive, label)} {...(interactive ? handlers : {})}>
-              {grid && <ChartGrid lines={ticks.length} orientation="vertical" className={direct ? "right-3xl" : ""} />}
-              <div className={`relative flex flex-col ${direct ? "pr-3xl" : ""}`}>
+            <div
+              className="relative min-w-0 touch-pan-x"
+              {...plotA11y(interactive, label)}
+              {...(interactive ? handlers : {})}
+            >
+              {grid && (
+                <ChartGrid
+                  lines={ticks.length}
+                  orientation="vertical"
+                  className={direct ? "right-3xl" : ""}
+                />
+              )}
+              <div
+                className={`relative flex flex-col ${direct ? "pr-3xl" : ""}`}
+              >
                 {xs.map((_, j) => (
-                  <span key={j} className={`flex h-xl items-center ${RADIUS_BAR} santo-transition-colors ${wash(j)}`}>
+                  <span
+                    key={j}
+                    className={`flex h-xl items-center ${RADIUS_BAR} santo-transition-colors ${wash(j)}`}
+                  >
                     {bars(j)}
                   </span>
                 ))}
               </div>
-              {active !== null && !direct && <ChartTooltip x={Math.min(tx, 100)} y={ty} title={xs[active]} rows={rows} mark="rect" />}
+              {active !== null && !direct && (
+                <ChartTooltip
+                  x={Math.min(tx, 100)}
+                  y={ty}
+                  title={xs[active]}
+                  rows={rows}
+                  mark="rect"
+                />
+              )}
               {live}
             </div>
-            {yAxis && <AxisLabels labels={ticks.map(formatTick)} className={direct ? "pr-3xl" : ""} />}
+            {yAxis && (
+              <AxisLabels
+                labels={ticks.map(formatTick)}
+                className={direct ? "pr-3xl" : ""}
+              />
+            )}
           </div>
         </div>
         {table}
@@ -631,7 +782,9 @@ export function BarChart({
             </span>
           ))}
         </div>
-        {active !== null && <ChartTooltip x={tx} title={xs[active]} rows={rows} mark="rect" />}
+        {active !== null && (
+          <ChartTooltip x={tx} title={xs[active]} rows={rows} mark="rect" />
+        )}
         {live}
       </div>
     </Frame>
@@ -644,10 +797,29 @@ export type DonutDatum = { name: string; value: number; tone?: ChartTone };
 export type DonutSize = "sm" | "md" | "lg";
 
 /** Lado e espessura saem do token; o viewBox tem o lado em px, entao 1 unidade = 1 px. */
-const DONUT: Record<DonutSize, { side: string; stroke: string; box: string; value: string }> = {
-  sm: { side: resolved["dimension/space/128"], stroke: resolved["dimension/space/12"], box: "size-(--santo-dimension-space-128)", value: "santo-body-semibold" },
-  md: { side: resolved["dimension/space/160"], stroke: resolved["dimension/space/16"], box: "size-(--santo-dimension-space-160)", value: "santo-heading-5-bold" },
-  lg: { side: resolved["dimension/space/192"], stroke: resolved["dimension/space/24"], box: "size-(--santo-dimension-space-192)", value: "santo-heading-4-bold" },
+const DONUT: Record<
+  DonutSize,
+  { side: string; stroke: string; box: string; value: string }
+> = {
+  sm: {
+    side: resolved["dimension/space/128"],
+    stroke: resolved["dimension/space/12"],
+    box: "size-(--santo-dimension-space-128)",
+    value: "santo-body-semibold",
+  },
+  md: {
+    side: resolved["dimension/space/160"],
+    stroke: resolved["dimension/space/16"],
+    box: "size-(--santo-dimension-space-160)",
+    // Escala de numero do DS (Pedro: numeros menores): o total cabe no furo.
+    value: "santo-heading-6-bold",
+  },
+  lg: {
+    side: resolved["dimension/space/192"],
+    stroke: resolved["dimension/space/24"],
+    box: "size-(--santo-dimension-space-192)",
+    value: "santo-heading-5-bold",
+  },
 };
 /** Vao entre fatias (space/3xs) e quanto a fatia em foco engorda (border/heavy). */
 const SLICE_GAP = parseFloat(resolved["space/3xs"]);
@@ -698,7 +870,12 @@ export function DonutChart({
 
   // Inicio de cada fatia = soma das anteriores (em % do anel).
   const lens = data.map((d) => (Math.max(0, d.value) / total) * 100);
-  const slices = data.map((d, i) => ({ d, i, len: lens[i], from: lens.slice(0, i).reduce((a, b) => a + b, 0) }));
+  const slices = data.map((d, i) => ({
+    d,
+    i,
+    len: lens[i],
+    from: lens.slice(0, i).reduce((a, b) => a + b, 0),
+  }));
   const pctOf = (v: number) => `${Math.round((Math.max(0, v) / total) * 100)}%`;
   const focus = active === null ? null : data[active];
 
@@ -716,12 +893,17 @@ export function DonutChart({
               onPointerLeave: handlers.onPointerLeave,
               // O furo e o canto fora do anel nao sao fatia: o ponteiro ali solta o foco e o centro volta ao total.
               onPointerMove: (e: PointerEvent<HTMLDivElement>) => {
-                if ((e.target as Element).tagName.toLowerCase() !== "circle") setActive(null);
+                if ((e.target as Element).tagName.toLowerCase() !== "circle")
+                  setActive(null);
               },
             }
           : {})}
       >
-        <svg viewBox={`0 0 ${side} ${side}`} className="absolute inset-0 size-full -rotate-90" aria-hidden>
+        <svg
+          viewBox={`0 0 ${side} ${side}`}
+          className="absolute inset-0 size-full -rotate-90"
+          aria-hidden
+        >
           {slices.map(({ d, i, len, from }) => {
             const dash = Math.max(len - gap, 0);
             return (
@@ -748,37 +930,52 @@ export function DonutChart({
           })}
         </svg>
         {!pie && (
-          <span className="relative flex flex-col items-center gap-3xs text-center" aria-hidden>
-            <span className={`${s.value} text-text-primary tabular-nums`}>{format(focus ? focus.value : total)}</span>
-            <span className="santo-caption-medium text-text-tertiary">{focus ? focus.name : centerLabel}</span>
+          <span
+            className="relative flex flex-col items-center gap-3xs text-center"
+            aria-hidden
+          >
+            <span className={`${s.value} text-text-primary tabular-nums`}>
+              {format(focus ? focus.value : total)}
+            </span>
+            <span className="santo-caption-medium text-text-tertiary">
+              {focus ? focus.name : centerLabel}
+            </span>
           </span>
         )}
         {interactive && (
           <span className="sr-only" aria-live="polite">
-            {focus ? `${focus.name}: ${format(focus.value)} (${pctOf(focus.value)})` : ""}
+            {focus
+              ? `${focus.name}: ${format(focus.value)} (${pctOf(focus.value)})`
+              : ""}
           </span>
         )}
       </div>
       {legend && (
         <ChartLegend
           layout="column"
-          items={data.map((d, i) => ({ name: d.name, tone: toneAt(i, d.tone), value: pctOf(d.value) }))}
+          items={data.map((d, i) => ({
+            name: d.name,
+            tone: toneAt(i, d.tone),
+            value: pctOf(d.value),
+          }))}
           active={active}
           onActiveChange={interactive ? setActive : undefined}
         />
       )}
-      <table className="sr-only">
-        {label && <caption>{label}</caption>}
-        <tbody>
-          {data.map((d, i) => (
-            <tr key={i}>
-              <th scope="row">{d.name}</th>
-              <td>{format(d.value)}</td>
-              <td>{pctOf(d.value)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="sr-only">
+        <table>
+          {label && <caption>{label}</caption>}
+          <tbody>
+            {data.map((d, i) => (
+              <tr key={i}>
+                <th scope="row">{d.name}</th>
+                <td>{format(d.value)}</td>
+                <td>{pctOf(d.value)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

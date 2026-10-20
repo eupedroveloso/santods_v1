@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import {
+  BreakdownCard,
   CardGrid,
-  Button,
+  ChartCard,
   DashboardHeader,
   GoalsCard,
   Icon,
   InvestCard,
   LimitCard,
-  Segmented,
   StatCard,
   TransactionsCard,
+  type ChartRange,
   type Transaction,
 } from "@/lib/ui";
 import { Block } from "./_block";
@@ -21,9 +22,13 @@ import { Block } from "./_block";
  * BLOCAGEM POR FILEIRA (skill santo-ui-craft §10.4): cada fileira e uma grade
  * fixa com stretch, irmaos de conteudo equivalente e nenhum buraco:
  *   1. KPIs — 4 StatCard do mesmo molde (1 col; 2 em sm; 4 em xl).
- *   2. Operacao — Limite | Investir | Metas, cada um com cabecalho, conteudo,
+ *   2. Fluxo — ChartCard receita × despesa, largura total, periodo ligado ao
+ *      filtro do cabecalho.
+ *   3. Composicao — gastos por categoria (barras) | distribuicao (donut)
+ *      (1 coluna; 2 em xl, onde as alturas casam).
+ *   4. Operacao — Limite | Investir | Metas, cada um com cabecalho, conteudo,
  *      resumo e a acao ancorada no fim (1; 2 em md com Metas largo; 3 em xl).
- *   3. Transacoes — sempre largura total.
+ *   5. Transacoes — sempre largura total.
  * Um acento por cartao: a micro-viz OU a acao primaria leva brand.
  */
 
@@ -134,37 +139,105 @@ const TRANSACTIONS: Transaction[] = [
   { title: "Streaming", category: "Assinaturas", date: "05 out.", amount: -39.9 },
 ];
 
+/* ------------------------------------------------------------- Graficos */
+
+type Period = "7d" | "30d" | "12m";
+
+const brl = (v: number) => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+/** Compacto para o donut: "24,3 mil" cabe no furo (a moeda ja esta no Count do titulo). */
+const brlShort = (v: number) => `${(v / 1000).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} mil`;
+
+/** Receita × despesa por periodo: os mesmos valores do filtro do cabecalho. */
+const FLOW: ChartRange<Period>[] = [
+  {
+    value: "7d",
+    label: "7 dias",
+    labels: ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"],
+    series: [
+      { name: "Receita", values: [820, 640, 910, 760, 1180, 540, 430] },
+      { name: "Despesa", values: [410, 520, 380, 690, 450, 720, 310] },
+    ],
+  },
+  {
+    value: "30d",
+    label: "30 dias",
+    labels: ["sem 1", "sem 2", "sem 3", "sem 4", "sem 5"],
+    series: [
+      { name: "Receita", values: [3200, 4100, 3800, 5200, 4600] },
+      { name: "Despesa", values: [2600, 2900, 3100, 2800, 3300] },
+    ],
+  },
+  {
+    value: "12m",
+    label: "12 meses",
+    labels: ["nov", "dez", "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out"],
+    series: [
+      { name: "Receita", values: [14, 18, 12, 13, 15, 16, 17, 16, 19, 21, 20, 24].map((v) => v * 1000) },
+      { name: "Despesa", values: [11, 15, 10, 11, 12, 12, 13, 12, 14, 15, 15, 16].map((v) => v * 1000) },
+    ],
+  },
+];
+
+const SPENDING = [
+  { name: "Moradia", value: 2400 },
+  { name: "Alimentação", value: 1310 },
+  { name: "Transporte", value: 620 },
+  { name: "Lazer", value: 480 },
+  { name: "Assinaturas", value: 140 },
+];
+
+const ALLOCATION = [
+  { name: "Tesouro Selic", value: 11200 },
+  { name: "CDB", value: 6400 },
+  { name: "Ações", value: 4100 },
+  { name: "Reserva", value: 2600 },
+];
+
 export const DASHBOARD_BLOCKS = [
   { id: "dashboard-kpis", label: "Indicadores" },
+  { id: "dashboard-fluxo", label: "Receita × despesa" },
+  { id: "dashboard-gastos", label: "Gastos por categoria" },
+  { id: "dashboard-carteira", label: "Carteira" },
   { id: "dashboard-limite", label: "Limite diário" },
   { id: "dashboard-investir", label: "Investir" },
   { id: "dashboard-metas", label: "Metas" },
   { id: "dashboard-transacoes", label: "Transações" },
 ];
 
-const PERIODS = [
+const PERIODS: { value: Period; label: string }[] = [
   { value: "7d", label: "7 dias" },
   { value: "30d", label: "30 dias" },
   { value: "12m", label: "12 meses" },
 ];
 
 export function DashboardScreen() {
-  const [period, setPeriod] = useState("30d");
+  const [period, setPeriod] = useState<Period>("30d");
   return (
     <div className="flex flex-col gap-md">
       <DashboardHeader
         title="Dashboard"
         meta="Atualizado há 2 min"
-        filter={<Segmented value={period} onChange={setPeriod} options={PERIODS} />}
-        action={
-          <Button variant="primary" leading={<Icon.Plus size={16} />}>
-            Nova transação
-          </Button>
-        }
+        periods={PERIODS}
+        period={period}
+        onPeriodChange={setPeriod}
+        primaryAction={{ label: "Nova transação", icon: <Icon.Plus size={16} /> }}
       />
       <Block id="dashboard-kpis">
         <Kpis />
       </Block>
+      <Block id="dashboard-fluxo">
+        <ChartCard title="Receita × despesa" meta="R$ 4,6 mil livres" kind="area" ranges={FLOW} range={period} format={brl} />
+      </Block>
+      {/* 2 colunas so em xl: abaixo, o donut estreito empilha a legenda e ficaria
+          mais alto que as barras (margem morta). Empilhado, cada um vai largo. */}
+      <CardGrid columns={{ xl: 2 }} gap="md" masonry={false} stretch>
+        <Block id="dashboard-gastos" fill>
+          <BreakdownCard title="Gastos por categoria" meta="R$ 4,9 mil" kind="bars" items={SPENDING} format={brl} />
+        </Block>
+        <Block id="dashboard-carteira" fill>
+          <BreakdownCard title="Carteira" meta="R$ 24,3 mil" kind="donut" items={ALLOCATION} format={brlShort} centerLabel="R$ total" />
+        </Block>
+      </CardGrid>
       <CardGrid columns={{ md: 2, xl: 3 }} gap="md" masonry={false} stretch>
         <Block id="dashboard-limite" fill>
           <PaymentLimit />

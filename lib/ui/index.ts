@@ -139,6 +139,8 @@ export type { BrandId, BrandLogoSize } from "./brand-logo";
 export { BrandSwitch } from "./brand-switch";
 export { BrandCard } from "./brand-card";
 export { DashboardHeader } from "./dashboard-header";
+export { BreakdownCard } from "./breakdown-card";
+export type { BreakdownItem } from "./breakdown-card";
 export { TransactionRow } from "./transaction-row";
 export type { BrandCardColor } from "./brand-card";
 export { Rating } from "./rating";

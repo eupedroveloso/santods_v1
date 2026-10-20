@@ -86,7 +86,7 @@ export function GoalsCard({
               </Ring>
               <div className="flex min-w-0 flex-1 flex-col gap-2xs">
                 <Overline>{g.name}</Overline>
-                <span className="santo-heading-5-bold text-text-primary tabular-nums">{format(g.saved)}</span>
+                <span className="santo-heading-6-bold text-text-primary tabular-nums">{format(g.saved)}</span>
                 <span className="santo-caption-medium text-text-tertiary tabular-nums">de {format(g.target)}</span>
               </div>
             </div>
