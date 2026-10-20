@@ -78,7 +78,7 @@ ainda não tem. Comparação pelos nós de definição dos 74 styles publicados
 - **Impacto no código quando sincronizar:** as classes `.santo-<papel>-<peso>` dos 66 de
   texto ficam iguais. As de código mudam: `.santo-code-md` vira `.santo-code-md-regular`,
   e o papel `--text-code` vira `--text-code-md` e `--text-code-sm`. Quem usa
-  `santo-code-*` / `text-code` quebra. Avisar o Iluminador antes do `--write`.
+  `santo-code-*` / `text-code` quebra. Avisar o Coroinha antes do `--write`.
 - **Effect styles:** o publicado não tem o `none` (pode existir local sem publicar; a REST
   não vê). Os 6 restantes estão ligados a variáveis (raio, spread, cor), e a camada principal
   de xs, sm, md, lg e 2xl tem alpha `0x1a` no Figma contra `0x14`/`0x17`/`0x1f` no snapshot.
@@ -89,7 +89,7 @@ ainda não tem. Comparação pelos nós de definição dos 74 styles publicados
   100% com o inventário: os mesmos 8 componentes, descriptions, variantes e contagens.
 
 Ação: no próximo dump via MCP, rodar `check-parity`, mostrar a lista ao Pedro antes do
-`--write` e coordenar a troca de `santo-code-*` com o Iluminador.
+`--write` e coordenar a troca de `santo-code-*` com o Coroinha.
 
 ## Reconciliacao: snapshot a frente do Figma
 

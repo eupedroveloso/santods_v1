@@ -72,7 +72,7 @@ um dono de área bem definido:
 |---|---|---|
 | **Chefe** (maestro) | Planeja, delega, acompanha e consolida para o Pedro | Nada no repo. Nunca executa: nem código, build, git, servidor, portal ou doc. Seus `maestri ask` vão em segundo plano |
 | **Escriba** | Guardião de Tokens | `tokens/`, `lib/tokens/`, `scripts/figma-*`, `check-parity`, sincronização com o Figma |
-| **Iluminador** | Construtor de Interface | `lib/ui/`, `app/`, `lib/fonts/`, `lib/thumbs/`, documentação viva em `/componentes` |
+| **Coroinha** | Construtor de Interface | `lib/ui/`, `app/`, `lib/fonts/`, `lib/thumbs/`, documentação viva em `/componentes` |
 | **Oráculo** | Construtor de Gráficos (andar isolado) | Biblioteca de gráficos, hover e teclado, blocos de exemplo. Trabalha num andar próprio, juntado ao térreo quando o Pedro pede |
 | **Exorcista** | Revisor e QA | Só lê e roda checks. Revisa **somente quando o Pedro pede** |
 
@@ -80,7 +80,7 @@ Como uma tarefa anda:
 
 1. O Pedro pede ao Chefe. O Chefe registra a tarefa na nota compartilhada `santo-contexto`
    ("Tarefas em andamento") e a quebra por dono.
-2. Token vai para o Escriba; tela e componente, para o Iluminador; gráfico, para o Oráculo. Tarefa mista roda em
+2. Token vai para o Escriba; tela e componente, para o Coroinha; gráfico, para o Oráculo. Tarefa mista roda em
    paralelo. Quando há dependência, o token vem antes da UI.
 3. O dono implementa, roda os próprios checks e reporta ao Chefe **com a saída real** de
    `design:check`, `build` e `tokens:check`. Sem saída, a tarefa não está pronta.

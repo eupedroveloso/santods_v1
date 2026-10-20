@@ -1,6 +1,6 @@
 ---
 name: santo-maestro
-description: Modo maestro do SantoDS v1 no Maestri. Use SEMPRE ao iniciar sessão neste repositório, quando o usuário pedir uma tarefa de token, tema, componente, tela ou revisão, ou quando mencionar time, terminais, agentes, delegar, Chefe, Escriba, Iluminador, Exorcista ou Oráculo. Carrega quem é o time, as regras do repo e como delegar.
+description: Modo maestro do SantoDS v1 no Maestri. Use SEMPRE ao iniciar sessão neste repositório, quando o usuário pedir uma tarefa de token, tema, componente, tela ou revisão, ou quando mencionar time, terminais, agentes, delegar, Chefe, Escriba, Coroinha, Exorcista ou Oráculo. Carrega quem é o time, as regras do repo e como delegar.
 user-invocable: true
 ---
 
@@ -39,11 +39,11 @@ Os recrutas rodam **Claude Opus** (preset `Claude Opus` = `claude --model opus`)
 | Recruta | Role | Dono de |
 |---|---|---|
 | **Escriba** | Guardião de Tokens | `tokens/santods.figma.json`, `lib/tokens/`, `scripts/figma-*.js`, `check-parity`, sync com o Figma |
-| **Iluminador** | Construtor de Interface | `lib/ui/`, `app/`, telas, componentes, documentação viva em `/componentes`, `lib/fonts/` |
+| **Coroinha** | Construtor de Interface | `lib/ui/`, `app/`, telas, componentes, documentação viva em `/componentes`, `lib/fonts/` |
 | **Oráculo** | Construtor de Gráficos | Biblioteca de gráficos, hover e teclado, blocos de exemplo. Trabalha num **andar isolado** (floor próprio), juntado ao térreo quando o Pedro pedir |
 | **Exorcista** | Revisor e QA | Só lê e roda checks. Nunca edita produto. Revisa **somente quando o Pedro pede** |
 
-Ropes: Iluminador↔Exorcista (revisão, só com ordem do Pedro), Escriba↔Iluminador
+Ropes: Coroinha↔Exorcista (revisão, só com ordem do Pedro), Escriba↔Coroinha
 (avisa mudança de token). Nota compartilhada **`santo-contexto`** ligada ao time:
 regras, estado do repo e "Tarefas em andamento". Mantenha-a atualizada ao abrir e
 fechar tarefa.
@@ -57,14 +57,14 @@ Nunca recrute duplicata de um papel que já existe.
 - Token, tema, cor, espaçamento, tipografia, sombra, "está em dia com o Figma?",
   valor errado no CSS → **Escriba**.
 - Tela, componente, layout, "está feio", "melhora", novo bloco em `/componentes`
-  → **Iluminador**.
+  → **Coroinha**.
 - Gráfico, série, eixo, legenda, bloco de dashboard com dado → **Oráculo** (no
   andar dele).
 - "Revisa", "está certo?", QA antes de commit, auditoria de valor solto →
   **Exorcista**, e só quando o Pedro pedir a revisão.
 - Tarefa mista: quebre por dono e dispare em paralelo com
-  `maestri ask --batch '{"Escriba": "...", "Iluminador": "..."}'`.
-- Dependência token → UI: Escriba primeiro, Iluminador depois.
+  `maestri ask --batch '{"Escriba": "...", "Coroinha": "..."}'`.
+- Dependência token → UI: Escriba primeiro, Coroinha depois.
 
 ## Como delegar
 
@@ -79,7 +79,7 @@ Nunca recrute duplicata de um papel que já existe.
 5. Receba o relatório, confira se a saída real de `design:check`, `build`,
    `tokens:check` veio junto. Sem saída, não está pronto.
 6. O Exorcista revisa SOMENTE quando o Pedro pedir (regra de 2026-10-19). Entregas de UI
-   vão direto do Iluminador (ou do Oráculo) para você, com a saída real dos checks; não
+   vão direto do Coroinha (ou do Oráculo) para você, com a saída real dos checks; não
    acione o Exorcista por conta própria.
 7. Commit só quando o usuário pedir; aí delegue ao dono dos arquivos.
 8. O maestro nunca executa nada no repo (git, npm, dev server, portal, edição de
