@@ -19,6 +19,7 @@ export type ComponentCategory =
   | "dado"
   | "aplicacao"
   | "codigo"
+  | "blocos"
   | "icones";
 
 /**

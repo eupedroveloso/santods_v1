@@ -15,6 +15,18 @@ import { sparklineMeta } from "./sparkline.meta";
 import { miniBarsMeta } from "./mini-bars.meta";
 import { fabMeta } from "./fab.meta";
 import { railNavMeta } from "./rail-nav.meta";
+import { appSidebarMeta } from "./app-sidebar.meta";
+import { brandLogoMeta } from "./brand-logo.meta";
+import { brandSwitchMeta } from "./brand-switch.meta";
+import { brandCardMeta } from "./brand-card.meta";
+import { dashboardHeaderMeta } from "./dashboard-header.meta";
+import { transactionRowMeta } from "./transaction-row.meta";
+import { landingSectionsMeta } from "./landing-sections.meta";
+import { ratingMeta } from "./rating.meta";
+import { ctaButtonMeta } from "./cta-button.meta";
+import { youtubeEmbedMeta } from "./youtube-embed.meta";
+import { landingMeta } from "./landing.meta";
+import { socialProofToastMeta } from "./social-proof-toast.meta";
 import { inputMeta } from "./input.meta";
 import { listboxMeta } from "./listbox.meta";
 import { numberFieldMeta } from "./number-field.meta";
@@ -23,6 +35,7 @@ import { swatchMeta } from "./swatch.meta";
 import { colorPickerMeta } from "./color-picker.meta";
 import { colorMeta } from "./color.meta";
 import { cardMeta } from "./card.meta";
+import { cardGridMeta } from "./card-grid.meta";
 import { disclosureMeta } from "./disclosure.meta";
 import { segmentedMeta } from "./segmented.meta";
 import { chipMeta } from "./chip.meta";
@@ -64,6 +77,7 @@ export const CATEGORIES: { id: ComponentCategory; label: string }[] = [
   { id: "dado", label: "Dado" },
   { id: "aplicacao", label: "Aplicação" },
   { id: "codigo", label: "Código" },
+  { id: "blocos", label: "Blocos" },
   { id: "icones", label: "Ícones" },
 ];
 
@@ -79,6 +93,18 @@ const ALL: ComponentMeta[] = [
   ...miniBarsMeta,
   ...fabMeta,
   ...railNavMeta,
+  ...appSidebarMeta,
+  ...brandLogoMeta,
+  ...brandSwitchMeta,
+  ...brandCardMeta,
+  ...dashboardHeaderMeta,
+  ...transactionRowMeta,
+  ...landingSectionsMeta,
+  ...ratingMeta,
+  ...ctaButtonMeta,
+  ...youtubeEmbedMeta,
+  ...landingMeta,
+  ...socialProofToastMeta,
   ...inputMeta,
   ...listboxMeta,
   ...numberFieldMeta,
@@ -87,6 +113,7 @@ const ALL: ComponentMeta[] = [
   ...colorPickerMeta,
   ...colorMeta,
   ...cardMeta,
+  ...cardGridMeta,
   ...disclosureMeta,
   ...segmentedMeta,
   ...chipMeta,

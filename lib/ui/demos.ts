@@ -11,6 +11,18 @@ import { sparklineDemos } from "./sparkline.demo";
 import { miniBarsDemos } from "./mini-bars.demo";
 import { fabDemos } from "./fab.demo";
 import { railNavDemos } from "./rail-nav.demo";
+import { appSidebarDemos } from "./app-sidebar.demo";
+import { brandLogoDemos } from "./brand-logo.demo";
+import { brandSwitchDemos } from "./brand-switch.demo";
+import { brandCardDemos } from "./brand-card.demo";
+import { dashboardHeaderDemos } from "./dashboard-header.demo";
+import { transactionRowDemos } from "./transaction-row.demo";
+import { landingSectionsDemos } from "./landing-sections.demo";
+import { ratingDemos } from "./rating.demo";
+import { ctaButtonDemos } from "./cta-button.demo";
+import { youtubeEmbedDemos } from "./youtube-embed.demo";
+import { landingDemos } from "./landing.demo";
+import { socialProofToastDemos } from "./social-proof-toast.demo";
 import { inputDemos } from "./input.demo";
 import { listboxDemos } from "./listbox.demo";
 import { numberFieldDemos } from "./number-field.demo";
@@ -19,6 +31,7 @@ import { swatchDemos } from "./swatch.demo";
 import { colorPickerDemos } from "./color-picker.demo";
 import { colorDemos } from "./color.demo";
 import { cardDemos } from "./card.demo";
+import { cardGridDemos } from "./card-grid.demo";
 import { disclosureDemos } from "./disclosure.demo";
 import { segmentedDemos } from "./segmented.demo";
 import { chipDemos } from "./chip.demo";
@@ -55,6 +68,18 @@ export const demos: DemoMap = {
   ...miniBarsDemos,
   ...fabDemos,
   ...railNavDemos,
+  ...appSidebarDemos,
+  ...brandLogoDemos,
+  ...brandSwitchDemos,
+  ...brandCardDemos,
+  ...dashboardHeaderDemos,
+  ...transactionRowDemos,
+  ...landingSectionsDemos,
+  ...ratingDemos,
+  ...ctaButtonDemos,
+  ...youtubeEmbedDemos,
+  ...landingDemos,
+  ...socialProofToastDemos,
   ...inputDemos,
   ...listboxDemos,
   ...numberFieldDemos,
@@ -63,6 +88,7 @@ export const demos: DemoMap = {
   ...colorPickerDemos,
   ...colorDemos,
   ...cardDemos,
+  ...cardGridDemos,
   ...disclosureDemos,
   ...segmentedDemos,
   ...chipDemos,
