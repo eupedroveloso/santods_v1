@@ -26,6 +26,13 @@ const dumpPath = args.find((a) => !a.startsWith('--'));
 
 const snapshot = JSON.parse(readFileSync(SNAPSHOT, 'utf8'));
 
+/** Marca deixada por scripts/apply-brand-mode.mjs: o snapshot esta a frente do Figma. */
+const ahead = snapshot.meta.aheadOfFigma;
+const aheadNotice = ahead
+  ? `AVISO: snapshot A FRENTE do Figma em ${ahead.collections.join(', ')} (modo ${ahead.mode}, desde ${ahead.since}, por ${ahead.by}). ` +
+    `Reconciliar: ${ahead.reconcile}.`
+  : '';
+
 /* ------------------------------------------------- consistencia interna */
 
 function flatten(doc) {
@@ -49,26 +56,49 @@ function validate(doc, label) {
   const flat = flatten(doc);
   const problems = [];
   const isAlias = (v) => typeof v === 'string' && v.startsWith('{') && v.endsWith('}');
-  for (const [name, v] of flat) {
-    for (const [mode, value] of Object.entries(v.values)) {
-      if (!isAlias(value)) continue;
-      const chain = new Set([name]);
-      let cur = value;
-      while (isAlias(cur)) {
-        const target = cur.slice(1, -1);
-        if (chain.has(target)) {
-          problems.push(`${label}: ciclo de alias em ${name} [${mode}] -> ${target}`);
-          break;
-        }
-        chain.add(target);
-        const next = flat.get(target);
-        if (!next) {
-          problems.push(`${label}: ${name} [${mode}] aponta para variavel inexistente {${target}}`);
-          break;
-        }
-        cur = mode in next.values ? next.values[mode] : Object.values(next.values)[0];
-      }
+  /**
+   * Segue a cadeia de alias. Quando a colecao do alvo nao tem o modo corrente
+   * (Color Light -> Palette Santo/VTSD), segue em TODOS os modos do alvo, para
+   * que cada marca seja validada e nao so a primeira.
+   */
+  const walk = (name, mode, value, chain) => {
+    if (!isAlias(value)) return;
+    const target = value.slice(1, -1);
+    if (chain.has(target)) {
+      problems.push(`${label}: ciclo de alias em ${name} [${mode}] -> ${target}`);
+      return;
     }
+    const next = flat.get(target);
+    if (!next) {
+      problems.push(`${label}: ${name} [${mode}] aponta para variavel inexistente {${target}}`);
+      return;
+    }
+    const branch = new Set([...chain, target]);
+    if (mode in next.values) walk(name, mode, next.values[mode], branch);
+    else for (const [m, val] of Object.entries(next.values)) walk(name, m, val, branch);
+  };
+  for (const [name, v] of flat) {
+    for (const [mode, value] of Object.entries(v.values)) walk(name, mode, value, new Set([name]));
+    const missing = v.modes.filter((m) => !(m in v.values));
+    if (v.modes.length > 1 && missing.length) problems.push(`${label}: ${name} sem valor no(s) modo(s) ${missing.join(', ')}`);
+  }
+
+  // Marcas: Palette e Brand andam juntas, um modo por marca, com brand/id unico.
+  const palette = doc.collections.Palette;
+  const brand = doc.collections.Brand;
+  if (palette && brand) {
+    if (!eq(palette.modes, brand.modes)) {
+      problems.push(`${label}: modos de Palette (${palette.modes.join('/')}) e Brand (${brand.modes.join('/')}) precisam ser os mesmos`);
+    }
+    const idDef = brand.variables['brand/id'];
+    const ids = brand.modes.map((m) => (idDef?.values ?? { [brand.defaultMode]: idDef?.value })[m]);
+    ids.forEach((id, i) => {
+      if (typeof id !== 'string' || !/^[a-z0-9-]+$/.test(id)) {
+        problems.push(`${label}: brand/id do modo ${brand.modes[i]} precisa ser slug [a-z0-9-] (vale ${JSON.stringify(id)})`);
+      }
+    });
+    const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
+    if (dup.length) problems.push(`${label}: brand/id repetido entre modos: ${[...new Set(dup)].join(', ')}`);
   }
   for (const [styleName, s] of Object.entries(doc.textStyles)) {
     for (const [prop, target] of Object.entries(s.boundVariables ?? {})) {
@@ -187,6 +217,7 @@ if (fingerprint) {
   out.paintStyles = 0;
   out.gridStyles = 0;
   console.log(JSON.stringify(out, null, 2));
+  if (ahead) console.error(aheadNotice);
   process.exit(0);
 }
 
@@ -197,6 +228,7 @@ if (!dumpPath) {
       `${Object.keys(snapshot.textStyles).length} text styles, ` +
       `${Object.keys(snapshot.effectStyles).length} effect styles.`,
   );
+  if (ahead) console.log(aheadNotice);
   console.log('Passe um dump do Figma para comparar: node scripts/check-parity.mjs <dump.json>');
   process.exit(0);
 }
@@ -209,11 +241,36 @@ if (dumpProblems.length) {
 }
 
 const rows = diff(snapshot, dump);
+/** Snapshot vindo do dump, sem a marca de "a frente do Figma" (o Figma passa a ser a verdade). */
+const fromDump = () => {
+  const meta = { ...snapshot.meta, ...dump.meta };
+  delete meta.aheadOfFigma;
+  return JSON.stringify({ ...dump, meta }, null, 2) + '\n';
+};
 
 if (rows.length === 0) {
   console.log('PARIDADE OK — codigo e Figma batem em 100% dos tokens e styles.');
+  if (ahead) {
+    // Reconciliacao: o Figma alcancou o snapshot. Com --write, grava o dump e tira a marca.
+    if (!write) {
+      console.log(`${aheadNotice}\nO Figma ja alcancou o snapshot. Para reconciliar: node scripts/check-parity.mjs ${dumpPath} --write`);
+      process.exit(1);
+    }
+    const before = readFileSync(SNAPSHOT, 'utf8');
+    const metaBefore = { ...snapshot.meta };
+    delete metaBefore.aheadOfFigma;
+    const expected = JSON.stringify({ ...snapshot, meta: metaBefore }, null, 2) + '\n';
+    const next = fromDump();
+    writeFileSync(SNAPSHOT, next);
+    console.log(
+      `RECONCILIADO — meta.aheadOfFigma removido. Bytes do dump ${next === expected ? 'IDENTICOS' : 'DIFERENTES (so ordem/formato; valores batem)'} ao snapshot aplicado por script` +
+        (before === next ? '.' : '.\nRode agora: npm run tokens && npm run tokens:fingerprint e atualize a tabela de hashes.'),
+    );
+  }
   process.exit(dumpProblems.length ? 1 : 0);
 }
+
+if (ahead) console.log(`${aheadNotice}\nDivergencia em ${ahead.collections.join('/')} pode ser so o Figma ainda sem o modo ${ahead.mode}.\n`);
 
 console.log(`DIVERGENCIAS: ${rows.length}\n`);
 const width = Math.max(...rows.map((r) => r.key.length), 10);
@@ -222,7 +279,7 @@ for (const r of rows) {
 }
 
 if (write) {
-  writeFileSync(SNAPSHOT, JSON.stringify({ ...dump, meta: { ...snapshot.meta, ...dump.meta } }, null, 2) + '\n');
+  writeFileSync(SNAPSHOT, fromDump());
   console.log(`\nSnapshot atualizado. Rode agora: node scripts/build-tokens.mjs`);
   process.exit(0);
 }
