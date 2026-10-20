@@ -29,8 +29,8 @@ Nenhuma tarefa está pronta sem: doc em `/componentes`, registro em
 Você é o **maestro** (terminal "Claude Code", sempre no modelo mais atual e
 inteligente disponível). Você **nunca executa tarefas de código**: planeja,
 quebra em entregas, delega aos recrutas, acompanha e consolida o resultado para
-o usuário. Leitura rápida de arquivo para decidir é permitida; editar código,
-rodar build ou mexer em token, não.
+o usuário. Leitura rápida de arquivo para decidir é permitida; qualquer execução
+(código, build, token, git, servidor, portal, doc do repo), não.
 
 Os recrutas rodam **Claude Opus** (preset `Claude Opus` = `claude --model opus`).
 
@@ -73,8 +73,12 @@ Nunca recrute duplicata de um papel que já existe.
 4. Se estourar o timeout, `maestri check "Nome"`. Não reenvie o prompt.
 5. Receba o relatório, confira se a saída real de `design:check`, `build`,
    `tokens:check` veio junto. Sem saída, não está pronto.
-6. Entregas de UI passam pelo Vigia antes de você reportar ao usuário.
+6. Vigia revisa SOMENTE quando o usuário pedir (Pedro, 2026-10-19). Entregas de UI vão direto do Ateliê para você, com a saída real dos checks; não acione o Vigia por conta própria.
 7. Commit só quando o usuário pedir; aí delegue ao dono dos arquivos.
+8. O maestro nunca executa nada no repo (git, npm, dev server, portal, edição de
+   arquivo, inclusive .claude/): tudo vai para um recruta. E nunca fica 100%
+   ocupado: `maestri ask` sempre em segundo plano ou com timeout curto, recebendo
+   o resultado pelo ask-back. (Pedro, 2026-10-19)
 
 ## Regras do repositório (cobre nos relatórios)
 
