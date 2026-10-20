@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Button } from "./button";
 import { Count } from "./chip";
 import { Avatar } from "./data";
-import type { ReactNode } from "react";
-import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
+import { Children, type ReactNode } from "react";
+import { RADIUS_TRACK } from "./radius";
+import { NAV_BRANCH_CLASS, NAV_ELBOW_CLASS, NAV_ELBOW_STYLE, NAV_ICON_CLASS, NAV_ROW_CLASS } from "./nav-layout";
 
 /**
  * Navegacao lateral de aplicacao (skill santo-ui-craft, secao 7).
@@ -54,8 +55,17 @@ export function NavSection({ title, children }: { title?: string; children: Reac
  * Subitens de um NavItem, com conectores de arvore. O tronco sai do centro do
  * icone do pai (px-sm + metade do icone de 16 = 20px = space/xl - space/sm).
  */
-export function NavSub({ children }: { children: ReactNode }) {
-  return <div className="flex flex-col gap-3xs pl-xl">{children}</div>;
+export function NavSub({ children, branches = false }: { children: ReactNode; /** Desenha ramos em folhas e pastas, sem precisar de NavItem sub. */ branches?: boolean }) {
+  return (
+    <div className="relative flex flex-col gap-3xs pl-xl">
+      {branches ? Children.map(children, (child) => child && (
+        <div className={NAV_BRANCH_CLASS} data-nav-branch>
+          <span aria-hidden className={NAV_ELBOW_CLASS} style={NAV_ELBOW_STYLE} />
+          {child}
+        </div>
+      )) : children}
+    </div>
+  );
 }
 
 export function NavItem({
@@ -86,14 +96,14 @@ export function NavItem({
     : active
       ? "bg-surface-raised text-text-primary shadow-xs"
       : "text-text-secondary hover:bg-neutral-subtle-default hover:text-text-primary";
-  const className = `group santo-body-small-medium santo-transition-elevation flex h-(--santo-dimension-size-36) w-full cursor-pointer items-center gap-xs ${RADIUS_CONTROL} px-sm text-left ${tone}`;
+  const className = `group ${NAV_ROW_CLASS} ${tone}`;
   const content = (
     <>
       {icon && (
         <span
           // Icone um tom abaixo do texto: tertiary em repouso (texto em secondary),
           // sobe para secondary no hover e acompanha o texto primary no ativo.
-          className={`santo-transition-colors shrink-0 ${
+          className={`santo-transition-colors ${NAV_ICON_CLASS} ${
             emphasis ? "" : active ? "text-icon-primary" : "text-icon-tertiary group-hover:text-icon-secondary"
           }`}
         >
@@ -116,9 +126,9 @@ export function NavItem({
   if (!sub) return item;
   return (
     // Tronco que continua para o proximo irmao: so quando nao e o ultimo.
-    <div className="relative not-last:before:absolute not-last:before:-top-3xs not-last:before:-bottom-3xs not-last:before:-left-sm not-last:before:border-l-thin not-last:before:border-border-subtle">
+    <div className={NAV_BRANCH_CLASS}>
       {/* Curva do tronco ate o meio do item. */}
-      <span aria-hidden className="absolute -top-3xs bottom-1/2 -left-sm w-sm rounded-bl-md border-b-thin border-l-thin border-border-subtle" />
+      <span aria-hidden className={NAV_ELBOW_CLASS} style={NAV_ELBOW_STYLE} />
       {item}
     </div>
   );

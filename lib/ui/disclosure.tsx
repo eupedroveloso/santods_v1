@@ -1,8 +1,9 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { ChevronDown, ChevronRight } from "./icons";
 import { RADIUS_CONTROL } from "./radius";
+import { NAV_ICON_CLASS, NAV_ROW_CLASS } from "./nav-layout";
 
 /**
  * Grupo colapsavel do editor.
@@ -18,6 +19,7 @@ export function Disclosure({
   trailing,
   hint,
   variant = "pill",
+  leading,
   id,
   children,
 }: {
@@ -37,11 +39,15 @@ export function Disclosure({
    * row: a linha inteira e o gatilho — lista dentro de um Card padded={false},
    * com divisoria entre itens (o ultimo nao tem); os cantos vem do Card.
    */
-  variant?: "pill" | "row";
+  variant?: "pill" | "row" | "nav";
+  /** Ícone da pasta em variant="nav". Sem ele, o chevron ocupa o mesmo slot. */
+  leading?: ReactNode;
   /** id da raiz, para ancora (use com scroll-mt-6xl). */
   id?: string;
   children: ReactNode;
 }) {
+  const panelId = useId();
+  const nav = variant === "nav";
   if (variant === "row") {
     return (
       <div id={id} className="scroll-mt-6xl border-b-thin border-border-subtle last:border-b-0">
@@ -49,6 +55,7 @@ export function Disclosure({
           type="button"
           onClick={onToggle}
           aria-expanded={open}
+          aria-controls={panelId}
           className="flex w-full cursor-pointer items-center gap-sm p-lg text-left transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default"
           // Foco por dentro da linha: o Card recorta (overflow-hidden) o que passar da borda.
           style={{ outlineOffset: "calc(var(--santo-focus-width) * -1)" }}
@@ -59,7 +66,7 @@ export function Disclosure({
           <span className="min-w-0 flex-1">{label}</span>
           {trailing && <span className="flex shrink-0 items-center gap-2xs">{trailing}</span>}
         </button>
-        <div className="santo-collapse" data-open={open} inert={!open}>
+        <div id={panelId} className="santo-collapse" data-open={open} inert={!open}>
           <div>
             <div className="flex flex-col gap-sm px-lg pb-lg">
               {hint && <p className="santo-caption-regular text-text-tertiary">{hint}</p>}
@@ -71,23 +78,34 @@ export function Disclosure({
     );
   }
   return (
-    <div id={id} className="flex flex-col gap-2xs">
+    <div id={id} className={`flex flex-col ${nav ? open ? "gap-3xs" : "gap-0" : "gap-2xs"}`}>
       <div className="flex items-center gap-2xs">
         <button
           type="button"
           onClick={onToggle}
           aria-expanded={open}
-          className={`santo-caption-small-semibold inline-flex cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} bg-neutral-subtle-default px-xs py-3xs tracking-wide text-text-secondary uppercase transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-hover hover:text-text-primary`}
+          aria-controls={panelId}
+          className={nav
+            ? `${NAV_ROW_CLASS} text-text-secondary hover:bg-neutral-subtle-default hover:text-text-primary`
+            : `santo-caption-small-semibold inline-flex cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} bg-neutral-subtle-default px-xs py-3xs tracking-wide text-text-secondary uppercase transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-hover hover:text-text-primary`}
         >
-          {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
-          {label}
+          {nav ? (
+            <>
+              <span aria-hidden className={`${NAV_ICON_CLASS} text-icon-tertiary`}>
+                {leading ?? (open ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
+              </span>
+              <span className="min-w-0 flex-1 truncate">{label}</span>
+              {trailing && <span className="flex shrink-0 items-center gap-2xs">{trailing}</span>}
+              {leading && <span aria-hidden className="shrink-0 text-icon-tertiary">{open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}</span>}
+            </>
+          ) : <>{open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}{label}</>}
         </button>
-        {trailing && <span className="ml-auto flex items-center gap-2xs">{trailing}</span>}
+        {!nav && trailing && <span className="ml-auto flex items-center gap-2xs">{trailing}</span>}
       </div>
 
-      <div className="santo-collapse" data-open={open} inert={!open}>
+      <div id={panelId} className="santo-collapse" data-open={open} inert={!open}>
         <div>
-          <div className="flex flex-col gap-2xs pb-xs">
+          <div className={`flex flex-col ${nav ? "gap-3xs" : "gap-2xs pb-xs"}`}>
             {hint && <p className="santo-caption-small-regular text-text-tertiary">{hint}</p>}
             {children}
           </div>

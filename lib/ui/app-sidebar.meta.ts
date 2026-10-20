@@ -8,7 +8,7 @@ export const appSidebarMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "app-sidebar.tsx",
     description:
-      "Sidebar de app ou documentação numa coluna só: busca no topo e todos os grupos já abertos com seus itens, item ativo elevado e trazido para a vista. Sem trilho de ícones.",
-    related: ["sidebar-nav", "nav-section", "nav-item", "search-trigger"],
+      "Navegação de app ou documentação em árvore, com pastas recursivas recolhíveis, ícones, contadores e ramificações em cada nível. A rota reabre os ancestrais do único item ativo, que permanece visível ao recolher. showRail={false} é a variante usada pelo site de documentação.",
+    related: ["sidebar-nav", "nav-section", "nav-item", "disclosure", "rail-nav", "search-trigger"],
   },
 ];
