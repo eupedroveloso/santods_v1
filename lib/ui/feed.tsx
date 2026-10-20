@@ -57,11 +57,15 @@ export function Ticker({
   items: { symbol: string; name: string; value: string; delta: number }[];
 }) {
   return (
-    <div className="flex items-stretch overflow-x-auto rounded-xl border-thin border-border-subtle bg-surface-raised">
+    // Quebra em vez de rolar: barra de rolagem sob a faixa e ultimo item cortado na borda liam como defeito.
+    // Cada cotacao ocupa uma celula de largura minima de token; a hairline de cima separa as linhas quebradas.
+    <div className="flex flex-wrap items-stretch overflow-hidden rounded-xl border-thin border-border-subtle bg-surface-raised">
       {items.map((t, i) => (
         <div
           key={t.symbol}
-          className={`flex shrink-0 items-center gap-xs px-md py-sm ${i > 0 ? "border-l-thin border-border-subtle" : ""}`}
+          className={`-mt-px flex min-w-(--santo-dimension-space-240) flex-1 items-center gap-xs border-t-thin border-border-subtle px-md py-sm ${
+            i > 0 ? "-ml-px border-l-thin" : ""
+          }`}
         >
           <Avatar name={t.symbol} size={24} />
           <span className="santo-body-small-semibold">{t.symbol}</span>

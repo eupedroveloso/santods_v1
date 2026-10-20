@@ -25,6 +25,6 @@ export const feedMeta: ComponentMeta[] = [
     category: "aplicacao",
     tier: "semantico",
     source: "feed.tsx",
-    description: "Faixa de cotações: símbolo, valor e variação.",
+    description: "Faixa de cotações: símbolo, valor e variação. Quebra em linhas em vez de rolar (sem barra horizontal nem item cortado).",
   },
 ];

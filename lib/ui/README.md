@@ -97,7 +97,7 @@ Composição não é o critério de semântico; é restrição do primitivo. Um 
 ### Estrutura
 | | quando usar |
 |---|---|
-| `Card` | Superfície com um assunto só, **profundidade por tom** (skill santo-ui-craft). `variant`: `raised` (padrão, nível 1, sombra ambiente `sm`, raio xl — o máximo de card no DS), `well` (poço nível 2 dentro de cartão, sunken, raio interno do pai), `inset` (bloco no tom do chão, raio do pai), `sunken` (chão que contém cartões), `outlined`, `dashed` (lugar vazio), `double` (moldura sunken raio xl + painel raised raio xl − recuo com `header`/`footer`). Sem borda 1px visível: contorno `santo-edge` (invisível no claro, hairline no escuro). Expõe `--santo-card-inner-radius` aos filhos. `padding` sm/md/lg; `padded={false}` quando o conteúdo encosta na borda. |
+| `Card` | Superfície com um assunto só, **profundidade por tom** (skill santo-ui-craft). `variant`: `raised` (padrão, nível 1, sombra ambiente `sm`, raio xl — o máximo de card no DS), `well` (poço nível 2 dentro de cartão, sunken, raio interno do pai), `inset` (bloco no tom do chão, raio do pai), `sunken` (chão que contém cartões), `outlined`, `dashed` (lugar vazio), `double` (moldura sunken raio xl + painel raised raio xl − recuo com `header`/`footer`; `footerFlush` põe o rodapé na largura e no raio do painel — bloco de código sob preview, como nos demos de /componentes). Sem borda 1px visível: contorno `santo-edge` (invisível no claro, hairline no escuro). Expõe `--santo-card-inner-radius` aos filhos. `padding` sm/md/lg; `padded={false}` quando o conteúdo encosta na borda. |
 | `Divider` | Divisor de 1px no token de borda. `orientation="vertical"` entre itens de uma linha; `label` para o rótulo no meio ("ou continue com"). |
 | `Disclosure` | Grupo colapsável. O gatilho é pastilha que abraça o texto, não faixa de ponta a ponta. Contador ou selo vão no slot `trailing` (ex.: `<Count>`). |
 | `Segmented` | Escolha única entre 2 e 4 opções visíveis. Prefira a `Select` quando a comparação entre elas importa. |
@@ -107,9 +107,13 @@ Composição não é o critério de semântico; é restrição do primitivo. Um 
 | `Skeleton` | Formas neutras (`Bar`, `Block`, `Circle`, `Button`, `Field`, `Chip`, `Check`, `Row`, `Rule`, `Bars`, `Line`) para ilustrar a anatomia de um componente ou segurar o lugar enquanto carrega. Sem texto, ícone nem cor de marca. |
 | `ThumbFrame` | Moldura de miniatura: poço 16:10 com grade sutil e cartão no centro, onde o `Skeleton` desenha. Só para a vitrine do índice de `/componentes` (ilustrações em `lib/thumbs`). |
 | `Overline` | Rótulo em caixa alta acima de um número ou bloco. Um rótulo, não uma frase. **Dívida de token**: falta o text style overline no Figma (hoje caption-small + tracking/wide, em `text-class.ts`). |
-| `Ring` | Anel de progresso (`value` 0–100, `size` sm/md/lg, `tone`, centro opcional; trilha em `neutral/subtle/active`). Ao lado de número grande, em tile, em linha de lista. |
-| `Sparkline` | Linha de tendência sem eixo, cor do pai (`text-icon-brand`). Largura padrão por `size` (space/64·96·128) — cabe no slot `viz` do `Stat` sem embrulho; `fluid` ocupa a largura do pai. `area`, `dot`; `surface` (raised\|sunken\|page) é a cor do anel do ponto final — use `sunken` dentro de poço. **Dívida de token**: stopOpacity 0,24→0 do degradê é literal até o sync de opacity/* do Figma (PENDENCIA em sparkline.tsx). |
-| `MiniBars` | Barrinhas compactas, sem transição de altura; `highlight` pinta uma na cor do pai, base em `neutral/subtle/active`. |
+| `Ring` | Anel de progresso (`value` 0–100, `size` sm/md/lg, `tone`, centro opcional; trilha em `neutral/subtle/active`). Ao lado de número grande, em tile, em linha de lista. **Interativo por padrão**: hover/foco (uma parada de Tab) engrossa o arco um degrau (`border/thick`) e abre tooltip com rótulo e valor (`detail` troca o "72%"); `interactive={false}` em anel decorativo. |
+| `Sparkline` | Linha de tendência sem eixo, cor do pai (`text-icon-brand`). Largura padrão por `size` (space/64·96·128) — cabe no slot `viz` do `Stat` sem embrulho; `fluid` ocupa a largura do pai. `area`, `dot`; `surface` (raised\|sunken\|page) é a cor do anel do ponto final — use `sunken` dentro de poço. Com `label` vira interativa: ponteiro/setas andam pelos pontos, o ponto acompanha e um tooltip mostra valor + `labels[i]` (`format` formata); aria-live anuncia. **Dívida de token**: stopOpacity 0,24→0 do degradê é literal até o sync de opacity/* do Figma (PENDENCIA em sparkline.tsx). |
+| `MiniBars` | Barrinhas compactas, sem transição de altura; `highlight` pinta uma na cor do pai, base em `neutral/subtle/active`. Com `label` vira interativa: a barra sob o ponteiro/setas acende, tooltip com valor + `labels[i]`. |
+| `ChartTooltip` | Leitura do x em foco com **todas** as séries: valor em destaque, nome depois, chave (traço ou quadradinho) na cor; `x`/`y` em % posicionam; no alto da plotagem a bolha fica ao lado da guia com folga `space/sm` (nunca cobre o ponto ativo), acima de micro-viz fica centrada. Bolha raised + `shadow-lg` + `santo-edge`. |
+| `ChartLegend` | Qual cor é qual série: obrigatória com 2+ séries, nunca com uma. `row` acima do gráfico; `column` ao lado do donut com valores; `onActiveChange` destaca a série (as outras recuam para `muted`). |
+| `ChartGrid` | Grade atrás da plotagem: hairline `border/subtle` igualmente espaçada (justify-between, casa com os ticks), zero em `border/default`, nunca tracejada. |
+| `AxisLabels` | Eixo `x` (`edge` linha/área, `band` barra) ou `y` (ticks de cima para baixo). Cada rótulo centrado no seu ponto, pontas inclusive; eixo longo amostrado com passo uniforme (`max`, sem forçar o último); `active` acende o x em foco e esconde os vizinhos a menos de um passo. |
 | `Fab` | Ação flutuante única da tela: círculo ou `extended`, `tone` brand/raised, `position` end/center/start (o bottom soma a safe-area do aparelho). |
 | `RailNav` / `RailItem` | Trilho vertical de ícones (chão em cápsula, ativo em pílula elevada); o painel ao lado é `SidebarNav`. |
 | `IconTile` | Ícone numa caixa tonal, sem contorno (quadrado: raio limitado ao raio interno do Card pai): `tone` subtle (poço, padrão) / outline (pílula elevada, sobre chão) / brand (acento, um por região); `shape` square/round; `size` md/lg. Marcador de lista, estado vazio, anexo, cabeçalho de cartão. |
@@ -152,6 +156,7 @@ Composições com significado de produto: navegação, conversa, dado, documenta
 | `CardHeader` | Título + ação no canto. Título em `body-large-semibold` (18px): abaixo do título de seção (`heading-6`) e bem abaixo do número de KPI (`Stat`, `heading-4`). Não trunca, quebra linha. |
 | `CardFooter` | Ações do cartão alinhadas à direita: no fim de um `Card`, ou no `footer` da moldura do `Card variant="double"`. |
 | `Stat` | Número grande com rótulo e variação. |
+| `CardGrid` | **Toda** fileira de cartões ou peças irmãs — tela de `app/` não monta `grid` inline (`lib:check`, regra C). **Masonry por padrão** (princípio 4 do Pedro, sem margem morta): linhas de `space/3xs` e cada filho ocupa as linhas da sua altura medida (ResizeObserver) — cartões empilham por coluna, sem vão, na ordem do DOM (esquerda → direita, como o foco anda); `col-span-*` no filho continua valendo. **Limitação**: precisa de JS — antes de hidratar a grade é a comum, alinhada ao topo; filho que ocupa todas as colunas espera a coluna mais alta. `masonry={false}` para peças de altura igual (miniaturas, amostras, demos). `columns` por breakpoint (`{ md: 2, "2xl": 3 }`, base 1) ou `minItem` (auto-fill/`autoFit` com largura mínima de token); `gap` sm\|md\|lg\|2xl. **Dívida de paridade**: sem par no Figma — lá vira auto-layout wrap alinhado ao topo. |
 
 ### Navegação
 | | quando usar |
@@ -166,17 +171,23 @@ Composições com significado de produto: navegação, conversa, dado, documenta
 | `Table` | Tabela compacta: cabeçalho tonal em faixa pílula, linhas hairline, número à direita. Realce de linha INSET com raio aninhado (`santo-row`, padrão) ou `flush` para tabela que ocupa o Card inteiro (`padded={false}`: realce reto, contêiner recorta). `layout="fixed"` + `Column.width` (degrau de dimension/space) trava as colunas — tabelas empilhadas alinham e texto longo quebra. `selected` liga a coluna de seleção, `rowAction` a de ações. Coluna sem `render` lê a célula pronta em `row[key]` (`CellRow`) — assim a tabela monta num Server Component; seleção e ações exigem cliente. |
 | `Pagination` | Contagem à esquerda, navegação à direita. |
 | `Calendar` | Mês interativo: `mode` single\|range, `onSelect(dias, {month, year})`, setas pílula tonal, hoje com anel brand/subtle, escolhido em brand/solid, intervalo em faixa brand/subtle com pontas arredondadas, dias vizinhos em text/disabled. Teclado de grade (setas, Home/End, PageUp/PageDown) e aria-grid. `startWeekday`/`days` aceitos por compatibilidade (o mês sai de `month`/`year`). |
-| `LineChart` / `AreaChart` / `BarChart` / `StackedAreaChart` | SVG puro, pintado por token. Sem biblioteca. |
-| `AxisLabels` | Rótulos de eixo abaixo de um gráfico. |
+| `LineChart` | Tendência ao longo do tempo, 1 a 4 séries (`values` ou `series` com `tone`). Guia vertical encaixa no ponto mais próximo + tooltip com todas as séries; ponto final na série principal; `surface` para o anel do ponto. |
+| `AreaChart` | Volume ao longo do tempo com lavagem `bg/<tom>/subtle/default` (sem opacidade solta); `stacked` = partes de um total. Eixo em zero. |
+| `BarChart` | `vertical` (períodos) ou `horizontal` (categorias, valor na ponta); várias séries `grouped` ou `stacked`; `highlight` acende uma e recua o resto. Espessura ≤ space/24, ponta xs, base reta, vão space/3xs. A faixa é o alvo. |
+| `DonutChart` | Partes de um todo (≤ 5 fatias): total no meio (em foco, a fatia), legenda `column` com a parte de cada uma; `pie` = disco cheio. Fatia em foco engorda `border/heavy`; todas mantêm o tom (ordem `CHART_TONES`); ponteiro no furo volta o centro ao total; legenda `w-fit`. |
+| `StackedAreaChart` | Compatibilidade: `AreaChart stacked` com séries por cor crua. |
+
+**Contrato dos gráficos** (skill dataviz): um eixo de valor só, ticks redondos e compactos; grade e eixo recessivos; hover por padrão (crosshair em linha/área, a marca em barra/fatia), teclado no mesmo cursor (uma parada de Tab: setas, Home/End, Esc), aria-live do ponto em foco e tabela `sr-only`; legenda com 2+ séries; texto sempre em token de texto. Tons em ordem fixa `CHART_TONES` (brand, neutral, accent, info…). Kit compartilhado em `chart-kit.ts` (escala, ticks, tons, `useChartCursor`, classe do tooltip) — helper, não componente, então o primitivo pode usar. **Dívida de token**: falta no Figma uma paleta categórica de dado (`data/series/*`) validada para daltonismo; até lá, `color/icon/*` + `bg/*/subtle`.
 | `KeyValue` | Linha rótulo × valor (resumo de pedido, detalhe de transação). Valor tabular à direita; `emphasis` no total. |
 
 ### Aplicação
 | | quando usar |
 |---|---|
 | `SidebarNav` / `NavSection` / `NavItem` / `NavSub` / `NavUser` | Painel de navegação (ao lado do `RailNav`). Itens em pílula (size/36); ativo = pílula elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavUser` em pílula elevada. `href` vira link. |
+| `AppSidebar` | Sidebar completa de app ou documentação, num bloco só: trilho de áreas (`RailNav`) sticky no topo, colado ao campo de busca (`SearchTrigger`), e o painel de seções da área ativa (`SidebarNav` + `NavSection` + `NavItem`). Para poucas áreas grandes com muitas seções. `onAreaChange` só troca o painel; rota e navegação são do pai. Compõe: é a sidebar do site de docs (`app/_docs/shell.tsx` só passa áreas, grupos e estado). **Dívida de paridade**: sem par no Figma. |
 | `ChatHeader` / `ChatBubble` / `ChatAttachment` / `ChatComposer` / `TypingIndicator` | Conversa. Bolha recebida em poço (`surface/sunken`), enviada em `brand/solid` + `text/on-brand`, raio xl com cauda xs; reações em pílula elevada. `ChatComposer`: campo-poço em pílula com anexar (ghost) e enviar (primary, círculo) inline, anel no conjunto. `avatarSrc` em ChatHeader. |
 | `ActivityItem` / `Marker` | Feed "quem / o quê / quando", com pastilha de contexto. |
-| `Ticker` | Faixa de cotações. |
+| `Ticker` | Faixa de cotações. Quebra em linhas (célula de largura mínima `space/240`) em vez de rolar: sem barra horizontal nem item cortado. |
 
 ### Código
 | | quando usar |
@@ -195,6 +206,30 @@ Composições com significado de produto: navegação, conversa, dado, documenta
 | `SearchTrigger` | Parece campo de busca e abre o ⌘K; atalho pela plataforma. |
 | `TableOfContents` | Índice da página na coluna direita, grupos > itens, ativo com linha de brand; acompanha a rolagem. |
 | `Stat` | (atualizado) `action` no canto e `size` sm/md/lg. |
+
+### Blocos
+Cartões prontos, **alimentados por dado** e montados só com a lib. Regra dura do Pedro: tela de exemplo não monta cartão; em `app/exemplos` só entram blocos (`lib:check`, regra D). Item dentro de cartão (métrica, meta, linha) não ganha caixa própria: separa por espaço ou `Divider`; poço só em campo e código. Todos sem par no Figma (codeOnly).
+
+| | quando usar |
+|---|---|
+| `StatCard` | Métrica num cartão: número + unidade, `delta` em Tag, `trend` (spark, bars ou ring) no acento; `title` com `meta`/`badge` e `ranges` (Segmented); `details` chave × valor após Divider; `action` em bloco. KPI, saldo, cotação. |
+| `GoalsCard` | Metas com teto (reserva, viagem): anel, nome em overline, guardado e alvo; metas separadas por Divider; `onAdd` liga "Nova meta". |
+| `InvestCard` | Ordem com valor e modalidade: campo-poço, tipo em Segmented, resumo, ação primária. |
+| `LimitCard` | Teto configurável: número grande, NumberField, moeda em Segmented, nota opcional. |
+| `TransactionRow` / `TransactionsCard` | Movimentação (seta, título, categoria · data, valor assinado, ações ghost) / extrato curto com "Ver todas". |
+| `PaymentsCard` | Tabela com seleção, status em Tag de intenção, ações por linha e paginação com contagem. |
+| `DailyGoalCard` | Alvo curto em degraus: menos · anel com valor · mais, teto em overline, ação. |
+| `PreferencesCard` | Liga/desliga com salvar (cookies, notificações): SettingRow + Switch por hairline, contagem ligada. |
+| `UpgradePlanCard` | Checkout de plano: dados em poço, RadioGroup de plano, cupom, aceite (habilita a ação), resumo que muda com o plano. |
+| `SignUpCard` | Criar conta ou entrar: provedores, "ou continue com", e-mail e senha, ação primária. |
+| `MemberRow` / `TeamCard` / `ShareCard` | Pessoa com papel (Select) / equipe com avatares no canto / link para copiar + quem tem acesso. |
+| `CalendarCard` | Mês como bloco de painel; `mode="range"` para intervalo. |
+| `ChatCard` | Conversa: pessoa e status, ações ghost, bolhas (texto ou anexo), digitando, composer que acrescenta à lista. |
+| `ActivityCard` | Feed com abas que filtram por `kind`, itens quem/o quê/quando com pastilha, ação em FAB. |
+| `ChartCard` | Série principal do painel: título + total + períodos e o gráfico (`kind` area/line/bar, `stacked`) direto no cartão, sem poço. |
+| `AppFrame` | Tela de app dentro de página: chão rebaixado, trilho de ícones, painel de navegação em árvore opcional, conteúdo `stack` ou `split`. |
+
+`EmptyState` também aceita `action` por dado (`{ label, onClick }` vira Button), para a tela de exemplo não montar o botão.
 
 ### Hooks
 | | quando usar |

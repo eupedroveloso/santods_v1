@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import { isValidElement, type ReactNode } from "react";
+import { Button } from "./button";
 import { Card } from "./card";
 import { IconTile } from "./icon-tile";
 
@@ -6,6 +7,7 @@ import { IconTile } from "./icon-tile";
  * Lugar vazio com um caminho: icone, titulo e a acao que o preenche.
  * Sem texto de apoio por padrao — o titulo diz o que falta, o botao diz o que
  * fazer. Contorno tracejado (Card variant=dashed): e um alvo, nao um cartao.
+ * `action` aceita o no pronto ou so o dado (`{ label, onClick }` vira Button).
  */
 export function EmptyState({
   icon,
@@ -15,7 +17,7 @@ export function EmptyState({
 }: {
   icon?: ReactNode;
   title: ReactNode;
-  action?: ReactNode;
+  action?: ReactNode | { label: string; onClick?: () => void };
   className?: string;
 }) {
   return (
@@ -26,7 +28,11 @@ export function EmptyState({
         </IconTile>
       )}
       <span className="santo-body-large-semibold text-text-primary">{title}</span>
-      {action}
+      {action && typeof action === "object" && !isValidElement(action) && "label" in action ? (
+        <Button onClick={action.onClick}>{action.label}</Button>
+      ) : (
+        (action as ReactNode)
+      )}
     </Card>
   );
 }

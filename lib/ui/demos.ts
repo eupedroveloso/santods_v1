@@ -11,6 +11,7 @@ import { sparklineDemos } from "./sparkline.demo";
 import { miniBarsDemos } from "./mini-bars.demo";
 import { fabDemos } from "./fab.demo";
 import { railNavDemos } from "./rail-nav.demo";
+import { appSidebarDemos } from "./app-sidebar.demo";
 import { inputDemos } from "./input.demo";
 import { listboxDemos } from "./listbox.demo";
 import { numberFieldDemos } from "./number-field.demo";
@@ -19,6 +20,7 @@ import { swatchDemos } from "./swatch.demo";
 import { colorPickerDemos } from "./color-picker.demo";
 import { colorDemos } from "./color.demo";
 import { cardDemos } from "./card.demo";
+import { cardGridDemos } from "./card-grid.demo";
 import { disclosureDemos } from "./disclosure.demo";
 import { segmentedDemos } from "./segmented.demo";
 import { chipDemos } from "./chip.demo";
@@ -47,6 +49,10 @@ import { radioGroupDemos } from "./radio-group.demo";
 import { tokenSampleDemos } from "./token-sample.demo";
 import { searchTriggerDemos } from "./search-trigger.demo";
 import { tableOfContentsDemos } from "./table-of-contents.demo";
+import { statCardDemos } from "./stat-card.demo";
+import { financeCardsDemos } from "./finance-cards.demo";
+import { accountCardsDemos } from "./account-cards.demo";
+import { appCardsDemos } from "./app-cards.demo";
 
 export const demos: DemoMap = {
   ...buttonDemos,
@@ -55,6 +61,7 @@ export const demos: DemoMap = {
   ...miniBarsDemos,
   ...fabDemos,
   ...railNavDemos,
+  ...appSidebarDemos,
   ...inputDemos,
   ...listboxDemos,
   ...numberFieldDemos,
@@ -63,6 +70,7 @@ export const demos: DemoMap = {
   ...colorPickerDemos,
   ...colorDemos,
   ...cardDemos,
+  ...cardGridDemos,
   ...disclosureDemos,
   ...segmentedDemos,
   ...chipDemos,
@@ -91,4 +99,8 @@ export const demos: DemoMap = {
   ...tokenSampleDemos,
   ...searchTriggerDemos,
   ...tableOfContentsDemos,
+  ...statCardDemos,
+  ...financeCardsDemos,
+  ...accountCardsDemos,
+  ...appCardsDemos,
 };

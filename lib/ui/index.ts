@@ -22,6 +22,8 @@ export { Tag, Chip, Count } from "./chip";
 export type { ChipProps, Intent } from "./chip";
 
 export { Card, CardHeader, CardFooter, Stat, Divider } from "./card";
+export { CardGrid } from "./card-grid";
+export type { CardGridBreakpoint, CardGridColumns } from "./card-grid";
 export type { CardVariant, CardPadding, CardRadius } from "./card";
 
 export { Swatch } from "./swatch";
@@ -39,8 +41,15 @@ export { Disclosure } from "./disclosure";
 export { Segmented, TabBar } from "./segmented";
 export type { Segment } from "./segmented";
 
-export { LineChart, AreaChart, BarChart, StackedAreaChart, AxisLabels } from "./chart";
-export type { ChartProps } from "./chart";
+export { LineChart, AreaChart, BarChart, StackedAreaChart, DonutChart } from "./chart";
+export type { ChartProps, ChartSeries, ChartHeight, DonutDatum, DonutSize } from "./chart";
+export { AxisLabels } from "./chart-axis";
+export { ChartGrid } from "./chart-grid";
+export { ChartLegend } from "./chart-legend";
+export type { ChartLegendItem, ChartLegendMark } from "./chart-legend";
+export { ChartTooltip } from "./chart-tooltip";
+export type { ChartTooltipRow, ChartKeyMark } from "./chart-tooltip";
+export { CHART_TONES, type ChartTone, type ChartSurface } from "./chart-kit";
 
 export { Avatar, AvatarGroup, Table } from "./data";
 export { Calendar } from "./calendar";
@@ -88,6 +97,25 @@ export { SearchTrigger } from "./search-trigger";
 export { TableOfContents } from "./table-of-contents";
 export type { TocItem } from "./table-of-contents";
 
+// Blocos: cartoes prontos alimentados por dado — a tela de exemplo so os compoe.
+export { StatCard } from "./stat-card";
+export type { StatTrend, StatDetail } from "./stat-card";
+export { GoalsCard, InvestCard, LimitCard, TransactionsCard, TransactionRow, PaymentsCard } from "./finance-cards";
+export type { Goal, Transaction, Payment, PaymentStatus } from "./finance-cards";
+export {
+  DailyGoalCard,
+  PreferencesCard,
+  UpgradePlanCard,
+  SignUpCard,
+  MemberRow,
+  TeamCard,
+  ShareCard,
+  CalendarCard,
+} from "./account-cards";
+export type { Preference, PlanOption, AuthProvider, Member } from "./account-cards";
+export { ChatCard, ActivityCard, ChartCard, AppFrame } from "./app-cards";
+export type { ChatMessage, Activity, ChartRange, AppRailEntry, AppNavEntry } from "./app-cards";
+
 // Registro de componentes (metadado puro) — as demos ficam em ./demos, so cliente.
 export {
   components,
@@ -105,3 +133,5 @@ export { Sparkline, type SparklineSize } from "./sparkline";
 export { MiniBars, type MiniBarsSize } from "./mini-bars";
 export { Fab, type FabPosition, type FabSize, type FabTone } from "./fab";
 export { RailItem, RailNav } from "./rail-nav";
+export { AppSidebar } from "./app-sidebar";
+export type { AppSidebarArea, AppSidebarGroup, AppSidebarItem } from "./app-sidebar";

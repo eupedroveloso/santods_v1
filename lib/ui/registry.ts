@@ -15,6 +15,7 @@ import { sparklineMeta } from "./sparkline.meta";
 import { miniBarsMeta } from "./mini-bars.meta";
 import { fabMeta } from "./fab.meta";
 import { railNavMeta } from "./rail-nav.meta";
+import { appSidebarMeta } from "./app-sidebar.meta";
 import { inputMeta } from "./input.meta";
 import { listboxMeta } from "./listbox.meta";
 import { numberFieldMeta } from "./number-field.meta";
@@ -23,6 +24,7 @@ import { swatchMeta } from "./swatch.meta";
 import { colorPickerMeta } from "./color-picker.meta";
 import { colorMeta } from "./color.meta";
 import { cardMeta } from "./card.meta";
+import { cardGridMeta } from "./card-grid.meta";
 import { disclosureMeta } from "./disclosure.meta";
 import { segmentedMeta } from "./segmented.meta";
 import { chipMeta } from "./chip.meta";
@@ -51,6 +53,10 @@ import { radioGroupMeta } from "./radio-group.meta";
 import { tokenSampleMeta } from "./token-sample.meta";
 import { searchTriggerMeta } from "./search-trigger.meta";
 import { tableOfContentsMeta } from "./table-of-contents.meta";
+import { statCardMeta } from "./stat-card.meta";
+import { financeCardsMeta } from "./finance-cards.meta";
+import { accountCardsMeta } from "./account-cards.meta";
+import { appCardsMeta } from "./app-cards.meta";
 
 export type * from "./registry.types";
 
@@ -64,6 +70,7 @@ export const CATEGORIES: { id: ComponentCategory; label: string }[] = [
   { id: "dado", label: "Dado" },
   { id: "aplicacao", label: "Aplicação" },
   { id: "codigo", label: "Código" },
+  { id: "blocos", label: "Blocos" },
   { id: "icones", label: "Ícones" },
 ];
 
@@ -79,6 +86,7 @@ const ALL: ComponentMeta[] = [
   ...miniBarsMeta,
   ...fabMeta,
   ...railNavMeta,
+  ...appSidebarMeta,
   ...inputMeta,
   ...listboxMeta,
   ...numberFieldMeta,
@@ -87,6 +95,7 @@ const ALL: ComponentMeta[] = [
   ...colorPickerMeta,
   ...colorMeta,
   ...cardMeta,
+  ...cardGridMeta,
   ...disclosureMeta,
   ...segmentedMeta,
   ...chipMeta,
@@ -115,6 +124,10 @@ const ALL: ComponentMeta[] = [
   ...tokenSampleMeta,
   ...searchTriggerMeta,
   ...tableOfContentsMeta,
+  ...statCardMeta,
+  ...financeCardsMeta,
+  ...accountCardsMeta,
+  ...appCardsMeta,
 ];
 
 /** Os dois niveis do catalogo, na ordem em que aparecem. */
