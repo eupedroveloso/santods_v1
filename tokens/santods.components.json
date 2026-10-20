@@ -83,6 +83,18 @@
         "Modal"
       ],
       "codeOnly": [
+        "daily-goal-card",
+        "preferences-card",
+        "upgrade-plan-card",
+        "sign-up-card",
+        "member-row",
+        "team-card",
+        "share-card",
+        "calendar-card",
+        "chat-card",
+        "activity-card",
+        "chart-card",
+        "app-frame",
         "app-sidebar",
         "brand-card",
         "brand-logo",
@@ -97,8 +109,12 @@
         "line-chart",
         "area-chart",
         "bar-chart",
+        "donut-chart",
         "stacked-area-chart",
         "axis-labels",
+        "chart-grid",
+        "chart-legend",
+        "chart-tooltip",
         "chat-header",
         "chat-bubble",
         "chat-attachment",
@@ -113,6 +129,7 @@
         "copy-button",
         "copy-code",
         "cta-button",
+        "dashboard-header",
         "table",
         "avatar",
         "avatar-group",
@@ -123,12 +140,22 @@
         "activity-item",
         "marker",
         "ticker",
+        "goals-card",
+        "invest-card",
+        "limit-card",
+        "transactions-card",
+        "payments-card",
         "icon-tile",
         "textarea",
         "search-input",
         "field",
         "kbd",
         "key-value",
+        "hero-card",
+        "showcase-strip",
+        "logo-strip",
+        "section-intro",
+        "bento-grid",
         "landing-page",
         "landing-header",
         "landing-hero",
@@ -158,6 +185,7 @@
         "skeleton",
         "social-proof-toast",
         "sparkline",
+        "stat-card",
         "swatch",
         "swatch-picker",
         "color-row",
@@ -167,6 +195,7 @@
         "switch",
         "setting-row",
         "token-sample",
+        "transaction-row",
         "youtube-embed"
       ],
       "brokenDeclarations": []
@@ -388,6 +417,78 @@
   ],
   "codeOnly": [
     {
+      "slug": "daily-goal-card",
+      "name": "DailyGoalCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "preferences-card",
+      "name": "PreferencesCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "upgrade-plan-card",
+      "name": "UpgradePlanCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "sign-up-card",
+      "name": "SignUpCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "member-row",
+      "name": "MemberRow",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "team-card",
+      "name": "TeamCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "share-card",
+      "name": "ShareCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "calendar-card",
+      "name": "CalendarCard",
+      "source": "account-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chat-card",
+      "name": "ChatCard",
+      "source": "app-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "activity-card",
+      "name": "ActivityCard",
+      "source": "app-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chart-card",
+      "name": "ChartCard",
+      "source": "app-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "app-frame",
+      "name": "AppFrame",
+      "source": "app-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "app-sidebar",
       "name": "AppSidebar",
       "source": "app-sidebar.tsx",
@@ -472,6 +573,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "donut-chart",
+      "name": "DonutChart",
+      "source": "chart.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "stacked-area-chart",
       "name": "StackedAreaChart",
       "source": "chart.tsx",
@@ -480,7 +587,25 @@
     {
       "slug": "axis-labels",
       "name": "AxisLabels",
-      "source": "chart.tsx",
+      "source": "chart-axis.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chart-grid",
+      "name": "ChartGrid",
+      "source": "chart-grid.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chart-legend",
+      "name": "ChartLegend",
+      "source": "chart-legend.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "chart-tooltip",
+      "name": "ChartTooltip",
+      "source": "chart-tooltip.tsx",
       "figmaDeclared": null
     },
     {
@@ -568,6 +693,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "dashboard-header",
+      "name": "DashboardHeader",
+      "source": "dashboard-header.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "table",
       "name": "Table",
       "source": "data.tsx",
@@ -628,6 +759,36 @@
       "figmaDeclared": null
     },
     {
+      "slug": "goals-card",
+      "name": "GoalsCard",
+      "source": "finance-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "invest-card",
+      "name": "InvestCard",
+      "source": "finance-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "limit-card",
+      "name": "LimitCard",
+      "source": "finance-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "transactions-card",
+      "name": "TransactionsCard",
+      "source": "finance-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "payments-card",
+      "name": "PaymentsCard",
+      "source": "finance-cards.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "icon-tile",
       "name": "IconTile",
       "source": "icon-tile.tsx",
@@ -661,6 +822,36 @@
       "slug": "key-value",
       "name": "KeyValue",
       "source": "key-value.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "hero-card",
+      "name": "HeroCard",
+      "source": "landing-sections.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "showcase-strip",
+      "name": "ShowcaseStrip",
+      "source": "landing-sections.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "logo-strip",
+      "name": "LogoStrip",
+      "source": "landing-sections.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "section-intro",
+      "name": "SectionIntro",
+      "source": "landing-sections.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "bento-grid",
+      "name": "BentoGrid",
+      "source": "landing-sections.tsx",
       "figmaDeclared": null
     },
     {
@@ -838,6 +1029,12 @@
       "figmaDeclared": null
     },
     {
+      "slug": "stat-card",
+      "name": "StatCard",
+      "source": "stat-card.tsx",
+      "figmaDeclared": null
+    },
+    {
       "slug": "swatch",
       "name": "Swatch",
       "source": "swatch.tsx",
@@ -889,6 +1086,12 @@
       "slug": "token-sample",
       "name": "TokenSample",
       "source": "token-sample.tsx",
+      "figmaDeclared": null
+    },
+    {
+      "slug": "transaction-row",
+      "name": "TransactionRow",
+      "source": "transaction-row.tsx",
       "figmaDeclared": null
     },
     {
