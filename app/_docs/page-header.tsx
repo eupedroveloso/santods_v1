@@ -6,7 +6,27 @@ import { Breadcrumb, Divider, type Crumb } from "@/lib/ui";
  * lado da sidebar (o max-w de leitura fica so no paragrafo do DocHeader) e toda
  * a altura da <main>, para um rodape com mt-auto encostar no fim.
  */
-export function DocPage({ children }: { children: ReactNode }) {
+export function DocPage({
+  children,
+  layout = "doc",
+}: {
+  children: ReactNode;
+  /**
+   * `doc` (padrao): coluna de leitura com o padding da <main> e gap entre secoes.
+   * `full`: tela de exemplo rodando como app — anula o padding da <main> (margens
+   * negativas com os mesmos tokens: px-md / lg:px-3xl, py-2xl) e ocupa a area de
+   * conteudo inteira, altura minima = viewport menos a topbar. Sem cabecalho nem
+   * indice "Nesta pagina": quem desenha e a tela.
+   */
+  layout?: "doc" | "full";
+}) {
+  if (layout === "full") {
+    return (
+      <div className="-mx-md -my-2xl flex min-h-[calc(100dvh-var(--santo-dimension-size-56))] min-w-0 flex-1 flex-col lg:-mx-3xl">
+        {children}
+      </div>
+    );
+  }
   return <div className="flex w-full min-w-0 flex-1 flex-col gap-3xl">{children}</div>;
 }
 
@@ -34,7 +54,7 @@ export function DocHeader({
   description?: ReactNode;
   /** Controles na linha do titulo, a direita, alinhados pela base (alternancia, filtro). */
   actions?: ReactNode;
-  /** Divider depois do cabecalho; o conteudo comeca a gap-lg dele (nao o 3xl do DocPage). */
+  /** Divider depois do cabecalho; o conteudo comeca a space/xl dele (3xl do DocPage − md). */
   divided?: boolean;
   /** Linha extra abaixo do titulo: tags, atalhos. */
   children?: ReactNode;
@@ -46,7 +66,7 @@ export function DocHeader({
           <Breadcrumb items={crumbs} />
         </div>
       )}
-      <header className={`flex flex-col gap-sm ${divided ? "-mb-lg" : ""}`}>
+      <header className={`flex flex-col gap-sm ${divided ? "-mb-md" : ""}`}>
         <div className="flex flex-wrap items-end justify-between gap-sm">
           <h1 className="santo-heading-5-semibold">{title}</h1>
           {actions}

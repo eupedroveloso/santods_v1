@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CodeBlock, Field, Input, Select, Switch } from "@/lib/ui";
+import { Card, CardGrid, CodeBlock, Field, Input, Select, Switch } from "@/lib/ui";
 import { initialValues } from "@/lib/ui/demo-kit";
 import { demos } from "@/lib/ui/demos";
 import { getComponent } from "@/lib/ui/registry";
@@ -24,7 +24,7 @@ export function ComponentDemos({ slug }: { slug: string }) {
   const file = getComponent(slug)?.source ?? `${slug}.tsx`;
   if (!entry || (!entry.playground && entry.demos.length === 0)) {
     return (
-      <p className="santo-body-small-regular rounded-xl border-thin border-border-subtle bg-surface-sunken p-lg text-text-secondary">
+      <p className="santo-body-small-regular text-text-secondary">
         Este componente ainda não tem demo registrada em lib/ui.
       </p>
     );
@@ -33,13 +33,13 @@ export function ComponentDemos({ slug }: { slug: string }) {
     <div className="flex flex-col gap-2xl">
       {entry.playground && <PlaygroundBlock playground={entry.playground} file={file} />}
       {/* Demos em grade fluida: uma coluna ate caber duas de container/sm (640px). */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,var(--santo-dimension-container-sm)),1fr))] gap-2xl">
+      <CardGrid minItem="container-sm" autoFit gap="2xl" masonry={false}>
         {entry.demos.map((d) => (
         <DemoCard key={d.title} id={anchor(d.title)} title={d.title} code={d.code} codeTitle={file} layout={d.layout}>
           <d.Preview />
         </DemoCard>
         ))}
-      </div>
+      </CardGrid>
     </div>
   );
 }
@@ -55,12 +55,13 @@ function PlaygroundBlock({ playground, file }: { playground: Playground; file: s
       <Card
         variant="double"
         padded={false}
+        footerFlush
         header={PLAYGROUND_LABEL}
         footer={<CodeBlock code={playground.code(values)} title={file} className="flex-1" />}
       >
         <div className="flex min-w-0 flex-col md:flex-row">
           <div
-            className={`flex min-h-(--santo-dimension-space-240) min-w-0 flex-1 flex-col justify-center p-xl ${
+            className={`flex min-w-0 flex-1 flex-col justify-center p-xl ${
               playground.layout === "stretch" ? "items-stretch" : "items-center"
             }`}
           >

@@ -52,7 +52,7 @@ export default async function CollectionPage({ params }: PageProps<"/tokens/[slu
                 <SectionLabel>{group.name}</SectionLabel>
                 <Count>{group.variables.length}</Count>
               </span>
-              <Card padding="sm">
+              <Card padding="md">
                 <TokenTable variables={group.variables} modes={collection.modes} />
               </Card>
             </section>

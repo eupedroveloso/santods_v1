@@ -4,16 +4,11 @@ import {
   getCollection,
   listCollections,
   listIdentities,
-  type IdentityEntry,
 } from "@/lib/docs/catalog";
-import { Card, CardHeader, Tag, TokenSample } from "@/lib/ui";
-import { SantoLogo } from "../_docs/logo";
-import { BrandPreview } from "./brand-preview";
+import { BrandCard, CardGrid } from "@/lib/ui";
 import {
   DocHeader,
   DocPage,
-  SectionLabel,
-  SectionTitle,
 } from "../_docs/page-header";
 
 export const metadata: Metadata = {
@@ -31,165 +26,55 @@ function variableIn(slug: string, name: string) {
   );
 }
 
-function radiusScale() {
-  return (getCollection("semantic")?.groups ?? [])
-    .flatMap((g) => g.variables)
-    .filter((v) => v.name.startsWith("radius/") && v.name !== "radius/none");
+/** Degrau da Palette para o qual color/surface/page aponta num modo de tema (Light/Dark). */
+function pageStep(theme: "Light" | "Dark") {
+  return variableIn("color", "color/surface/page")?.values.find((v) => v.mode === theme)?.alias ?? null;
+}
+
+/** Var e hex de um degrau da Palette num modo de marca. */
+function paletteColor(name: string | null, mode: string) {
+  const v = name ? variableIn("palette", name) : null;
+  return { cssVar: v?.cssVar ?? "", value: v?.values.find((m) => m.mode === mode)?.css ?? "—" };
 }
 
 export default function IdentidadesPage() {
   const identities = listIdentities();
-  const radii = radiusScale();
-  const sansVar = variableIn("brand", "brand/family/sans")?.cssVar;
-  const monoVar = variableIn("brand", "brand/family/mono")?.cssVar;
   const brand = getCollection("brand");
-  const sources = listCollections().filter((c) =>
-    ["brand", "palette"].includes(c.slug),
-  );
+  const light = pageStep("Light");
+  const dark = pageStep("Dark");
+  const sources = listCollections().filter((c) => ["brand", "palette"].includes(c.slug));
 
   return (
     <DocPage>
-      <DocHeader
-        crumbs={[{ label: "Docs", href: "/" }, { label: "Identidades" }]}
-        title="Identidades"
-      />
+      <DocHeader crumbs={[{ label: "Docs", href: "/" }, { label: "Identidades" }]} title="Identidades" divided />
 
       <section className="flex flex-col gap-md">
-        <SectionTitle
-          id="produtos"
-          title="Produtos"
-          count={identities.length}
-        />
-        <div className="grid grid-cols-1 gap-lg">
-          {identities.map((identity) => (
-            <IdentityCard
-              key={identity.slug}
-              identity={identity}
-              radii={radii}
-              sansVar={sansVar}
-              monoVar={monoVar}
-              isDefault={identity.mode === brand?.defaultMode}
-            />
-          ))}
-        </div>
+        <CardGrid columns={{ base: 1 }} masonry={false}>
+          {identities.map((identity) => {
+            const brandColor = identity.palette.find((p) => p.family === "brand");
+            return (
+              <BrandCard
+                key={identity.slug}
+                brand={identity.id}
+                name={identity.name}
+                isDefault={identity.mode === brand?.defaultMode}
+                font={identity.families.sans}
+                color={{ cssVar: brandColor?.cssVar ?? "", value: brandColor?.value ?? "—" }}
+                neutrals={{ light: paletteColor(light, identity.mode), dark: paletteColor(dark, identity.mode) }}
+                radius={{ cssVar: identity.radiusBase.cssVar, value: identity.radiusBase.css }}
+              />
+            );
+          })}
+        </CardGrid>
       </section>
 
       <p className="santo-caption-regular flex flex-wrap items-center gap-sm">
         {sources.map((c) => (
-          <Link
-            key={c.slug}
-            href={c.route}
-            className="text-text-link-default hover:text-text-link-hover hover:underline"
-          >
+          <Link key={c.slug} href={c.route} className="text-text-link-default hover:text-text-link-hover hover:underline">
             {c.name}
           </Link>
         ))}
       </p>
     </DocPage>
-  );
-}
-
-function IdentityCard({
-  identity,
-  radii,
-  sansVar,
-  monoVar,
-  isDefault,
-}: {
-  identity: IdentityEntry;
-  radii: ReturnType<typeof radiusScale>;
-  sansVar?: string;
-  monoVar?: string;
-  isDefault: boolean;
-}) {
-  const shadows = identity.shadows.filter((sh) => sh.name !== "none");
-  return (
-    // data-brand no cartao inteiro: paleta, fontes, raios e preview resolvem
-    // as vars da identidade deste cartao, nao da marca ativa no documento.
-    // E o seletor que o emit.mjs usara para cada modo de marca (F0).
-    <div id={identity.slug} data-brand={identity.id} className="scroll-mt-6xl">
-      <Card padded={false} className="overflow-hidden">
-        <div className="flex flex-col gap-lg p-lg">
-          {identity.id === "santo" && <SantoLogo size={32} />}
-          <CardHeader
-            title={identity.name}
-            action={isDefault ? <Tag intent="brand">Padrão</Tag> : undefined}
-          />
-
-          <div className="flex flex-col gap-xs">
-            <SectionLabel>Paleta</SectionLabel>
-            <div className="flex flex-wrap gap-md">
-              {identity.palette.map((p) => (
-                <TokenSample
-                  key={p.family}
-                  variant="swatch"
-                  value={`var(${p.cssVar})`}
-                  label={<span className="capitalize">{p.family}</span>}
-                  caption={p.value}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Os dois paineis esticam ate a mesma altura; as amostras de raio e
-              de sombra dividem as mesmas colunas, entao amostra e rotulo caem
-              na mesma linha de base nas duas fileiras. */}
-          <div className="grid grid-cols-1 gap-lg xl:grid-cols-2">
-            <div className="flex flex-col gap-xs">
-              <SectionLabel>Tipografia</SectionLabel>
-              <Card variant="inset" padding="md" className="flex-1 justify-between">
-                <div className="flex flex-col gap-3xs">
-                  <span
-                    className="santo-heading-4-semibold"
-                    style={sansVar ? { fontFamily: `var(${sansVar})` } : undefined}
-                  >
-                    Aa Bb Cc 0123
-                  </span>
-                  <span className="santo-caption-regular text-text-secondary">{identity.families.sans}</span>
-                </div>
-                <div className="flex flex-col gap-3xs">
-                  <span
-                    className="santo-body-regular"
-                    style={monoVar ? { fontFamily: `var(${monoVar})` } : undefined}
-                  >
-                    {"const santo = { id: 0 };"}
-                  </span>
-                  <span className="santo-caption-regular text-text-secondary">{identity.families.mono}</span>
-                </div>
-              </Card>
-            </div>
-
-            <div className="flex flex-col gap-xs">
-              <SectionLabel>Raio e sombra</SectionLabel>
-              <Card variant="inset" padding="md" className="flex-1 justify-between">
-                {/* Raio e sombra em duas grades com o MESMO molde de colunas: amostra e
-                    rotulo caem na mesma coluna nas duas fileiras, e a 375 viram 4 colunas. */}
-                {[
-                  radii.map((r) => ({ key: r.name, title: r.cssVar, label: r.leaf, sample: <TokenSample variant="radius" value={`var(${r.cssVar})`} /> })),
-                  shadows.map((sh) => ({ key: sh.name, title: sh.cssVar, label: sh.name, sample: <TokenSample variant="shadow" value={`var(${sh.cssVar})`} /> })),
-                ].map((row, i) => (
-                  <div key={i} className="grid grid-cols-4 gap-x-sm gap-y-md sm:grid-cols-8">
-                    {row.map((it) => (
-                      <div key={it.key} className="flex flex-col items-start gap-xs" title={it.title}>
-                        {it.sample}
-                        <span className="santo-caption-small-regular text-text-tertiary">{it.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-                <span className="santo-caption-regular text-text-secondary">
-                  Raio base: <span className="santo-code-sm">{identity.radiusBase.css}</span>
-                </span>
-              </Card>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-xs border-t-thin border-border-subtle bg-surface-sunken p-lg">
-          <SectionLabel>Preview</SectionLabel>
-          <BrandPreview name={identity.name} />
-        </div>
-      </Card>
-    </div>
   );
 }

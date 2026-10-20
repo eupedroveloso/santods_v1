@@ -10,11 +10,11 @@ import {
   CommandPalette,
   Icon,
   IconButton,
-  SearchTrigger,
+  AppSidebar,
+  BrandLogo,
+  type BrandOption,
   NavItem,
   NavSection,
-  RailItem,
-  RailNav,
   SidebarNav,
   Tag,
   useModal,
@@ -22,8 +22,8 @@ import {
   type CommandItem,
 } from "@/lib/ui";
 import { ThemeToggle } from "../_components/theme-toggle";
+import { BrandControl } from "../_components/brand-control";
 import * as FigmaIcons from "@/lib/icons";
-import { SantoLogo } from "./logo";
 import { FIGMA_URL, LAYOUT, TOP_LINKS, type NavGroup, type NavIcon, type SearchItem } from "./links";
 
 /**
@@ -35,10 +35,13 @@ import { FIGMA_URL, LAYOUT, TOP_LINKS, type NavGroup, type NavIcon, type SearchI
 export function DocsShell({
   nav,
   search,
+  brands = [],
   children,
 }: {
   nav: NavGroup[];
   search: SearchItem[];
+  /** Marcas do DS (modos de Brand); com mais de uma, aparece o seletor de marca. */
+  brands?: BrandOption[];
   children: ReactNode;
 }) {
   const pathname = usePathname();
@@ -90,7 +93,7 @@ export function DocsShell({
             <Icon.Menu size={16} />
           </IconButton>
           <Link href="/" aria-label="SantoDS — início" className="flex shrink-0 items-center rounded-md">
-            <SantoLogo />
+            <BrandLogo brand="santo" priority />
           </Link>
           <nav aria-label="Seções" className="hidden items-center gap-3xs lg:flex">
             {TOP_LINKS.map((l) => {
@@ -128,6 +131,10 @@ export function DocsShell({
                 <Icon.Figma size={16} />
               </a>
             </span>
+            {/* No celular o seletor de marca mora na gaveta: no header ele empurrava a barra para fora dos 390px. */}
+            <div className="hidden sm:block">
+              <BrandControl brands={brands} />
+            </div>
             <ThemeToggle />
           </div>
         </div>
@@ -147,7 +154,7 @@ export function DocsShell({
       </div>
 
       {menuOpen && (
-        <MenuDrawer onClose={() => setMenuOpen(false)}>
+        <MenuDrawer onClose={() => setMenuOpen(false)} brands={brands}>
           {sidebar}
         </MenuDrawer>
       )}
@@ -174,7 +181,7 @@ function NavGlyph({ name, size = 16 }: { name: NavIcon; size?: 16 | 20 }) {
 }
 
 /** Gaveta do menu no celular: modal de verdade (Esc, foco preso, foco devolvido). */
-function MenuDrawer({ onClose, children }: { onClose: () => void; children: ReactNode }) {
+function MenuDrawer({ onClose, brands, children }: { onClose: () => void; brands: BrandOption[]; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useModal(ref, onClose);
   return (
@@ -198,7 +205,7 @@ function MenuDrawer({ onClose, children }: { onClose: () => void; children: Reac
           className="h-full"
           header={
             <div className="flex min-w-0 flex-1 items-center justify-between">
-              <SantoLogo />
+              <BrandLogo brand="santo" priority />
               <IconButton label="Fechar menu" size="sm" onClick={onClose}>
                 <Icon.Close size={16} />
               </IconButton>
@@ -206,6 +213,11 @@ function MenuDrawer({ onClose, children }: { onClose: () => void; children: Reac
           }
         >
           <div className="flex min-h-0 flex-1 flex-col gap-sm overflow-y-auto p-xs">
+            {brands.length > 1 && (
+              <div className="sm:hidden">
+                <BrandControl brands={brands} />
+              </div>
+            )}
             <SidebarNav className="lg:hidden">
               <NavSection>
                 {TOP_LINKS.map((l) => (
@@ -224,7 +236,7 @@ function MenuDrawer({ onClose, children }: { onClose: () => void; children: Reac
 }
 
 /*
- * Item com hash (/exemplos#cartoes, /tokens/semantic#…) so fica ativo na hash
+ * Item com hash (/exemplos#dashboard, /tokens/semantic#…) so fica ativo na hash
  * dele ou numa ancora filha (#cartoes-saldo). Sem hash na URL, vale o primeiro
  * item daquela rota — a visualizacao padrao da pagina.
  */
@@ -243,30 +255,6 @@ function isActive(href: string, pathname: string, hash: string, nav: NavGroup[])
   return first?.href === href;
 }
 
-/*
- * Trilho + painel (skill santo-ui-craft, secao 7): o trilho troca de AREA
- * (Inicio, Exemplos, Fundamentos, Componentes); o painel mostra as secoes da
- * area. A area segue a rota; clicar no trilho so troca o painel (sem navegar)
- * ate a rota mudar. Areas saem dos grupos da nav (titulo do grupo).
- */
-type Area = { id: string; label: string; icon: NavIcon; groups: string[] };
-const AREAS: Area[] = [
-  { id: "inicio", label: "Início", icon: "BookIcon", groups: [""] },
-  { id: "exemplos", label: "Exemplos", icon: "Grid2Icon", groups: ["Exemplos"] },
-  { id: "fundamentos", label: "Fundamentos", icon: "PaletteIcon", groups: ["Fundamentos"] },
-  { id: "componentes", label: "Componentes", icon: "CubeIcon", groups: ["Primitivos", "Semânticos"] },
-];
-
-function areaOf(pathname: string, nav: NavGroup[]): string {
-  for (const area of AREAS)
-    for (const g of nav.filter((g) => area.groups.includes(g.title)))
-      if (g.items.some((i) => i.href.split("#")[0] === pathname)) return area.id;
-  if (pathname.startsWith("/componentes")) return "componentes";
-  if (/^\/(tokens|estilos|identidades)/.test(pathname)) return "fundamentos";
-  if (pathname.startsWith("/exemplos")) return "exemplos";
-  return "inicio";
-}
-
 function Sidebar({
   nav,
   pathname,
@@ -279,46 +267,21 @@ function Sidebar({
   onNavigate: () => void;
 }) {
   const hash = useSyncExternalStore(subscribeHash, readHash, () => "");
-  const routeArea = areaOf(pathname, nav);
-  // Escolha manual vale so para a rota em que foi feita.
-  const [picked, setPicked] = useState<{ path: string; area: string } | null>(null);
-  const area = picked?.path === pathname ? picked.area : routeArea;
-  const groups = nav.filter((g) => AREAS.find((a) => a.id === area)?.groups.includes(g.title));
+  // Coluna unica: todos os grupos abertos (sem trilho de areas).
   return (
-    <div className="flex gap-xs">
-      <div className="sticky top-0 self-start">
-        <RailNav label="Áreas da documentação">
-          {AREAS.map((a) => (
-            <RailItem
-              key={a.id}
-              icon={<NavGlyph name={a.icon} size={20} />}
-              label={a.label}
-              active={area === a.id}
-              onClick={() => setPicked({ path: pathname, area: a.id })}
-            />
-          ))}
-        </RailNav>
-      </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-md">
-        <SearchTrigger onClick={onSearch} />
-        <SidebarNav label={AREAS.find((a) => a.id === area)?.label ?? "Seções"}>
-          {groups.map((group) => (
-            <NavSection key={group.title || "inicio"} title={group.title || undefined}>
-              {group.items.map((item) => (
-                <NavItem
-                  key={item.href}
-                  href={item.href}
-                  active={isActive(item.href, pathname, hash, nav)}
-                  onClick={onNavigate}
-                  icon={item.icon ? <NavGlyph name={item.icon} /> : undefined}
-                >
-                  {item.label}
-                </NavItem>
-              ))}
-            </NavSection>
-          ))}
-        </SidebarNav>
-      </div>
-    </div>
+    <AppSidebar
+      label="Documentação"
+      onSearch={onSearch}
+      onNavigate={onNavigate}
+      groups={nav.map((group) => ({
+        title: group.title || undefined,
+        items: group.items.map((item) => ({
+          href: item.href,
+          label: item.label,
+          icon: item.icon ? <NavGlyph name={item.icon} /> : undefined,
+          active: isActive(item.href, pathname, hash, nav),
+        })),
+      }))}
+    />
   );
 }

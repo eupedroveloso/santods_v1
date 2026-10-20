@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { listEffectStyles } from "@/lib/docs/catalog";
-import { Card, CopyCode, Count, TableOfContents, Tag, TokenSample, type TocItem } from "@/lib/ui";
+import { Card, CardGrid, CopyCode, Count, TableOfContents, Tag, TokenSample, type TocItem } from "@/lib/ui";
 import { DocHeader, DocPage, SectionLabel } from "../../_docs/page-header";
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default function EfeitosPage() {
               <SectionLabel>Sombras</SectionLabel>
               <Count>{effects.length}</Count>
             </span>
-            <div className="grid gap-md sm:grid-cols-2 lg:grid-cols-3">
+            <CardGrid columns={{ sm: 2, lg: 3 }} gap="md">
               {effects.map((e) => {
                 return (
                   <div key={e.slug} id={e.slug} className="flex scroll-mt-6xl flex-col">
@@ -73,7 +73,7 @@ export default function EfeitosPage() {
                   </div>
                 );
               })}
-            </div>
+            </CardGrid>
           </section>
 
         </div>

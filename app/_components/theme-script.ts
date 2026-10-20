@@ -7,6 +7,15 @@ export const THEME_STORAGE_KEY = "santo-theme";
  */
 export const THEME_SCRIPT = `try{var t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
 
+/** Chave da marca escolhida no localStorage (id de brand/id). */
+export const BRAND_STORAGE_KEY = "santo-brand";
+
+/**
+ * Roda no <head> junto do tema: aplica a marca salva (data-brand na raiz) antes
+ * da primeira pintura. So aceita id simples; ausencia = marca padrao.
+ */
+export const BRAND_SCRIPT = `try{var b=localStorage.getItem(${JSON.stringify(BRAND_STORAGE_KEY)});if(b&&/^[a-z0-9-]+$/.test(b))document.documentElement.setAttribute("data-brand",b)}catch(e){}`;
+
 /**
  * SO EM DESENVOLVIMENTO. O next dev serve o CSS sempre na mesma URL
  * (app_globals_*.css), e o WebKit (Safari, portal do Maestri) reaproveita a
