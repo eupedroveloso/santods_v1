@@ -1,7 +1,7 @@
 import { createElement, type ComponentType, type ReactNode } from "react";
 import { Icon } from "@/lib/ui";
-import { APLICACAO_BLOCKS, ApplicationScreen, CARTOES_BLOCKS, CardsScreen, DashboardScreen } from "./_screens/showcase";
-import { FINANCAS_BLOCKS, Overview } from "./overview";
+import { LandingScreen } from "./landing";
+import { DASHBOARD_BLOCKS, DashboardScreen } from "./dashboard";
 
 /**
  * Visualizacoes de /exemplos. Uma visualizacao nova = um componente + uma
@@ -9,18 +9,21 @@ import { FINANCAS_BLOCKS, Overview } from "./overview";
  * `blocks` sao as ancoras (ids) que o componente poe na pagina.
  */
 export type ExampleView = {
-  /** Vai na hash: /exemplos#financas. */
+  /** Vai na hash: /exemplos#dashboard. */
   slug: string;
   label: string;
   /** Icone da tab bar flutuante (celular). */
   icon: ReactNode;
   Component: ComponentType;
   blocks: { id: string; label: string }[];
+  /**
+   * A tela encosta nas bordas da area (pagina inteira, como a landing). Sem ele,
+   * a tela ganha o respiro de pagina (space/md, lg: space/xl) dentro do layout full.
+   */
+  bleed?: boolean;
 };
 
 export const VIEWS: ExampleView[] = [
-  { slug: "financas", label: "Finanças", icon: createElement(Icon.TrendUp, { size: 20 }), Component: Overview, blocks: FINANCAS_BLOCKS },
-  { slug: "cartoes", label: "Cartões", icon: createElement(Icon.Grid, { size: 20 }), Component: CardsScreen, blocks: CARTOES_BLOCKS },
-  { slug: "painel", label: "Painel", icon: createElement(Icon.Layers, { size: 20 }), Component: DashboardScreen, blocks: [] },
-  { slug: "aplicacao", label: "Aplicação", icon: createElement(Icon.Book, { size: 20 }), Component: ApplicationScreen, blocks: APLICACAO_BLOCKS },
+  { slug: "dashboard", label: "Dashboard", icon: createElement(Icon.TrendUp, { size: 20 }), Component: DashboardScreen, blocks: DASHBOARD_BLOCKS },
+  { slug: "landing", label: "Landing", icon: createElement(Icon.Link, { size: 20 }), Component: LandingScreen, blocks: [], bleed: true },
 ];
