@@ -19,6 +19,8 @@ export type BrandLogoSize = keyof typeof HEIGHT;
  * altura do arquivo original. Assets em public/brand — a cor da marca vem no
  * SVG (asset isento), nunca em JSX.
  */
+// SantoDS: assinatura sem o selo de versão, que ficava ilegível nas alturas de UI.
+// O SVG preserva a marca inteira; a prancheta termina após o desenho, sem sobra lateral.
 type LogoFile = { light: string; dark: string; ratio: number };
 
 /*
@@ -27,7 +29,7 @@ type LogoFile = { light: string; dark: string; ratio: number };
  * (hoje o Santo ainda nao tem mark: falta o asset).
  */
 const LOGOS: Record<string, { alt: string; full: LogoFile; mark?: LogoFile }> = {
-  santo: { alt: "SantoDS v1", full: { light: "/brand/santods-logo.svg", dark: "/brand/santods-logo-dark.svg", ratio: 442 / 92 } },
+  santo: { alt: "SantoDS v1", full: { light: "/brand/santods-logo.svg", dark: "/brand/santods-logo-dark.svg", ratio: 417 / 92 } },
   vtsd: {
     alt: "Venda Todo Santo Dia",
     full: { light: "/brand/vtsd-logo.svg", dark: "/brand/vtsd-logo-dark.svg", ratio: 120 / 32 },
