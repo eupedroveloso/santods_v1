@@ -9,20 +9,20 @@ export const iconTileDemos: DemoMap = {
   "icon-tile": {
     playground: {
       controls: [
-        { kind: "select", prop: "tone", label: "Tom", options: ["subtle", "outline", "brand"], initial: "subtle" },
+        { kind: "select", prop: "tone", label: "Tom", options: ["plain", "brand", "success", "danger", "subtle", "outline"], initial: "plain" },
         { kind: "select", prop: "shape", label: "Forma", options: ["square", "round"], initial: "square" },
         { kind: "select", prop: "size", label: "Tamanho", options: ["md", "lg"], initial: "md" },
       ],
-      // outline e a pilula elevada: aparece sobre chao; os outros sobre cartao.
+      // outline e a pastilha elevada: aparece sobre chao; os outros sobre cartao.
       Preview: ({ values: v }) => (
         <Card variant={v.tone === "outline" ? "sunken" : "raised"} padding="lg" className="items-center">
-          <IconTile tone={v.tone as "subtle" | "outline" | "brand"} shape={v.shape as "square" | "round"} size={v.size as "md" | "lg"}>
+          <IconTile tone={v.tone as "plain" | "subtle" | "outline" | "brand" | "success" | "danger"} shape={v.shape as "square" | "round"} size={v.size as "md" | "lg"}>
             {v.size === "lg" ? <Icon.Palette size={20} /> : <Icon.File size={16} />}
           </IconTile>
         </Card>
       ),
       code: (v) =>
-        `<IconTile${v.tone !== "subtle" ? ` tone="${v.tone}"` : ""}${v.shape !== "square" ? ` shape="${v.shape}"` : ""}${
+        `<IconTile${v.tone !== "plain" ? ` tone="${v.tone}"` : ""}${v.shape !== "square" ? ` shape="${v.shape}"` : ""}${
           v.size !== "md" ? ` size="${v.size}"` : ""
         }>${v.size === "lg" ? "<Icon.Palette size={20} />" : "<Icon.File size={16} />"}</IconTile>`,
     },

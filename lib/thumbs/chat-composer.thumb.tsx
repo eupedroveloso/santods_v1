@@ -4,7 +4,7 @@ import { ThumbFrame } from "@/lib/ui/thumb-frame";
 export function ChatComposerThumb() {
   return (
     <ThumbFrame pad="sm">
-      <S.Block w="lg" radius="full" className="items-center p-xs">
+      <S.Block w="lg" className="items-center p-xs">
         <S.Bar w="md" />
       </S.Block>
       <S.Field

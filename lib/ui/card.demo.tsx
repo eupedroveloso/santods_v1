@@ -12,7 +12,7 @@ import { Ring } from "./ring";
 import { Sparkline } from "./sparkline";
 import type { DemoMap } from "./registry.types";
 
-const VARIANTS = ["raised", "well", "inset", "sunken", "outlined", "dashed", "double"];
+const VARIANTS = ["raised", "sunken", "outlined", "dashed", "double"];
 const ELEVATIONS = ["none", "xs", "sm", "md", "lg", "xl", "2xl"];
 const SERIES = [6, 5, 4, 14, 8, 7, 9, 8, 10, 9];
 
@@ -46,16 +46,6 @@ export const cardDemos: DemoMap = {
       Preview: ({ values: v }) => {
         const variant = v.variant as CardVariant;
         const width = "mx-auto w-full max-w-(--santo-dimension-space-384)";
-        // well e inset vivem DENTRO de um cartao: mostrados no pai certo.
-        if (variant === "well" || variant === "inset")
-          return (
-            <Card className={width}>
-              <CardHeader title={v.title as string} meta={<Count>10</Count>} />
-              <Card variant={variant}>
-                <LineChart values={SERIES} />
-              </Card>
-            </Card>
-          );
         if (variant === "double")
           return (
             <Card
@@ -79,12 +69,7 @@ export const cardDemos: DemoMap = {
         );
       },
       code: (v) =>
-        v.variant === "well" || v.variant === "inset"
-          ? `<Card>
-  <CardHeader title="${v.title}" meta={<Count>10</Count>} />
-  <Card variant="${v.variant}">…</Card>
-</Card>`
-          : v.variant === "double"
+        v.variant === "double"
             ? `<Card
   variant="double"
   header={<CardHeader title="${v.title}" meta={<Count>10</Count>} />}
@@ -99,20 +84,19 @@ export const cardDemos: DemoMap = {
     },
     demos: [
       {
-        title: "Níveis tonais",
+        title: "Níveis tonais e raio concêntrico",
         layout: "stretch",
-        code: `<Card variant="sunken">          // nível 0: chão
-  <Card>                         // nível 1: cartão
-    <Card variant="well">…</Card> // nível 2: poço, raio = interno do pai
+        code: `<Card variant="sunken" padding="sm">   // moldura: raio = filho (lg) + sm
+  <Card>                                  // cartão: vira lg dentro da moldura
+    <CardHeader title="Pedidos" meta={<Count>128</Count>} />
+    <MiniBars …/>                          // sem caixa em volta (nada de poço)
   </Card>
 </Card>`,
         Preview: () => (
           <Card variant="sunken" padding="sm" className="mx-auto w-full max-w-(--santo-dimension-space-448)">
-            <Card radius="xs">
+            <Card>
               <CardHeader title="Pedidos" meta={<Count>128</Count>} />
-              <Card variant="well">
-                <MiniBars values={[4, 6, 5, 9, 8, 12, 10]} highlight={-1} size="md" label="Pedidos por dia" className="text-icon-brand" />
-              </Card>
+              <MiniBars values={[4, 6, 5, 9, 8, 12, 10]} highlight={-1} size="md" label="Pedidos por dia" className="text-icon-brand" />
             </Card>
           </Card>
         ),

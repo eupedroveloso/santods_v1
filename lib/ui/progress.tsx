@@ -1,4 +1,5 @@
 import type { Intent } from "./chip";
+import { RADIUS_BAR } from "./radius";
 
 type ProgressIntent = Exclude<Intent, "neutral">;
 
@@ -44,10 +45,10 @@ export function Progress({
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(pct)}
-      className={`w-full overflow-hidden rounded-full bg-neutral-subtle-default ${HEIGHT[size]} ${className}`}
+      className={`w-full overflow-hidden ${RADIUS_BAR} bg-neutral-subtle-default ${HEIGHT[size]} ${className}`}
     >
       <div
-        className={`h-full rounded-full transition-[width] duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-standard) ${FILL[intent]}`}
+        className={`h-full ${RADIUS_BAR} transition-[width] duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-standard) ${FILL[intent]}`}
         style={{ width: `${pct}%` }}
       />
     </div>

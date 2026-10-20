@@ -18,20 +18,20 @@
 
 .santo-range::-webkit-slider-runnable-track {
   height: var(--santo-dimension-space-4);
-  border-radius: var(--santo-radius-full);
+  border-radius: var(--santo-radius-xs);
   background: var(--santo-color-bg-neutral-subtle-active);
 }
 
 .santo-range::-moz-range-track {
   height: var(--santo-dimension-space-4);
-  border-radius: var(--santo-radius-full);
+  border-radius: var(--santo-radius-xs);
   background: var(--santo-color-bg-neutral-subtle-active);
 }
 
 /* Firefox pinta sozinho a parte já percorrida. */
 .santo-range::-moz-range-progress {
   height: var(--santo-dimension-space-4);
-  border-radius: var(--santo-radius-full);
+  border-radius: var(--santo-radius-xs);
   background: var(--santo-color-bg-brand-solid-default);
 }
 
@@ -182,7 +182,7 @@
 
   ::-webkit-scrollbar-thumb {
     border: var(--santo-dimension-space-2) solid transparent;
-    border-radius: var(--santo-radius-full);
+    border-radius: var(--santo-radius-sm);
     background-color: var(--santo-color-border-default);
     background-clip: padding-box;
   }

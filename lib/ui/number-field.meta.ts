@@ -8,7 +8,7 @@ export const numberFieldMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "number-field.tsx",
     description:
-      "Slider e campo numérico para o mesmo valor: arrasta quem está explorando, digita quem sabe o número.",
+      "Slider de largura total para um número, com o valor flutuando acima do punho (ou mín/valor/máx abaixo); campo exato opcional numa linha própria.",
     related: ["input"],
   },
 ];

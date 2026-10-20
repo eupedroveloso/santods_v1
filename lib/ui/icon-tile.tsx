@@ -1,23 +1,34 @@
 import type { ReactNode } from "react";
 
 /**
- * Icone dentro de uma caixa tonal: marcador de linha de lista, de estado vazio,
- * de anexo, de cabecalho de cartao. Sem contorno 1px (skill santo-ui-craft):
- *   subtle   (padrao) poco tonal — surface/sunken sobre cartao.
- *   outline  pilula elevada (raised + shadow-xs) — sobre chao/poco.
- *   brand    o acento da regiao (brand/subtle + icone brand). Um por regiao.
- * Quadrado com raio lg/xl limitado ao raio interno do Card pai, ou redondo.
+ * Icone num SLOT de tamanho de token (size/40 ou size/48): marcador de linha de
+ * lista, de estado vazio, de anexo, de cabecalho de cartao. O slot alinha o
+ * icone com Avatar e com a coluna de texto ao lado.
+ *
+ * Regra do Pedro (2026-10-19, sem caixa em volta de componente dentro de
+ * cartao): o padrao e `plain`, sem fundo. A caixa tonal e OPCIONAL, para quando
+ * a cor carrega significado:
+ *   plain    (padrao) so o icone, icon/secondary, sem caixa.
+ *   brand    o acento da regiao (brand/subtle + icone brand): estado vazio, item em destaque. Um por regiao.
+ *   subtle   poco tonal (surface/sunken): grade de icones, marcador que precisa de alvo visual.
+ *   outline  pastilha elevada (raised + shadow-xs) — sobre chao/poco (anexo de chat).
+ *   success/danger  intencao (bg/<intencao>/subtle + icon/<intencao>): quando o
+ *            icone diz entrada/saida, ok/erro — ex. TransactionRow.
+ * Com caixa: quadrado no raio interno do Card pai (raio de controle), ou redondo.
  */
 const TONE = {
+  plain: "text-icon-secondary",
   subtle: "bg-surface-sunken text-icon-secondary",
   outline: "santo-edge bg-surface-raised text-icon-secondary shadow-xs",
   brand: "bg-brand-subtle-default text-icon-brand",
+  success: "bg-success-subtle-default text-icon-success",
+  danger: "bg-danger-subtle-default text-icon-danger",
 } as const;
 
 export function IconTile({
   children,
   shape = "square",
-  tone = "subtle",
+  tone = "plain",
   size = "md",
   className = "",
 }: {

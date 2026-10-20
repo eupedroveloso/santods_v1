@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Card } from "./card";
-import { IconTile } from "./icon-tile";
 import { ChevronRight } from "./icons";
 
 export type CardLink = { label: string; href: string };
@@ -43,9 +42,8 @@ export function LinkCard({
 }) {
   const body = (
     <>
-      {icon && (
-        <IconTile>{icon}</IconTile>
-      )}
+      {/* Icone sem caixa (regra do Pedro), alinhado a coluna do titulo. */}
+      {icon && <span className="flex text-icon-secondary">{icon}</span>}
       <div className="flex flex-col gap-3xs">
         <div className="flex min-w-0 items-center justify-between gap-xs">
           <h3 className={`min-w-0 truncate ${size === "sm" ? "santo-body-small-semibold" : "santo-body-large-semibold"}`}>
@@ -62,12 +60,14 @@ export function LinkCard({
         {description && <p className="santo-body-small-regular text-text-secondary">{description}</p>}
       </div>
       {links && links.length > 0 && (
-        <ul className="-mx-xs flex flex-col gap-3xs">
+        // flex-1: num indice esticado (CardGrid stretch) a lista preenche o cartao; cada
+        // linha cresce por igual, entao o cartao curto nao fica com buraco embaixo.
+        <ul className="-mx-xs flex flex-1 flex-col gap-3xs">
           {links.map((l) => (
-            <li key={l.href}>
+            <li key={l.href} className="flex flex-1">
               <Link
                 href={l.href}
-                className="santo-body-small-medium flex items-center justify-between gap-xs rounded-md px-xs py-2xs text-text-secondary transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
+                className="santo-body-small-medium flex flex-1 items-center justify-between gap-xs rounded-md px-xs py-2xs text-text-secondary transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) hover:bg-neutral-subtle-default hover:text-text-primary"
               >
                 <span className="min-w-0 truncate">{l.label}</span>
                 <ChevronRight size={16} />

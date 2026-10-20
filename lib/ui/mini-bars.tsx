@@ -1,3 +1,5 @@
+import { RADIUS_BAR } from "./radius";
+
 export type MiniBarsSize = "sm" | "md" | "lg";
 
 const HEIGHT: Record<MiniBarsSize, string> = {
@@ -53,7 +55,7 @@ export function MiniBars({
       {values.map((v, i) => (
         <span
           key={i}
-          className={`shrink-0 rounded-full ${WIDTH[size]} ${
+          className={`shrink-0 ${RADIUS_BAR} ${WIDTH[size]} ${
             hi === undefined || hi === i ? "bg-current" : "bg-neutral-subtle-active"
           }`}
           style={{ height: `${(Math.max(v, 0) / max) * 100}%` }}

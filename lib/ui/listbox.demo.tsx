@@ -31,7 +31,6 @@ function PlaygroundPreview({ values: v }: { values: Record<string, string | bool
         label="Papel"
         options={ROLES}
         size={v.size as ControlSize}
-        pill={v.pill as boolean}
         disabled={v.disabled as boolean}
       />
     </div>
@@ -83,7 +82,6 @@ export const listboxDemos: DemoMap = {
     playground: {
       controls: [
         { kind: "select", prop: "size", label: "Tamanho", options: ["sm", "md", "lg"], initial: "md" },
-        { kind: "boolean", prop: "pill", label: "Pastilha", initial: false },
         { kind: "boolean", prop: "disabled", label: "Desabilitado", initial: false },
       ],
       layout: "stretch",
@@ -97,7 +95,6 @@ export const listboxDemos: DemoMap = {
             label: "Papel",
             options: "{ROLES}",
             size: v.size as string,
-            pill: v.pill as boolean,
             disabled: v.disabled as boolean,
           },
           undefined,

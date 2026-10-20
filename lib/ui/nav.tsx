@@ -5,6 +5,7 @@ import { Button } from "./button";
 import { Count } from "./chip";
 import { Avatar } from "./data";
 import type { ReactNode } from "react";
+import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
 
 /**
  * Navegacao lateral de aplicacao (skill santo-ui-craft, secao 7).
@@ -12,7 +13,7 @@ import type { ReactNode } from "react";
  * Painel de secoes ao lado do trilho (RailNav). O item ativo e a PILULA
  * ELEVADA (surface/raised + shadow-xs) sobre o chao do painel; hover so
  * tonaliza. Subitens ficam em `NavSub`, com conectores de arvore saindo do
- * centro do icone do pai. Contagem em pilula a direita (`count`).
+ * centro do icone do pai. Contagem em pastilha a direita (`count`).
  */
 
 export function SidebarNav({
@@ -85,7 +86,7 @@ export function NavItem({
     : active
       ? "bg-surface-raised text-text-primary shadow-xs"
       : "text-text-secondary hover:bg-neutral-subtle-default hover:text-text-primary";
-  const className = `group santo-body-small-medium santo-transition-elevation flex h-(--santo-dimension-size-36) w-full cursor-pointer items-center gap-xs rounded-full px-sm text-left ${tone}`;
+  const className = `group santo-body-small-medium santo-transition-elevation flex h-(--santo-dimension-size-36) w-full cursor-pointer items-center gap-xs ${RADIUS_CONTROL} px-sm text-left ${tone}`;
   const content = (
     <>
       {icon && (
@@ -123,7 +124,7 @@ export function NavItem({
   );
 }
 
-/** Rodape da nav: quem esta logado, numa pilula elevada. */
+/** Rodape da nav: quem esta logado, numa pastilha elevada. */
 export function NavUser({
   name,
   email,
@@ -137,7 +138,7 @@ export function NavUser({
   avatarSrc?: string;
 }) {
   return (
-    <div className="santo-edge flex items-center gap-xs rounded-full bg-surface-raised p-2xs pr-xs shadow-xs">
+    <div className={`santo-edge flex items-center gap-xs ${RADIUS_TRACK} bg-surface-raised p-2xs pr-xs shadow-xs`}>
       <Avatar name={name} src={avatarSrc} size={32} />
       <span className="flex min-w-0 flex-1 flex-col">
         <span className="santo-body-small-semibold truncate">{name}</span>

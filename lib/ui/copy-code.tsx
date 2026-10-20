@@ -8,9 +8,9 @@ import { CopyButton } from "./copy-button";
  * Para trecho de varias linhas, use CodeBlock. Sem valor (null), mostra um
  * travessao em vez de um campo vazio — "nao existe" e informacao.
  *
- * Raio: code inline NAO e pilula (regra do Pedro). O chip vive dentro de uma
+ * Raio: code inline NAO e pastilha (regra do Pedro). O chip vive dentro de uma
  * celula/linha sem padding proprio, entao pela formula do raio aninhado leva o
- * menor degrau, radius/xs. Pilula fica so para Tag, Chip, Count e Segmented.
+ * menor degrau, radius/xs. Pastilha fica so para Tag, Chip, Count e Segmented.
  *
  * `truncate`: em coluna estreita (Table layout fixed), o chip encolhe e corta
  * com reticencias; o `title` mostra o valor inteiro, a copia copia o inteiro e

@@ -5,7 +5,7 @@ export function TabBarThumb() {
   return (
     <ThumbFrame pad="sm">
       <div className="flex">
-        <S.Block w="fit" h="lg" tone="sunken" radius="full" className="items-center gap-xs p-3xs pr-xs">
+        <S.Block w="fit" h="lg" tone="sunken" className="items-center gap-xs p-3xs pr-xs">
           <S.Chip w="sm" elevated>
             <S.Bar w="xs" size="sm" tone="emphasis" />
           </S.Chip>

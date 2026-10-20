@@ -17,7 +17,6 @@ export const buttonDemos: DemoMap = {
         { kind: "select", prop: "size", label: "Tamanho", options: SIZES, initial: "md" },
         { kind: "text", prop: "children", label: "Texto", initial: "Salvar alterações" },
         { kind: "boolean", prop: "leading", label: "Ícone à esquerda", initial: false },
-        { kind: "boolean", prop: "pill", label: "Pílula", initial: true },
         { kind: "boolean", prop: "disabled", label: "Desabilitado", initial: false },
       ],
       Preview: ({ values: v }) => (
@@ -25,7 +24,6 @@ export const buttonDemos: DemoMap = {
           variant={v.variant as ButtonVariant}
           size={v.size as ControlSize}
           disabled={v.disabled as boolean}
-          pill={v.pill as boolean}
           leading={v.leading ? <Icon.Plus size={16} /> : undefined}
         >
           {v.children as string}
@@ -38,7 +36,6 @@ export const buttonDemos: DemoMap = {
             variant: v.variant as string,
             size: v.size as string,
             leading: v.leading ? "{<Icon.Plus size={16} />}" : undefined,
-            pill: v.pill ? undefined : "{false}",
             disabled: v.disabled as boolean,
           },
           v.children as string,
@@ -123,7 +120,6 @@ export const buttonDemos: DemoMap = {
         { kind: "select", prop: "variant", label: "Variante", options: VARIANTS, initial: "secondary" },
         { kind: "select", prop: "size", label: "Tamanho", options: SIZES, initial: "md" },
         { kind: "text", prop: "label", label: "Rótulo acessível", initial: "Copiar" },
-        { kind: "boolean", prop: "pill", label: "Círculo", initial: true },
         { kind: "boolean", prop: "disabled", label: "Desabilitado", initial: false },
       ],
       Preview: ({ values: v }) => (
@@ -132,7 +128,6 @@ export const buttonDemos: DemoMap = {
           size={v.size as ControlSize}
           label={v.label as string}
           disabled={v.disabled as boolean}
-          pill={v.pill as boolean}
         >
           <Icon.Copy size={16} />
         </IconButton>
@@ -140,7 +135,7 @@ export const buttonDemos: DemoMap = {
       code: (v) =>
         jsx(
           "IconButton",
-          { variant: v.variant as string, size: v.size as string, label: v.label as string, pill: v.pill ? undefined : "{false}", disabled: v.disabled as boolean },
+          { variant: v.variant as string, size: v.size as string, label: v.label as string, disabled: v.disabled as boolean },
           "\n  <Icon.Copy size={16} />\n",
           { variant: "ghost", size: "md" },
         ),

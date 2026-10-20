@@ -13,6 +13,7 @@ import {
   type Rgb,
 } from "./color";
 import { Icon } from "./index-icons";
+import { RADIUS_BAR } from "./radius";
 
 /**
  * Seletor de cor completo, em popover.
@@ -202,7 +203,7 @@ export function ColorPicker({
         <div className="flex min-w-0 flex-1 flex-col gap-2xs">
           <div
             {...hue}
-            className="relative h-xs w-full cursor-pointer touch-none rounded-full"
+            className={`relative h-xs w-full cursor-pointer touch-none ${RADIUS_BAR}`}
             style={{
               background:
                 "linear-gradient(to right,#f00 0%,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,#f00 100%)",
@@ -223,7 +224,7 @@ export function ColorPicker({
           {showAlpha && (
             <div
               {...alphaTrack}
-              className="relative h-xs w-full cursor-pointer touch-none overflow-hidden rounded-full"
+              className={`relative h-xs w-full cursor-pointer touch-none overflow-hidden ${RADIUS_BAR}`}
               style={{
                 backgroundImage: `linear-gradient(to right, transparent, ${rgbToHex(rgb)}), linear-gradient(45deg,var(--santo-color-bg-neutral-subtle-active) 25%,transparent 25%),linear-gradient(-45deg,var(--santo-color-bg-neutral-subtle-active) 25%,transparent 25%),linear-gradient(45deg,transparent 75%,var(--santo-color-bg-neutral-subtle-active) 75%),linear-gradient(-45deg,transparent 75%,var(--santo-color-bg-neutral-subtle-active) 75%)`,
                 backgroundSize: "100% 100%, 8px 8px, 8px 8px, 8px 8px, 8px 8px",

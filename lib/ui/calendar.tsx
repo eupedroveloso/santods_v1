@@ -37,7 +37,7 @@ const sameView = (a: View, b: View) => a.y === b.y && a.m === b.m;
  * Calendario de um mes, interativo (skill santo-ui-craft).
  *
  * Anatomia: titulo do mes + ano como meta, duas setas iguais (IconButton
- * pilula tonal); dias da semana em caption text/tertiary; cada dia e um
+ * pastilha tonal); dias da semana em caption text/tertiary; cada dia e um
  * circulo com hover tonal. HOJE = anel brand/subtle; SELECIONADO =
  * brand/solid + text/on-brand (nunca neutro escuro); INTERVALO = faixa
  * brand/subtle continua com as pontas arredondadas (mesmo principio do

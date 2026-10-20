@@ -13,6 +13,7 @@ import {
 } from "react";
 import { Check, ChevronDown, Search } from "./icons";
 import type { ControlSize } from "./button";
+import { RADIUS_CONTROL } from "./radius";
 
 /**
  * Seletor do SantoDS.
@@ -58,7 +59,6 @@ export function Select<T extends string>({
   options,
   label,
   size = "md",
-  pill,
   variant = "well",
   mono,
   disabled,
@@ -72,7 +72,7 @@ export function Select<T extends string>({
   /** Rótulo acessível do gatilho. */
   label: string;
   size?: ControlSize;
-  /** Raio: pilula por padrao no `well`, md no `outline`. */
+  /** @deprecated Sem efeito: todo campo leva o raio de controle (principio 5 do Pedro). */
   pill?: boolean;
   /** Mesmo vocabulario do Input: `well` (poco, padrao) ou `outline`. */
   variant?: "well" | "outline";
@@ -255,7 +255,7 @@ export function Select<T extends string>({
         onClick={toggle}
         onKeyDown={onKeyDown}
         className={`santo-focus-field relative flex w-full min-w-0 cursor-pointer items-center gap-2xs border-thin text-left text-text-primary santo-transition-colors disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${
-          (pill ?? variant === "well") ? "rounded-full" : "rounded-md"
+          RADIUS_CONTROL
         } ${
           variant === "well"
             ? `bg-surface-sunken hover:bg-neutral-subtle-default ${open ? "border-border-brand" : "border-transparent"}`

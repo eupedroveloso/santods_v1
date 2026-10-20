@@ -1,6 +1,7 @@
 "use client";
 
 import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { RADIUS_BADGE, RADIUS_CONTROL } from "./radius";
 
 /**
  * Rotulos curtos: estado, categoria, contagem.
@@ -46,7 +47,7 @@ export function Tag({
 }) {
   return (
     <span
-      className={`santo-caption-semibold inline-flex h-(--santo-dimension-size-24) shrink-0 items-center gap-3xs rounded-full px-xs whitespace-nowrap ${INTENTS[intent]} ${className}`}
+      className={`santo-caption-semibold inline-flex h-(--santo-dimension-size-24) shrink-0 items-center gap-3xs ${RADIUS_BADGE} px-xs whitespace-nowrap ${INTENTS[intent]} ${className}`}
     >
       {dot && <span aria-hidden className={`size-2xs shrink-0 rounded-full ${DOT[intent]}`} />}
       {children}
@@ -55,7 +56,7 @@ export function Tag({
 }
 
 /**
- * Contador em pilula, a direita de um rotulo (grupo, aba, item de nav, titulo
+ * Contador em pastilha, a direita de um rotulo (grupo, aba, item de nav, titulo
  * de cartao). `brand` so para o contador que pede atencao (nao lidos); o
  * resto fica neutro (subtle/hover: um degrau acima de surface/sunken, que no
  * claro tem o mesmo tom de subtle/default — senao some no poco). Numero com tabular-nums, largura minima = altura (1
@@ -72,7 +73,7 @@ export function Count({
 }) {
   return (
     <span
-      className={`santo-caption-small-semibold inline-flex h-(--santo-dimension-size-20) min-w-(--santo-dimension-size-20) shrink-0 items-center justify-center rounded-full px-2xs tabular-nums ${
+      className={`santo-caption-small-semibold inline-flex h-(--santo-dimension-size-20) min-w-(--santo-dimension-size-20) shrink-0 items-center justify-center ${RADIUS_BADGE} px-2xs tabular-nums ${
         tone === "brand" ? "bg-brand-solid-default text-text-on-brand" : "bg-neutral-subtle-hover text-text-secondary"
       } ${className}`}
     >
@@ -88,7 +89,7 @@ export type ChipProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 /**
- * Pilula clicavel (filtro, aba de editor). Em repouso e tonal (neutral/subtle),
+ * Pastilha clicavel (filtro, aba de editor). Em repouso e tonal (neutral/subtle),
  * nao texto solto; ativa leva o acento brand/subtle. Altura size/32.
  */
 export function Chip({
@@ -104,7 +105,7 @@ export function Chip({
     <button
       type={type}
       aria-pressed={active}
-      className={`santo-body-small-medium inline-flex h-(--santo-dimension-size-32) shrink-0 cursor-pointer items-center gap-2xs rounded-full px-sm whitespace-nowrap santo-press ${
+      className={`santo-body-small-medium inline-flex h-(--santo-dimension-size-32) shrink-0 cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} px-sm whitespace-nowrap santo-press ${
         active
           ? "bg-brand-subtle-default text-text-brand hover:bg-brand-subtle-hover"
           : "bg-neutral-subtle-default text-text-secondary hover:bg-neutral-subtle-hover hover:text-text-primary"

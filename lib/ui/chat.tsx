@@ -5,6 +5,7 @@ import { IconButton } from "./button";
 import { Avatar } from "./data";
 import { IconTile } from "./icon-tile";
 import { ArrowUpRight, File, Plus } from "./icons";
+import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
 
 /**
  * Conversa.
@@ -31,7 +32,7 @@ export function ChatBubble({
     <div className={`flex flex-col gap-3xs ${mine ? "items-end" : "items-start"}`}>
       {time && <span className="santo-caption-small-regular text-text-tertiary">{time}</span>}
       <div
-        className={`santo-body-small-regular max-w-5/6 rounded-xl px-md py-sm ${
+        className={`santo-body-small-regular max-w-5/6 ${RADIUS_TRACK} px-md py-sm ${
           mine
             ? "rounded-br-xs bg-brand-solid-default text-text-on-brand"
             : "rounded-bl-xs bg-surface-sunken text-text-primary"
@@ -44,7 +45,7 @@ export function ChatBubble({
           {reactions.map(([emoji, count]) => (
             <span
               key={emoji}
-              className="santo-edge santo-caption-small-medium inline-flex h-(--santo-dimension-size-24) items-center gap-3xs rounded-full bg-surface-raised px-xs shadow-xs"
+              className={`santo-edge santo-caption-small-medium inline-flex h-(--santo-dimension-size-24) items-center gap-3xs ${RADIUS_CONTROL} bg-surface-raised px-xs shadow-xs`}
             >
               <span aria-hidden>{emoji}</span>
               <span className="tabular-nums text-text-secondary">{count}</span>
@@ -89,7 +90,7 @@ export function ChatHeader({
 /** Tres pontos pulsando, para quem esta digitando. */
 export function TypingIndicator() {
   return (
-    <div className="inline-flex items-center gap-3xs rounded-xl rounded-bl-xs bg-surface-sunken px-md py-sm">
+    <div className={`inline-flex items-center gap-3xs ${RADIUS_TRACK} rounded-bl-xs bg-surface-sunken px-md py-sm`}>
       {[0, 1, 2].map((i) => (
         <span
           key={i}
@@ -117,7 +118,7 @@ export function ChatAttachment({ name, size }: { name: string; size: string }) {
 }
 
 /**
- * Campo de mensagem: POCO (surface/sunken) em pilula com acoes inline — anexar
+ * Campo de mensagem: POCO (surface/sunken) em pastilha com acoes inline — anexar
  * a esquerda (ghost), enviar a direita (primary em circulo). Sem borda em
  * repouso; foco = anel de campo. Enter envia; o pai guarda o texto.
  */
@@ -136,7 +137,7 @@ export function ChatComposer({
   /** Sem ele, o botao de anexar some. */
   onAttach?: () => void;
   placeholder?: string;
-  /** Acoes extras antes do enviar (IconButton ghost pill). */
+  /** Acoes extras antes do enviar (IconButton ghost). */
   actions?: ReactNode;
   className?: string;
 }) {
@@ -147,10 +148,10 @@ export function ChatComposer({
   return (
     <form
       onSubmit={submit}
-      className={`santo-focus-within-field flex items-center gap-2xs rounded-full bg-surface-sunken p-2xs ${className}`}
+      className={`santo-focus-within-field flex items-center gap-2xs ${RADIUS_TRACK} bg-surface-sunken p-2xs ${className}`}
     >
       {onAttach && (
-        <IconButton pill size="sm" label="Anexar" onClick={onAttach}>
+        <IconButton size="sm" label="Anexar" onClick={onAttach}>
           <Plus size={16} />
         </IconButton>
       )}
@@ -163,7 +164,7 @@ export function ChatComposer({
         className={`santo-body-small-regular h-(--santo-dimension-size-32) min-w-0 flex-1 bg-transparent text-text-primary outline-none placeholder:text-text-placeholder ${onAttach ? "" : "pl-sm"}`}
       />
       {actions}
-      <IconButton pill size="sm" variant="primary" label="Enviar" type="submit" disabled={!value.trim()}>
+      <IconButton size="sm" variant="primary" label="Enviar" type="submit" disabled={!value.trim()}>
         <ArrowUpRight size={16} />
       </IconButton>
     </form>

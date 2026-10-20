@@ -40,8 +40,8 @@ function SidebarPreview({ values: v }: { values: ControlValues }) {
       {n.label}
     </NavItem>
   );
-  // Nivel 1 (cartao) com o trilho (chao em capsula) e o painel (poco) onde a
-  // pilula ativa eleva.
+  // Nivel 1 (cartao) com o trilho (chao em trilho) e o painel (poco) onde a
+  // pastilha ativa eleva.
   return (
     <Card padding="sm" className="w-full max-w-(--santo-dimension-space-384)">
       <div className="flex gap-sm">
