@@ -10,26 +10,32 @@ import type { ReactNode } from "react";
  */
 export function AvatarImage({
   src,
+  avifSrc,
   alt,
   size,
   fallback,
 }: {
   src: string;
+  avifSrc?: string;
   alt: string;
   size: number;
   fallback: ReactNode;
 }) {
   const [failed, setFailed] = useState(false);
-  if (failed) return <>{fallback}</>;
-  return (
+  const [avifFailed, setAvifFailed] = useState(false);
+  if (failed) return <span role="img" aria-label={alt}>{fallback}</span>;
+  const preferAvif = Boolean(avifSrc && !avifFailed);
+  const image = (
     <Image
       src={src}
       alt={alt}
       width={size}
       height={size}
+      sizes={`${size}px`}
       unoptimized
-      onError={() => setFailed(true)}
+      onError={() => preferAvif ? setAvifFailed(true) : setFailed(true)}
       className="size-full rounded-full object-cover"
     />
   );
+  return preferAvif ? <picture className="contents"><source type="image/avif" srcSet={avifSrc} />{image}</picture> : image;
 }

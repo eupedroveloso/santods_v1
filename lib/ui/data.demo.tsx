@@ -7,10 +7,12 @@ import { Calendar } from "./calendar";
 import { Card } from "./card";
 import { Avatar, AvatarGroup, Table, type CellRow, type Column } from "./data";
 import * as Icon from "./icons";
-import { PEOPLE, photo } from "./demo-people";
+import { PEOPLE, portrait, type Person } from "./demo-people";
 import type { ControlValues, DemoMap } from "./registry.types";
 
 type Payment = { id: string; status: "Pago" | "Processando" | "Falhou" | "Pendente"; email: string; amount: string };
+const PERSON_KEYS = Object.keys(PEOPLE) as Person[];
+const selectedPerson = (name: string) => PERSON_KEYS.find((key) => PEOPLE[key].name === name);
 
 const PAYMENTS: Payment[] = [
   { id: "1", status: "Pago", email: "ken99@exemplo.com", amount: "R$ 316,00" },
@@ -168,22 +170,22 @@ const rows: CellRow[] = pagamentos.map((p) => ({
   avatar: {
     playground: {
       controls: [
-        { kind: "select", prop: "person", label: "Pessoa", options: ["Pedro", "Érica", "Sena", "Iniciais"], initial: "Pedro" },
+        { kind: "select", prop: "person", label: "Pessoa", options: [...PERSON_KEYS.map((key) => PEOPLE[key].name), "Iniciais"], initial: PEOPLE.leo.name },
         { kind: "select", prop: "size", label: "Tamanho", options: ["24", "32", "40"], initial: "40" },
       ],
       Preview: ({ values: v }) => {
         const size = Number(v.size) as 24 | 32 | 40;
-        const key = ({ Pedro: "pedro", "Érica": "erica", Sena: "sena" } as const)[v.person as "Pedro" | "Érica" | "Sena"];
+        const key = selectedPerson(String(v.person));
         return key ? (
-          <Avatar name={PEOPLE[key].name} src={photo(key, size)} size={size} />
+          <Avatar {...portrait(key, size)} size={size} />
         ) : (
           <Avatar name="Alex Ribeiro" size={size} />
         );
       },
       code: (v) => {
-        const key = ({ Pedro: "pedro", "Érica": "erica", Sena: "sena" } as const)[v.person as "Pedro" | "Érica" | "Sena"];
+        const key = selectedPerson(String(v.person));
         return key
-          ? `<Avatar name="${PEOPLE[key].name}" src="${photo(key, Number(v.size) as 24 | 32 | 40)}" size={${v.size}} />`
+          ? `<Avatar {...portrait("${key}", ${v.size})} size={${v.size}} />`
           : `<Avatar name="Alex Ribeiro" size={${v.size}} />`;
       },
     },
@@ -194,14 +196,16 @@ const rows: CellRow[] = pagamentos.map((p) => ({
       {
         title: "Básico",
         code: `<AvatarGroup>
-  <Avatar name="Pedro Veloso" src="/brand/avatar-pedro-96.webp" />
-  <Avatar name="Érica Nunes" src="/brand/avatar-erica-96.webp" />
-  <Avatar name="Sena Rocha" src="/brand/avatar-sena-96.webp" />
+  <Avatar {...portrait("pedro", 40)} size={40} />
+  <Avatar {...portrait("erica", 40)} size={40} />
+  <Avatar {...portrait("sena", 40)} size={40} />
+  <Avatar {...portrait("leo", 40)} size={40} />
+  <Avatar {...portrait("clara", 40)} size={40} />
 </AvatarGroup>`,
         Preview: () => (
           <AvatarGroup>
-            {(["pedro", "erica", "sena"] as const).map((p) => (
-              <Avatar key={p} name={PEOPLE[p].name} src={photo(p, 40)} size={40} />
+            {PERSON_KEYS.map((p) => (
+              <Avatar key={p} {...portrait(p, 40)} size={40} />
             ))}
           </AvatarGroup>
         ),

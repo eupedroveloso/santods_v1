@@ -17,6 +17,7 @@ export function Avatar({
   name,
   size = 32,
   src,
+  avifSrc,
   alt,
   className = "",
 }: {
@@ -24,6 +25,8 @@ export function Avatar({
   size?: 24 | 32 | 40;
   /** Foto (quadrada). Sem src, ou se falhar, aparecem as iniciais. */
   src?: string;
+  /** Fonte AVIF opcional; src continua sendo o WebP de fallback. */
+  avifSrc?: string;
   /** Texto alternativo da foto; padrao: o nome. */
   alt?: string;
   className?: string;
@@ -43,7 +46,7 @@ export function Avatar({
       className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-neutral-subtle-active text-text-secondary ${text} ${className}`}
       style={{ width: `var(--santo-dimension-size-${size})`, height: `var(--santo-dimension-size-${size})` }}
     >
-      {src ? <AvatarImage src={src} alt={alt ?? name} size={size} fallback={letters} /> : letters}
+      {src ? <AvatarImage key={`${src}:${avifSrc ?? ""}`} src={src} avifSrc={avifSrc} alt={alt ?? name} size={size} fallback={letters} /> : letters}
     </span>
   );
 }
