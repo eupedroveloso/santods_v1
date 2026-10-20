@@ -17,6 +17,7 @@ import { brandSwitchDemos } from "./brand-switch.demo";
 import { brandCardDemos } from "./brand-card.demo";
 import { dashboardHeaderDemos } from "./dashboard-header.demo";
 import { breakdownCardDemos } from "./breakdown-card.demo";
+import { downloadListDemos } from "./download-list.demo";
 import { transactionRowDemos } from "./transaction-row.demo";
 import { landingSectionsDemos } from "./landing-sections.demo";
 import { ratingDemos } from "./rating.demo";
@@ -79,6 +80,7 @@ export const demos: DemoMap = {
   ...brandCardDemos,
   ...dashboardHeaderDemos,
   ...breakdownCardDemos,
+  ...downloadListDemos,
   ...transactionRowDemos,
   ...landingSectionsDemos,
   ...ratingDemos,

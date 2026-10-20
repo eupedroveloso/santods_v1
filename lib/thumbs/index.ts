@@ -31,6 +31,7 @@ import { BrandSwitchThumb } from "./brand-switch.thumb";
 import { BrandCardThumb } from "./brand-card.thumb";
 import { DashboardHeaderThumb } from "./dashboard-header.thumb";
 import { BreakdownCardThumb } from "./breakdown-card.thumb";
+import { DownloadListThumb } from "./download-list.thumb";
 import { TransactionRowThumb } from "./transaction-row.thumb";
 import { BentoGridThumb } from "./bento-grid.thumb";
 import { SectionIntroThumb } from "./section-intro.thumb";
@@ -155,6 +156,7 @@ export const thumbs: Record<string, ComponentType> = {
   "brand-card": BrandCardThumb,
   "dashboard-header": DashboardHeaderThumb,
   "breakdown-card": BreakdownCardThumb,
+  "download-list": DownloadListThumb,
   "transaction-row": TransactionRowThumb,
   "bento-grid": BentoGridThumb,
   "section-intro": SectionIntroThumb,

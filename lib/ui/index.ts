@@ -140,6 +140,8 @@ export { BrandSwitch } from "./brand-switch";
 export { BrandCard } from "./brand-card";
 export { DashboardHeader } from "./dashboard-header";
 export { BreakdownCard } from "./breakdown-card";
+export { DownloadList, formatBytes } from "./download-list";
+export type { DownloadItem } from "./download-list";
 export type { BreakdownItem } from "./breakdown-card";
 export { TransactionRow } from "./transaction-row";
 export type { BrandCardColor } from "./brand-card";

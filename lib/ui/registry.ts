@@ -21,6 +21,7 @@ import { brandSwitchMeta } from "./brand-switch.meta";
 import { brandCardMeta } from "./brand-card.meta";
 import { dashboardHeaderMeta } from "./dashboard-header.meta";
 import { breakdownCardMeta } from "./breakdown-card.meta";
+import { downloadListMeta } from "./download-list.meta";
 import { transactionRowMeta } from "./transaction-row.meta";
 import { landingSectionsMeta } from "./landing-sections.meta";
 import { ratingMeta } from "./rating.meta";
@@ -104,6 +105,7 @@ const ALL: ComponentMeta[] = [
   ...brandCardMeta,
   ...dashboardHeaderMeta,
   ...breakdownCardMeta,
+  ...downloadListMeta,
   ...transactionRowMeta,
   ...landingSectionsMeta,
   ...ratingMeta,
