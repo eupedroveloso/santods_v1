@@ -24,6 +24,8 @@ import { ColorRowThumb } from "./color-row.thumb";
 import { ColorPickerThumb } from "./color-picker.thumb";
 import { ColorThumb } from "./color.thumb";
 import { CardThumb } from "./card.thumb";
+import { CardGridThumb } from "./card-grid.thumb";
+import { AppSidebarThumb } from "./app-sidebar.thumb";
 import { CardHeaderThumb } from "./card-header.thumb";
 import { StatThumb } from "./stat.thumb";
 import { DividerThumb } from "./divider.thumb";
@@ -45,6 +47,10 @@ import { AreaChartThumb } from "./area-chart.thumb";
 import { BarChartThumb } from "./bar-chart.thumb";
 import { StackedAreaChartThumb } from "./stacked-area-chart.thumb";
 import { AxisLabelsThumb } from "./axis-labels.thumb";
+import { DonutChartThumb } from "./donut-chart.thumb";
+import { ChartGridThumb } from "./chart-grid.thumb";
+import { ChartLegendThumb } from "./chart-legend.thumb";
+import { ChartTooltipThumb } from "./chart-tooltip.thumb";
 import { ProgressThumb } from "./progress.thumb";
 import { KeyValueThumb } from "./key-value.thumb";
 import { SidebarNavThumb } from "./sidebar-nav.thumb";
@@ -84,6 +90,25 @@ import { RailNavThumb } from "./rail-nav.thumb";
 import { RailItemThumb } from "./rail-item.thumb";
 import { NavSubThumb } from "./nav-sub.thumb";
 import { ChatComposerThumb } from "./chat-composer.thumb";
+import { StatCardThumb } from "./stat-card.thumb";
+import { GoalsCardThumb } from "./goals-card.thumb";
+import { InvestCardThumb } from "./invest-card.thumb";
+import { LimitCardThumb } from "./limit-card.thumb";
+import { TransactionRowThumb } from "./transaction-row.thumb";
+import { TransactionsCardThumb } from "./transactions-card.thumb";
+import { PaymentsCardThumb } from "./payments-card.thumb";
+import { DailyGoalCardThumb } from "./daily-goal-card.thumb";
+import { PreferencesCardThumb } from "./preferences-card.thumb";
+import { UpgradePlanCardThumb } from "./upgrade-plan-card.thumb";
+import { SignUpCardThumb } from "./sign-up-card.thumb";
+import { MemberRowThumb } from "./member-row.thumb";
+import { TeamCardThumb } from "./team-card.thumb";
+import { ShareCardThumb } from "./share-card.thumb";
+import { CalendarCardThumb } from "./calendar-card.thumb";
+import { ChatCardThumb } from "./chat-card.thumb";
+import { ActivityCardThumb } from "./activity-card.thumb";
+import { ChartCardThumb } from "./chart-card.thumb";
+import { AppFrameThumb } from "./app-frame.thumb";
 
 export const thumbs: Record<string, ComponentType> = {
   button: ButtonThumb,
@@ -104,6 +129,8 @@ export const thumbs: Record<string, ComponentType> = {
   "color-picker": ColorPickerThumb,
   color: ColorThumb,
   card: CardThumb,
+  "card-grid": CardGridThumb,
+  "app-sidebar": AppSidebarThumb,
   "card-header": CardHeaderThumb,
   stat: StatThumb,
   divider: DividerThumb,
@@ -125,6 +152,10 @@ export const thumbs: Record<string, ComponentType> = {
   "bar-chart": BarChartThumb,
   "stacked-area-chart": StackedAreaChartThumb,
   "axis-labels": AxisLabelsThumb,
+  "donut-chart": DonutChartThumb,
+  "chart-grid": ChartGridThumb,
+  "chart-legend": ChartLegendThumb,
+  "chart-tooltip": ChartTooltipThumb,
   progress: ProgressThumb,
   "key-value": KeyValueThumb,
   "sidebar-nav": SidebarNavThumb,
@@ -164,4 +195,23 @@ export const thumbs: Record<string, ComponentType> = {
   "rail-item": RailItemThumb,
   "nav-sub": NavSubThumb,
   "chat-composer": ChatComposerThumb,
+  "stat-card": StatCardThumb,
+  "goals-card": GoalsCardThumb,
+  "invest-card": InvestCardThumb,
+  "limit-card": LimitCardThumb,
+  "transaction-row": TransactionRowThumb,
+  "transactions-card": TransactionsCardThumb,
+  "payments-card": PaymentsCardThumb,
+  "daily-goal-card": DailyGoalCardThumb,
+  "preferences-card": PreferencesCardThumb,
+  "upgrade-plan-card": UpgradePlanCardThumb,
+  "sign-up-card": SignUpCardThumb,
+  "member-row": MemberRowThumb,
+  "team-card": TeamCardThumb,
+  "share-card": ShareCardThumb,
+  "calendar-card": CalendarCardThumb,
+  "chat-card": ChatCardThumb,
+  "activity-card": ActivityCardThumb,
+  "chart-card": ChartCardThumb,
+  "app-frame": AppFrameThumb,
 };
