@@ -31,6 +31,7 @@ export const LAYOUT = {
 /** Nome de um icone de lib/ui/icons — string, para atravessar do servidor para o shell. */
 export type NavIcon =
   | "BookIcon"
+  | "CodeIcon"
   | "Grid2Icon"
   | "PaletteIcon"
   | "FontIcon"
@@ -44,7 +45,12 @@ export type NavIcon =
   | "BezierCurveIcon"
   | "FileIcon";
 export type NavLink = { label: string; href: string; icon?: NavIcon };
-export type NavGroup = { title: string; items: NavLink[] };
+export type NavGroup = { title: string; items: NavLink[]; icon?: NavIcon; count?: number; railIcon?: NavIcon; groups?: NavGroup[] };
+/** Todos os destinos, inclusive os de subgrupos; usado para resolver rota/hash. */
+export const navItems = (group: NavGroup): NavLink[] => [
+  ...group.items,
+  ...(group.groups ?? []).flatMap(navItems),
+];
 /** badge: selo curto exibido a direita no ⌘K (ex.: "Primitivo"), em vez de texto corrido. */
 export type SearchItem = { href: string; label: string; hint?: string; group: string; badge?: string };
 

@@ -1,3 +1,7 @@
+import { TaskAppPreviewThumb } from "./task-app-preview.thumb";
+import { TaskFeatureBentoThumb } from "./task-feature-bento.thumb";
+import { TaskMetricsThumb } from "./task-metrics.thumb";
+import { TaskOnboardingThumb } from "./task-onboarding.thumb";
 /**
  * Ilustracoes de componente em estilo esqueleto, por slug do registry.
  *
@@ -5,6 +9,9 @@
  * gramatica esta em .claude/skills/santo-vitrine/SKILL.md. Slug novo no
  * registry pede uma ilustracao aqui.
  */
+import { ProductHeroThumb } from "./product-hero.thumb";
+import { TestimonialGridThumb } from "./testimonial-grid.thumb";
+import { LandingClosingThumb } from "./landing-closing.thumb";
 import type { ComponentType } from "react";
 import { ButtonThumb } from "./button.thumb";
 import { IconButtonThumb } from "./icon-button.thumb";
@@ -132,6 +139,13 @@ import { ChartCardThumb } from "./chart-card.thumb";
 import { AppFrameThumb } from "./app-frame.thumb";
 
 export const thumbs: Record<string, ComponentType> = {
+  "task-app-preview": TaskAppPreviewThumb,
+  "task-feature-bento": TaskFeatureBentoThumb,
+  "task-metrics": TaskMetricsThumb,
+  "task-onboarding": TaskOnboardingThumb,
+  "product-hero": ProductHeroThumb,
+  "testimonial-grid": TestimonialGridThumb,
+  "landing-closing": LandingClosingThumb,
   button: ButtonThumb,
   "icon-button": IconButtonThumb,
   input: InputThumb,

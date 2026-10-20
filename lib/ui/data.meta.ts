@@ -16,7 +16,7 @@ export const dataMeta: ComponentMeta[] = [
     category: "dado",
     tier: "primitivo",
     source: "data.tsx",
-    description: "Pessoa em lista, feed e conversa: foto em círculo (src) ou iniciais quando não há foto ou ela falha.",
+    description: "Pessoa em lista, feed e conversa: foto em círculo (src/alt), AVIF opcional em avifSrc com fallback WebP e iniciais se ambas as fontes falharem. Tamanhos 24/32/40, com acervo tipado em demo-people.ts.",
   },
   {
     name: "AvatarGroup",

@@ -4,6 +4,7 @@ import { Card, CardGrid, componentsByTier, DownloadList, EmptyState, Icon, LinkC
 import { DocHeader, DocPage } from "./_docs/page-header";
 import { listContext } from "./_docs/contexto";
 import { FIGMA_URL, groupAnchor } from "./_docs/links";
+import { VIEWS } from "./exemplos/_views";
 
 export default function DocsHome() {
   const files: DownloadItem[] = listContext().map((d) => ({
@@ -59,9 +60,9 @@ export default function DocsHome() {
         />
         <LinkCard
           icon={<Icon.Layers size={20} />}
-          title="Overview"
+          title="Exemplos"
           href="/exemplos"
-          links={[{ label: "Ver as telas", href: "/exemplos" }]}
+          links={VIEWS.map((view) => ({ label: view.label, href: `/exemplos#${view.slug}` }))}
         />
         <LinkCard
           icon={<Icon.Figma size={20} />}

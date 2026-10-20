@@ -6,7 +6,7 @@ import * as Icon from "./icons";
 import type { ButtonVariant, ControlSize } from "./button-class";
 import type { DemoMap } from "./registry.types";
 
-const VARIANTS = ["primary", "secondary", "subtle", "ghost", "danger"];
+const VARIANTS = ["primary", "secondary", "subtle", "contrast", "ghost", "danger"];
 const SIZES = ["sm", "md", "lg"];
 
 export const buttonDemos: DemoMap = {
@@ -56,6 +56,7 @@ export const buttonDemos: DemoMap = {
             <Button variant="primary">Primária</Button>
             <Button variant="secondary">Secundária</Button>
             <Button variant="subtle">Suave</Button>
+            <Button variant="contrast">Contraste</Button>
             <Button variant="ghost">Fantasma</Button>
             <Button variant="danger">Destrutiva</Button>
           </div>

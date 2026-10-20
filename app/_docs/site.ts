@@ -1,5 +1,5 @@
 import { listCollections, searchIndex } from "@/lib/docs/catalog";
-import { components, TIERS, TIER_LABEL } from "@/lib/ui/registry";
+import { components, componentsByTier, TIER_LABEL } from "@/lib/ui/registry";
 import { VIEWS } from "@/app/exemplos/_views";
 import { listContext } from "./contexto";
 import { groupAnchor, type NavGroup, type SearchItem } from "./links";
@@ -11,7 +11,6 @@ import { groupAnchor, type NavGroup, type SearchItem } from "./links";
  */
 
 export function docsNav(): NavGroup[] {
-  const byName = [...components].sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
   return [
     {
       title: "",
@@ -19,16 +18,19 @@ export function docsNav(): NavGroup[] {
     },
     // Contexto do sistema: um item por arquivo de public/contexto, na ordem do indice.
     {
-      title: "Contexto",
+      title: "Documentos",
+      icon: "FileIcon",
       items: listContext().map((d) => ({ label: d.titulo, href: d.page, icon: "FileIcon" as const })),
     },
     // Uma entrada por visualizacao de /exemplos, gerada do registro da Galeria.
     {
       title: "Exemplos",
+      icon: "Grid2Icon",
       items: VIEWS.map((v) => ({ label: v.label, href: `/exemplos#${v.slug}`, icon: "Grid2Icon" as const })),
     },
     {
       title: "Fundamentos",
+      icon: "PaletteIcon",
       items: [
         { label: "Cor", href: "/tokens/color", icon: "PaletteIcon" },
         { label: "Tipografia", href: "/estilos/tipografia", icon: "FontIcon" },
@@ -37,18 +39,22 @@ export function docsNav(): NavGroup[] {
         { label: "Espaçamento", href: `/tokens/semantic#${groupAnchor("space")}`, icon: "ArrowsLeftRightIcon" },
         { label: "Movimento", href: "/estilos/movimento", icon: "BezierCurveIcon" },
         { label: "Todos os tokens", href: "/tokens", icon: "ListIcon" },
-        { label: "Ícones", href: "/componentes/icon", icon: "IconsIcon" },
-        { label: "Marca", href: "/identidades", icon: "IdCardIcon" },
       ],
     },
-    // Componentes em dois grupos (primitivos e semanticos), cada um A–Z, com
-    // um icone unico de componente em todos, como no DS Manager (cube, do Figma).
-    ...TIERS.map((t) => ({
-      title: t.label,
-      items: byName
-        .filter((c) => c.tier === t.id)
-        .map((c) => ({ label: c.name, href: `/componentes/${c.slug}`, icon: "CubeIcon" as const })),
-    })),
+    // Camadas e ordem A–Z vêm dos mesmos metadados usados pelo índice.
+    {
+      title: "Componentes",
+      icon: "CubeIcon",
+      items: [
+        { label: "Todos os componentes", href: "/componentes", icon: "CubeIcon" },
+      ],
+      groups: componentsByTier().map((tier) => ({
+        title: tier.label,
+        icon: "CubeIcon",
+        count: tier.items.length,
+        items: tier.items.map((c) => ({ label: c.name, href: `/componentes/${c.slug}`, icon: "CubeIcon" as const })),
+      })),
+    },
   ];
 }
 

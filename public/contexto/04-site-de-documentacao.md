@@ -101,7 +101,7 @@ então um slug fora da lista dá 404.
 
 | Rota | Arquivo | Mostra |
 |---|---|---|
-| `/` | `app/page.tsx` | "Documentação". Uma `CardGrid` de `LinkCard`s: Tokens (uma linha por coleção, com contagem), Estilos, Componentes (por tier), Identidades (por marca), Overview (`/exemplos`) e Figma. |
+| `/` | `app/page.tsx` | "Documentação". Uma `CardGrid` de `LinkCard`s: Tokens (uma linha por coleção, com contagem), Estilos, Componentes (por tier), Identidades (por marca), Exemplos (Dashboard e Landing Page, de `VIEWS`) e Figma. |
 | `/tokens` | `app/tokens/page.tsx` | As 5 coleções com contagem. |
 | `/tokens/[slug]` | `app/tokens/[slug]/page.tsx` | Uma coleção (palette, color, primitives, brand, semantic), agrupada pelo prefixo do nome. Cada grupo tem uma âncora `#grupo-<prefixo>` e uma tabela com amostra viva (`TokenSample`), nome do Figma, valor **por modo** (com a amostra de cor daquele modo e o ícone de alias mostrando a origem), var CSS e classe Tailwind. A tabela é desenhada no cliente a partir de linhas enxutas, porque desenhar no servidor dobrava o peso da página. |
 | `/estilos` | `app/estilos/page.tsx` | Entrada para Tipografia, Efeitos e Movimento. |
@@ -111,7 +111,7 @@ então um slug fora da lista dá 404.
 | `/identidades` | `app/identidades/page.tsx` | Uma ficha (`BrandCard`) por modo de marca: logo, cor, família, raio e superfície em claro e escuro, lidos do catálogo. |
 | `/componentes` | `app/componentes/page.tsx` + `app/_docs/component-index.tsx` | O índice. Abas por tier (Primitivos/Semânticos), busca por nome, índice lateral por categoria e um cartão por componente com a miniatura em esqueleto de `lib/thumbs`. O nível ativo vive na hash (`#primitivo`, `#semantico-dado`), então o link direto e o "voltar" funcionam. |
 | `/componentes/[nome]` | `app/componentes/[nome]/page.tsx` | A página de um componente (veja abaixo). |
-| `/exemplos` | `app/exemplos/page.tsx` + `views-nav.tsx` | O DS em uso real, em `DocPage layout="full"`. As visualizações vêm de `VIEWS`: **Dashboard** (`#dashboard`) e **Landing** (`#landing`, `bleed`, sem padding). As duas seguem a marca ativa do seletor (`useActiveBrand`): com VTSD selecionada, a landing é a página de venda da VTSD. A visualização ativa vive na hash. A âncora de um bloco carrega o slug da visualização, então clicar no índice troca a aba e rola até o bloco. A tela **só compõe blocos** da lib (regra D do `lib:check`). |
+| `/exemplos` | `app/exemplos/page.tsx` + `views-nav.tsx` | O DS em uso real, em `DocPage layout="full"`. As únicas visualizações vêm de `VIEWS`: **Dashboard** (`#dashboard`) e **Landing Page** (`#landing`, `bleed`, sem padding), que apresenta o produto fictício Compasso. As duas seguem a marca ativa. A visualização e suas seções vivem na hash; `_anchors.ts` centraliza os destinos e converte links antigos `#compasso`/`#compasso-*` e as âncoras conhecidas da landing VSL, preservando histórico, rolagem e item ativo único da sidebar. Home, sidebar e busca consomem `VIEWS`. A landing VSL antiga foi removida de `app/exemplos`; os componentes da lib e suas demos continuam em `/componentes`. A tela **só compõe blocos** da lib (regra D do `lib:check`). |
 
 ## Registry, meta, demo e thumb: como uma página de componente nasce
 

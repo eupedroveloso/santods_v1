@@ -5,7 +5,7 @@ export const ctaButtonMeta: ComponentMeta[] = [
     name: "CtaButton",
     slug: "cta-button",
     category: "acao",
-    tier: "primitivo",
+    tier: "marketing",
     source: "cta-button.tsx",
     description:
       "CTA principal de página de venda: largo, texto grande, pastilha escura concêntrica com a seta na ponta. Um por página; ação comum é Button.",

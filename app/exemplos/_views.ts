@@ -1,7 +1,8 @@
 import { createElement, type ComponentType, type ReactNode } from "react";
 import { Icon } from "@/lib/ui";
-import { LandingScreen } from "./landing";
 import { DASHBOARD_BLOCKS, DashboardScreen } from "./dashboard";
+import { CompassoScreen } from "./compasso";
+import { LANDING, LANDING_BLOCKS } from "./_anchors";
 
 /**
  * Visualizacoes de /exemplos. Uma visualizacao nova = um componente + uma
@@ -25,5 +26,5 @@ export type ExampleView = {
 
 export const VIEWS: ExampleView[] = [
   { slug: "dashboard", label: "Dashboard", icon: createElement(Icon.TrendUp, { size: 20 }), Component: DashboardScreen, blocks: DASHBOARD_BLOCKS },
-  { slug: "landing", label: "Landing", icon: createElement(Icon.Link, { size: 20 }), Component: LandingScreen, blocks: [], bleed: true },
+  { slug: LANDING.home, label: "Landing Page", icon: createElement(Icon.Link, { size: 20 }), Component: CompassoScreen, blocks: LANDING_BLOCKS, bleed: true },
 ];

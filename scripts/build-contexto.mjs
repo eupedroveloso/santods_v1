@@ -34,6 +34,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import ts from 'typescript';
+import { CATEGORIES, TIERS } from '../lib/ui/registry.config.ts';
 import {
   BRAND_COLLECTIONS,
   brandModes,
@@ -278,6 +279,25 @@ async function loadMetas() {
   return metas;
 }
 
+/** Inventário do README agrupado pelo tier dos metas, preservando notas de uso. */
+function syncUiReadme(metas) {
+  const file = resolve(root, 'lib/ui/README.md');
+  const before = readFileSync(file, 'utf8');
+  const descriptions = new Map();
+  for (const row of before.matchAll(/^\| (.*?) \| (.*) \|$/gm)) {
+    for (const name of row[1].matchAll(/`([\w.]+)`/g)) {
+      if (!descriptions.has(name[1])) descriptions.set(name[1], row[2]);
+    }
+  }
+  const inventory = TIERS.map((tier) => {
+    const entries = metas.filter((meta) => meta.tier === tier.id).sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+    const rows = entries.map((meta) => `| ${code(meta.name)} | ${descriptions.get(meta.name) ?? cell(meta.description)} |`);
+    return `## ${tier.label}\n\n${entries.length} componentes.\n\n| Componente | Quando usar |\n|---|---|\n${rows.join('\n')}`;
+  }).join('\n\n');
+  const after = before.replace(/<!-- ui-inventory:start -->[\s\S]*?<!-- ui-inventory:end -->/, `<!-- ui-inventory:start -->\n\n${inventory}\n\n<!-- ui-inventory:end -->`);
+  if (before !== after) writeFileSync(file, after);
+}
+
 /** Props declaradas no proprio repo para o componente exportado `name` em `source`. */
 function propsExtractor() {
   const configPath = ts.findConfigFile(root, ts.sys.fileExists, 'tsconfig.json');
@@ -334,19 +354,19 @@ function propsExtractor() {
 
 async function componentesMd() {
   const metas = await loadMetas();
+  syncUiReadme(metas);
   const inventory = JSON.parse(read('tokens/santods.components.json'));
   const pairBySlug = new Map(inventory.components.filter((c) => c.code).map((c) => [c.code.slug, c]));
   const pagePair = new Map(inventory.pagePairs.map((p) => [p.slug, p]));
   const registry = read('lib/ui/registry.ts');
-  const { CATEGORIES } = { CATEGORIES: [...registry.matchAll(/\{ id: "([a-z]+)", label: "([^"]+)" \}/g)].map((m) => ({ id: m[1], label: m[2] })) };
   const label = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
   const propsOf = propsExtractor();
   const exists = (p) => existsSync(resolve(root, p));
 
-  const order = (m) => [m.tier === 'primitivo' ? 0 : 1, CATEGORIES.findIndex((c) => c.id === m.category), metas.indexOf(m)];
+  const order = (m) => [TIERS.findIndex((tier) => tier.id === m.tier), CATEGORIES.findIndex((c) => c.id === m.category)];
   const sorted = [...metas].sort((a, b) => {
     const [x, y] = [order(a), order(b)];
-    return x[0] - y[0] || x[1] - y[1] || x[2] - y[2];
+    return x[0] - y[0] || x[1] - y[1] || a.name.localeCompare(b.name, 'pt-BR');
   });
   const notInRegistry = metas.filter((m) => !registry.includes(`./${m.metaFile.replace(/\.ts$/, '')}`));
 
@@ -361,7 +381,7 @@ async function componentesMd() {
   const tierCount = (t) => metas.filter((m) => m.tier === t).length;
   out.push(`# Componentes
 
-Inventário completo de \`lib/ui\`: ${metas.length} componentes (${tierCount('primitivo')} primitivos, ${tierCount('semantico')} semânticos), cada um com nome, tier, categoria, quando usar, props, par no Figma e arquivos. Gerado de \`lib/ui/*.meta.ts\`, do TypeScript dos \`.tsx\` e de \`tokens/santods.components.json\` por \`scripts/build-contexto.mjs\`.
+Inventário completo de \`lib/ui\`: ${metas.length} componentes (${TIERS.map((tier) => `${tierCount(tier.id)} ${tier.label.toLocaleLowerCase('pt-BR')}`).join(', ')}), cada um com nome, camada (\`tier\`), categoria, quando usar, props, par no Figma e arquivos. Gerado de \`lib/ui/*.meta.ts\`, do TypeScript dos \`.tsx\` e de \`tokens/santods.components.json\` por \`scripts/build-contexto.mjs\`.
 
 ## Como um componente é montado
 
@@ -372,7 +392,7 @@ Inventário completo de \`lib/ui\`: ${metas.length} componentes (${tierCount('pr
 - \`lib/ui/index.ts\`: o barrel \`@/lib/ui\`.
 - Página: \`/componentes/<slug>\`.
 
-**Tier.** PRIMITIVO é um bloco genérico, sem significado de produto, que não importa outro componente de \`lib/ui\` além de Icon (conteúdo de fora entra por slot). SEMÂNTICO carrega um papel de produto e é montado só com primitivos da lib. \`npm run tier:check\` cobra isso.
+**Camada (tier).** PRIMITIVO é um bloco atômico e genérico, sem significado de produto, que não importa outro componente de \`lib/ui\` além de Icon (conteúdo de fora entra por slot). SEMÂNTICO carrega um papel de produto ou aplicação. MARKETING tem uso principal em landing, materiais e apresentações comerciais. Cada meta declara uma única camada, usada pela sidebar, índice, README e este contexto. \`npm run tier:check\` valida as camadas e a restrição de composição dos primitivos.
 
 **Par no Figma.** \`figma: { name }\` no meta declara o par. Sem ele, o componente é **codeOnly**, uma divergência a resolver (princípio: Figma e repositório caminham juntos). Hoje: ${inventory.meta.summary.figmaComponents} componentes no Figma, ${inventory.meta.summary.paired} com par; só no Figma: ${inventory.meta.summary.figmaOnly.join(', ') || 'nenhum'}; ${inventory.meta.summary.codeOnly.length} codeOnly.
 
@@ -385,9 +405,9 @@ ${table(
   sorted.map((m) => [code(m.slug), m.name, m.tier, label[m.category] ?? m.category, pairBySlug.has(m.slug) || pagePair.has(m.slug) ? 'par' : 'codeOnly']),
 )}`);
 
-  for (const tier of ['primitivo', 'semantico']) {
-    out.push(`## ${tier === 'primitivo' ? 'Primitivos' : 'Semânticos'}`);
-    for (const m of sorted.filter((x) => x.tier === tier)) {
+  for (const tier of TIERS) {
+    out.push(`## ${tier.label}`);
+    for (const m of sorted.filter((x) => x.tier === tier.id)) {
       const mod = m.metaFile.replace(/\.meta\.ts$/, '');
       const props = propsOf(m.source, m.name);
       const files = [

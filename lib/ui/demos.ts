@@ -1,9 +1,11 @@
+import { taskShowcaseDemos } from "./task-showcase.demo";
 /**
  * Demos de todos os componentes, por slug.
  *
  * Modulo de cliente (as demos tem estado e handlers). O registry.ts guarda o
  * dado; aqui fica o que renderiza. Componente novo: importe o `.demo.tsx` dele.
  */
+import { productLandingDemos } from "./product-landing.demo";
 import type { DemoMap } from "./registry.types";
 import { buttonDemos } from "./button.demo";
 import { ringDemos } from "./ring.demo";
@@ -69,6 +71,8 @@ import { accountCardsDemos } from "./account-cards.demo";
 import { appCardsDemos } from "./app-cards.demo";
 
 export const demos: DemoMap = {
+  ...taskShowcaseDemos,
+  ...productLandingDemos,
   ...buttonDemos,
   ...ringDemos,
   ...sparklineDemos,

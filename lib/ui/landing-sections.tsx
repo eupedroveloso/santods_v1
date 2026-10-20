@@ -131,7 +131,20 @@ export function ShowcaseStrip({ items }: { items: ShowcaseItem[] }) {
  * separados por hairline em cima e embaixo. Placeholder em texto ate haver
  * logos reais (asset de marca, nao componente). Abaixo de md, rola na horizontal.
  */
-export function LogoStrip({ names, label }: { names: string[]; label?: string }) {
+export function LogoStrip({ names, label, variant = "standard" }: { names: string[]; label?: string; variant?: "standard" | "partners" }) {
+  if (variant === "partners") return (
+    <div className="flex w-full flex-col items-center gap-lg py-xl lg:flex-row">
+      {label && <p className="santo-body-small-medium shrink-0 text-balance text-text-secondary lg:w-(--santo-dimension-space-160) lg:text-left">{label}</p>}
+      <ul className="flex w-full flex-wrap justify-center gap-xs">
+        {names.map((name, i) => (
+          <li key={name} className="santo-body-large-semibold flex h-(--santo-dimension-space-64) min-w-(--santo-dimension-space-128) flex-1 items-center justify-center gap-xs rounded-lg border-thin border-border-subtle text-text-tertiary">
+            <span aria-hidden className={`size-sm border-thick border-current ${i % 2 ? "rounded-full" : "rounded-xs"}`} />
+            {name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
   return (
     <div className="flex w-full flex-col items-center gap-md border-t-thin border-b-thin border-border-subtle py-lg">
       {label && <Overline>{label}</Overline>}
@@ -157,7 +170,7 @@ export type IntroPart = string | { icon: ReactNode };
  * ficam numa pastilha tonal pequena (brand/subtle, raio de controle). heading-4
  * a partir de md, heading-6 abaixo.
  */
-export function SectionIntro({ overline, lines }: { overline?: string; lines: IntroPart[][] }) {
+export function SectionIntro({ overline, lines, description }: { overline?: string; lines: IntroPart[][]; description?: string }) {
   const render = (line: IntroPart[], li: number) => (
     <span key={li} className={`block ${li === lines.length - 1 ? "text-text-secondary" : "text-text-primary"}`}>
       {line.map((part, pi) =>
@@ -185,10 +198,11 @@ export function SectionIntro({ overline, lines }: { overline?: string; lines: In
       )}
       <h2 className="tracking-tight text-balance">
         <span className="santo-heading-6-bold block md:hidden">{lines.map(render)}</span>
-        <span aria-hidden className="santo-heading-4-bold hidden md:block">
+        <span className="santo-heading-4-bold hidden md:block">
           {lines.map(render)}
         </span>
       </h2>
+      {description && <p className="santo-body-small-regular max-w-(--santo-dimension-container-sm) text-pretty text-text-secondary">{description}</p>}
     </header>
   );
 }

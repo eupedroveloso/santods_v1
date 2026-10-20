@@ -54,6 +54,12 @@ export const landingSectionsDemos: DemoMap = {
   "logo-strip": {
     demos: [
       {
+        title: "Parceiros com rótulo lateral",
+        layout: "stretch",
+        code: `<LogoStrip variant="partners" label="Para equipes que fazem acontecer" names={["Arco", "Nimbo", "Órbita", "Mosaico"]} />`,
+        Preview: () => <LogoStrip variant="partners" label="Para equipes que fazem acontecer" names={["Arco", "Nimbo", "Órbita", "Mosaico"]} />,
+      },
+      {
         title: "Faixa",
         layout: "stretch",
         code: `<LogoStrip label="Alunos vendendo em" names={["Hotmart", "Kiwify", "Eduzz"]} />`,

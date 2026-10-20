@@ -8,7 +8,8 @@
  * Componente novo em lib/ui: crie `<modulo>.meta.ts` e `<modulo>.demo.tsx`,
  * importe os dois aqui e em demos.ts.
  */
-import type { ComponentCategory, ComponentMeta, ComponentTier } from "./registry.types";
+import { productLandingMeta } from "./product-landing.meta";
+import type { ComponentMeta } from "./registry.types";
 import { buttonMeta } from "./button.meta";
 import { ringMeta } from "./ring.meta";
 import { sparklineMeta } from "./sparkline.meta";
@@ -73,27 +74,14 @@ import { accountCardsMeta } from "./account-cards.meta";
 import { appCardsMeta } from "./app-cards.meta";
 
 export type * from "./registry.types";
+export { CATEGORIES, CATEGORY_LABEL, TIERS, TIER_LABEL } from "./registry.config";
+import { CATEGORIES, TIERS } from "./registry.config";
 
-/** Ordem e rotulo das categorias — a mesma do lib/ui/README.md. */
-export const CATEGORIES: { id: ComponentCategory; label: string }[] = [
-  { id: "acao", label: "Ação" },
-  { id: "entrada", label: "Entrada" },
-  { id: "cor", label: "Cor" },
-  { id: "estrutura", label: "Estrutura" },
-  { id: "navegacao", label: "Navegação" },
-  { id: "dado", label: "Dado" },
-  { id: "aplicacao", label: "Aplicação" },
-  { id: "codigo", label: "Código" },
-  { id: "blocos", label: "Blocos" },
-  { id: "icones", label: "Ícones" },
-];
-
-export const CATEGORY_LABEL = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label])) as Record<
-  ComponentCategory,
-  string
->;
+import { taskShowcaseMeta } from "./task-showcase.meta";
 
 const ALL: ComponentMeta[] = [
+  ...taskShowcaseMeta,
+  ...productLandingMeta,
   ...buttonMeta,
   ...ringMeta,
   ...sparklineMeta,
@@ -158,17 +146,6 @@ const ALL: ComponentMeta[] = [
   ...appCardsMeta,
 ];
 
-/** Os dois niveis do catalogo, na ordem em que aparecem. */
-export const TIERS: { id: ComponentTier; label: string }[] = [
-  { id: "primitivo", label: "Primitivos" },
-  { id: "semantico", label: "Semânticos" },
-];
-
-export const TIER_LABEL = { primitivo: "Primitivo", semantico: "Semântico" } as const satisfies Record<
-  ComponentTier,
-  string
->;
-
 /** Todos os componentes, ordenados por categoria e depois na ordem de declaracao. */
 export const components: ComponentMeta[] = CATEGORIES.flatMap((c) =>
   ALL.filter((m) => m.category === c.id),
@@ -185,13 +162,13 @@ export function componentsByCategory() {
   );
 }
 
-/** Por nivel (primitivo/semantico) e, dentro dele, por categoria. */
+/** Pela camada declarada no meta, A–Z dentro de cada camada e categoria. */
 export function componentsByTier() {
   return TIERS.map((t) => ({
     ...t,
-    items: components.filter((c) => c.tier === t.id),
+    items: components.filter((c) => c.tier === t.id).sort((a, b) => a.name.localeCompare(b.name, "pt-BR")),
     categories: componentsByCategory()
-      .map((g) => ({ ...g, items: g.items.filter((c) => c.tier === t.id) }))
+      .map((g) => ({ ...g, items: g.items.filter((c) => c.tier === t.id).sort((a, b) => a.name.localeCompare(b.name, "pt-BR")) }))
       .filter((g) => g.items.length > 0),
   }));
 }

@@ -24,6 +24,7 @@ export function LandingPage({
   header,
   overlay,
   className = "",
+  rhythm = "standard",
 }: {
   children: ReactNode;
   /** Id de brand/id: `vtsd`, `santo`. Sem ele, herda a marca do documento. */
@@ -40,6 +41,8 @@ export function LandingPage({
   /** Camada flutuante da pagina (SocialProofToast `placement="frame"`). */
   overlay?: ReactNode;
   className?: string;
+  /** Produto: seções definem seu próprio ritmo e o hero encosta na moldura. */
+  rhythm?: "standard" | "product";
 }) {
   return (
     <section
@@ -49,8 +52,8 @@ export function LandingPage({
       {header}
       {/* Coluna container/lg: o video vai largo; texto e oferta se limitam a md/sm por dentro. */}
       <div
-        className={`relative mx-auto flex w-full flex-col items-center gap-2xl px-md py-3xl text-center md:py-4xl ${
-          fullBleed ? "md:px-xl" : "max-w-(--santo-dimension-container-lg)"
+        className={`relative mx-auto flex w-full flex-col items-center text-center ${rhythm === "product" ? "gap-0" : "gap-2xl px-md py-3xl md:py-4xl"} ${
+          rhythm === "product" ? "" : fullBleed ? "md:px-xl" : "max-w-(--santo-dimension-container-lg)"
         }`}
       >
         {children}
@@ -75,7 +78,7 @@ function withHighlight(text: string, highlight?: string) {
   );
 }
 
-export type LandingPerson = { name: string; src?: string };
+export type LandingPerson = { name: string; src?: string; alt?: string; avifSrc?: string };
 
 /**
  * Linha de prova social: ate 3 avatares (AvatarGroup, de preferencia com foto)
@@ -99,7 +102,7 @@ export function SocialProofRow({
       {people.length > 0 && (
         <AvatarGroup>
           {people.slice(0, 3).map((p) => (
-            <Avatar key={p.name} name={p.name} src={p.src} size={32} />
+            <Avatar key={p.name} {...p} size={32} />
           ))}
         </AvatarGroup>
       )}
@@ -135,6 +138,8 @@ export function LandingHero({
   lead,
   leadHighlight,
   caption,
+  primaryFirst = false,
+  size = "standard",
 }: {
   /** Logo pronta (slot). Prefira `brand`. */
   logo?: ReactNode;
@@ -156,7 +161,12 @@ export function LandingHero({
   leadHighlight?: string;
   /** Legenda pequena antes do video. */
   caption?: string;
+  /** Produto: ação principal primeiro na leitura; padrão preserva a landing VSL. */
+  primaryFirst?: boolean;
+  /** Display para abertura de produto; padrão mantém o tamanho da landing VSL. */
+  size?: "standard" | "display";
 }) {
+  const primaryAction = actions && <CtaButton size="md" intent="brand" href={actions.primary.href}>{actions.primary.label}</CtaButton>;
   return (
     // Ritmo: grupo de abertura (logo, prova) -> space/lg -> titulo + sub (space/sm,
     // um bloco so) -> space/xl -> lead + legenda (space/xs). Texto em medida de
@@ -174,7 +184,7 @@ export function LandingHero({
             {withHighlight(headline, highlight)}
             {secondLine && <span className="block text-text-brand">{secondLine}</span>}
           </span>
-          <span aria-hidden className="santo-heading-4-bold hidden md:block">
+          <span className={`${size === "display" ? "santo-heading-3-bold" : "santo-heading-4-bold"} hidden md:block`}>
             {withHighlight(headline, highlight)}
             {secondLine && <span className="block text-text-brand">{secondLine}</span>}
           </span>
@@ -185,14 +195,13 @@ export function LandingHero({
       </div>
       {actions && (
         <div className="flex flex-wrap items-center justify-center gap-sm">
+          {primaryFirst && primaryAction}
           {actions.secondary && (
             <Link href={actions.secondary.href} className={buttonClass({ variant: "secondary", size: "lg" })}>
               {actions.secondary.label}
             </Link>
           )}
-          <CtaButton size="md" intent="brand" href={actions.primary.href}>
-            {actions.primary.label}
-          </CtaButton>
+          {!primaryFirst && primaryAction}
         </div>
       )}
       {(lead || caption) && (

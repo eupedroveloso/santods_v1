@@ -5,7 +5,7 @@ export const ratingMeta: ComponentMeta[] = [
     name: "Rating",
     slug: "rating",
     category: "dado",
-    tier: "primitivo",
+    tier: "marketing",
     source: "rating.tsx",
     description:
       "Avaliação em estrelas + nota (“4,9/5”) ao lado de um CTA ou de um produto. Estrelas decorativas; a nota é o que se lê.",

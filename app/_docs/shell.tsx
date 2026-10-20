@@ -11,6 +11,7 @@ import {
   Icon,
   IconButton,
   AppSidebar,
+  type AppSidebarGroup,
   BrandLogo,
   type BrandOption,
   NavItem,
@@ -23,8 +24,9 @@ import {
 } from "@/lib/ui";
 import { ThemeToggle } from "../_components/theme-toggle";
 import { BrandControl } from "../_components/brand-control";
+import { canonicalExampleHash } from "../exemplos/_anchors";
 import * as FigmaIcons from "@/lib/icons";
-import { FIGMA_URL, LAYOUT, TOP_LINKS, type NavGroup, type NavIcon, type SearchItem } from "./links";
+import { FIGMA_URL, LAYOUT, TOP_LINKS, navItems, type NavGroup, type NavIcon, type SearchItem } from "./links";
 
 /**
  * Moldura do site de docs: topbar fina, sidebar com busca e area de conteudo.
@@ -165,7 +167,14 @@ export function DocsShell({
         items={items}
         onSelect={(item) => {
           setSearchOpen(false);
-          router.push(item.id);
+          const [path, anchor] = item.id.split("#");
+          if (pathname === "/exemplos" && path === pathname && anchor) {
+            const id = canonicalExampleHash(anchor);
+            if (window.location.hash.slice(1) === id) document.getElementById(id)?.scrollIntoView();
+            else window.location.hash = id;
+          } else {
+            router.push(item.id);
+          }
         }}
         placeholder="Buscar componente, token, estilo…"
         label="Buscar na documentação"
@@ -242,7 +251,11 @@ function MenuDrawer({ onClose, brands, children }: { onClose: () => void; brands
  */
 const subscribeHash = (cb: () => void) => {
   window.addEventListener("hashchange", cb);
-  return () => window.removeEventListener("hashchange", cb);
+  window.addEventListener("popstate", cb);
+  return () => {
+    window.removeEventListener("hashchange", cb);
+    window.removeEventListener("popstate", cb);
+  };
 };
 const readHash = () => window.location.hash.slice(1);
 
@@ -250,8 +263,9 @@ function isActive(href: string, pathname: string, hash: string, nav: NavGroup[])
   const [path, anchor] = href.split("#");
   if (path !== pathname) return false;
   if (anchor === undefined) return true;
-  if (hash) return hash === anchor || hash.startsWith(`${anchor}-`);
-  const first = nav.flatMap((g) => g.items).find((i) => i.href.split("#")[0] === path);
+  const activeHash = pathname === "/exemplos" ? canonicalExampleHash(hash) : hash;
+  if (activeHash) return activeHash === anchor || activeHash.startsWith(`${anchor}-`);
+  const first = nav.flatMap(navItems).find((i) => i.href.split("#")[0] === path);
   return first?.href === href;
 }
 
@@ -267,21 +281,28 @@ function Sidebar({
   onNavigate: () => void;
 }) {
   const hash = useSyncExternalStore(subscribeHash, readHash, () => "");
-  // Coluna unica: todos os grupos abertos (sem trilho de areas).
+  // Atalhos podem repetir destinos (Ícones em Fundamentos e no catálogo).
+  // A última ocorrência é a entrada canônica, dentro da camada do componente.
+  const activeItem = nav.flatMap(navItems).reverse().find((item) => isActive(item.href, pathname, hash, nav));
+  const sidebarGroup = (group: NavGroup): AppSidebarGroup => ({
+    title: group.title || undefined,
+    icon: group.icon ? <NavGlyph name={group.icon} /> : undefined,
+    count: group.count,
+    railIcon: group.railIcon ? <NavGlyph name={group.railIcon} size={20} /> : undefined,
+    items: group.items.map((item) => ({
+      ...item,
+      icon: item.icon ? <NavGlyph name={item.icon} /> : undefined,
+      active: item === activeItem,
+    })),
+    groups: group.groups?.map(sidebarGroup),
+  });
   return (
     <AppSidebar
       label="Documentação"
+      showRail={false}
       onSearch={onSearch}
       onNavigate={onNavigate}
-      groups={nav.map((group) => ({
-        title: group.title || undefined,
-        items: group.items.map((item) => ({
-          href: item.href,
-          label: item.label,
-          icon: item.icon ? <NavGlyph name={item.icon} /> : undefined,
-          active: isActive(item.href, pathname, hash, nav),
-        })),
-      }))}
+      groups={nav.map(sidebarGroup)}
     />
   );
 }

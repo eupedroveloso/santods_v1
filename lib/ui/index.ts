@@ -158,3 +158,9 @@ export type { LandingPerson } from "./landing";
 export { SocialProofToast } from "./social-proof-toast";
 export type { BrandOption } from "./brand-switch";
 export type { AppSidebarGroup, AppSidebarItem } from "./app-sidebar";
+
+export { ProductHero, TestimonialGrid, LandingClosing } from "./product-landing";
+export type { LandingTestimonial } from "./product-landing";
+
+export { TaskAppPreview, TaskFeatureBento, TaskMetrics, TaskOnboarding, TASK_PREVIEW_TASKS } from "./task-showcase";
+export type { TaskPreviewTask, TaskMetricItem, TaskOnboardingStep, TaskBentoProject, TaskBentoState, TaskBentoMessage } from "./task-showcase";

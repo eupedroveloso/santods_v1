@@ -11,10 +11,12 @@ import { RADIUS_CONTROL } from "./radius";
  * `color/bg/*` + `color/text/on-*`, transicao de `motion/*`. Nenhum valor solto.
  */
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "subtle" | "ghost-inverse";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "subtle" | "contrast" | "ghost-inverse";
 export type ControlSize = "sm" | "md" | "lg";
 
 const VARIANTS: Record<ButtonVariant, string> = {
+  contrast:
+    "bg-surface-inverse text-text-inverse hover:bg-neutral-solid-hover active:bg-neutral-solid-active",
   primary:
     "bg-brand-solid-default text-text-on-brand hover:bg-brand-solid-hover active:bg-brand-solid-active",
   // Pastilha elevada: raised + sombra curta + hairline subtle nos DOIS temas — o

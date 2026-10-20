@@ -7,10 +7,11 @@
  * Decisao do maestro (2026-10-19):
  *   PRIMITIVO = generico, sem papel de produto, e nao importa outro componente
  *               de lib/ui alem de Icon (lib/ui/icons, lib/icons).
- *   SEMANTICO = papel de produto; pode ou nao compor.
+ *   SEMANTICO = papel de produto/app; pode ou nao compor.
+ *   MARKETING = landing, materiais e apresentações comerciais.
  *
  * Regras:
- *   1. todo item de lib/ui/*.meta.ts tem `tier` ("primitivo" | "semantico");
+ *   1. todo item de lib/ui/*.meta.ts tem `tier` válido no registry;
  *   2. o arquivo-fonte (`source`) de um item primitivo nao importa, em runtime,
  *      outro modulo de componente de lib/ui (qualquer `source` de outro meta),
  *      nem de @/lib/ui. `import type` nao compoe e passa; helper que nao e
@@ -23,6 +24,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { TIERS } from '../lib/ui/registry.config.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 /** Pasta dos componentes; um argumento troca (fixture de teste). */
@@ -65,8 +67,8 @@ function componentImports(source) {
 
 const problems = [];
 for (const item of items) {
-  if (!item.tier) problems.push(`${item.meta}  ${item.name} sem tier — todo componente e "primitivo" ou "semantico"`);
-  else if (!['primitivo', 'semantico'].includes(item.tier)) problems.push(`${item.meta}  ${item.name} com tier "${item.tier}" invalido`);
+  if (!item.tier) problems.push(`${item.meta}  ${item.name} sem tier — todo componente deve declarar sua camada`);
+  else if (!TIERS.some((tier) => tier.id === item.tier)) problems.push(`${item.meta}  ${item.name} com tier "${item.tier}" invalido`);
   if (item.tier !== 'primitivo' || !item.source) continue;
   for (const imp of componentImports(item.source)) {
     problems.push(
@@ -100,8 +102,8 @@ if (!process.argv[2]) {
   for (const key of keys) if (!files.has(key)) problems.push(`lib/thumbs/index.ts  chave "${key}" sem arquivo lib/thumbs/${key}.thumb.tsx`);
 }
 
-const primitives = items.filter((i) => i.tier === 'primitivo').length;
-console.log(`Lidos ${items.length} componentes de lib/ui/*.meta.ts (${primitives} primitivos, ${items.length - primitives} semanticos)${thumbCount ? ` e ${thumbCount} thumbs` : ''}.`);
+const counts = TIERS.map((tier) => `${items.filter((item) => item.tier === tier.id).length} ${tier.label.toLocaleLowerCase('pt-BR')}`);
+console.log(`Lidos ${items.length} componentes de lib/ui/*.meta.ts (${counts.join(', ')})${thumbCount ? ` e ${thumbCount} thumbs` : ''}.`);
 if (problems.length) {
   console.error(`\n${problems.length} problema(s) de tier:`);
   problems.forEach((p) => console.error('  ' + p));

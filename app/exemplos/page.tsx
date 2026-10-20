@@ -4,7 +4,7 @@ import { ExampleViews } from "./views-nav";
 
 export const metadata: Metadata = {
   title: "Exemplos",
-  description: "O SantoDS em uso real: telas de exemplo (dashboard e landing) montadas só com tokens e componentes.",
+  description: "O SantoDS em uso real: Dashboard e Landing Page, com o produto fictício Compasso, montados só com tokens e componentes.",
 };
 
 export default function ExemplosPage() {

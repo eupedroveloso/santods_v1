@@ -23,6 +23,10 @@ fonte de ícones** do SantoDS — veja [Ícones](#ícones).
 
 ## Como usar
 
+Exemplos completos no site: **Dashboard** (`/exemplos#dashboard`) e
+**Landing Page** (`/exemplos#landing`, produto fictício Compasso).
+Os links antigos `/exemplos#compasso` e suas seções continuam compatíveis.
+
 ```tsx
 // Utilitários Tailwind gerados a partir dos tokens
 <div className="bg-surface-raised text-text-primary rounded-lg p-md gap-sm shadow-md">

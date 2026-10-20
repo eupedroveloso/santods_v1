@@ -106,10 +106,13 @@ Estado em 2026-10-19:
   as fichas em `/identidades` e a persistência em `localStorage`.
 - **F1, layout:** a Fase A (sem margem morta, `CardGrid`, `AppSidebar`) e a Fase B (raio por
   família, `lib/ui/radius.ts`, régua de equilíbrio) estão concluídas.
-- **F2, landing:** concluída. `/exemplos#landing` segue a marca ativa e, em VTSD, monta a
-  página de venda da VTSD só com
-  blocos de `lib/ui`: `LandingPage`, `HeroCard`, `YouTubeEmbed`, `LandingOffer`,
-  `CtaButton`, `Rating`, `SocialProofToast`, `LogoStrip`, `BentoGrid`…
+- **F2, landing:** concluída. A visualização **Landing Page** (`/exemplos#landing`)
+  apresenta o produto fictício Compasso e segue a marca ativa, com hero, quadro,
+  parceiros, bento, resultados, onboarding, depoimentos, CTA e rodapé. Exemplos
+  oferece apenas **Dashboard** e **Landing Page**. A antiga página de venda VSL
+  foi removida; seus componentes continuam documentados com demos em `/componentes`.
+  Links já divulgados em `#compasso` e `#compasso-*` continuam compatíveis e são
+  normalizados para as âncoras `#landing` e `#landing-*`.
 - **Fase C, gráficos (andar Gráficos):** concluída e juntada. `LineChart`, `AreaChart`,
   `BarChart` e `DonutChart` com hover e teclado, mais 19 blocos de cartão (`StatCard`,
   `ChartCard`, `TransactionsCard`…).

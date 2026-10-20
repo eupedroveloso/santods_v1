@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { BrandLogo } from "./brand-logo";
-import { buttonClass } from "./button-class";
+import { buttonClass, type ButtonVariant } from "./button-class";
 import { IconButton } from "./button";
 import { Close, Menu, User } from "./icons";
 import { RADIUS_CONTROL, RADIUS_TRACK } from "./radius";
@@ -36,6 +36,9 @@ export function LandingHeader({
   ctaHref,
   offset = false,
   variant = "floating",
+  productName,
+  homeHref = "#",
+  ctaVariant = "primary",
 }: {
   /** Id da marca da logo. Sem ele, a marca ativa do documento (troca com o seletor). */
   brand?: string;
@@ -50,6 +53,10 @@ export function LandingHeader({
    * painel nem sticky, para morar DENTRO de um cartao (HeroCard).
    */
   variant?: "floating" | "inline";
+  /** Nome do produto junto da marca ativa, sem introduzir outra identidade. */
+  productName?: string;
+  homeHref?: string;
+  ctaVariant?: ButtonVariant;
 }) {
   const inline = variant === "inline";
   const [open, setOpen] = useState(false);
@@ -61,7 +68,7 @@ export function LandingHeader({
       href={l.href}
       aria-current={l.active ? "page" : undefined}
       onClick={() => setOpen(false)}
-      className={`santo-body-small-medium santo-transition-elevation flex items-center ${RADIUS_CONTROL} px-sm ${
+      className={`santo-body-small-medium santo-transition-elevation flex items-center ${RADIUS_CONTROL} ${productName ? "px-xs" : "px-sm"} ${
         block ? "h-(--santo-dimension-size-40) w-full" : "h-(--santo-dimension-size-32)"
       } ${
         l.active
@@ -91,13 +98,14 @@ export function LandingHeader({
       >
         <div className="flex h-(--santo-dimension-size-40) items-center gap-md">
           {/* Celular: a variante reduzida (mark); a partir de md, a logo completa. */}
-          <Link href="#" aria-label="Início" className={`flex shrink-0 items-center ${RADIUS_CONTROL} pl-xs`}>
-            <span className="flex md:hidden">
+          <Link href={homeHref} aria-label={productName ? `${productName} — início` : "Início"} className={`flex shrink-0 items-center gap-xs ${RADIUS_CONTROL} pl-xs`}>
+            <span className={productName ? "flex" : "flex md:hidden"}>
               <BrandLogo brand={brand} size={24} variant="mark" />
             </span>
-            <span className="hidden md:flex">
+            <span className={productName ? "hidden" : "hidden md:flex"}>
               <BrandLogo brand={brand} size={24} />
             </span>
+            {productName && <span className="santo-body-large-semibold text-text-primary">{productName}</span>}
           </Link>
           <nav aria-label="Menu da página" className={`mx-auto hidden items-center gap-3xs ${RADIUS_TRACK} bg-surface-sunken p-2xs md:flex`}>
             {links.map((l) => item(l))}
@@ -110,7 +118,7 @@ export function LandingHeader({
             )}
             {/* Wrapper: o inline-flex do buttonClass venceria um `hidden` no proprio link. */}
             <span className="hidden md:inline-flex">
-              <Link href={ctaHref} className={buttonClass({ variant: "primary", size: "md" })}>
+              <Link href={ctaHref} className={buttonClass({ variant: ctaVariant, size: "md" })}>
                 {cta}
               </Link>
             </span>
@@ -130,7 +138,7 @@ export function LandingHeader({
             <nav aria-label="Menu da página" className={`flex flex-col gap-3xs ${RADIUS_TRACK} bg-surface-sunken p-2xs`}>
               {links.map((l) => item(l, true))}
             </nav>
-            <Link href={ctaHref} onClick={() => setOpen(false)} className={`mt-xs ${buttonClass({ variant: "primary", size: "lg", block: true })}`}>
+            <Link href={ctaHref} onClick={() => setOpen(false)} className={`mt-xs ${buttonClass({ variant: ctaVariant, size: "lg", block: true })}`}>
               {cta}
             </Link>
           </div>

@@ -29,11 +29,13 @@ export type ComponentCategory =
  *   de conteudo de outro componente? Slot (ReactNode), nunca import.
  * - SEMANTICO: carrega um papel/padrao de produto (navegacao, conversa, dado,
  *   formulario, feed, grafico), mesmo que nao componha nada da lib hoje.
+ * - MARKETING: peças cujo uso principal é landing, material ou apresentação
+ *   comercial (hero, prova social, CTA, oferta e vídeo de venda).
  * Composicao nao e o criterio de semantico; e restricao do primitivo. E um
  * semantico se monta SO com primitivos da lib — markup cru que imita um
  * primitivo e divida.
  */
-export type ComponentTier = "primitivo" | "semantico";
+export type ComponentTier = "primitivo" | "semantico" | "marketing";
 
 export type ComponentMeta = {
   /** Nome exportado por @/lib/ui: `Button`. */
@@ -41,7 +43,7 @@ export type ComponentMeta = {
   /** Rota /componentes/[slug]: `button`. */
   slug: string;
   category: ComponentCategory;
-  /** Obrigatorio: separa o catalogo em Primitivos e Semanticos. */
+  /** Camada obrigatória; fonte única para sidebar, índice e inventários. */
   tier: ComponentTier;
   /** Quando usar — nao o que faz. Mesma frase do lib/ui/README.md. */
   description: string;
