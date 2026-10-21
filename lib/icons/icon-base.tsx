@@ -6,7 +6,11 @@ import type { ReactNode } from "react";
 export type IconSize = 12 | 16 | 20 | 24 | 32 | 40 | 48;
 
 export type IconProps = {
-  /** Altura, casa com os tokens dimension/icon/*. */
+  /**
+   * Altura, casa com os tokens dimension/icon/*. Sem ela, o icone herda
+   * --santo-icon-size do contexto (o controle define com --santo-control-icon-*)
+   * e cai em dimension/icon/16.
+   */
   size?: IconSize;
   className?: string;
   /** Rotulo acessivel. Sem ele, o icone e decorativo. */
@@ -15,14 +19,14 @@ export type IconProps = {
 
 /** Moldura comum: cor por currentColor, tamanho por token, viewBox do Figma preservado. */
 export function IconBase({
-  size = 16,
+  size,
   className = "",
   title,
   viewBox,
   ratio,
   children,
 }: IconProps & { viewBox: string; ratio: number; children: ReactNode }) {
-  const height = `var(--santo-dimension-icon-${size})`;
+  const height = size ? `var(--santo-dimension-icon-${size})` : "var(--santo-icon-size, var(--santo-dimension-icon-16))";
   return (
     <svg
       viewBox={viewBox}

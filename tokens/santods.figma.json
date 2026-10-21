@@ -20,9 +20,10 @@
           "tag": "nivel-b",
           "collections": [
             "Brand",
-            "Semantic"
+            "Semantic",
+            "Color"
           ],
-          "styles": "text styles (11 papeis) e effect styles (cor das camadas)",
+          "styles": "text styles (11 papeis: tamanho, entrelinha, tracking), effect styles (cor, deslocamento e desfoque das camadas) e 7 effect styles novos (glass/*, blur/*, glow/*)",
           "since": "2026-10-21",
           "by": "scripts/figma-nivel-b-apply.mjs",
           "why": "Nivel B do Estudio aprovado pelo maestro so no andar estudio; Figma read-only para o MCP.",
@@ -608,8 +609,8 @@
             "SHAPE_FILL"
           ],
           "values": {
-            "Light": "{palette/neutral/50}",
-            "Dark": "{palette/neutral/950}"
+            "Light": "{brand/surface/page/light}",
+            "Dark": "{brand/surface/page/dark}"
           }
         },
         "color/surface/raised": {
@@ -619,8 +620,8 @@
             "SHAPE_FILL"
           ],
           "values": {
-            "Light": "{palette/neutral/0}",
-            "Dark": "{palette/neutral/900}"
+            "Light": "{brand/surface/raised/light}",
+            "Dark": "{brand/surface/raised/dark}"
           }
         },
         "color/surface/sunken": {
@@ -630,8 +631,8 @@
             "SHAPE_FILL"
           ],
           "values": {
-            "Light": "{palette/neutral/100}",
-            "Dark": "{palette/neutral/1000}"
+            "Light": "{brand/surface/sunken/light}",
+            "Dark": "{brand/surface/sunken/dark}"
           }
         },
         "color/surface/overlay": {
@@ -641,8 +642,8 @@
             "SHAPE_FILL"
           ],
           "values": {
-            "Light": "#100d1699",
-            "Dark": "#000000b8"
+            "Light": "{brand/surface/overlay/light}",
+            "Dark": "{brand/surface/overlay/dark}"
           }
         },
         "color/surface/inverse": {
@@ -1410,8 +1411,8 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/neutral/200}",
-            "Dark": "{palette/neutral/800}"
+            "Light": "{brand/border/subtle/light}",
+            "Dark": "{brand/border/subtle/dark}"
           }
         },
         "color/border/default": {
@@ -1420,8 +1421,8 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/neutral/300}",
-            "Dark": "{palette/neutral/700}"
+            "Light": "{brand/border/default/light}",
+            "Dark": "{brand/border/default/dark}"
           }
         },
         "color/border/strong": {
@@ -1430,8 +1431,8 @@
             "STROKE_COLOR"
           ],
           "values": {
-            "Light": "{palette/neutral/400}",
-            "Dark": "{palette/neutral/600}"
+            "Light": "{brand/border/strong/light}",
+            "Dark": "{brand/border/strong/dark}"
           }
         },
         "color/border/brand": {
@@ -1673,6 +1674,88 @@
             "Light": "{palette/info/600}",
             "Dark": "{palette/info/400}"
           }
+        },
+        "color/surface/well": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/surface/well/light}",
+            "Dark": "{brand/surface/well/dark}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Poço: campo de formulário (Input/Textarea well) e áreas rebaixadas de entrada."
+        },
+        "color/surface/panel": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/surface/panel/light}",
+            "Dark": "{brand/surface/panel/dark}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Painel interno da borda dupla (e painéis elevados dentro de moldura)."
+        },
+        "frame/surface": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{color/surface/panel}",
+            "Dark": "{color/surface/panel}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Cor do painel interno da borda dupla (--santo-frame-surface)."
+        },
+        "frame/border": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/frame/border/light}",
+            "Dark": "{brand/frame/border/dark}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda interna da borda dupla (--santo-frame-border)."
+        },
+        "glass/surface": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/glass/surface/light}",
+            "Dark": "{brand/glass/surface/dark}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície de vidro (--santo-glass-surface)."
+        },
+        "glass/border": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/glass/border/light}",
+            "Dark": "{brand/glass/border/dark}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda do vidro (--santo-glass-border)."
+        },
+        "glass/highlight": {
+          "type": "COLOR",
+          "values": {
+            "Light": "{brand/glass/highlight/light}",
+            "Dark": "{brand/glass/highlight/dark}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Brilho do vidro (--santo-glass-highlight)."
         }
       }
     },
@@ -2590,7 +2673,7 @@
           "scopes": [
             "FONT_FAMILY"
           ],
-          "description": "Família sans da marca: corpo e legenda (body-large ao caption-small). Os títulos usam brand/family/heading."
+          "description": "Família sans da marca: corpo e legenda (body-large ao caption-small). Os títulos usam brand/family/heading. No Estúdio: qualquer família do Google Fonts (lib/fonts/google-index.json)."
         },
         "brand/family/mono": {
           "type": "STRING",
@@ -2600,7 +2683,8 @@
           },
           "scopes": [
             "FONT_FAMILY"
-          ]
+          ],
+          "description": "Família mono da marca (code/*). No Estúdio: só famílias monoespaçadas do Google Fonts (lib/fonts/google-index.json)."
         },
         "brand/shape/radius-base": {
           "type": "FLOAT",
@@ -2621,7 +2705,7 @@
           "scopes": [
             "FONT_FAMILY"
           ],
-          "description": "Família dos títulos (heading-1 a heading-6). Igual à sans quando a marca não separa título de corpo."
+          "description": "Família dos títulos (heading-1 a heading-6). Igual à sans quando a marca não separa título de corpo. No Estúdio: qualquer família do Google Fonts (lib/fonts/google-index.json)."
         },
         "brand/shape/radius-xs": {
           "type": "FLOAT",
@@ -3241,6 +3325,1038 @@
             "EFFECT_COLOR"
           ],
           "description": "Cor da camada 1 da sombra 2xl. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/surface/page/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/50}",
+            "VTSD": "{palette/neutral/50}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície page no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/page/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/950}",
+            "VTSD": "{palette/neutral/950}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície page no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/raised/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/0}",
+            "VTSD": "{palette/neutral/0}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície raised no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/raised/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/900}",
+            "VTSD": "{palette/neutral/900}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície raised no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/sunken/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/100}",
+            "VTSD": "{palette/neutral/100}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície sunken no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/sunken/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/1000}",
+            "VTSD": "{palette/neutral/1000}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície sunken no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/well/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/100}",
+            "VTSD": "{palette/neutral/100}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície well no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/well/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/1000}",
+            "VTSD": "{palette/neutral/1000}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície well no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/panel/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/0}",
+            "VTSD": "{palette/neutral/0}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície panel no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/panel/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/900}",
+            "VTSD": "{palette/neutral/900}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície panel no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/overlay/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d1699",
+            "VTSD": "#100d1699"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície overlay no tema claro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/surface/overlay/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#000000b8",
+            "VTSD": "#000000b8"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície overlay no tema escuro. No Estúdio: degrau da rampa neutral (profundidade por tom)."
+        },
+        "brand/border/subtle/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/200}",
+            "VTSD": "{palette/neutral/200}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda subtle no tema claro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/border/subtle/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/800}",
+            "VTSD": "{palette/neutral/800}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda subtle no tema escuro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/border/default/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/300}",
+            "VTSD": "{palette/neutral/300}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda default no tema claro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/border/default/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/700}",
+            "VTSD": "{palette/neutral/700}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda default no tema escuro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/border/strong/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/400}",
+            "VTSD": "{palette/neutral/400}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda strong no tema claro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/border/strong/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/600}",
+            "VTSD": "{palette/neutral/600}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda strong no tema escuro. No Estúdio: degrau da rampa neutral."
+        },
+        "brand/frame/inset": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/xs}",
+            "VTSD": "{brand/space/xs}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Recuo da moldura da borda dupla (degrau de espaço da marca)."
+        },
+        "brand/frame/enabled": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 1,
+            "VTSD": 1
+          },
+          "description": "Borda dupla ligada (1) ou desligada (0) no Design System da marca."
+        },
+        "brand/frame/border/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#00000000",
+            "VTSD": "#00000000"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda interna da borda dupla, tema claro (transparente = só o tom separa)."
+        },
+        "brand/frame/border/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/neutral/800}",
+            "VTSD": "{palette/neutral/800}"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda interna da borda dupla, tema escuro."
+        },
+        "brand/shape/radius-control": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/8}",
+            "VTSD": "{dimension/radius/8}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Base do raio de CONTROLE (botão, campo, chip), independente do raio de container (radius-base)."
+        },
+        "brand/control/padding-x/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/sm}",
+            "VTSD": "{brand/space/sm}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle sm."
+        },
+        "brand/control/padding-x/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/md}",
+            "VTSD": "{brand/space/md}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle md."
+        },
+        "brand/control/padding-x/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/lg}",
+            "VTSD": "{brand/space/lg}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle lg."
+        },
+        "brand/control/radius/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/shape/radius-control}",
+            "VTSD": "{brand/shape/radius-control}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle sm."
+        },
+        "brand/control/radius/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/shape/radius-control}",
+            "VTSD": "{brand/shape/radius-control}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle md."
+        },
+        "brand/control/radius/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/shape/radius-control}",
+            "VTSD": "{brand/shape/radius-control}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle lg."
+        },
+        "brand/control/border/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/border/1}",
+            "VTSD": "{dimension/border/1}"
+          },
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle sm (variantes com contorno)."
+        },
+        "brand/control/border/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/border/1}",
+            "VTSD": "{dimension/border/1}"
+          },
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle md (variantes com contorno)."
+        },
+        "brand/control/border/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/border/1}",
+            "VTSD": "{dimension/border/1}"
+          },
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle lg (variantes com contorno)."
+        },
+        "brand/control/font/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/type/caption/size}",
+            "VTSD": "{brand/type/caption/size}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle sm."
+        },
+        "brand/control/font/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/type/body-small/size}",
+            "VTSD": "{brand/type/body-small/size}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle md."
+        },
+        "brand/control/font/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/type/body/size}",
+            "VTSD": "{brand/type/body/size}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle lg."
+        },
+        "brand/control/icon/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/icon/16}",
+            "VTSD": "{dimension/icon/16}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle sm."
+        },
+        "brand/control/icon/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/icon/16}",
+            "VTSD": "{dimension/icon/16}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle md."
+        },
+        "brand/control/icon/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/icon/16}",
+            "VTSD": "{dimension/icon/16}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle lg."
+        },
+        "brand/control/gap/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/2xs}",
+            "VTSD": "{brand/space/2xs}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle sm."
+        },
+        "brand/control/gap/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/xs}",
+            "VTSD": "{brand/space/xs}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle md."
+        },
+        "brand/control/gap/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/space/xs}",
+            "VTSD": "{brand/space/xs}"
+          },
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle lg."
+        },
+        "brand/type/heading-1/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/tighter}",
+            "VTSD": "{type/tracking/tighter}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-1 (% do tamanho)."
+        },
+        "brand/type/heading-2/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/tighter}",
+            "VTSD": "{type/tracking/tighter}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-2 (% do tamanho)."
+        },
+        "brand/type/heading-3/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/tight}",
+            "VTSD": "{type/tracking/tight}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-3 (% do tamanho)."
+        },
+        "brand/type/heading-4/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/tight}",
+            "VTSD": "{type/tracking/tight}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-4 (% do tamanho)."
+        },
+        "brand/type/heading-5/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/snug}",
+            "VTSD": "{type/tracking/snug}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-5 (% do tamanho)."
+        },
+        "brand/type/heading-6/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/snug}",
+            "VTSD": "{type/tracking/snug}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel heading-6 (% do tamanho)."
+        },
+        "brand/type/body-large/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/normal}",
+            "VTSD": "{type/tracking/normal}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel body-large (% do tamanho)."
+        },
+        "brand/type/body/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/normal}",
+            "VTSD": "{type/tracking/normal}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel body (% do tamanho)."
+        },
+        "brand/type/body-small/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/normal}",
+            "VTSD": "{type/tracking/normal}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel body-small (% do tamanho)."
+        },
+        "brand/type/caption/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/normal}",
+            "VTSD": "{type/tracking/normal}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel caption (% do tamanho)."
+        },
+        "brand/type/caption-small/tracking": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/tracking/wide}",
+            "VTSD": "{type/tracking/wide}"
+          },
+          "scopes": [
+            "LETTER_SPACING"
+          ],
+          "description": "Tracking do papel caption-small (% do tamanho)."
+        },
+        "brand/shadow/xs/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 1,
+            "VTSD": 1
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra xs. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/xs/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 2,
+            "VTSD": 2
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra xs. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/sm/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 1,
+            "VTSD": 1
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra sm. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/sm/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 3,
+            "VTSD": 3
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra sm. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/sm/2/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 1,
+            "VTSD": 1
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 2 da sombra sm. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/sm/2/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 2,
+            "VTSD": 2
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 2 da sombra sm. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/md/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 4,
+            "VTSD": 4
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra md. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/md/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 8,
+            "VTSD": 8
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra md. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/md/2/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 2,
+            "VTSD": 2
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 2 da sombra md. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/md/2/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 4,
+            "VTSD": 4
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 2 da sombra md. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/lg/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 12,
+            "VTSD": 12
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra lg. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/lg/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 16,
+            "VTSD": 16
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra lg. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/lg/2/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 4,
+            "VTSD": 4
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 2 da sombra lg. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/lg/2/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 6,
+            "VTSD": 6
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 2 da sombra lg. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/xl/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 20,
+            "VTSD": 20
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra xl. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/xl/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 24,
+            "VTSD": 24
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra xl. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/xl/2/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 8,
+            "VTSD": 8
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 2 da sombra xl. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/xl/2/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 8,
+            "VTSD": 8
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 2 da sombra xl. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/shadow/2xl/1/y": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 24,
+            "VTSD": 24
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Deslocamento vertical da camada 1 da sombra 2xl. No Estúdio: deslocamento x multiplicador."
+        },
+        "brand/shadow/2xl/1/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 48,
+            "VTSD": 48
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque da camada 1 da sombra 2xl. No Estúdio: desfoque x multiplicador."
+        },
+        "brand/effect/blur/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 4,
+            "VTSD": 4
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de fundo sm (background blur). No Estúdio: efeitos.blur.sm."
+        },
+        "brand/effect/blur/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 8,
+            "VTSD": 8
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de fundo md (background blur). No Estúdio: efeitos.blur.md."
+        },
+        "brand/effect/blur/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 16,
+            "VTSD": 16
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de fundo lg (background blur). No Estúdio: efeitos.blur.lg."
+        },
+        "brand/effect/blur/xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 24,
+            "VTSD": 24
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de fundo xl (background blur). No Estúdio: efeitos.blur.xl."
+        },
+        "brand/effect/layer-blur/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 2,
+            "VTSD": 2
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de camada sm (layer blur)."
+        },
+        "brand/effect/layer-blur/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 4,
+            "VTSD": 4
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Raio do desfoque de camada md (layer blur)."
+        },
+        "brand/effect/glow/brand": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#64a3fe59",
+            "VTSD": "#4ab2a759"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor do brilho de marca (sombra colorida): brand/500 a 35% no Santo."
+        },
+        "brand/effect/glow/neutral": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#090f1733",
+            "VTSD": "#0f0f0f33"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor do brilho neutro: neutral/950 a 20% no Santo."
+        },
+        "brand/effect/glow/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 24,
+            "VTSD": 24
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque do brilho (glow)."
+        },
+        "brand/effect/noise": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 0.04,
+            "VTSD": 0.04
+          },
+          "scopes": [
+            "OPACITY"
+          ],
+          "description": "Opacidade do ruído de textura (0..0,5)."
+        },
+        "brand/gradient/brand/angle": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 135,
+            "VTSD": 135
+          },
+          "description": "Ângulo do gradiente de marca, em graus."
+        },
+        "brand/gradient/brand/from": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/brand/500}",
+            "VTSD": "{palette/brand/500}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Parada inicial do gradiente de marca."
+        },
+        "brand/gradient/brand/to": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "{palette/brand/700}",
+            "VTSD": "{palette/brand/700}"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Parada final do gradiente de marca."
+        },
+        "brand/glass/surface/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#ffffffb8",
+            "VTSD": "#ffffffb8"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície de vidro, claro: tinta + alfa."
+        },
+        "brand/glass/surface/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#131a2599",
+            "VTSD": "#1a1a1a99"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Superfície de vidro, escuro: tinta + alfa."
+        },
+        "brand/glass/border/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#ffffff80",
+            "VTSD": "#ffffff80"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda do vidro, claro."
+        },
+        "brand/glass/border/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#ffffff1f",
+            "VTSD": "#ffffff1f"
+          },
+          "scopes": [
+            "STROKE_COLOR"
+          ],
+          "description": "Borda do vidro, escuro."
+        },
+        "brand/glass/highlight/light": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#ffffff99",
+            "VTSD": "#ffffff99"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Brilho de borda superior do vidro, claro."
+        },
+        "brand/glass/highlight/dark": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#ffffff14",
+            "VTSD": "#ffffff14"
+          },
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Brilho de borda superior do vidro, escuro."
+        },
+        "brand/glass/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{brand/effect/blur/md}",
+            "VTSD": "{brand/effect/blur/md}"
+          },
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo do vidro (degrau de efeito)."
+        },
+        "brand/glass/enabled": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": 0,
+            "VTSD": 0
+          },
+          "description": "Tratamento de superfície em vidro ligado (1) ou desligado (0)."
         }
       }
     },
@@ -3498,6 +4614,279 @@
             "WIDTH_HEIGHT"
           ],
           "description": "Altura de controle lg. Use em h-(--santo-control-height-lg)."
+        },
+        "frame/inset": {
+          "type": "FLOAT",
+          "value": "{brand/frame/inset}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Recuo da moldura da borda dupla (--santo-frame-inset)."
+        },
+        "frame/enabled": {
+          "type": "FLOAT",
+          "value": "{brand/frame/enabled}",
+          "description": "Borda dupla ligada (1) ou desligada (0) (--santo-frame-enabled)."
+        },
+        "radius/control": {
+          "type": "FLOAT",
+          "value": "{brand/shape/radius-control}",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio base de controle (rounded-control)."
+        },
+        "control/padding-x/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/padding-x/sm}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle sm. Use --santo-control-padding-x-sm."
+        },
+        "control/padding-x/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/padding-x/md}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle md. Use --santo-control-padding-x-md."
+        },
+        "control/padding-x/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/padding-x/lg}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Padding horizontal do controle lg. Use --santo-control-padding-x-lg."
+        },
+        "control/radius/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/radius/sm}",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle sm. Use --santo-control-radius-sm."
+        },
+        "control/radius/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/radius/md}",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle md. Use --santo-control-radius-md."
+        },
+        "control/radius/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/radius/lg}",
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio do controle lg. Use --santo-control-radius-lg."
+        },
+        "control/border/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/border/sm}",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle sm (variantes com contorno). Use --santo-control-border-sm."
+        },
+        "control/border/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/border/md}",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle md (variantes com contorno). Use --santo-control-border-md."
+        },
+        "control/border/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/border/lg}",
+          "scopes": [
+            "STROKE_FLOAT"
+          ],
+          "description": "Espessura da borda do controle lg (variantes com contorno). Use --santo-control-border-lg."
+        },
+        "control/font/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/font/sm}",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle sm. Use --santo-control-font-sm."
+        },
+        "control/font/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/font/md}",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle md. Use --santo-control-font-md."
+        },
+        "control/font/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/font/lg}",
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho de fonte do rótulo do controle lg. Use --santo-control-font-lg."
+        },
+        "control/icon/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/icon/sm}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle sm. Use --santo-control-icon-sm."
+        },
+        "control/icon/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/icon/md}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle md. Use --santo-control-icon-md."
+        },
+        "control/icon/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/icon/lg}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Tamanho do ícone dentro do controle lg. Use --santo-control-icon-lg."
+        },
+        "control/gap/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/gap/sm}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle sm. Use --santo-control-gap-sm."
+        },
+        "control/gap/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/gap/md}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle md. Use --santo-control-gap-md."
+        },
+        "control/gap/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/gap/lg}",
+          "scopes": [
+            "GAP"
+          ],
+          "description": "Distância ícone-texto no controle lg. Use --santo-control-gap-lg."
+        },
+        "effect/blur/sm": {
+          "type": "FLOAT",
+          "value": "{brand/effect/blur/sm}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo sm (--santo-effect-blur-sm; Tailwind backdrop-blur-effect-sm)."
+        },
+        "effect/blur/md": {
+          "type": "FLOAT",
+          "value": "{brand/effect/blur/md}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo md (--santo-effect-blur-md; Tailwind backdrop-blur-effect-md)."
+        },
+        "effect/blur/lg": {
+          "type": "FLOAT",
+          "value": "{brand/effect/blur/lg}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo lg (--santo-effect-blur-lg; Tailwind backdrop-blur-effect-lg)."
+        },
+        "effect/blur/xl": {
+          "type": "FLOAT",
+          "value": "{brand/effect/blur/xl}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo xl (--santo-effect-blur-xl; Tailwind backdrop-blur-effect-xl)."
+        },
+        "effect/layer-blur/sm": {
+          "type": "FLOAT",
+          "value": "{brand/effect/layer-blur/sm}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de camada sm (--santo-effect-layer-blur-sm)."
+        },
+        "effect/layer-blur/md": {
+          "type": "FLOAT",
+          "value": "{brand/effect/layer-blur/md}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de camada md (--santo-effect-layer-blur-md)."
+        },
+        "effect/glow/brand": {
+          "type": "COLOR",
+          "value": "{brand/effect/glow/brand}",
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor do brilho de marca (--santo-effect-glow-brand). A sombra pronta: --santo-glow-brand."
+        },
+        "effect/glow/neutral": {
+          "type": "COLOR",
+          "value": "{brand/effect/glow/neutral}",
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor do brilho neutro (--santo-effect-glow-neutral). A sombra pronta: --santo-glow-neutral."
+        },
+        "effect/noise": {
+          "type": "FLOAT",
+          "value": "{brand/effect/noise}",
+          "scopes": [
+            "OPACITY"
+          ],
+          "description": "Opacidade do ruído (--santo-effect-noise)."
+        },
+        "glass/blur": {
+          "type": "FLOAT",
+          "value": "{brand/glass/blur}",
+          "scopes": [
+            "EFFECT_FLOAT"
+          ],
+          "description": "Desfoque de fundo do vidro (--santo-glass-blur)."
+        },
+        "glass/enabled": {
+          "type": "FLOAT",
+          "value": "{brand/glass/enabled}",
+          "description": "Vidro ligado (1) ou desligado (0) (--santo-glass-enabled)."
+        },
+        "gradient/brand/angle": {
+          "type": "FLOAT",
+          "value": "{brand/gradient/brand/angle}",
+          "description": "Ângulo do gradiente de marca (--santo-gradient-brand-angle)."
+        },
+        "gradient/brand/from": {
+          "type": "COLOR",
+          "value": "{brand/gradient/brand/from}",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Parada inicial do gradiente de marca."
+        },
+        "gradient/brand/to": {
+          "type": "COLOR",
+          "value": "{brand/gradient/brand/to}",
+          "scopes": [
+            "FRAME_FILL",
+            "SHAPE_FILL"
+          ],
+          "description": "Parada final do gradiente de marca. Pronto: --santo-gradient-brand."
         }
       }
     }
@@ -3523,7 +4912,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-1/regular": {
@@ -3546,7 +4936,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-1/medium": {
@@ -3569,7 +4960,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-1/semibold": {
@@ -3592,7 +4984,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-1/bold": {
@@ -3615,7 +5008,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-1/extrabold": {
@@ -3638,7 +5032,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-1/size",
         "lineHeight": "brand/type/heading-1/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-1/tracking"
       }
     },
     "Albert Sans/heading-2/light": {
@@ -3661,7 +5056,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-2/regular": {
@@ -3684,7 +5080,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-2/medium": {
@@ -3707,7 +5104,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-2/semibold": {
@@ -3730,7 +5128,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-2/bold": {
@@ -3753,7 +5152,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-2/extrabold": {
@@ -3776,7 +5176,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-2/size",
         "lineHeight": "brand/type/heading-2/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-2/tracking"
       }
     },
     "Albert Sans/heading-3/light": {
@@ -3799,7 +5200,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-3/regular": {
@@ -3822,7 +5224,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-3/medium": {
@@ -3845,7 +5248,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-3/semibold": {
@@ -3868,7 +5272,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-3/bold": {
@@ -3891,7 +5296,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-3/extrabold": {
@@ -3914,7 +5320,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-3/size",
         "lineHeight": "brand/type/heading-3/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-3/tracking"
       }
     },
     "Albert Sans/heading-4/light": {
@@ -3937,7 +5344,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-4/regular": {
@@ -3960,7 +5368,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-4/medium": {
@@ -3983,7 +5392,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-4/semibold": {
@@ -4006,7 +5416,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-4/bold": {
@@ -4029,7 +5440,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-4/extrabold": {
@@ -4052,7 +5464,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-4/size",
         "lineHeight": "brand/type/heading-4/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-4/tracking"
       }
     },
     "Albert Sans/heading-5/light": {
@@ -4075,7 +5488,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-5/regular": {
@@ -4098,7 +5512,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-5/medium": {
@@ -4121,7 +5536,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-5/semibold": {
@@ -4144,7 +5560,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-5/bold": {
@@ -4167,7 +5584,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-5/extrabold": {
@@ -4190,7 +5608,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-5/size",
         "lineHeight": "brand/type/heading-5/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-5/tracking"
       }
     },
     "Albert Sans/heading-6/light": {
@@ -4213,7 +5632,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/heading-6/regular": {
@@ -4236,7 +5656,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/heading-6/medium": {
@@ -4259,7 +5680,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/heading-6/semibold": {
@@ -4282,7 +5704,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/heading-6/bold": {
@@ -4305,7 +5728,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/heading-6/extrabold": {
@@ -4328,7 +5752,8 @@
         "fontFamily": "brand/family/heading",
         "fontSize": "brand/type/heading-6/size",
         "lineHeight": "brand/type/heading-6/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/heading-6/tracking"
       }
     },
     "Albert Sans/body-large/light": {
@@ -4351,7 +5776,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body-large/regular": {
@@ -4374,7 +5800,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body-large/medium": {
@@ -4397,7 +5824,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body-large/semibold": {
@@ -4420,7 +5848,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body-large/bold": {
@@ -4443,7 +5872,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body-large/extrabold": {
@@ -4466,7 +5896,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-large/size",
         "lineHeight": "brand/type/body-large/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/body-large/tracking"
       }
     },
     "Albert Sans/body/light": {
@@ -4489,7 +5920,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body/regular": {
@@ -4512,7 +5944,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body/medium": {
@@ -4535,7 +5968,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body/semibold": {
@@ -4558,7 +5992,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body/bold": {
@@ -4581,7 +6016,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body/extrabold": {
@@ -4604,7 +6040,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body/size",
         "lineHeight": "brand/type/body/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/body/tracking"
       }
     },
     "Albert Sans/body-small/light": {
@@ -4627,7 +6064,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/body-small/regular": {
@@ -4650,7 +6088,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/body-small/medium": {
@@ -4673,7 +6112,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/body-small/semibold": {
@@ -4696,7 +6136,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/body-small/bold": {
@@ -4719,7 +6160,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/body-small/extrabold": {
@@ -4742,7 +6184,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/body-small/size",
         "lineHeight": "brand/type/body-small/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/body-small/tracking"
       }
     },
     "Albert Sans/caption/light": {
@@ -4765,7 +6208,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption/regular": {
@@ -4788,7 +6232,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption/medium": {
@@ -4811,7 +6256,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption/semibold": {
@@ -4834,7 +6280,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption/bold": {
@@ -4857,7 +6304,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption/extrabold": {
@@ -4880,7 +6328,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption/size",
         "lineHeight": "brand/type/caption/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/caption/tracking"
       }
     },
     "Albert Sans/caption-small/light": {
@@ -4903,7 +6352,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/light"
+        "fontWeight": "type/weight/light",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "Albert Sans/caption-small/regular": {
@@ -4926,7 +6376,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/regular"
+        "fontWeight": "type/weight/regular",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "Albert Sans/caption-small/medium": {
@@ -4949,7 +6400,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/medium"
+        "fontWeight": "type/weight/medium",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "Albert Sans/caption-small/semibold": {
@@ -4972,7 +6424,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/semibold"
+        "fontWeight": "type/weight/semibold",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "Albert Sans/caption-small/bold": {
@@ -4995,7 +6448,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/bold"
+        "fontWeight": "type/weight/bold",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "Albert Sans/caption-small/extrabold": {
@@ -5018,7 +6472,8 @@
         "fontFamily": "brand/family/sans",
         "fontSize": "brand/type/caption-small/size",
         "lineHeight": "brand/type/caption-small/leading",
-        "fontWeight": "type/weight/extrabold"
+        "fontWeight": "type/weight/extrabold",
+        "letterSpacing": "brand/type/caption-small/tracking"
       }
     },
     "JetBrains Mono/code/md": {
@@ -5084,7 +6539,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/xs/1"
+            "color": "brand/shadow/xs/1",
+            "y": "brand/shadow/xs/1/y",
+            "blur": "brand/shadow/xs/1/blur"
           }
         }
       ]
@@ -5101,7 +6558,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/sm/1"
+            "color": "brand/shadow/sm/1",
+            "y": "brand/shadow/sm/1/y",
+            "blur": "brand/shadow/sm/1/blur"
           }
         },
         {
@@ -5114,7 +6573,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/sm/2"
+            "color": "brand/shadow/sm/2",
+            "y": "brand/shadow/sm/2/y",
+            "blur": "brand/shadow/sm/2/blur"
           }
         }
       ]
@@ -5131,7 +6592,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/md/1"
+            "color": "brand/shadow/md/1",
+            "y": "brand/shadow/md/1/y",
+            "blur": "brand/shadow/md/1/blur"
           }
         },
         {
@@ -5144,7 +6607,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/md/2"
+            "color": "brand/shadow/md/2",
+            "y": "brand/shadow/md/2/y",
+            "blur": "brand/shadow/md/2/blur"
           }
         }
       ]
@@ -5161,7 +6626,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/lg/1"
+            "color": "brand/shadow/lg/1",
+            "y": "brand/shadow/lg/1/y",
+            "blur": "brand/shadow/lg/1/blur"
           }
         },
         {
@@ -5174,7 +6641,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/lg/2"
+            "color": "brand/shadow/lg/2",
+            "y": "brand/shadow/lg/2/y",
+            "blur": "brand/shadow/lg/2/blur"
           }
         }
       ]
@@ -5191,7 +6660,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/xl/1"
+            "color": "brand/shadow/xl/1",
+            "y": "brand/shadow/xl/1/y",
+            "blur": "brand/shadow/xl/1/blur"
           }
         },
         {
@@ -5204,7 +6675,9 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/xl/2"
+            "color": "brand/shadow/xl/2",
+            "y": "brand/shadow/xl/2/y",
+            "blur": "brand/shadow/xl/2/blur"
           }
         }
       ]
@@ -5221,7 +6694,130 @@
           "visible": true,
           "blendMode": "NORMAL",
           "boundVariables": {
-            "color": "brand/shadow/2xl/1"
+            "color": "brand/shadow/2xl/1",
+            "y": "brand/shadow/2xl/1/y",
+            "blur": "brand/shadow/2xl/1/blur"
+          }
+        }
+      ]
+    },
+    "glass/sm": {
+      "effects": [
+        {
+          "type": "BACKGROUND_BLUR",
+          "x": 0,
+          "y": 0,
+          "blur": 4,
+          "spread": 0,
+          "color": null,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "blur": "brand/effect/blur/sm"
+          }
+        }
+      ]
+    },
+    "glass/md": {
+      "effects": [
+        {
+          "type": "BACKGROUND_BLUR",
+          "x": 0,
+          "y": 0,
+          "blur": 8,
+          "spread": 0,
+          "color": null,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "blur": "brand/effect/blur/md"
+          }
+        }
+      ]
+    },
+    "glass/lg": {
+      "effects": [
+        {
+          "type": "BACKGROUND_BLUR",
+          "x": 0,
+          "y": 0,
+          "blur": 16,
+          "spread": 0,
+          "color": null,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "blur": "brand/effect/blur/lg"
+          }
+        }
+      ]
+    },
+    "blur/sm": {
+      "effects": [
+        {
+          "type": "LAYER_BLUR",
+          "x": 0,
+          "y": 0,
+          "blur": 2,
+          "spread": 0,
+          "color": null,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "blur": "brand/effect/layer-blur/sm"
+          }
+        }
+      ]
+    },
+    "blur/md": {
+      "effects": [
+        {
+          "type": "LAYER_BLUR",
+          "x": 0,
+          "y": 0,
+          "blur": 4,
+          "spread": 0,
+          "color": null,
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "blur": "brand/effect/layer-blur/md"
+          }
+        }
+      ]
+    },
+    "glow/brand": {
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "x": 0,
+          "y": 0,
+          "blur": 24,
+          "spread": 0,
+          "color": "#64a3fe59",
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/effect/glow/brand",
+            "blur": "brand/effect/glow/blur"
+          }
+        }
+      ]
+    },
+    "glow/neutral": {
+      "effects": [
+        {
+          "type": "DROP_SHADOW",
+          "x": 0,
+          "y": 0,
+          "blur": 24,
+          "spread": 0,
+          "color": "#090f1733",
+          "visible": true,
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/effect/glow/neutral",
+            "blur": "brand/effect/glow/blur"
           }
         }
       ]

@@ -131,8 +131,13 @@ Vale enquanto `tokens/santods.figma.json` tiver `meta.aheadOfFigma`. O check imp
    primeira gravacao pode acusar "DIFERENTES (so ordem/formato)", com os valores iguais.
    **Nivel B do Estudio (andar `estudio`, `meta.aheadOfFigma.also`, tag `nivel-b`):** depois do
    passo 6 da VTSD, cole `scripts/figma-nivel-b.js` no `use_figma` (DRY_RUN, depois real):
-   56 variaveis novas na Brand, 20 aliases redirecionados e 3 novas na Semantic, 66 text
-   styles religados e a cor de 10 camadas de sombra ligada a `brand/shadow/*`. Repita dump,
+   149 variaveis novas na Brand; Semantic com 20 aliases redirecionados e 38 novas; Color com
+   7 aliases redirecionados (surface/*, border/*) e 7 novas (surface/well, surface/panel,
+   frame/surface, frame/border, glass/surface, glass/border, glass/highlight); 7 effect styles
+   novos (glass/sm|md|lg background blur, blur/sm|md layer blur, glow/brand|neutral); 66 text styles religados (tamanho, entrelinha e tracking) e
+   10 camadas de sombra com cor, offsetY e radius ligados a `brand/shadow/*`.
+   ATENCAO na reconciliacao: confirmar no Figma a unidade do letterSpacing ligado a variavel
+   (o snapshot guarda % do tamanho, como type/tracking/*). Repita dump,
    diff vazio e `--write`. O `figma-dump.js` e o hash ja leem `boundVariables.color` das sombras.
    Ensaiado em Figma simulado: escrita = snapshot aplicado, segunda rodada 0 mudancas.
 7. `npm run tokens && npm run tokens:check` (sem AVISO) e `npm run tokens:fingerprint`.

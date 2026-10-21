@@ -85,9 +85,13 @@ for (const s of await figma.getLocalEffectStylesAsync()) {
         visible: e.visible,
         blendMode: e.blendMode || 'NORMAL',
       };
-      // Cor ligada a variavel (nivel B do Estudio): brand/shadow/<estilo>/<camada>.
-      const b = e.boundVariables && e.boundVariables.color;
-      if (b) out.boundVariables = { color: byId[b.id] ? byId[b.id].name : b.id };
+      // Campos ligados a variavel (nivel B do Estudio): cor, deslocamento vertical e desfoque.
+      const bound = {};
+      for (const [field, key] of [['color', 'color'], ['offsetY', 'y'], ['radius', 'blur']]) {
+        const b = e.boundVariables && e.boundVariables[field];
+        if (b) bound[key] = byId[b.id] ? byId[b.id].name : b.id;
+      }
+      if (Object.keys(bound).length) out.boundVariables = bound;
       return out;
     }),
   };

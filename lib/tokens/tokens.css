@@ -214,7 +214,7 @@
   --santo-type-tracking-wide: 0.02em;
   --santo-type-tracking-wider: 0.06em;
 
-  /* Brand (61) */
+  /* Brand (154) */
   --santo-brand-id: "santo";
   --santo-brand-name: "Santo";
   --santo-brand-family-sans: "Albert Sans";
@@ -276,8 +276,101 @@
   --santo-brand-shadow-xl-1: #100d161a;
   --santo-brand-shadow-xl-2: #100d160f;
   --santo-brand-shadow-2xl-1: #100d161f;
+  --santo-brand-surface-page-light: var(--santo-palette-neutral-50);
+  --santo-brand-surface-page-dark: var(--santo-palette-neutral-950);
+  --santo-brand-surface-raised-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-raised-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-sunken-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-sunken-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-well-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-well-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-panel-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-panel-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-overlay-light: #100d1699;
+  --santo-brand-surface-overlay-dark: #000000b8;
+  --santo-brand-border-subtle-light: var(--santo-palette-neutral-200);
+  --santo-brand-border-subtle-dark: var(--santo-palette-neutral-800);
+  --santo-brand-border-default-light: var(--santo-palette-neutral-300);
+  --santo-brand-border-default-dark: var(--santo-palette-neutral-700);
+  --santo-brand-border-strong-light: var(--santo-palette-neutral-400);
+  --santo-brand-border-strong-dark: var(--santo-palette-neutral-600);
+  --santo-brand-frame-inset: var(--santo-brand-space-xs);
+  --santo-brand-frame-enabled: 1;
+  --santo-brand-frame-border-light: #00000000;
+  --santo-brand-frame-border-dark: var(--santo-palette-neutral-800);
+  --santo-brand-shape-radius-control: var(--santo-dimension-radius-8);
+  --santo-brand-control-padding-x-sm: var(--santo-brand-space-sm);
+  --santo-brand-control-padding-x-md: var(--santo-brand-space-md);
+  --santo-brand-control-padding-x-lg: var(--santo-brand-space-lg);
+  --santo-brand-control-radius-sm: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-md: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-lg: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-border-sm: var(--santo-dimension-border-1);
+  --santo-brand-control-border-md: var(--santo-dimension-border-1);
+  --santo-brand-control-border-lg: var(--santo-dimension-border-1);
+  --santo-brand-control-font-sm: var(--santo-brand-type-caption-size);
+  --santo-brand-control-font-md: var(--santo-brand-type-body-small-size);
+  --santo-brand-control-font-lg: var(--santo-brand-type-body-size);
+  --santo-brand-control-icon-sm: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-md: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-lg: var(--santo-dimension-icon-16);
+  --santo-brand-control-gap-sm: var(--santo-brand-space-2xs);
+  --santo-brand-control-gap-md: var(--santo-brand-space-xs);
+  --santo-brand-control-gap-lg: var(--santo-brand-space-xs);
+  --santo-brand-type-heading-1-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-2-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-3-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-4-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-5-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-heading-6-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-body-large-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-small-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-small-tracking: var(--santo-type-tracking-wide);
+  --santo-brand-shadow-xs-1-y: 1px;
+  --santo-brand-shadow-xs-1-blur: 2px;
+  --santo-brand-shadow-sm-1-y: 1px;
+  --santo-brand-shadow-sm-1-blur: 3px;
+  --santo-brand-shadow-sm-2-y: 1px;
+  --santo-brand-shadow-sm-2-blur: 2px;
+  --santo-brand-shadow-md-1-y: 4px;
+  --santo-brand-shadow-md-1-blur: 8px;
+  --santo-brand-shadow-md-2-y: 2px;
+  --santo-brand-shadow-md-2-blur: 4px;
+  --santo-brand-shadow-lg-1-y: 12px;
+  --santo-brand-shadow-lg-1-blur: 16px;
+  --santo-brand-shadow-lg-2-y: 4px;
+  --santo-brand-shadow-lg-2-blur: 6px;
+  --santo-brand-shadow-xl-1-y: 20px;
+  --santo-brand-shadow-xl-1-blur: 24px;
+  --santo-brand-shadow-xl-2-y: 8px;
+  --santo-brand-shadow-xl-2-blur: 8px;
+  --santo-brand-shadow-2xl-1-y: 24px;
+  --santo-brand-shadow-2xl-1-blur: 48px;
+  --santo-brand-effect-blur-sm: 4px;
+  --santo-brand-effect-blur-md: 8px;
+  --santo-brand-effect-blur-lg: 16px;
+  --santo-brand-effect-blur-xl: 24px;
+  --santo-brand-effect-layer-blur-sm: 2px;
+  --santo-brand-effect-layer-blur-md: 4px;
+  --santo-brand-effect-glow-brand: #64a3fe59;
+  --santo-brand-effect-glow-neutral: #090f1733;
+  --santo-brand-effect-glow-blur: 24px;
+  --santo-brand-effect-noise: 0.04;
+  --santo-brand-gradient-brand-angle: 135deg;
+  --santo-brand-gradient-brand-from: var(--santo-palette-brand-500);
+  --santo-brand-gradient-brand-to: var(--santo-palette-brand-700);
+  --santo-brand-glass-surface-light: #ffffffb8;
+  --santo-brand-glass-surface-dark: #131a2599;
+  --santo-brand-glass-border-light: #ffffff80;
+  --santo-brand-glass-border-dark: #ffffff1f;
+  --santo-brand-glass-highlight-light: #ffffff99;
+  --santo-brand-glass-highlight-dark: #ffffff14;
+  --santo-brand-glass-blur: var(--santo-brand-effect-blur-md);
+  --santo-brand-glass-enabled: 0;
 
-  /* Semantic (33) */
+  /* Semantic (68) */
   --santo-space-none: var(--santo-dimension-space-0);
   --santo-space-3xs: var(--santo-brand-space-3xs);
   --santo-space-2xs: var(--santo-brand-space-2xs);
@@ -311,12 +404,47 @@
   --santo-control-height-sm: var(--santo-brand-control-height-sm);
   --santo-control-height-md: var(--santo-brand-control-height-md);
   --santo-control-height-lg: var(--santo-brand-control-height-lg);
+  --santo-frame-inset: var(--santo-brand-frame-inset);
+  --santo-frame-enabled: var(--santo-brand-frame-enabled);
+  --santo-radius-control: var(--santo-brand-shape-radius-control);
+  --santo-control-padding-x-sm: var(--santo-brand-control-padding-x-sm);
+  --santo-control-padding-x-md: var(--santo-brand-control-padding-x-md);
+  --santo-control-padding-x-lg: var(--santo-brand-control-padding-x-lg);
+  --santo-control-radius-sm: var(--santo-brand-control-radius-sm);
+  --santo-control-radius-md: var(--santo-brand-control-radius-md);
+  --santo-control-radius-lg: var(--santo-brand-control-radius-lg);
+  --santo-control-border-sm: var(--santo-brand-control-border-sm);
+  --santo-control-border-md: var(--santo-brand-control-border-md);
+  --santo-control-border-lg: var(--santo-brand-control-border-lg);
+  --santo-control-font-sm: var(--santo-brand-control-font-sm);
+  --santo-control-font-md: var(--santo-brand-control-font-md);
+  --santo-control-font-lg: var(--santo-brand-control-font-lg);
+  --santo-control-icon-sm: var(--santo-brand-control-icon-sm);
+  --santo-control-icon-md: var(--santo-brand-control-icon-md);
+  --santo-control-icon-lg: var(--santo-brand-control-icon-lg);
+  --santo-control-gap-sm: var(--santo-brand-control-gap-sm);
+  --santo-control-gap-md: var(--santo-brand-control-gap-md);
+  --santo-control-gap-lg: var(--santo-brand-control-gap-lg);
+  --santo-effect-blur-sm: var(--santo-brand-effect-blur-sm);
+  --santo-effect-blur-md: var(--santo-brand-effect-blur-md);
+  --santo-effect-blur-lg: var(--santo-brand-effect-blur-lg);
+  --santo-effect-blur-xl: var(--santo-brand-effect-blur-xl);
+  --santo-effect-layer-blur-sm: var(--santo-brand-effect-layer-blur-sm);
+  --santo-effect-layer-blur-md: var(--santo-brand-effect-layer-blur-md);
+  --santo-effect-glow-brand: var(--santo-brand-effect-glow-brand);
+  --santo-effect-glow-neutral: var(--santo-brand-effect-glow-neutral);
+  --santo-effect-noise: var(--santo-brand-effect-noise);
+  --santo-glass-blur: var(--santo-brand-glass-blur);
+  --santo-glass-enabled: var(--santo-brand-glass-enabled);
+  --santo-gradient-brand-angle: var(--santo-brand-gradient-brand-angle);
+  --santo-gradient-brand-from: var(--santo-brand-gradient-brand-from);
+  --santo-gradient-brand-to: var(--santo-brand-gradient-brand-to);
 
-  /* Color — modo Light (102) */
-  --santo-color-surface-page: var(--santo-palette-neutral-50);
-  --santo-color-surface-raised: var(--santo-palette-neutral-0);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-100);
-  --santo-color-surface-overlay: #100d1699;
+  /* Color — modo Light (109) */
+  --santo-color-surface-page: var(--santo-brand-surface-page-light);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-light);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-light);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-light);
   --santo-color-surface-inverse: var(--santo-palette-neutral-900);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-600);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-700);
@@ -388,9 +516,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-700);
   --santo-color-text-link-hover: var(--santo-palette-brand-700);
   --santo-color-text-link-visited: var(--santo-palette-brand-800);
-  --santo-color-border-subtle: var(--santo-palette-neutral-200);
-  --santo-color-border-default: var(--santo-palette-neutral-300);
-  --santo-color-border-strong: var(--santo-palette-neutral-400);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-light);
+  --santo-color-border-default: var(--santo-brand-border-default-light);
+  --santo-color-border-strong: var(--santo-brand-border-strong-light);
   --santo-color-border-brand: var(--santo-palette-brand-600);
   --santo-color-border-success: var(--santo-palette-success-600);
   --santo-color-border-warning: var(--santo-palette-warning-600);
@@ -415,20 +543,35 @@
   --santo-color-icon-warning: var(--santo-palette-warning-600);
   --santo-color-icon-danger: var(--santo-palette-danger-600);
   --santo-color-icon-info: var(--santo-palette-info-600);
+  --santo-color-surface-well: var(--santo-brand-surface-well-light);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-light);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-light);
+  --santo-glass-surface: var(--santo-brand-glass-surface-light);
+  --santo-glass-border: var(--santo-brand-glass-border-light);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-light);
 
-  /* Effect styles (7) */
+  /* Effect styles (14) */
   --santo-shadow-none: none;
-  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
-  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
-  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
-  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
-  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
-  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
+  --santo-shadow-xs: 0px var(--santo-brand-shadow-xs-1-y) var(--santo-brand-shadow-xs-1-blur) 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px var(--santo-brand-shadow-sm-1-y) var(--santo-brand-shadow-sm-1-blur) 0px var(--santo-brand-shadow-sm-1), 0px var(--santo-brand-shadow-sm-2-y) var(--santo-brand-shadow-sm-2-blur) -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px var(--santo-brand-shadow-md-1-y) var(--santo-brand-shadow-md-1-blur) -2px var(--santo-brand-shadow-md-1), 0px var(--santo-brand-shadow-md-2-y) var(--santo-brand-shadow-md-2-blur) -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px var(--santo-brand-shadow-lg-1-y) var(--santo-brand-shadow-lg-1-blur) -4px var(--santo-brand-shadow-lg-1), 0px var(--santo-brand-shadow-lg-2-y) var(--santo-brand-shadow-lg-2-blur) -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px var(--santo-brand-shadow-xl-1-y) var(--santo-brand-shadow-xl-1-blur) -4px var(--santo-brand-shadow-xl-1), 0px var(--santo-brand-shadow-xl-2-y) var(--santo-brand-shadow-xl-2-blur) -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px var(--santo-brand-shadow-2xl-1-y) var(--santo-brand-shadow-2xl-1-blur) -12px var(--santo-brand-shadow-2xl-1);
+  --santo-glass-sm: blur(var(--santo-brand-effect-blur-sm));
+  --santo-glass-md: blur(var(--santo-brand-effect-blur-md));
+  --santo-glass-lg: blur(var(--santo-brand-effect-blur-lg));
+  --santo-blur-sm: blur(var(--santo-brand-effect-layer-blur-sm));
+  --santo-blur-md: blur(var(--santo-brand-effect-layer-blur-md));
+  --santo-glow-brand: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-brand);
+  --santo-glow-neutral: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-neutral);
 
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --santo-gradient-brand: linear-gradient(var(--santo-gradient-brand-angle), var(--santo-gradient-brand-from), var(--santo-gradient-brand-to));
 
   color-scheme: light dark;
 }
@@ -436,10 +579,10 @@
 /* Color — modo Dark. Segue o sistema, a menos que o tema claro esteja fixado. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --santo-color-surface-page: var(--santo-palette-neutral-950);
-    --santo-color-surface-raised: var(--santo-palette-neutral-900);
-    --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
-    --santo-color-surface-overlay: #000000b8;
+    --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+    --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+    --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+    --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
     --santo-color-surface-inverse: var(--santo-palette-neutral-50);
     --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
     --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -511,9 +654,9 @@
     --santo-color-text-link-default: var(--santo-palette-brand-300);
     --santo-color-text-link-hover: var(--santo-palette-brand-200);
     --santo-color-text-link-visited: var(--santo-palette-brand-400);
-    --santo-color-border-subtle: var(--santo-palette-neutral-800);
-    --santo-color-border-default: var(--santo-palette-neutral-700);
-    --santo-color-border-strong: var(--santo-palette-neutral-600);
+    --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+    --santo-color-border-default: var(--santo-brand-border-default-dark);
+    --santo-color-border-strong: var(--santo-brand-border-strong-dark);
     --santo-color-border-brand: var(--santo-palette-brand-500);
     --santo-color-border-success: var(--santo-palette-success-500);
     --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -538,15 +681,22 @@
     --santo-color-icon-warning: var(--santo-palette-warning-400);
     --santo-color-icon-danger: var(--santo-palette-danger-400);
     --santo-color-icon-info: var(--santo-palette-info-400);
+    --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+    --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+    --santo-frame-surface: var(--santo-color-surface-panel);
+    --santo-frame-border: var(--santo-brand-frame-border-dark);
+    --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+    --santo-glass-border: var(--santo-brand-glass-border-dark);
+    --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
   }
 }
 
 /* Color — modo Dark fixado explicitamente. */
 :root[data-theme='dark'] {
-  --santo-color-surface-page: var(--santo-palette-neutral-950);
-  --santo-color-surface-raised: var(--santo-palette-neutral-900);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
-  --santo-color-surface-overlay: #000000b8;
+  --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
   --santo-color-surface-inverse: var(--santo-palette-neutral-50);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -618,9 +768,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-300);
   --santo-color-text-link-hover: var(--santo-palette-brand-200);
   --santo-color-text-link-visited: var(--santo-palette-brand-400);
-  --santo-color-border-subtle: var(--santo-palette-neutral-800);
-  --santo-color-border-default: var(--santo-palette-neutral-700);
-  --santo-color-border-strong: var(--santo-palette-neutral-600);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+  --santo-color-border-default: var(--santo-brand-border-default-dark);
+  --santo-color-border-strong: var(--santo-brand-border-strong-dark);
   --santo-color-border-brand: var(--santo-palette-brand-500);
   --santo-color-border-success: var(--santo-palette-success-500);
   --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -645,6 +795,13 @@
   --santo-color-icon-warning: var(--santo-palette-warning-400);
   --santo-color-icon-danger: var(--santo-palette-danger-400);
   --santo-color-icon-info: var(--santo-palette-info-400);
+  --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-dark);
+  --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+  --santo-glass-border: var(--santo-brand-glass-border-dark);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
 }
 
 /* Marca Santo — modo Santo. Vale no elemento com data-brand='santo' e em tudo dentro dele. */
@@ -730,7 +887,7 @@
   --santo-palette-info-900: #194185;
   --santo-palette-info-950: #102a56;
 
-  /* Brand — modo Santo (61) */
+  /* Brand — modo Santo (154) */
   --santo-brand-id: "santo";
   --santo-brand-name: "Santo";
   --santo-brand-family-sans: "Albert Sans";
@@ -792,8 +949,101 @@
   --santo-brand-shadow-xl-1: #100d161a;
   --santo-brand-shadow-xl-2: #100d160f;
   --santo-brand-shadow-2xl-1: #100d161f;
+  --santo-brand-surface-page-light: var(--santo-palette-neutral-50);
+  --santo-brand-surface-page-dark: var(--santo-palette-neutral-950);
+  --santo-brand-surface-raised-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-raised-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-sunken-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-sunken-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-well-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-well-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-panel-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-panel-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-overlay-light: #100d1699;
+  --santo-brand-surface-overlay-dark: #000000b8;
+  --santo-brand-border-subtle-light: var(--santo-palette-neutral-200);
+  --santo-brand-border-subtle-dark: var(--santo-palette-neutral-800);
+  --santo-brand-border-default-light: var(--santo-palette-neutral-300);
+  --santo-brand-border-default-dark: var(--santo-palette-neutral-700);
+  --santo-brand-border-strong-light: var(--santo-palette-neutral-400);
+  --santo-brand-border-strong-dark: var(--santo-palette-neutral-600);
+  --santo-brand-frame-inset: var(--santo-brand-space-xs);
+  --santo-brand-frame-enabled: 1;
+  --santo-brand-frame-border-light: #00000000;
+  --santo-brand-frame-border-dark: var(--santo-palette-neutral-800);
+  --santo-brand-shape-radius-control: var(--santo-dimension-radius-8);
+  --santo-brand-control-padding-x-sm: var(--santo-brand-space-sm);
+  --santo-brand-control-padding-x-md: var(--santo-brand-space-md);
+  --santo-brand-control-padding-x-lg: var(--santo-brand-space-lg);
+  --santo-brand-control-radius-sm: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-md: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-lg: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-border-sm: var(--santo-dimension-border-1);
+  --santo-brand-control-border-md: var(--santo-dimension-border-1);
+  --santo-brand-control-border-lg: var(--santo-dimension-border-1);
+  --santo-brand-control-font-sm: var(--santo-brand-type-caption-size);
+  --santo-brand-control-font-md: var(--santo-brand-type-body-small-size);
+  --santo-brand-control-font-lg: var(--santo-brand-type-body-size);
+  --santo-brand-control-icon-sm: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-md: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-lg: var(--santo-dimension-icon-16);
+  --santo-brand-control-gap-sm: var(--santo-brand-space-2xs);
+  --santo-brand-control-gap-md: var(--santo-brand-space-xs);
+  --santo-brand-control-gap-lg: var(--santo-brand-space-xs);
+  --santo-brand-type-heading-1-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-2-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-3-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-4-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-5-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-heading-6-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-body-large-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-small-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-small-tracking: var(--santo-type-tracking-wide);
+  --santo-brand-shadow-xs-1-y: 1px;
+  --santo-brand-shadow-xs-1-blur: 2px;
+  --santo-brand-shadow-sm-1-y: 1px;
+  --santo-brand-shadow-sm-1-blur: 3px;
+  --santo-brand-shadow-sm-2-y: 1px;
+  --santo-brand-shadow-sm-2-blur: 2px;
+  --santo-brand-shadow-md-1-y: 4px;
+  --santo-brand-shadow-md-1-blur: 8px;
+  --santo-brand-shadow-md-2-y: 2px;
+  --santo-brand-shadow-md-2-blur: 4px;
+  --santo-brand-shadow-lg-1-y: 12px;
+  --santo-brand-shadow-lg-1-blur: 16px;
+  --santo-brand-shadow-lg-2-y: 4px;
+  --santo-brand-shadow-lg-2-blur: 6px;
+  --santo-brand-shadow-xl-1-y: 20px;
+  --santo-brand-shadow-xl-1-blur: 24px;
+  --santo-brand-shadow-xl-2-y: 8px;
+  --santo-brand-shadow-xl-2-blur: 8px;
+  --santo-brand-shadow-2xl-1-y: 24px;
+  --santo-brand-shadow-2xl-1-blur: 48px;
+  --santo-brand-effect-blur-sm: 4px;
+  --santo-brand-effect-blur-md: 8px;
+  --santo-brand-effect-blur-lg: 16px;
+  --santo-brand-effect-blur-xl: 24px;
+  --santo-brand-effect-layer-blur-sm: 2px;
+  --santo-brand-effect-layer-blur-md: 4px;
+  --santo-brand-effect-glow-brand: #64a3fe59;
+  --santo-brand-effect-glow-neutral: #090f1733;
+  --santo-brand-effect-glow-blur: 24px;
+  --santo-brand-effect-noise: 0.04;
+  --santo-brand-gradient-brand-angle: 135deg;
+  --santo-brand-gradient-brand-from: var(--santo-palette-brand-500);
+  --santo-brand-gradient-brand-to: var(--santo-palette-brand-700);
+  --santo-brand-glass-surface-light: #ffffffb8;
+  --santo-brand-glass-surface-dark: #131a2599;
+  --santo-brand-glass-border-light: #ffffff80;
+  --santo-brand-glass-border-dark: #ffffff1f;
+  --santo-brand-glass-highlight-light: #ffffff99;
+  --santo-brand-glass-highlight-dark: #ffffff14;
+  --santo-brand-glass-blur: var(--santo-brand-effect-blur-md);
+  --santo-brand-glass-enabled: 0;
 
-  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (24) */
+  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (59) */
   --santo-space-3xs: var(--santo-brand-space-3xs);
   --santo-space-2xs: var(--santo-brand-space-2xs);
   --santo-space-xs: var(--santo-brand-space-xs);
@@ -818,11 +1068,47 @@
   --santo-control-height-sm: var(--santo-brand-control-height-sm);
   --santo-control-height-md: var(--santo-brand-control-height-md);
   --santo-control-height-lg: var(--santo-brand-control-height-lg);
+  --santo-frame-inset: var(--santo-brand-frame-inset);
+  --santo-frame-enabled: var(--santo-brand-frame-enabled);
+  --santo-radius-control: var(--santo-brand-shape-radius-control);
+  --santo-control-padding-x-sm: var(--santo-brand-control-padding-x-sm);
+  --santo-control-padding-x-md: var(--santo-brand-control-padding-x-md);
+  --santo-control-padding-x-lg: var(--santo-brand-control-padding-x-lg);
+  --santo-control-radius-sm: var(--santo-brand-control-radius-sm);
+  --santo-control-radius-md: var(--santo-brand-control-radius-md);
+  --santo-control-radius-lg: var(--santo-brand-control-radius-lg);
+  --santo-control-border-sm: var(--santo-brand-control-border-sm);
+  --santo-control-border-md: var(--santo-brand-control-border-md);
+  --santo-control-border-lg: var(--santo-brand-control-border-lg);
+  --santo-control-font-sm: var(--santo-brand-control-font-sm);
+  --santo-control-font-md: var(--santo-brand-control-font-md);
+  --santo-control-font-lg: var(--santo-brand-control-font-lg);
+  --santo-control-icon-sm: var(--santo-brand-control-icon-sm);
+  --santo-control-icon-md: var(--santo-brand-control-icon-md);
+  --santo-control-icon-lg: var(--santo-brand-control-icon-lg);
+  --santo-control-gap-sm: var(--santo-brand-control-gap-sm);
+  --santo-control-gap-md: var(--santo-brand-control-gap-md);
+  --santo-control-gap-lg: var(--santo-brand-control-gap-lg);
+  --santo-effect-blur-sm: var(--santo-brand-effect-blur-sm);
+  --santo-effect-blur-md: var(--santo-brand-effect-blur-md);
+  --santo-effect-blur-lg: var(--santo-brand-effect-blur-lg);
+  --santo-effect-blur-xl: var(--santo-brand-effect-blur-xl);
+  --santo-effect-layer-blur-sm: var(--santo-brand-effect-layer-blur-sm);
+  --santo-effect-layer-blur-md: var(--santo-brand-effect-layer-blur-md);
+  --santo-effect-glow-brand: var(--santo-brand-effect-glow-brand);
+  --santo-effect-glow-neutral: var(--santo-brand-effect-glow-neutral);
+  --santo-effect-noise: var(--santo-brand-effect-noise);
+  --santo-glass-blur: var(--santo-brand-glass-blur);
+  --santo-glass-enabled: var(--santo-brand-glass-enabled);
+  --santo-gradient-brand-angle: var(--santo-brand-gradient-brand-angle);
+  --santo-gradient-brand-from: var(--santo-brand-gradient-brand-from);
+  --santo-gradient-brand-to: var(--santo-brand-gradient-brand-to);
 
-  /* Color — modo Light (100) */
-  --santo-color-surface-page: var(--santo-palette-neutral-50);
-  --santo-color-surface-raised: var(--santo-palette-neutral-0);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-100);
+  /* Color — modo Light (108) */
+  --santo-color-surface-page: var(--santo-brand-surface-page-light);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-light);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-light);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-light);
   --santo-color-surface-inverse: var(--santo-palette-neutral-900);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-600);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-700);
@@ -893,9 +1179,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-700);
   --santo-color-text-link-hover: var(--santo-palette-brand-700);
   --santo-color-text-link-visited: var(--santo-palette-brand-800);
-  --santo-color-border-subtle: var(--santo-palette-neutral-200);
-  --santo-color-border-default: var(--santo-palette-neutral-300);
-  --santo-color-border-strong: var(--santo-palette-neutral-400);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-light);
+  --santo-color-border-default: var(--santo-brand-border-default-light);
+  --santo-color-border-strong: var(--santo-brand-border-strong-light);
   --santo-color-border-brand: var(--santo-palette-brand-600);
   --santo-color-border-success: var(--santo-palette-success-600);
   --santo-color-border-warning: var(--santo-palette-warning-600);
@@ -920,27 +1206,43 @@
   --santo-color-icon-warning: var(--santo-palette-warning-600);
   --santo-color-icon-danger: var(--santo-palette-danger-600);
   --santo-color-icon-info: var(--santo-palette-info-600);
+  --santo-color-surface-well: var(--santo-brand-surface-well-light);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-light);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-light);
+  --santo-glass-surface: var(--santo-brand-glass-surface-light);
+  --santo-glass-border: var(--santo-brand-glass-border-light);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-light);
 
-  /* Effect styles com cor ligada a variavel de marca (6) */
-  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
-  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
-  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
-  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
-  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
-  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
+  /* Effect styles com cor ligada a variavel de marca (13) */
+  --santo-shadow-xs: 0px var(--santo-brand-shadow-xs-1-y) var(--santo-brand-shadow-xs-1-blur) 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px var(--santo-brand-shadow-sm-1-y) var(--santo-brand-shadow-sm-1-blur) 0px var(--santo-brand-shadow-sm-1), 0px var(--santo-brand-shadow-sm-2-y) var(--santo-brand-shadow-sm-2-blur) -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px var(--santo-brand-shadow-md-1-y) var(--santo-brand-shadow-md-1-blur) -2px var(--santo-brand-shadow-md-1), 0px var(--santo-brand-shadow-md-2-y) var(--santo-brand-shadow-md-2-blur) -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px var(--santo-brand-shadow-lg-1-y) var(--santo-brand-shadow-lg-1-blur) -4px var(--santo-brand-shadow-lg-1), 0px var(--santo-brand-shadow-lg-2-y) var(--santo-brand-shadow-lg-2-blur) -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px var(--santo-brand-shadow-xl-1-y) var(--santo-brand-shadow-xl-1-blur) -4px var(--santo-brand-shadow-xl-1), 0px var(--santo-brand-shadow-xl-2-y) var(--santo-brand-shadow-xl-2-blur) -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px var(--santo-brand-shadow-2xl-1-y) var(--santo-brand-shadow-2xl-1-blur) -12px var(--santo-brand-shadow-2xl-1);
+  --santo-glass-sm: blur(var(--santo-brand-effect-blur-sm));
+  --santo-glass-md: blur(var(--santo-brand-effect-blur-md));
+  --santo-glass-lg: blur(var(--santo-brand-effect-blur-lg));
+  --santo-blur-sm: blur(var(--santo-brand-effect-layer-blur-sm));
+  --santo-blur-md: blur(var(--santo-brand-effect-layer-blur-md));
+  --santo-glow-brand: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-brand);
+  --santo-glow-neutral: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-neutral);
 
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --santo-gradient-brand: linear-gradient(var(--santo-gradient-brand-angle), var(--santo-gradient-brand-from), var(--santo-gradient-brand-to));
 }
 
 /* Marca Santo — Color modo Dark, seguindo o sistema. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) [data-brand='santo'] {
-    --santo-color-surface-page: var(--santo-palette-neutral-950);
-    --santo-color-surface-raised: var(--santo-palette-neutral-900);
-    --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
+    --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+    --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+    --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+    --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
     --santo-color-surface-inverse: var(--santo-palette-neutral-50);
     --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
     --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -1011,9 +1313,9 @@
     --santo-color-text-link-default: var(--santo-palette-brand-300);
     --santo-color-text-link-hover: var(--santo-palette-brand-200);
     --santo-color-text-link-visited: var(--santo-palette-brand-400);
-    --santo-color-border-subtle: var(--santo-palette-neutral-800);
-    --santo-color-border-default: var(--santo-palette-neutral-700);
-    --santo-color-border-strong: var(--santo-palette-neutral-600);
+    --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+    --santo-color-border-default: var(--santo-brand-border-default-dark);
+    --santo-color-border-strong: var(--santo-brand-border-strong-dark);
     --santo-color-border-brand: var(--santo-palette-brand-500);
     --santo-color-border-success: var(--santo-palette-success-500);
     --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -1038,14 +1340,22 @@
     --santo-color-icon-warning: var(--santo-palette-warning-400);
     --santo-color-icon-danger: var(--santo-palette-danger-400);
     --santo-color-icon-info: var(--santo-palette-info-400);
+    --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+    --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+    --santo-frame-surface: var(--santo-color-surface-panel);
+    --santo-frame-border: var(--santo-brand-frame-border-dark);
+    --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+    --santo-glass-border: var(--santo-brand-glass-border-dark);
+    --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
   }
 }
 
 /* Marca Santo — Color modo Dark fixado. */
 :root[data-theme='dark'] [data-brand='santo'] {
-  --santo-color-surface-page: var(--santo-palette-neutral-950);
-  --santo-color-surface-raised: var(--santo-palette-neutral-900);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
+  --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
   --santo-color-surface-inverse: var(--santo-palette-neutral-50);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -1116,9 +1426,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-300);
   --santo-color-text-link-hover: var(--santo-palette-brand-200);
   --santo-color-text-link-visited: var(--santo-palette-brand-400);
-  --santo-color-border-subtle: var(--santo-palette-neutral-800);
-  --santo-color-border-default: var(--santo-palette-neutral-700);
-  --santo-color-border-strong: var(--santo-palette-neutral-600);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+  --santo-color-border-default: var(--santo-brand-border-default-dark);
+  --santo-color-border-strong: var(--santo-brand-border-strong-dark);
   --santo-color-border-brand: var(--santo-palette-brand-500);
   --santo-color-border-success: var(--santo-palette-success-500);
   --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -1143,6 +1453,13 @@
   --santo-color-icon-warning: var(--santo-palette-warning-400);
   --santo-color-icon-danger: var(--santo-palette-danger-400);
   --santo-color-icon-info: var(--santo-palette-info-400);
+  --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-dark);
+  --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+  --santo-glass-border: var(--santo-brand-glass-border-dark);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
 }
 
 /* Marca Venda Todo Santo Dia — modo VTSD. Vale no elemento com data-brand='vtsd' e em tudo dentro dele. */
@@ -1228,7 +1545,7 @@
   --santo-palette-info-900: #194185;
   --santo-palette-info-950: #102a56;
 
-  /* Brand — modo VTSD (61) */
+  /* Brand — modo VTSD (154) */
   --santo-brand-id: "vtsd";
   --santo-brand-name: "Venda Todo Santo Dia";
   --santo-brand-family-sans: Sora;
@@ -1290,8 +1607,101 @@
   --santo-brand-shadow-xl-1: #100d161a;
   --santo-brand-shadow-xl-2: #100d160f;
   --santo-brand-shadow-2xl-1: #100d161f;
+  --santo-brand-surface-page-light: var(--santo-palette-neutral-50);
+  --santo-brand-surface-page-dark: var(--santo-palette-neutral-950);
+  --santo-brand-surface-raised-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-raised-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-sunken-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-sunken-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-well-light: var(--santo-palette-neutral-100);
+  --santo-brand-surface-well-dark: var(--santo-palette-neutral-1000);
+  --santo-brand-surface-panel-light: var(--santo-palette-neutral-0);
+  --santo-brand-surface-panel-dark: var(--santo-palette-neutral-900);
+  --santo-brand-surface-overlay-light: #100d1699;
+  --santo-brand-surface-overlay-dark: #000000b8;
+  --santo-brand-border-subtle-light: var(--santo-palette-neutral-200);
+  --santo-brand-border-subtle-dark: var(--santo-palette-neutral-800);
+  --santo-brand-border-default-light: var(--santo-palette-neutral-300);
+  --santo-brand-border-default-dark: var(--santo-palette-neutral-700);
+  --santo-brand-border-strong-light: var(--santo-palette-neutral-400);
+  --santo-brand-border-strong-dark: var(--santo-palette-neutral-600);
+  --santo-brand-frame-inset: var(--santo-brand-space-xs);
+  --santo-brand-frame-enabled: 1;
+  --santo-brand-frame-border-light: #00000000;
+  --santo-brand-frame-border-dark: var(--santo-palette-neutral-800);
+  --santo-brand-shape-radius-control: var(--santo-dimension-radius-8);
+  --santo-brand-control-padding-x-sm: var(--santo-brand-space-sm);
+  --santo-brand-control-padding-x-md: var(--santo-brand-space-md);
+  --santo-brand-control-padding-x-lg: var(--santo-brand-space-lg);
+  --santo-brand-control-radius-sm: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-md: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-radius-lg: var(--santo-brand-shape-radius-control);
+  --santo-brand-control-border-sm: var(--santo-dimension-border-1);
+  --santo-brand-control-border-md: var(--santo-dimension-border-1);
+  --santo-brand-control-border-lg: var(--santo-dimension-border-1);
+  --santo-brand-control-font-sm: var(--santo-brand-type-caption-size);
+  --santo-brand-control-font-md: var(--santo-brand-type-body-small-size);
+  --santo-brand-control-font-lg: var(--santo-brand-type-body-size);
+  --santo-brand-control-icon-sm: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-md: var(--santo-dimension-icon-16);
+  --santo-brand-control-icon-lg: var(--santo-dimension-icon-16);
+  --santo-brand-control-gap-sm: var(--santo-brand-space-2xs);
+  --santo-brand-control-gap-md: var(--santo-brand-space-xs);
+  --santo-brand-control-gap-lg: var(--santo-brand-space-xs);
+  --santo-brand-type-heading-1-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-2-tracking: var(--santo-type-tracking-tighter);
+  --santo-brand-type-heading-3-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-4-tracking: var(--santo-type-tracking-tight);
+  --santo-brand-type-heading-5-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-heading-6-tracking: var(--santo-type-tracking-snug);
+  --santo-brand-type-body-large-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-body-small-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-tracking: var(--santo-type-tracking-normal);
+  --santo-brand-type-caption-small-tracking: var(--santo-type-tracking-wide);
+  --santo-brand-shadow-xs-1-y: 1px;
+  --santo-brand-shadow-xs-1-blur: 2px;
+  --santo-brand-shadow-sm-1-y: 1px;
+  --santo-brand-shadow-sm-1-blur: 3px;
+  --santo-brand-shadow-sm-2-y: 1px;
+  --santo-brand-shadow-sm-2-blur: 2px;
+  --santo-brand-shadow-md-1-y: 4px;
+  --santo-brand-shadow-md-1-blur: 8px;
+  --santo-brand-shadow-md-2-y: 2px;
+  --santo-brand-shadow-md-2-blur: 4px;
+  --santo-brand-shadow-lg-1-y: 12px;
+  --santo-brand-shadow-lg-1-blur: 16px;
+  --santo-brand-shadow-lg-2-y: 4px;
+  --santo-brand-shadow-lg-2-blur: 6px;
+  --santo-brand-shadow-xl-1-y: 20px;
+  --santo-brand-shadow-xl-1-blur: 24px;
+  --santo-brand-shadow-xl-2-y: 8px;
+  --santo-brand-shadow-xl-2-blur: 8px;
+  --santo-brand-shadow-2xl-1-y: 24px;
+  --santo-brand-shadow-2xl-1-blur: 48px;
+  --santo-brand-effect-blur-sm: 4px;
+  --santo-brand-effect-blur-md: 8px;
+  --santo-brand-effect-blur-lg: 16px;
+  --santo-brand-effect-blur-xl: 24px;
+  --santo-brand-effect-layer-blur-sm: 2px;
+  --santo-brand-effect-layer-blur-md: 4px;
+  --santo-brand-effect-glow-brand: #4ab2a759;
+  --santo-brand-effect-glow-neutral: #0f0f0f33;
+  --santo-brand-effect-glow-blur: 24px;
+  --santo-brand-effect-noise: 0.04;
+  --santo-brand-gradient-brand-angle: 135deg;
+  --santo-brand-gradient-brand-from: var(--santo-palette-brand-500);
+  --santo-brand-gradient-brand-to: var(--santo-palette-brand-700);
+  --santo-brand-glass-surface-light: #ffffffb8;
+  --santo-brand-glass-surface-dark: #1a1a1a99;
+  --santo-brand-glass-border-light: #ffffff80;
+  --santo-brand-glass-border-dark: #ffffff1f;
+  --santo-brand-glass-highlight-light: #ffffff99;
+  --santo-brand-glass-highlight-dark: #ffffff14;
+  --santo-brand-glass-blur: var(--santo-brand-effect-blur-md);
+  --santo-brand-glass-enabled: 0;
 
-  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (24) */
+  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (59) */
   --santo-space-3xs: var(--santo-brand-space-3xs);
   --santo-space-2xs: var(--santo-brand-space-2xs);
   --santo-space-xs: var(--santo-brand-space-xs);
@@ -1316,11 +1726,47 @@
   --santo-control-height-sm: var(--santo-brand-control-height-sm);
   --santo-control-height-md: var(--santo-brand-control-height-md);
   --santo-control-height-lg: var(--santo-brand-control-height-lg);
+  --santo-frame-inset: var(--santo-brand-frame-inset);
+  --santo-frame-enabled: var(--santo-brand-frame-enabled);
+  --santo-radius-control: var(--santo-brand-shape-radius-control);
+  --santo-control-padding-x-sm: var(--santo-brand-control-padding-x-sm);
+  --santo-control-padding-x-md: var(--santo-brand-control-padding-x-md);
+  --santo-control-padding-x-lg: var(--santo-brand-control-padding-x-lg);
+  --santo-control-radius-sm: var(--santo-brand-control-radius-sm);
+  --santo-control-radius-md: var(--santo-brand-control-radius-md);
+  --santo-control-radius-lg: var(--santo-brand-control-radius-lg);
+  --santo-control-border-sm: var(--santo-brand-control-border-sm);
+  --santo-control-border-md: var(--santo-brand-control-border-md);
+  --santo-control-border-lg: var(--santo-brand-control-border-lg);
+  --santo-control-font-sm: var(--santo-brand-control-font-sm);
+  --santo-control-font-md: var(--santo-brand-control-font-md);
+  --santo-control-font-lg: var(--santo-brand-control-font-lg);
+  --santo-control-icon-sm: var(--santo-brand-control-icon-sm);
+  --santo-control-icon-md: var(--santo-brand-control-icon-md);
+  --santo-control-icon-lg: var(--santo-brand-control-icon-lg);
+  --santo-control-gap-sm: var(--santo-brand-control-gap-sm);
+  --santo-control-gap-md: var(--santo-brand-control-gap-md);
+  --santo-control-gap-lg: var(--santo-brand-control-gap-lg);
+  --santo-effect-blur-sm: var(--santo-brand-effect-blur-sm);
+  --santo-effect-blur-md: var(--santo-brand-effect-blur-md);
+  --santo-effect-blur-lg: var(--santo-brand-effect-blur-lg);
+  --santo-effect-blur-xl: var(--santo-brand-effect-blur-xl);
+  --santo-effect-layer-blur-sm: var(--santo-brand-effect-layer-blur-sm);
+  --santo-effect-layer-blur-md: var(--santo-brand-effect-layer-blur-md);
+  --santo-effect-glow-brand: var(--santo-brand-effect-glow-brand);
+  --santo-effect-glow-neutral: var(--santo-brand-effect-glow-neutral);
+  --santo-effect-noise: var(--santo-brand-effect-noise);
+  --santo-glass-blur: var(--santo-brand-glass-blur);
+  --santo-glass-enabled: var(--santo-brand-glass-enabled);
+  --santo-gradient-brand-angle: var(--santo-brand-gradient-brand-angle);
+  --santo-gradient-brand-from: var(--santo-brand-gradient-brand-from);
+  --santo-gradient-brand-to: var(--santo-brand-gradient-brand-to);
 
-  /* Color — modo Light (100) */
-  --santo-color-surface-page: var(--santo-palette-neutral-50);
-  --santo-color-surface-raised: var(--santo-palette-neutral-0);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-100);
+  /* Color — modo Light (108) */
+  --santo-color-surface-page: var(--santo-brand-surface-page-light);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-light);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-light);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-light);
   --santo-color-surface-inverse: var(--santo-palette-neutral-900);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-600);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-700);
@@ -1391,9 +1837,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-700);
   --santo-color-text-link-hover: var(--santo-palette-brand-700);
   --santo-color-text-link-visited: var(--santo-palette-brand-800);
-  --santo-color-border-subtle: var(--santo-palette-neutral-200);
-  --santo-color-border-default: var(--santo-palette-neutral-300);
-  --santo-color-border-strong: var(--santo-palette-neutral-400);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-light);
+  --santo-color-border-default: var(--santo-brand-border-default-light);
+  --santo-color-border-strong: var(--santo-brand-border-strong-light);
   --santo-color-border-brand: var(--santo-palette-brand-600);
   --santo-color-border-success: var(--santo-palette-success-600);
   --santo-color-border-warning: var(--santo-palette-warning-600);
@@ -1418,27 +1864,43 @@
   --santo-color-icon-warning: var(--santo-palette-warning-600);
   --santo-color-icon-danger: var(--santo-palette-danger-600);
   --santo-color-icon-info: var(--santo-palette-info-600);
+  --santo-color-surface-well: var(--santo-brand-surface-well-light);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-light);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-light);
+  --santo-glass-surface: var(--santo-brand-glass-surface-light);
+  --santo-glass-border: var(--santo-brand-glass-border-light);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-light);
 
-  /* Effect styles com cor ligada a variavel de marca (6) */
-  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
-  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
-  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
-  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
-  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
-  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
+  /* Effect styles com cor ligada a variavel de marca (13) */
+  --santo-shadow-xs: 0px var(--santo-brand-shadow-xs-1-y) var(--santo-brand-shadow-xs-1-blur) 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px var(--santo-brand-shadow-sm-1-y) var(--santo-brand-shadow-sm-1-blur) 0px var(--santo-brand-shadow-sm-1), 0px var(--santo-brand-shadow-sm-2-y) var(--santo-brand-shadow-sm-2-blur) -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px var(--santo-brand-shadow-md-1-y) var(--santo-brand-shadow-md-1-blur) -2px var(--santo-brand-shadow-md-1), 0px var(--santo-brand-shadow-md-2-y) var(--santo-brand-shadow-md-2-blur) -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px var(--santo-brand-shadow-lg-1-y) var(--santo-brand-shadow-lg-1-blur) -4px var(--santo-brand-shadow-lg-1), 0px var(--santo-brand-shadow-lg-2-y) var(--santo-brand-shadow-lg-2-blur) -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px var(--santo-brand-shadow-xl-1-y) var(--santo-brand-shadow-xl-1-blur) -4px var(--santo-brand-shadow-xl-1), 0px var(--santo-brand-shadow-xl-2-y) var(--santo-brand-shadow-xl-2-blur) -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px var(--santo-brand-shadow-2xl-1-y) var(--santo-brand-shadow-2xl-1-blur) -12px var(--santo-brand-shadow-2xl-1);
+  --santo-glass-sm: blur(var(--santo-brand-effect-blur-sm));
+  --santo-glass-md: blur(var(--santo-brand-effect-blur-md));
+  --santo-glass-lg: blur(var(--santo-brand-effect-blur-lg));
+  --santo-blur-sm: blur(var(--santo-brand-effect-layer-blur-sm));
+  --santo-blur-md: blur(var(--santo-brand-effect-layer-blur-md));
+  --santo-glow-brand: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-brand);
+  --santo-glow-neutral: 0px 0px var(--santo-brand-effect-glow-blur) 0px var(--santo-brand-effect-glow-neutral);
 
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --santo-gradient-brand: linear-gradient(var(--santo-gradient-brand-angle), var(--santo-gradient-brand-from), var(--santo-gradient-brand-to));
 }
 
 /* Marca Venda Todo Santo Dia — Color modo Dark, seguindo o sistema. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) [data-brand='vtsd'] {
-    --santo-color-surface-page: var(--santo-palette-neutral-950);
-    --santo-color-surface-raised: var(--santo-palette-neutral-900);
-    --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
+    --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+    --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+    --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+    --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
     --santo-color-surface-inverse: var(--santo-palette-neutral-50);
     --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
     --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -1509,9 +1971,9 @@
     --santo-color-text-link-default: var(--santo-palette-brand-300);
     --santo-color-text-link-hover: var(--santo-palette-brand-200);
     --santo-color-text-link-visited: var(--santo-palette-brand-400);
-    --santo-color-border-subtle: var(--santo-palette-neutral-800);
-    --santo-color-border-default: var(--santo-palette-neutral-700);
-    --santo-color-border-strong: var(--santo-palette-neutral-600);
+    --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+    --santo-color-border-default: var(--santo-brand-border-default-dark);
+    --santo-color-border-strong: var(--santo-brand-border-strong-dark);
     --santo-color-border-brand: var(--santo-palette-brand-500);
     --santo-color-border-success: var(--santo-palette-success-500);
     --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -1536,14 +1998,22 @@
     --santo-color-icon-warning: var(--santo-palette-warning-400);
     --santo-color-icon-danger: var(--santo-palette-danger-400);
     --santo-color-icon-info: var(--santo-palette-info-400);
+    --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+    --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+    --santo-frame-surface: var(--santo-color-surface-panel);
+    --santo-frame-border: var(--santo-brand-frame-border-dark);
+    --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+    --santo-glass-border: var(--santo-brand-glass-border-dark);
+    --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
   }
 }
 
 /* Marca Venda Todo Santo Dia — Color modo Dark fixado. */
 :root[data-theme='dark'] [data-brand='vtsd'] {
-  --santo-color-surface-page: var(--santo-palette-neutral-950);
-  --santo-color-surface-raised: var(--santo-palette-neutral-900);
-  --santo-color-surface-sunken: var(--santo-palette-neutral-1000);
+  --santo-color-surface-page: var(--santo-brand-surface-page-dark);
+  --santo-color-surface-raised: var(--santo-brand-surface-raised-dark);
+  --santo-color-surface-sunken: var(--santo-brand-surface-sunken-dark);
+  --santo-color-surface-overlay: var(--santo-brand-surface-overlay-dark);
   --santo-color-surface-inverse: var(--santo-palette-neutral-50);
   --santo-color-bg-brand-solid-default: var(--santo-palette-brand-700);
   --santo-color-bg-brand-solid-hover: var(--santo-palette-brand-600);
@@ -1614,9 +2084,9 @@
   --santo-color-text-link-default: var(--santo-palette-brand-300);
   --santo-color-text-link-hover: var(--santo-palette-brand-200);
   --santo-color-text-link-visited: var(--santo-palette-brand-400);
-  --santo-color-border-subtle: var(--santo-palette-neutral-800);
-  --santo-color-border-default: var(--santo-palette-neutral-700);
-  --santo-color-border-strong: var(--santo-palette-neutral-600);
+  --santo-color-border-subtle: var(--santo-brand-border-subtle-dark);
+  --santo-color-border-default: var(--santo-brand-border-default-dark);
+  --santo-color-border-strong: var(--santo-brand-border-strong-dark);
   --santo-color-border-brand: var(--santo-palette-brand-500);
   --santo-color-border-success: var(--santo-palette-success-500);
   --santo-color-border-warning: var(--santo-palette-warning-400);
@@ -1641,4 +2111,11 @@
   --santo-color-icon-warning: var(--santo-palette-warning-400);
   --santo-color-icon-danger: var(--santo-palette-danger-400);
   --santo-color-icon-info: var(--santo-palette-info-400);
+  --santo-color-surface-well: var(--santo-brand-surface-well-dark);
+  --santo-color-surface-panel: var(--santo-brand-surface-panel-dark);
+  --santo-frame-surface: var(--santo-color-surface-panel);
+  --santo-frame-border: var(--santo-brand-frame-border-dark);
+  --santo-glass-surface: var(--santo-brand-glass-surface-dark);
+  --santo-glass-border: var(--santo-brand-glass-border-dark);
+  --santo-glass-highlight: var(--santo-brand-glass-highlight-dark);
 }

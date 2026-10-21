@@ -112,6 +112,13 @@
   --color-icon-warning: var(--santo-color-icon-warning);
   --color-icon-danger: var(--santo-color-icon-danger);
   --color-icon-info: var(--santo-color-icon-info);
+  --color-surface-well: var(--santo-color-surface-well);
+  --color-surface-panel: var(--santo-color-surface-panel);
+  --color-frame-surface: var(--santo-frame-surface);
+  --color-frame-border: var(--santo-frame-border);
+  --color-glass-surface: var(--santo-glass-surface);
+  --color-glass-border: var(--santo-glass-border);
+  --color-glass-highlight: var(--santo-glass-highlight);
   --color-palette-brand-50: var(--santo-palette-brand-50);
   --color-palette-brand-100: var(--santo-palette-brand-100);
   --color-palette-brand-200: var(--santo-palette-brand-200);
@@ -219,6 +226,7 @@
   --radius-2xl: var(--santo-radius-2xl);
   --radius-3xl: var(--santo-radius-3xl);
   --radius-full: var(--santo-radius-full);
+  --radius-control: var(--santo-radius-control);
 
   --font-weight-light: var(--santo-type-weight-light);
   --font-weight-regular: var(--santo-type-weight-regular);
@@ -261,41 +269,49 @@
   --shadow-lg: var(--santo-shadow-lg);
   --shadow-xl: var(--santo-shadow-xl);
   --shadow-2xl: var(--santo-shadow-2xl);
+  --shadow-glow-brand: var(--santo-glow-brand);
+  --shadow-glow-neutral: var(--santo-glow-neutral);
+
+  /* Desfoque de fundo: backdrop-blur-effect-md. */
+  --blur-effect-sm: var(--santo-effect-blur-sm);
+  --blur-effect-md: var(--santo-effect-blur-md);
+  --blur-effect-lg: var(--santo-effect-blur-lg);
+  --blur-effect-xl: var(--santo-effect-blur-xl);
 
   /* Papeis de texto: text-heading-1, text-body, text-code-md. */
   --text-heading-1: var(--santo-brand-type-heading-1-size);
   --text-heading-1--line-height: var(--santo-brand-type-heading-1-leading);
-  --text-heading-1--letter-spacing: var(--santo-type-tracking-tighter);
+  --text-heading-1--letter-spacing: var(--santo-brand-type-heading-1-tracking);
   --text-heading-2: var(--santo-brand-type-heading-2-size);
   --text-heading-2--line-height: var(--santo-brand-type-heading-2-leading);
-  --text-heading-2--letter-spacing: var(--santo-type-tracking-tighter);
+  --text-heading-2--letter-spacing: var(--santo-brand-type-heading-2-tracking);
   --text-heading-3: var(--santo-brand-type-heading-3-size);
   --text-heading-3--line-height: var(--santo-brand-type-heading-3-leading);
-  --text-heading-3--letter-spacing: var(--santo-type-tracking-tight);
+  --text-heading-3--letter-spacing: var(--santo-brand-type-heading-3-tracking);
   --text-heading-4: var(--santo-brand-type-heading-4-size);
   --text-heading-4--line-height: var(--santo-brand-type-heading-4-leading);
-  --text-heading-4--letter-spacing: var(--santo-type-tracking-tight);
+  --text-heading-4--letter-spacing: var(--santo-brand-type-heading-4-tracking);
   --text-heading-5: var(--santo-brand-type-heading-5-size);
   --text-heading-5--line-height: var(--santo-brand-type-heading-5-leading);
-  --text-heading-5--letter-spacing: var(--santo-type-tracking-snug);
+  --text-heading-5--letter-spacing: var(--santo-brand-type-heading-5-tracking);
   --text-heading-6: var(--santo-brand-type-heading-6-size);
   --text-heading-6--line-height: var(--santo-brand-type-heading-6-leading);
-  --text-heading-6--letter-spacing: var(--santo-type-tracking-snug);
+  --text-heading-6--letter-spacing: var(--santo-brand-type-heading-6-tracking);
   --text-body-large: var(--santo-brand-type-body-large-size);
   --text-body-large--line-height: var(--santo-brand-type-body-large-leading);
-  --text-body-large--letter-spacing: var(--santo-type-tracking-normal);
+  --text-body-large--letter-spacing: var(--santo-brand-type-body-large-tracking);
   --text-body: var(--santo-brand-type-body-size);
   --text-body--line-height: var(--santo-brand-type-body-leading);
-  --text-body--letter-spacing: var(--santo-type-tracking-normal);
+  --text-body--letter-spacing: var(--santo-brand-type-body-tracking);
   --text-body-small: var(--santo-brand-type-body-small-size);
   --text-body-small--line-height: var(--santo-brand-type-body-small-leading);
-  --text-body-small--letter-spacing: var(--santo-type-tracking-normal);
+  --text-body-small--letter-spacing: var(--santo-brand-type-body-small-tracking);
   --text-caption: var(--santo-brand-type-caption-size);
   --text-caption--line-height: var(--santo-brand-type-caption-leading);
-  --text-caption--letter-spacing: var(--santo-type-tracking-normal);
+  --text-caption--letter-spacing: var(--santo-brand-type-caption-tracking);
   --text-caption-small: var(--santo-brand-type-caption-small-size);
   --text-caption-small--line-height: var(--santo-brand-type-caption-small-leading);
-  --text-caption-small--letter-spacing: var(--santo-type-tracking-wide);
+  --text-caption-small--letter-spacing: var(--santo-brand-type-caption-small-tracking);
   --text-code: var(--santo-type-size-14);
   --text-code--line-height: var(--santo-type-leading-20);
   --text-code--letter-spacing: var(--santo-type-tracking-normal);

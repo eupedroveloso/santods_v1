@@ -51,7 +51,8 @@ for (const [name, def] of Object.entries(SPEC.Brand)) {
   const missing = brand.modes.filter((m) => !(m in def.values));
   if (missing.length) problems.push(`${name}: sem valor no(s) modo(s) ${missing.join(', ')}`);
   const values = Object.fromEntries(brand.modes.map((m) => [m, def.values[m]]));
-  const next = { type: def.type, values, scopes: def.scopes };
+  const next = { type: def.type, values };
+  if (def.scopes?.length) next.scopes = def.scopes; // o figma-dump.js omite scopes vazios
   if (def.description) next.description = def.description;
   const before = brand.variables[name];
   if (JSON.stringify(before) !== JSON.stringify(next)) {
@@ -76,11 +77,32 @@ for (const [name, def] of Object.entries(SPEC.Semantic)) {
     problems.push(`Semantic ${name} nao existe e a spec nao diz o tipo`);
     continue;
   }
-  const next = before ? { ...before, value: def.value } : { type: def.type, value: def.value, scopes: def.scopes };
+  const next = before ? { ...before, value: def.value } : { type: def.type, value: def.value, ...(def.scopes?.length ? { scopes: def.scopes } : {}) };
   if (!before && def.description) next.description = def.description;
   if (JSON.stringify(before) !== JSON.stringify(next)) {
     changes.push(`Semantic: ${before ? `${name} ${before.value} -> ${def.value}` : `cria ${name} = ${def.value}`}`);
     semantic.variables[name] = next;
+  }
+}
+
+/* ----------------------------------------------------------------- Color */
+
+const color = doc.collections.Color;
+for (const [name, def] of Object.entries(SPEC.Color ?? {})) {
+  const before = color.variables[name];
+  if (!before && !def.type) {
+    problems.push(`Color ${name} nao existe e a spec nao diz o tipo`);
+    continue;
+  }
+  const values = Object.fromEntries(color.modes.map((m) => [m, def.values[m]]));
+  // Formato do figma-dump.js: type, values, scopes, description (scopes vazios omitidos).
+  const next = before
+    ? { ...before, values }
+    : { type: def.type, values, ...(def.scopes?.length ? { scopes: def.scopes } : {}), ...(def.description ? { description: def.description } : {}) };
+  if (before && 'value' in before) delete next.value;
+  if (JSON.stringify(before) !== JSON.stringify(next)) {
+    changes.push(`Color: ${before ? `${name} -> ${JSON.stringify(values)}` : `cria ${name}`}`);
+    color.variables[name] = next;
   }
 }
 
@@ -90,7 +112,8 @@ for (const [styleName, s] of Object.entries(doc.textStyles)) {
   const binding = SPEC.textStyles[styleName.split('/')[1]];
   if (!binding) continue;
   for (const [field, varName] of Object.entries(binding)) {
-    if (!(field in s.boundVariables)) problems.push(`text style ${styleName} nao liga ${field} hoje`);
+    // letterSpacing pode nascer (e o ultimo campo na ordem do figma-dump.js); os outros ja precisam estar ligados.
+    if (!(field in s.boundVariables) && field !== 'letterSpacing') problems.push(`text style ${styleName} nao liga ${field} hoje`);
     else if (s.boundVariables[field] !== varName) {
       changes.push(`text style ${styleName}.${field}: ${s.boundVariables[field]} -> ${varName}`);
       s.boundVariables[field] = varName;
@@ -107,15 +130,37 @@ for (const [style, layers] of Object.entries(SPEC.effectStyles)) {
     continue;
   }
   s.effects.forEach((e, i) => {
-    const wanted = SPEC.Brand[layers[i]];
-    if (Object.values(wanted.values).some((v) => v !== e.color)) {
-      problems.push(`${layers[i]} precisa valer ${e.color} em toda marca (cor atual da camada ${i + 1} de ${style})`);
+    // Camada: nome da variavel de cor (formato antigo) ou { color, y, blur }.
+    const l = typeof layers[i] === 'string' ? { color: layers[i] } : layers[i];
+    for (const [k, varName] of Object.entries(l)) {
+      const wanted = SPEC.Brand[varName];
+      if (Object.values(wanted.values).some((v) => v !== e[k])) {
+        problems.push(`${varName} precisa valer ${e[k]} em toda marca (${k} atual da camada ${i + 1} de ${style})`);
+      }
     }
-    if (e.boundVariables?.color !== layers[i]) {
-      changes.push(`effect style ${style} camada ${i + 1}: cor ligada a ${layers[i]}`);
-      e.boundVariables = { color: layers[i] };
+    if (JSON.stringify(e.boundVariables) !== JSON.stringify(l)) {
+      changes.push(`effect style ${style} camada ${i + 1}: ligada a ${Object.values(l).join(', ')}`);
+      e.boundVariables = l;
     }
   });
+}
+
+/* ---------------------------------------------- effect styles novos (efeitos) */
+
+// glass/*, blur/*, glow/*: criados no formato do figma-dump.js (description fica so no Figma).
+for (const [name, def] of Object.entries(SPEC.novosEffectStyles ?? {})) {
+  for (const e of def.effects) {
+    for (const [k, varName] of Object.entries(e.boundVariables ?? {})) {
+      const wanted = SPEC.Brand[varName];
+      if (!wanted) problems.push(`effect style ${name}: ${varName} nao esta na spec`);
+      else if (wanted.values[doc.collections.Brand.defaultMode] !== e[k]) problems.push(`effect style ${name}: ${k} literal ${e[k]} != ${varName} na marca padrao`);
+    }
+  }
+  const next = { effects: def.effects };
+  if (JSON.stringify(doc.effectStyles[name]) !== JSON.stringify(next)) {
+    changes.push(`effect style ${doc.effectStyles[name] ? 'atualiza' : 'cria'} ${name}`);
+    doc.effectStyles[name] = next;
+  }
 }
 
 if (problems.length) {
@@ -132,8 +177,8 @@ if (changes.length) {
   const prev = (ahead.also ?? []).find((x) => x.tag === TAG);
   also.push({
     tag: TAG,
-    collections: ['Brand', 'Semantic'],
-    styles: 'text styles (11 papeis) e effect styles (cor das camadas)',
+    collections: ['Brand', 'Semantic', 'Color'],
+    styles: 'text styles (11 papeis: tamanho, entrelinha, tracking), effect styles (cor, deslocamento e desfoque das camadas) e 7 effect styles novos (glass/*, blur/*, glow/*)',
     since: prev?.since ?? new Date().toLocaleDateString('sv-SE'),
     by: 'scripts/figma-nivel-b-apply.mjs',
     why: 'Nivel B do Estudio aprovado pelo maestro so no andar estudio; Figma read-only para o MCP.',

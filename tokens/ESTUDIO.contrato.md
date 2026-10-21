@@ -371,3 +371,214 @@ As buscas binárias da rampa levavam isso a 1/255 em 32 de 240 degraus de teste.
 - O preview e o salvo batem em qualquer navegador, e a derivação inicial pode voltar a ser feita no cliente.
 - Custo: o `derivar` com rampa leva cerca de 3 ms.
 - A Palette da VTSD gerada fica a 1/255 do snapshot em 4 degraus. O snapshot não muda: a spec da VTSD é literal.
+
+### Fontes livres do Google e presets de tipografia (2026-10-21)
+
+**Índice:** `node scripts/google-fonts.mjs` gera `lib/fonts/google-index.json`, que é versionado e tem cerca de 120 KB.
+- A fonte é o JSON público `fonts.google.com/metadata/fonts`. Se ele falhar, o script usa a Developer API com `GOOGLE_FONTS_KEY`.
+- O bruto fica em `tokens/.cache/google-fonts.json`, ignorado pelo git, e `--offline` regera a partir dele.
+- O índice tem só as 1.829 famílias com subset latin: 489 variáveis, 1.340 estáticas e 51 mono.
+- Por família: `{ c: categoria, w: pesos estáticos | null, ax: { eixo: [min, max] } | null, i: itálico }`.
+- `curadoria` traz as 32 famílias de `lib/fonts/catalog.ts`, para destacar no topo. O script falha se alguma delas sumir do índice.
+- Ao importar, use `indice as unknown as IndiceGoogleFonts`, porque o TS infere o JSON estreito demais.
+
+**`derivar(rascunho, { indice })`:**
+- `tipografia.corpo`, `titulo` e `mono` aceitam qualquer família do índice. `mono` só aceita categoria `mono`.
+- `tipografia.pesos?: { corpo?, titulo?, mono? }` é um subconjunto de 300..800. Padrão `PESOS_PADRAO`: corpo e título com os 6 pesos, mono só com 400.
+  - Os pesos decidem só o que se baixa: as classes de texto continuam existindo nos 6 pesos.
+  - Peso que a família não tem é recusado. Variável: dentro de `ax.wght`. Estática: na lista `w`.
+- `r.fontes`: uma folha por família, com a união dos papéis e só os pesos pedidos.
+  Exemplo: `[{ familia, papeis, pesos, url }]`, com `url = https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap`.
+  `r.familias` (string[]) continua existindo.
+- **422:** todo `ok:false` é falha de validação. As mensagens trazem um código estável entre colchetes:
+  - `[familia-fora-do-indice]`, `[mono-nao-monoespacada]`, `[peso-indisponivel]`, `[peso-fora-do-sistema]`, `[familia-vazia]`;
+  - `[preset-invalido]`, para o preset de tipografia.
+- Sem `indice`, vale o comportamento antigo: lista fechada `fonts`.
+
+**Entidade preset de tipografia:**
+
+```ts
+type PresetTipografia = {
+  id: string;            // slug; compacta, santo e editorial são reservados
+  nome: string;
+  familias: { corpo: string; titulo: string; mono: string };
+  pesos: { corpo?: number[]; titulo?: number[]; mono?: number[] };
+  base: number;          // 10..24 px
+  razao: number;         // 1..2
+  tabela?: [number, number][] | "base";  // 11 pares [size, leading]; vence base/razao
+};
+```
+
+- `PRESETS_TIPOGRAFIA.{compacta,santo,editorial}` têm o mesmo formato.
+- `tipografia.escala` aceita o id de um preset fixo, o id de um personalizado (passado em `opts.presetsTipografia`) ou o próprio objeto.
+- `validarPresetTipografia(preset, { indice })` valida o preset antes de salvar.
+- `aplicarPresetTipografia(rascunho, preset)` copia famílias, pesos e escala do preset para o rascunho.
+
+**Paridade:**
+- `brand/family/*` já era STRING por marca, então nenhuma variável nova.
+- A família livre fica registrada no mesmo rastro `nivel-b`: as descriptions de `brand/family/{sans,heading,mono}` passam a dizer "qualquer família do Google Fonts", com mono só monoespaçada.
+  O `scripts/figma-nivel-b.js` grava isso no Figma, e o ensaio no Figma simulado continua igual ao snapshot.
+- Um sistema do Estúdio que vire modo no Figma precisa da família disponível lá. As do Google estão. O `figma-brand-mode.js` já recusa uma fonte ausente antes de escrever.
+- `lib/fonts/used.ts` agora também carrega `brand/family/heading`.
+
+### Estilo Superfícies e borda dupla como escolha (2026-10-21)
+
+A borda dupla deixa de ser regra fixa e vira escolha do Design System. A relação de cores entre as superfícies passa a ser definida no Estúdio.
+
+**`rascunho.superficies`:** id de preset ou objeto `Superficies`.
+
+| campo | o que é | Santo (`'borda-dupla'`) |
+|---|---|---|
+| `bordaDupla` | liga a moldura (`--santo-frame-enabled` 1/0) | `true` |
+| `recuo` | degrau de ESPAÇO do recuo da moldura (acompanha a densidade) | `'xs'` (8px) |
+| `tons.{claro,escuro}.{page,raised,sunken,well,panel}` | degrau da rampa neutral **da marca** | claro 50/0/100/100/0; escuro 950/900/1000/1000/900 |
+| `overlay.{claro,escuro}` | `#rrggbbaa` ou `{ degrau, alfa }` | `#100d1699` / `#000000b8` |
+| `bordas.{claro,escuro}.{subtle,default,strong}` | degrau neutral | 200/300/400; 800/700/600 |
+| `bordaInterna.{claro,escuro}` | borda do painel interno da moldura: degrau ou `'transparente'` | transparente / 800 |
+
+- O painel interno da moldura é a superfície `panel`.
+- Presets em `PRESETS_SUPERFICIES`:
+  - `borda-dupla`: o Santo de hoje;
+  - `tonal`: mesmos tons, sem moldura;
+  - `plana`: chão e cartão no mesmo tom, com borda interna 200/800.
+- **422:** `problemasDeSuperficies` devolve mensagens com o código `[superficie-invalida]`, para degrau inexistente, recuo fora da escala, overlay inválido, borda interna inválida ou `bordaDupla` não booleano. Preset inexistente também volta como problema.
+- **O `derivar` não lança mais.** Qualquer falha de derivação vira `ok:false` com `[derivacao] ...`: variável nova no núcleo sem fórmula, preset de tipografia inexistente etc.
+
+**Tokens:** o snapshot tem 432 variáveis, no mesmo rastro `nivel-b`, à frente do Figma.
+
+| onde | variável | consumida por |
+|---|---|---|
+| Brand | `brand/surface/{page,raised,sunken,well,panel,overlay}/{light,dark}` (12) | `color/surface/*` |
+| Brand | `brand/border/{subtle,default,strong}/{light,dark}` (6) | `color/border/*` |
+| Brand | `brand/frame/inset` (= `{brand/space/<recuo>}`), `brand/frame/enabled` (0/1), `brand/frame/border/{light,dark}` | moldura |
+| Color | `surface/page, raised, sunken, overlay` e `border/subtle, default, strong` | agora apontam para `brand/*` |
+| Color (novas) | `color/surface/well`, `color/surface/panel`, `frame/surface` (= `surface/panel`), `frame/border` | `--santo-color-surface-well`, `--santo-color-surface-panel`, `--santo-frame-surface`, `--santo-frame-border` |
+| Semantic (novas) | `frame/inset`, `frame/enabled` | `--santo-frame-inset`, `--santo-frame-enabled` (sem unidade) |
+
+- **Render:** Santo e VTSD idênticos. A prova foi no Chrome: 2.140 medidas por tema, 0 diferenças.
+  - `--santo-frame-*` reproduz o Card double de hoje: recuo 8px, painel = `raised`, borda interna transparente no claro e `border/subtle` no escuro.
+- **Tailwind:** `bg-surface-well`, `bg-surface-panel`, `bg-frame-surface` e `border-frame-border`.
+- **`lib/ui`:**
+  - O Input `well` passou a usar `bg-surface-well`, com o mesmo valor de hoje.
+  - **Falta o Card `double` consumir `--santo-frame-*`** (`card.tsx` está em edição no Estúdio). A moldura vale `--santo-frame-inset`, o painel vale `bg-frame-surface` e a borda interna vale `border-frame-border`. Com `--santo-frame-enabled: 0`, o Card double deve cair para `raised`.
+
+**Auditoria:** 67 pares, 18 deles novos:
+- texto primary, secondary e tertiary sobre sunken, well, panel e `frame/surface`;
+- `border/strong` sobre raised, sunken, well e panel;
+- `border/default` sobre raised e sunken (exceção aceita).
+
+Os textos passam em tudo. `border/strong` no escuro fica abaixo de 3 em todas as superfícies (o pior caso é 2,46 sobre raised). É o mesmo achado pendente.
+
+### Cor: neutros manuais e passos por degrau (2026-10-21)
+
+**`rascunho.cor.neutros`.** Os formatos antigos (`'cinza'|'tingido'|'quente'` e `{hue, chroma}`) continuam valendo. Novos:
+
+- `{ origem: 'manual', base: '#rrggbb' }`: a rampa neutral sai da cor de referência pelo mesmo método de luminância casada (`neutralRamp` em `brand-ramp.mjs`), **sem depender da marca**.
+  - A referência entra exata no degrau de luminância mais próxima, e `neutral/0` continua `#ffffff`.
+  - Exemplo: `#636f7f`, o neutral/500 do Santo, reconstrói a rampa do Santo a 1/255 por canal. A exceção é `neutral/1000`, que foi posto à mão no Figma.
+- `{ origem: 'derivada', preset?, ajuste?: { tinta, saturacao } }`: o ajuste substitui o preset.
+  - `saturacao`: % (0..300) do croma de cada degrau dos neutros do Santo. 0 = cinza, 100 = o tingido do Santo.
+  - `tinta`: % (0..100) do caminho, pelo arco mais curto, do matiz neutro do Santo (257°) até o matiz da marca.
+- Neutros manuais e ajuste valem também com `cor.origem: 'base'`.
+
+**`passos.cor`**: `{ brand?: { '50'..'950': hex }, neutral?: { '0'..'1000': hex } }`.
+- Sobrescreve o derivado degrau a degrau.
+- Hex `#rrggbb`, maiúsculas aceitas e normalizadas.
+- **Reset = tirar a chave.** Um objeto vazio dá exatamente o derivado.
+- A auditoria de contraste roda sobre a Palette final. Exemplo: `brand/600` em `#00796f` faz o `text/on-brand` passar a AA.
+
+**422:** `problemasDeCor` devolve mensagens com o código `[cor-invalida]`. Casos: origem, marca ou `neutros.base` que não sejam `#rrggbb`; preset inexistente; ajuste fora da faixa; rampa que não seja brand ou neutral; degrau inexistente; hex inválido.
+
+**Salvo:** o schema continua `santods.brand-mode/1`. O `spec` grava a Palette literal final, e o `draft` guarda `neutros` e `passos.cor` para reabrir o editor.
+
+### Liberdade total: base livre, passos editáveis e presets próprios em todo estilo (2026-10-21)
+
+Direção do Pedro: preset fixo é **ponto de partida, nunca limite**. Todo estilo tem uma Base com parâmetros livres, Passos editáveis e presets próprios salvos.
+
+**Preset como entidade, para todos os estilos:** `{ id, estilo, nome, dados, fixo? }`.
+- `estilo` ∈ `cor | tipografia | raio | espaco | sombra | controles | superficies`.
+- `dados` é o pedaço do rascunho daquele estilo, no mesmo formato.
+- Em raio, espaço, sombra e cor, `dados.passos` também é aplicado.
+- `PRESETS_FIXOS[estilo]` traz os fixos.
+- `aplicarPreset(rascunho, preset)` copia os dados para o rascunho, que continua editável.
+- `validarPreset(doc, preset, { indice })` roda antes de salvar um preset próprio. Ele confere a forma da entidade (id slug, não pode ser id de fixo; nome) e a mesma validação do `derivar`.
+- `derivar(doc, rascunho, { presets })`: qualquer estilo do rascunho aceita o **id de um preset próprio**.
+
+**Base livre por estilo** (tipos no `RascunhoLivre`; o `Rascunho` antigo continua válido):
+
+| estilo | formato livre | Santo |
+|---|---|---|
+| raio | `{ container, controle, curva: 'santo' \| { razao } }`; geométrica: xs = c/r², sm = c/r, lg = c·r … 3xl = c·r⁴ | `8` (= `{8, 8, 'santo'}`) |
+| espaço | `{ unidade, curva: 'santo' \| 'linear' \| { razao } }`; linear: ½, 1, 2, 3 … 13 × unidade; geométrica: md = 4u, ×r por nível | `4` |
+| controles | `{ sm?, md?, lg? }` com `{ altura, paddingX (degrau de espaço ou px), raio ('controle' ou px), borda, fonte (papel ou px), icone, gap (degrau ou px) }`, parciais sobre o padrão | `'padrao'` |
+| sombra | `{ intensidade, tinta: 'atual' \| 'marca' \| '#rrggbb', desfoque, deslocamento }` (multiplicadores); `passos.sombra[nivel]` = número ou `{ intensidade, desfoque, deslocamento }` | `{1, 'atual', 1, 1}` |
+| tipografia | `tipografia.tracking?: { papel: % }` (-10..20); o resto (famílias, pesos, escala) já era livre | da base |
+
+Presets fixos:
+- **raio:** reto, suave, padrão e arredondado. O arredondado tem container 12 e **controle 8**, para não virar cápsula.
+- **espaço:** compacta, padrão e confortável.
+- **controles:** compacto, padrão e confortável, cada um com os 7 parâmetros. `'amplo'` = confortável.
+- **sombra:** suave, padrão e marcada, com intensidade, desfoque e deslocamento.
+- **superfícies** e **tipografia:** os de antes. **cor:** `santo`.
+
+**Tokens novos** (snapshot com 501 variáveis, rastro `nivel-b`, à frente do Figma):
+
+| Brand (por marca) | Semantic | CSS |
+|---|---|---|
+| `brand/shape/radius-control` | `radius/control` | `--santo-radius-control`, Tailwind `rounded-control` |
+| `brand/control/{padding-x,radius,border,font,icon,gap}/{sm,md,lg}` (18) | `control/<medida>/<tamanho>` | `--santo-control-padding-x-md` etc. |
+| `brand/type/<papel>/tracking` (11) | os text styles ligam `letterSpacing` | via `typography.css` e `--text-<papel>--letter-spacing` |
+| `brand/shadow/<estilo>/<camada>/{y,blur}` (20) | os effect styles ligam `offsetY` e `radius` | dentro de `--santo-shadow-*` |
+
+O emit lê o tracking ligado (em `em`) e o y e blur ligados das sombras.
+
+**lib/ui consome os tokens**, com render idêntico. A prova foi feita no Chrome, em builds de produção: 3.974 elementos, 68 páginas de componente, claro e escuro, e só divergiu o que era trabalho em curso do Estúdio.
+- `button-class`: `h`, `px`, `gap`, `rounded`, `border` (só no secondary) e a fonte vêm de `control/*/<tamanho>`. A fonte usa `text-(length:...)!`, porque `typography.css` fica fora de `@layer`.
+- `radius.ts`: `RADIUS_CONTROL` = `rounded-control` (assim como `_START`, `_END` e `_VAR`). O raio de controle agora é independente do raio de container.
+- `IconBase`: sem `size`, herda `--santo-icon-size`. Os utilitários `santo-control-{sm,md,lg}` definem esse valor a partir de `control/icon`.
+- **Falta, para o Estúdio ou o Ateliê:**
+  - Input, Listbox e SearchTrigger têm padding e fonte próprios (px-xs/sm/md). Hoje só seguem `control/height` e `radius/control`.
+  - O `RADIUS_TRACK` (trilho = controle + `space/2xs`) continua `rounded-lg`. Precisa virar um calc para continuar concêntrico quando o raio de controle mudar.
+
+**Auditoria dos controles** em `r.auditoria.controles[tamanho] = { valores, avisos }`. Os avisos não bloqueiam:
+- `[alvo-pequeno]`: altura < 24 (WCAG 2.5.8);
+- `[controle-apertado]`: altura < 1,5 × fonte + bordas + 4;
+- `[controle-pilula]`: raio ≥ metade da altura;
+- `[icone-grande]`;
+- `[padding-raio]`: padding < raio.
+
+O Santo não dispara nenhum.
+
+**422:** `[raio-invalido]`, `[espaco-invalido]`, `[controle-invalido]`, `[sombra-invalida]`, `[tracking-invalido]`, sempre por parâmetro e com a faixa aceita na mensagem. Para preset: `[preset-invalido]`.
+
+### Estilos de efeito: vidro, desfoque, brilho, gradiente e ruído (2026-10-21)
+
+**Rascunho:**
+- `efeitos`: preset `'sutil' | 'padrao' | 'intenso'` (padrão `'padrao'` = Santo) ou `{ blur: {sm,md,lg,xl}, layerBlur: {sm,md}, glow: { brand: {degrau, alfa}, neutral: {degrau, alfa}, desfoque }, noise, gradiente: { angulo, de, para } }`.
+  - As cores do glow e do gradiente saem da rampa da marca.
+  - É também o estilo `efeitos` dos presets genéricos.
+- `superficies.tratamento`: `plana | tonal | borda-dupla | vidro`. Quando presente, manda na moldura: só `borda-dupla` a liga.
+- `superficies.vidro`: `{ blur (sm..xl ou px), alfa, borda, highlight (por tema, 0..1), tinta (por tema: degrau neutral ou 'brand-<degrau>') }`.
+- Preset novo de superfícies: `vidro` (tons do Santo, sem moldura, `glass/enabled` = 1).
+
+**Tokens** (snapshot com 539 variáveis e 14 effect styles, rastro `nivel-b`, à frente do Figma):
+
+| onde | variável | CSS |
+|---|---|---|
+| Brand → Semantic | `effect/blur/{sm,md,lg,xl}` (4/8/16/24) | `--santo-effect-blur-*`, Tailwind `backdrop-blur-effect-*` |
+| Brand → Semantic | `effect/layer-blur/{sm,md}` (2/4) | `--santo-effect-layer-blur-*` |
+| Brand → Semantic | `effect/glow/{brand,neutral}` (brand/500 a 35%, neutral/950 a 20%) | `--santo-effect-glow-*` (cor) |
+| Brand → Semantic | `effect/noise` (0,04) | `--santo-effect-noise` (sem unidade) |
+| Brand → Semantic | `gradient/brand/{angle,from,to}` (135°, brand/500 → brand/700) | `--santo-gradient-brand` (pronto) |
+| Brand → Color | `glass/{surface,border,highlight}` por tema | `--santo-glass-surface`, `-border`, `-highlight` |
+| Brand → Semantic | `glass/blur` (= `effect/blur/md`), `glass/enabled` (0) | `--santo-glass-blur`, `--santo-glass-enabled` |
+| effect styles novos | `glass/{sm,md,lg}` (BACKGROUND_BLUR), `blur/{sm,md}` (LAYER_BLUR), `glow/{brand,neutral}` (DROP_SHADOW colorida) | `--santo-glass-md: blur(8px)`, `--santo-blur-sm`, `--santo-glow-brand` (box-shadow), Tailwind `shadow-glow-brand` |
+
+- O preenchimento do vidro fica documentado na description do effect style: `color/glass/surface` com borda `color/glass/border`.
+- O `figma-nivel-b.js` cria os 7 effect styles com os campos ligados. No ensaio do Figma simulado, a escrita sai igual ao snapshot.
+- O emit trata desfoque como `blur()` e não como `box-shadow`. O índice das docs (`listEffectStyles`) continua listando só as sombras de elevação.
+- **Santo e VTSD idênticos.** Nenhum componente usa os efeitos ainda; no Chrome foram 2.140 medidas por tema, 0 diferenças.
+
+**Auditoria do vidro:** `r.auditoria.vidro` testa texto primary e secondary sobre o vidro composto no **pior fundo**: `surface/page` e `bg/brand/solid/default`, nos dois temas (8 pares).
+
+**422:** `[efeito-invalido]` para efeitos; `[superficie-invalida]` para vidro e tratamento.

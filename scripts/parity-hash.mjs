@@ -46,8 +46,11 @@ export function effectStyleLine(name, s) {
     name,
     s.effects.map((e) => {
       const row = [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode];
-      // Cor ligada a variavel (nivel B): entra no hash so quando existe.
-      return e.boundVariables && e.boundVariables.color ? [...row, e.boundVariables.color] : row;
+      // Campos ligados a variavel (nivel B): entram no hash so quando existem. So a cor = formato antigo.
+      const bv = e.boundVariables || {};
+      const keys = Object.keys(bv).sort();
+      if (!keys.length) return row;
+      return keys.length === 1 && keys[0] === 'color' ? [...row, bv.color] : [...row, keys.map((k) => [k, bv[k]])];
     }),
   ]);
 }

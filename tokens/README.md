@@ -28,6 +28,21 @@ controle e a cor de cada camada de sombra (56 variáveis). Santo e VTSD recebera
 antes: o render é idêntico (2.140 medidas por tema no Chrome, zero diferença). Aplicado por
 `scripts/figma-nivel-b-apply.mjs`, **à frente do Figma** (`meta.aheadOfFigma.also`).
 
+**Superfícies (andar `estudio`, 2026-10-21):** `surface/*` e `border/*` da Color passam a apontar
+para `brand/surface/*` e `brand/border/*` (degraus por marca e tema). A borda dupla vira escolha:
+`brand/frame/{inset,enabled,border/*}` → `--santo-frame-inset`, `--santo-frame-enabled`,
+`--santo-frame-surface`, `--santo-frame-border`. Santo e VTSD idênticos. Mesmo rastro `nivel-b`.
+
+**Controles e efeitos (andar `estudio`, 2026-10-21):** `control/*/<tamanho>` (padding, raio,
+borda, fonte, ícone, gap), `radius/control`, tracking por papel, geometria de sombra por marca,
+e os efeitos `effect/*`, `glass/*`, `gradient/brand/*` com os effect styles `glass/*`, `blur/*` e
+`glow/*`. Santo e VTSD idênticos. Mesmo rastro `nivel-b`.
+
+**Família livre (andar `estudio`, 2026-10-21):** no Estúdio, `brand/family/{sans,heading,mono}`
+aceitam qualquer família do Google Fonts (`lib/fonts/google-index.json`, gerado por
+`scripts/google-fonts.mjs`; mono só monoespaçada). As descriptions novas vão pelo mesmo rastro
+`nivel-b` (`scripts/figma-nivel-b.js`), à frente do Figma.
+
 ## Dívidas conhecidas
 
 ### D1 — `text/on-brand` reprova AA sobre o fundo de marca (2026-10-19)
@@ -54,6 +69,7 @@ não mexer na coleção Color agora. A dívida fica registrada para revisão.
 - **Achado da auditoria automática (2026-10-21, `lib/tokens/contrast-audit.mjs`):**
   `border/strong` sobre `surface/page` no tema escuro dá 2,70 (Santo) e 2,69 (VTSD), abaixo de 3.
   Vem da troca de stroke (`border/strong` escuro → neutral/600). Não está registrado como
-  dívida aceita; decisão pendente do Pedro.
+  dívida aceita; decisão pendente do Pedro. Medido também nas superfícies novas: 2,46 sobre
+  `surface/raised` e `panel`, 2,84 sobre `sunken` e `well` (Santo escuro).
 - **Mitigação até lá:** não pôr texto pequeno sobre `bg/brand/solid` fora de botões; input
   usa `border/strong`, não `border/default`.

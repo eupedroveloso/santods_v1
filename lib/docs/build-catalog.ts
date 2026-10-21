@@ -186,14 +186,18 @@ export function buildCatalog(doc: TokenDoc): Catalog {
     };
   });
 
-  const effectStyles: EffectStyleEntry[] = Object.entries(doc.effectStyles).map(([name, def]) => ({
-    name,
-    slug: slugify(name),
-    cssVar: shadowVarOf(name, prefix),
-    tailwind: `shadow-${name}`,
-    css: shadowCss(def.effects),
-    layers: def.effects,
-  }));
+  // So as sombras de elevacao (nomes sem grupo: none..2xl). Os estilos agrupados do Estudio
+  // (glass/*, blur/*, glow/*) sao efeitos de outra natureza e nao entram nesta lista.
+  const effectStyles: EffectStyleEntry[] = Object.entries(doc.effectStyles)
+    .filter(([name]) => !name.includes("/"))
+    .map(([name, def]) => ({
+      name,
+      slug: slugify(name),
+      cssVar: shadowVarOf(name, prefix),
+      tailwind: `shadow-${name}`,
+      css: shadowCss(def.effects),
+      layers: def.effects,
+    }));
 
   const brand = doc.collections.Brand;
   const palette = doc.collections.Palette;

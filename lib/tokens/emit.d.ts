@@ -1,4 +1,4 @@
-import type { Declaration, TokenDoc, ShadowLayer, TextStyleDef, VariableType, RawValue } from "./types";
+import type { Declaration, TokenDoc, ShadowLayer, TextStyleDef, VariableType, RawValue, EffectStyleDef } from "./types";
 
 export declare const BANNER: string;
 export declare function isAlias(v: unknown): v is string;
@@ -48,6 +48,11 @@ export declare function textStyleCss(
 ): { fontFamily: string; fontSize: string; lineHeight: string; letterSpacing: string; fontWeight: string };
 export declare function textRoleOf(figmaName: string): string;
 export declare function shadowVarOf(name: string, prefix: string): string;
+/** --<prefix>-shadow-<nome> sem grupo; --<prefix>-<grupo>-<nome> com grupo (glass/md, glow/brand). */
+export declare function effectVarOf(name: string, prefix: string): string;
+export declare function isBlurStyle(def: EffectStyleDef): boolean;
+/** box-shadow (sombras) ou blur() (desfoque de fundo/camada). */
+export declare function effectCss(def: EffectStyleDef, prefix?: string): string;
 export declare function themeKeyOf(entry: Pick<IndexEntry, "name" | "collection">): string | null;
 export declare function utilityClassOf(entry: Pick<IndexEntry, "name" | "collection">): string | null;
 export declare function emitTokensCss(doc: TokenDoc, opts?: { banner?: string; selector?: string }): string;

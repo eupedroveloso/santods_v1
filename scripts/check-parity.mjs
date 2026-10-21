@@ -113,11 +113,12 @@ function validate(doc, label) {
   }
   for (const [styleName, s] of Object.entries(doc.effectStyles ?? {})) {
     s.effects.forEach((e, i) => {
-      const target = e.boundVariables?.color;
-      if (!target) return;
-      const v = flat.get(target);
-      if (!v) problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga a cor a variavel inexistente ${target}`);
-      else if (v.type !== 'COLOR') problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga a cor a ${target}, que e ${v.type}`);
+      for (const [key, target] of Object.entries(e.boundVariables ?? {})) {
+        const v = flat.get(target);
+        const tipo = key === 'color' ? 'COLOR' : 'FLOAT';
+        if (!v) problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga ${key} a variavel inexistente ${target}`);
+        else if (v.type !== tipo) problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga ${key} a ${target}, que e ${v.type}`);
+      }
     });
   }
   return problems;
@@ -192,7 +193,7 @@ function diff(before, after) {
       `${s.fontFamily} ${s.fontStyle} ${s.fontSize}/${s.lineHeight.value ?? 'auto'} ls=${s.letterSpacing.value}${s.letterSpacing.unit === 'PERCENT' ? '%' : 'px'}`),
     ...diffMaps('effect style', before.effectStyles, after.effectStyles, eq, (s) =>
       s.effects.length
-        ? s.effects.map((e) => `${e.x} ${e.y} ${e.blur} ${e.spread} ${e.color}${e.boundVariables?.color ? ` @${e.boundVariables.color}` : ''}`).join(' | ')
+        ? s.effects.map((e) => `${e.x} ${e.y} ${e.blur} ${e.spread} ${e.color}${e.boundVariables ? ` @${Object.values(e.boundVariables).join('+')}` : ''}`).join(' | ')
         : 'none'),
   );
 

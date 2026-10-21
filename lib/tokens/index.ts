@@ -8,7 +8,7 @@ export const figmaSource = {
   "cssPrefix": "santo"
 } as const;
 
-/** Referencia `var(--santo-*)` de cada uma das 404 variaveis do Figma. */
+/** Referencia `var(--santo-*)` de cada uma das 539 variaveis do Figma. */
 export const token = {
   "palette/brand/50": "var(--santo-palette-brand-50)",
   "palette/brand/100": "var(--santo-palette-brand-100)",
@@ -191,6 +191,13 @@ export const token = {
   "color/icon/warning": "var(--santo-color-icon-warning)",
   "color/icon/danger": "var(--santo-color-icon-danger)",
   "color/icon/info": "var(--santo-color-icon-info)",
+  "color/surface/well": "var(--santo-color-surface-well)",
+  "color/surface/panel": "var(--santo-color-surface-panel)",
+  "frame/surface": "var(--santo-frame-surface)",
+  "frame/border": "var(--santo-frame-border)",
+  "glass/surface": "var(--santo-glass-surface)",
+  "glass/border": "var(--santo-glass-border)",
+  "glass/highlight": "var(--santo-glass-highlight)",
   "dimension/space/0": "var(--santo-dimension-space-0)",
   "dimension/space/2": "var(--santo-dimension-space-2)",
   "dimension/space/4": "var(--santo-dimension-space-4)",
@@ -381,6 +388,99 @@ export const token = {
   "brand/shadow/xl/1": "var(--santo-brand-shadow-xl-1)",
   "brand/shadow/xl/2": "var(--santo-brand-shadow-xl-2)",
   "brand/shadow/2xl/1": "var(--santo-brand-shadow-2xl-1)",
+  "brand/surface/page/light": "var(--santo-brand-surface-page-light)",
+  "brand/surface/page/dark": "var(--santo-brand-surface-page-dark)",
+  "brand/surface/raised/light": "var(--santo-brand-surface-raised-light)",
+  "brand/surface/raised/dark": "var(--santo-brand-surface-raised-dark)",
+  "brand/surface/sunken/light": "var(--santo-brand-surface-sunken-light)",
+  "brand/surface/sunken/dark": "var(--santo-brand-surface-sunken-dark)",
+  "brand/surface/well/light": "var(--santo-brand-surface-well-light)",
+  "brand/surface/well/dark": "var(--santo-brand-surface-well-dark)",
+  "brand/surface/panel/light": "var(--santo-brand-surface-panel-light)",
+  "brand/surface/panel/dark": "var(--santo-brand-surface-panel-dark)",
+  "brand/surface/overlay/light": "var(--santo-brand-surface-overlay-light)",
+  "brand/surface/overlay/dark": "var(--santo-brand-surface-overlay-dark)",
+  "brand/border/subtle/light": "var(--santo-brand-border-subtle-light)",
+  "brand/border/subtle/dark": "var(--santo-brand-border-subtle-dark)",
+  "brand/border/default/light": "var(--santo-brand-border-default-light)",
+  "brand/border/default/dark": "var(--santo-brand-border-default-dark)",
+  "brand/border/strong/light": "var(--santo-brand-border-strong-light)",
+  "brand/border/strong/dark": "var(--santo-brand-border-strong-dark)",
+  "brand/frame/inset": "var(--santo-brand-frame-inset)",
+  "brand/frame/enabled": "var(--santo-brand-frame-enabled)",
+  "brand/frame/border/light": "var(--santo-brand-frame-border-light)",
+  "brand/frame/border/dark": "var(--santo-brand-frame-border-dark)",
+  "brand/shape/radius-control": "var(--santo-brand-shape-radius-control)",
+  "brand/control/padding-x/sm": "var(--santo-brand-control-padding-x-sm)",
+  "brand/control/padding-x/md": "var(--santo-brand-control-padding-x-md)",
+  "brand/control/padding-x/lg": "var(--santo-brand-control-padding-x-lg)",
+  "brand/control/radius/sm": "var(--santo-brand-control-radius-sm)",
+  "brand/control/radius/md": "var(--santo-brand-control-radius-md)",
+  "brand/control/radius/lg": "var(--santo-brand-control-radius-lg)",
+  "brand/control/border/sm": "var(--santo-brand-control-border-sm)",
+  "brand/control/border/md": "var(--santo-brand-control-border-md)",
+  "brand/control/border/lg": "var(--santo-brand-control-border-lg)",
+  "brand/control/font/sm": "var(--santo-brand-control-font-sm)",
+  "brand/control/font/md": "var(--santo-brand-control-font-md)",
+  "brand/control/font/lg": "var(--santo-brand-control-font-lg)",
+  "brand/control/icon/sm": "var(--santo-brand-control-icon-sm)",
+  "brand/control/icon/md": "var(--santo-brand-control-icon-md)",
+  "brand/control/icon/lg": "var(--santo-brand-control-icon-lg)",
+  "brand/control/gap/sm": "var(--santo-brand-control-gap-sm)",
+  "brand/control/gap/md": "var(--santo-brand-control-gap-md)",
+  "brand/control/gap/lg": "var(--santo-brand-control-gap-lg)",
+  "brand/type/heading-1/tracking": "var(--santo-brand-type-heading-1-tracking)",
+  "brand/type/heading-2/tracking": "var(--santo-brand-type-heading-2-tracking)",
+  "brand/type/heading-3/tracking": "var(--santo-brand-type-heading-3-tracking)",
+  "brand/type/heading-4/tracking": "var(--santo-brand-type-heading-4-tracking)",
+  "brand/type/heading-5/tracking": "var(--santo-brand-type-heading-5-tracking)",
+  "brand/type/heading-6/tracking": "var(--santo-brand-type-heading-6-tracking)",
+  "brand/type/body-large/tracking": "var(--santo-brand-type-body-large-tracking)",
+  "brand/type/body/tracking": "var(--santo-brand-type-body-tracking)",
+  "brand/type/body-small/tracking": "var(--santo-brand-type-body-small-tracking)",
+  "brand/type/caption/tracking": "var(--santo-brand-type-caption-tracking)",
+  "brand/type/caption-small/tracking": "var(--santo-brand-type-caption-small-tracking)",
+  "brand/shadow/xs/1/y": "var(--santo-brand-shadow-xs-1-y)",
+  "brand/shadow/xs/1/blur": "var(--santo-brand-shadow-xs-1-blur)",
+  "brand/shadow/sm/1/y": "var(--santo-brand-shadow-sm-1-y)",
+  "brand/shadow/sm/1/blur": "var(--santo-brand-shadow-sm-1-blur)",
+  "brand/shadow/sm/2/y": "var(--santo-brand-shadow-sm-2-y)",
+  "brand/shadow/sm/2/blur": "var(--santo-brand-shadow-sm-2-blur)",
+  "brand/shadow/md/1/y": "var(--santo-brand-shadow-md-1-y)",
+  "brand/shadow/md/1/blur": "var(--santo-brand-shadow-md-1-blur)",
+  "brand/shadow/md/2/y": "var(--santo-brand-shadow-md-2-y)",
+  "brand/shadow/md/2/blur": "var(--santo-brand-shadow-md-2-blur)",
+  "brand/shadow/lg/1/y": "var(--santo-brand-shadow-lg-1-y)",
+  "brand/shadow/lg/1/blur": "var(--santo-brand-shadow-lg-1-blur)",
+  "brand/shadow/lg/2/y": "var(--santo-brand-shadow-lg-2-y)",
+  "brand/shadow/lg/2/blur": "var(--santo-brand-shadow-lg-2-blur)",
+  "brand/shadow/xl/1/y": "var(--santo-brand-shadow-xl-1-y)",
+  "brand/shadow/xl/1/blur": "var(--santo-brand-shadow-xl-1-blur)",
+  "brand/shadow/xl/2/y": "var(--santo-brand-shadow-xl-2-y)",
+  "brand/shadow/xl/2/blur": "var(--santo-brand-shadow-xl-2-blur)",
+  "brand/shadow/2xl/1/y": "var(--santo-brand-shadow-2xl-1-y)",
+  "brand/shadow/2xl/1/blur": "var(--santo-brand-shadow-2xl-1-blur)",
+  "brand/effect/blur/sm": "var(--santo-brand-effect-blur-sm)",
+  "brand/effect/blur/md": "var(--santo-brand-effect-blur-md)",
+  "brand/effect/blur/lg": "var(--santo-brand-effect-blur-lg)",
+  "brand/effect/blur/xl": "var(--santo-brand-effect-blur-xl)",
+  "brand/effect/layer-blur/sm": "var(--santo-brand-effect-layer-blur-sm)",
+  "brand/effect/layer-blur/md": "var(--santo-brand-effect-layer-blur-md)",
+  "brand/effect/glow/brand": "var(--santo-brand-effect-glow-brand)",
+  "brand/effect/glow/neutral": "var(--santo-brand-effect-glow-neutral)",
+  "brand/effect/glow/blur": "var(--santo-brand-effect-glow-blur)",
+  "brand/effect/noise": "var(--santo-brand-effect-noise)",
+  "brand/gradient/brand/angle": "var(--santo-brand-gradient-brand-angle)",
+  "brand/gradient/brand/from": "var(--santo-brand-gradient-brand-from)",
+  "brand/gradient/brand/to": "var(--santo-brand-gradient-brand-to)",
+  "brand/glass/surface/light": "var(--santo-brand-glass-surface-light)",
+  "brand/glass/surface/dark": "var(--santo-brand-glass-surface-dark)",
+  "brand/glass/border/light": "var(--santo-brand-glass-border-light)",
+  "brand/glass/border/dark": "var(--santo-brand-glass-border-dark)",
+  "brand/glass/highlight/light": "var(--santo-brand-glass-highlight-light)",
+  "brand/glass/highlight/dark": "var(--santo-brand-glass-highlight-dark)",
+  "brand/glass/blur": "var(--santo-brand-glass-blur)",
+  "brand/glass/enabled": "var(--santo-brand-glass-enabled)",
   "space/none": "var(--santo-space-none)",
   "space/3xs": "var(--santo-space-3xs)",
   "space/2xs": "var(--santo-space-2xs)",
@@ -414,6 +514,41 @@ export const token = {
   "control/height/sm": "var(--santo-control-height-sm)",
   "control/height/md": "var(--santo-control-height-md)",
   "control/height/lg": "var(--santo-control-height-lg)",
+  "frame/inset": "var(--santo-frame-inset)",
+  "frame/enabled": "var(--santo-frame-enabled)",
+  "radius/control": "var(--santo-radius-control)",
+  "control/padding-x/sm": "var(--santo-control-padding-x-sm)",
+  "control/padding-x/md": "var(--santo-control-padding-x-md)",
+  "control/padding-x/lg": "var(--santo-control-padding-x-lg)",
+  "control/radius/sm": "var(--santo-control-radius-sm)",
+  "control/radius/md": "var(--santo-control-radius-md)",
+  "control/radius/lg": "var(--santo-control-radius-lg)",
+  "control/border/sm": "var(--santo-control-border-sm)",
+  "control/border/md": "var(--santo-control-border-md)",
+  "control/border/lg": "var(--santo-control-border-lg)",
+  "control/font/sm": "var(--santo-control-font-sm)",
+  "control/font/md": "var(--santo-control-font-md)",
+  "control/font/lg": "var(--santo-control-font-lg)",
+  "control/icon/sm": "var(--santo-control-icon-sm)",
+  "control/icon/md": "var(--santo-control-icon-md)",
+  "control/icon/lg": "var(--santo-control-icon-lg)",
+  "control/gap/sm": "var(--santo-control-gap-sm)",
+  "control/gap/md": "var(--santo-control-gap-md)",
+  "control/gap/lg": "var(--santo-control-gap-lg)",
+  "effect/blur/sm": "var(--santo-effect-blur-sm)",
+  "effect/blur/md": "var(--santo-effect-blur-md)",
+  "effect/blur/lg": "var(--santo-effect-blur-lg)",
+  "effect/blur/xl": "var(--santo-effect-blur-xl)",
+  "effect/layer-blur/sm": "var(--santo-effect-layer-blur-sm)",
+  "effect/layer-blur/md": "var(--santo-effect-layer-blur-md)",
+  "effect/glow/brand": "var(--santo-effect-glow-brand)",
+  "effect/glow/neutral": "var(--santo-effect-glow-neutral)",
+  "effect/noise": "var(--santo-effect-noise)",
+  "glass/blur": "var(--santo-glass-blur)",
+  "glass/enabled": "var(--santo-glass-enabled)",
+  "gradient/brand/angle": "var(--santo-gradient-brand-angle)",
+  "gradient/brand/from": "var(--santo-gradient-brand-from)",
+  "gradient/brand/to": "var(--santo-gradient-brand-to)",
 } as const satisfies Record<string, string>;
 
 export type TokenName = keyof typeof token;
@@ -694,6 +829,99 @@ export const resolved = {
   "brand/shadow/xl/1": "#100d161a",
   "brand/shadow/xl/2": "#100d160f",
   "brand/shadow/2xl/1": "#100d161f",
+  "brand/surface/page/light": "#f8fafb",
+  "brand/surface/page/dark": "#090f17",
+  "brand/surface/raised/light": "#ffffff",
+  "brand/surface/raised/dark": "#131a25",
+  "brand/surface/sunken/light": "#f0f3f8",
+  "brand/surface/sunken/dark": "#08060b",
+  "brand/surface/well/light": "#f0f3f8",
+  "brand/surface/well/dark": "#08060b",
+  "brand/surface/panel/light": "#ffffff",
+  "brand/surface/panel/dark": "#131a25",
+  "brand/surface/overlay/light": "#100d1699",
+  "brand/surface/overlay/dark": "#000000b8",
+  "brand/border/subtle/light": "#e3e8ef",
+  "brand/border/subtle/dark": "#242d39",
+  "brand/border/default/light": "#ced5df",
+  "brand/border/default/dark": "#394352",
+  "brand/border/strong/light": "#7d8ca0",
+  "brand/border/strong/dark": "#4d596a",
+  "brand/frame/inset": "8px",
+  "brand/frame/enabled": "1",
+  "brand/frame/border/light": "#00000000",
+  "brand/frame/border/dark": "#242d39",
+  "brand/shape/radius-control": "8px",
+  "brand/control/padding-x/sm": "12px",
+  "brand/control/padding-x/md": "16px",
+  "brand/control/padding-x/lg": "24px",
+  "brand/control/radius/sm": "8px",
+  "brand/control/radius/md": "8px",
+  "brand/control/radius/lg": "8px",
+  "brand/control/border/sm": "1px",
+  "brand/control/border/md": "1px",
+  "brand/control/border/lg": "1px",
+  "brand/control/font/sm": "12px",
+  "brand/control/font/md": "14px",
+  "brand/control/font/lg": "16px",
+  "brand/control/icon/sm": "16px",
+  "brand/control/icon/md": "16px",
+  "brand/control/icon/lg": "16px",
+  "brand/control/gap/sm": "4px",
+  "brand/control/gap/md": "8px",
+  "brand/control/gap/lg": "8px",
+  "brand/type/heading-1/tracking": "-0.04em",
+  "brand/type/heading-2/tracking": "-0.04em",
+  "brand/type/heading-3/tracking": "-0.02em",
+  "brand/type/heading-4/tracking": "-0.02em",
+  "brand/type/heading-5/tracking": "-0.01em",
+  "brand/type/heading-6/tracking": "-0.01em",
+  "brand/type/body-large/tracking": "0em",
+  "brand/type/body/tracking": "0em",
+  "brand/type/body-small/tracking": "0em",
+  "brand/type/caption/tracking": "0em",
+  "brand/type/caption-small/tracking": "0.02em",
+  "brand/shadow/xs/1/y": "1px",
+  "brand/shadow/xs/1/blur": "2px",
+  "brand/shadow/sm/1/y": "1px",
+  "brand/shadow/sm/1/blur": "3px",
+  "brand/shadow/sm/2/y": "1px",
+  "brand/shadow/sm/2/blur": "2px",
+  "brand/shadow/md/1/y": "4px",
+  "brand/shadow/md/1/blur": "8px",
+  "brand/shadow/md/2/y": "2px",
+  "brand/shadow/md/2/blur": "4px",
+  "brand/shadow/lg/1/y": "12px",
+  "brand/shadow/lg/1/blur": "16px",
+  "brand/shadow/lg/2/y": "4px",
+  "brand/shadow/lg/2/blur": "6px",
+  "brand/shadow/xl/1/y": "20px",
+  "brand/shadow/xl/1/blur": "24px",
+  "brand/shadow/xl/2/y": "8px",
+  "brand/shadow/xl/2/blur": "8px",
+  "brand/shadow/2xl/1/y": "24px",
+  "brand/shadow/2xl/1/blur": "48px",
+  "brand/effect/blur/sm": "4px",
+  "brand/effect/blur/md": "8px",
+  "brand/effect/blur/lg": "16px",
+  "brand/effect/blur/xl": "24px",
+  "brand/effect/layer-blur/sm": "2px",
+  "brand/effect/layer-blur/md": "4px",
+  "brand/effect/glow/brand": "#64a3fe59",
+  "brand/effect/glow/neutral": "#090f1733",
+  "brand/effect/glow/blur": "24px",
+  "brand/effect/noise": "0.04",
+  "brand/gradient/brand/angle": "135deg",
+  "brand/gradient/brand/from": "#64a3fe",
+  "brand/gradient/brand/to": "#2c71cf",
+  "brand/glass/surface/light": "#ffffffb8",
+  "brand/glass/surface/dark": "#131a2599",
+  "brand/glass/border/light": "#ffffff80",
+  "brand/glass/border/dark": "#ffffff1f",
+  "brand/glass/highlight/light": "#ffffff99",
+  "brand/glass/highlight/dark": "#ffffff14",
+  "brand/glass/blur": "8px",
+  "brand/glass/enabled": "0",
   "space/none": "0px",
   "space/3xs": "2px",
   "space/2xs": "4px",
@@ -727,6 +955,41 @@ export const resolved = {
   "control/height/sm": "32px",
   "control/height/md": "40px",
   "control/height/lg": "48px",
+  "frame/inset": "8px",
+  "frame/enabled": "1",
+  "radius/control": "8px",
+  "control/padding-x/sm": "12px",
+  "control/padding-x/md": "16px",
+  "control/padding-x/lg": "24px",
+  "control/radius/sm": "8px",
+  "control/radius/md": "8px",
+  "control/radius/lg": "8px",
+  "control/border/sm": "1px",
+  "control/border/md": "1px",
+  "control/border/lg": "1px",
+  "control/font/sm": "12px",
+  "control/font/md": "14px",
+  "control/font/lg": "16px",
+  "control/icon/sm": "16px",
+  "control/icon/md": "16px",
+  "control/icon/lg": "16px",
+  "control/gap/sm": "4px",
+  "control/gap/md": "8px",
+  "control/gap/lg": "8px",
+  "effect/blur/sm": "4px",
+  "effect/blur/md": "8px",
+  "effect/blur/lg": "16px",
+  "effect/blur/xl": "24px",
+  "effect/layer-blur/sm": "2px",
+  "effect/layer-blur/md": "4px",
+  "effect/glow/brand": "#64a3fe59",
+  "effect/glow/neutral": "#090f1733",
+  "effect/noise": "0.04",
+  "glass/blur": "8px",
+  "glass/enabled": "0",
+  "gradient/brand/angle": "135deg",
+  "gradient/brand/from": "#64a3fe",
+  "gradient/brand/to": "#2c71cf",
 } as const satisfies Record<string, string>;
 
 /** Colecao Color resolvida no modo Light. */
@@ -833,6 +1096,13 @@ export const colorLight = {
   "color/icon/warning": "#dc6803",
   "color/icon/danger": "#d92d20",
   "color/icon/info": "#1570ef",
+  "color/surface/well": "#f0f3f8",
+  "color/surface/panel": "#ffffff",
+  "frame/surface": "#ffffff",
+  "frame/border": "#00000000",
+  "glass/surface": "#ffffffb8",
+  "glass/border": "#ffffff80",
+  "glass/highlight": "#ffffff99",
 } as const satisfies Record<string, string>;
 
 /** Colecao Color resolvida no modo Dark. */
@@ -939,6 +1209,13 @@ export const colorDark = {
   "color/icon/warning": "#fdb022",
   "color/icon/danger": "#f97066",
   "color/icon/info": "#53b1fd",
+  "color/surface/well": "#08060b",
+  "color/surface/panel": "#131a25",
+  "frame/surface": "#131a25",
+  "frame/border": "#242d39",
+  "glass/surface": "#131a2599",
+  "glass/border": "#ffffff1f",
+  "glass/highlight": "#ffffff14",
 } as const satisfies Record<string, string>;
 
 export type ColorToken = keyof typeof colorLight;
@@ -956,7 +1233,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-1/regular": {
@@ -964,7 +1241,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-1/medium": {
@@ -972,7 +1249,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-1/semibold": {
@@ -980,7 +1257,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-1/bold": {
@@ -988,7 +1265,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-1/extrabold": {
@@ -996,7 +1273,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-1-size)",
     "lineHeight": "var(--santo-brand-type-heading-1-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-1-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/heading-2/light": {
@@ -1004,7 +1281,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-2/regular": {
@@ -1012,7 +1289,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-2/medium": {
@@ -1020,7 +1297,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-2/semibold": {
@@ -1028,7 +1305,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-2/bold": {
@@ -1036,7 +1313,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-2/extrabold": {
@@ -1044,7 +1321,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-2-size)",
     "lineHeight": "var(--santo-brand-type-heading-2-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tighter)",
+    "letterSpacing": "var(--santo-brand-type-heading-2-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/heading-3/light": {
@@ -1052,7 +1329,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-3/regular": {
@@ -1060,7 +1337,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-3/medium": {
@@ -1068,7 +1345,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-3/semibold": {
@@ -1076,7 +1353,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-3/bold": {
@@ -1084,7 +1361,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-3/extrabold": {
@@ -1092,7 +1369,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-3-size)",
     "lineHeight": "var(--santo-brand-type-heading-3-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-3-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/heading-4/light": {
@@ -1100,7 +1377,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-4/regular": {
@@ -1108,7 +1385,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-4/medium": {
@@ -1116,7 +1393,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-4/semibold": {
@@ -1124,7 +1401,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-4/bold": {
@@ -1132,7 +1409,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-4/extrabold": {
@@ -1140,7 +1417,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-4-size)",
     "lineHeight": "var(--santo-brand-type-heading-4-leading)",
-    "letterSpacing": "var(--santo-type-tracking-tight)",
+    "letterSpacing": "var(--santo-brand-type-heading-4-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/heading-5/light": {
@@ -1148,7 +1425,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-5/regular": {
@@ -1156,7 +1433,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-5/medium": {
@@ -1164,7 +1441,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-5/semibold": {
@@ -1172,7 +1449,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-5/bold": {
@@ -1180,7 +1457,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-5/extrabold": {
@@ -1188,7 +1465,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-5-size)",
     "lineHeight": "var(--santo-brand-type-heading-5-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-5-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/heading-6/light": {
@@ -1196,7 +1473,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/heading-6/regular": {
@@ -1204,7 +1481,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/heading-6/medium": {
@@ -1212,7 +1489,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/heading-6/semibold": {
@@ -1220,7 +1497,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/heading-6/bold": {
@@ -1228,7 +1505,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/heading-6/extrabold": {
@@ -1236,7 +1513,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-heading)",
     "fontSize": "var(--santo-brand-type-heading-6-size)",
     "lineHeight": "var(--santo-brand-type-heading-6-leading)",
-    "letterSpacing": "var(--santo-type-tracking-snug)",
+    "letterSpacing": "var(--santo-brand-type-heading-6-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/body-large/light": {
@@ -1244,7 +1521,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/body-large/regular": {
@@ -1252,7 +1529,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/body-large/medium": {
@@ -1260,7 +1537,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/body-large/semibold": {
@@ -1268,7 +1545,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/body-large/bold": {
@@ -1276,7 +1553,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/body-large/extrabold": {
@@ -1284,7 +1561,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-large-size)",
     "lineHeight": "var(--santo-brand-type-body-large-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-large-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/body/light": {
@@ -1292,7 +1569,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/body/regular": {
@@ -1300,7 +1577,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/body/medium": {
@@ -1308,7 +1585,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/body/semibold": {
@@ -1316,7 +1593,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/body/bold": {
@@ -1324,7 +1601,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/body/extrabold": {
@@ -1332,7 +1609,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-size)",
     "lineHeight": "var(--santo-brand-type-body-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/body-small/light": {
@@ -1340,7 +1617,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/body-small/regular": {
@@ -1348,7 +1625,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/body-small/medium": {
@@ -1356,7 +1633,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/body-small/semibold": {
@@ -1364,7 +1641,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/body-small/bold": {
@@ -1372,7 +1649,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/body-small/extrabold": {
@@ -1380,7 +1657,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-body-small-size)",
     "lineHeight": "var(--santo-brand-type-body-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-body-small-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/caption/light": {
@@ -1388,7 +1665,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/caption/regular": {
@@ -1396,7 +1673,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/caption/medium": {
@@ -1404,7 +1681,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/caption/semibold": {
@@ -1412,7 +1689,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/caption/bold": {
@@ -1420,7 +1697,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/caption/extrabold": {
@@ -1428,7 +1705,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-size)",
     "lineHeight": "var(--santo-brand-type-caption-leading)",
-    "letterSpacing": "var(--santo-type-tracking-normal)",
+    "letterSpacing": "var(--santo-brand-type-caption-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "Albert Sans/caption-small/light": {
@@ -1436,7 +1713,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-light)"
   },
   "Albert Sans/caption-small/regular": {
@@ -1444,7 +1721,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-regular)"
   },
   "Albert Sans/caption-small/medium": {
@@ -1452,7 +1729,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-medium)"
   },
   "Albert Sans/caption-small/semibold": {
@@ -1460,7 +1737,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-semibold)"
   },
   "Albert Sans/caption-small/bold": {
@@ -1468,7 +1745,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-bold)"
   },
   "Albert Sans/caption-small/extrabold": {
@@ -1476,7 +1753,7 @@ export const textStyles = {
     "fontFamily": "var(--santo-font-sans)",
     "fontSize": "var(--santo-brand-type-caption-small-size)",
     "lineHeight": "var(--santo-brand-type-caption-small-leading)",
-    "letterSpacing": "var(--santo-type-tracking-wide)",
+    "letterSpacing": "var(--santo-brand-type-caption-small-tracking)",
     "fontWeight": "var(--santo-type-weight-extrabold)"
   },
   "JetBrains Mono/code/md": {
@@ -1508,6 +1785,8 @@ export const shadows = {
   "lg": "0px 12px 16px -4px #100d1617, 0px 4px 6px -2px #100d160f",
   "xl": "0px 20px 24px -4px #100d161a, 0px 8px 8px -4px #100d160f",
   "2xl": "0px 24px 48px -12px #100d161f",
+  "glow/brand": "0px 0px 24px 0px #64a3fe59",
+  "glow/neutral": "0px 0px 24px 0px #090f1733",
 } as const satisfies Record<string, string>;
 
 export type ShadowName = keyof typeof shadows;
@@ -1528,7 +1807,7 @@ export const collections = {
       "Dark"
     ],
     "defaultMode": "Light",
-    "count": 102
+    "count": 109
   },
   "Primitives": {
     "modes": [
@@ -1543,14 +1822,14 @@ export const collections = {
       "VTSD"
     ],
     "defaultMode": "Santo",
-    "count": 61
+    "count": 154
   },
   "Semantic": {
     "modes": [
       "Value"
     ],
     "defaultMode": "Value",
-    "count": 33
+    "count": 68
   }
 } as const;
 
@@ -1700,7 +1979,100 @@ export const brands = {
       "brand/shadow/lg/2": "#100d160f",
       "brand/shadow/xl/1": "#100d161a",
       "brand/shadow/xl/2": "#100d160f",
-      "brand/shadow/2xl/1": "#100d161f"
+      "brand/shadow/2xl/1": "#100d161f",
+      "brand/surface/page/light": "#f8fafb",
+      "brand/surface/page/dark": "#090f17",
+      "brand/surface/raised/light": "#ffffff",
+      "brand/surface/raised/dark": "#131a25",
+      "brand/surface/sunken/light": "#f0f3f8",
+      "brand/surface/sunken/dark": "#08060b",
+      "brand/surface/well/light": "#f0f3f8",
+      "brand/surface/well/dark": "#08060b",
+      "brand/surface/panel/light": "#ffffff",
+      "brand/surface/panel/dark": "#131a25",
+      "brand/surface/overlay/light": "#100d1699",
+      "brand/surface/overlay/dark": "#000000b8",
+      "brand/border/subtle/light": "#e3e8ef",
+      "brand/border/subtle/dark": "#242d39",
+      "brand/border/default/light": "#ced5df",
+      "brand/border/default/dark": "#394352",
+      "brand/border/strong/light": "#7d8ca0",
+      "brand/border/strong/dark": "#4d596a",
+      "brand/frame/inset": "8px",
+      "brand/frame/enabled": "1",
+      "brand/frame/border/light": "#00000000",
+      "brand/frame/border/dark": "#242d39",
+      "brand/shape/radius-control": "8px",
+      "brand/control/padding-x/sm": "12px",
+      "brand/control/padding-x/md": "16px",
+      "brand/control/padding-x/lg": "24px",
+      "brand/control/radius/sm": "8px",
+      "brand/control/radius/md": "8px",
+      "brand/control/radius/lg": "8px",
+      "brand/control/border/sm": "1px",
+      "brand/control/border/md": "1px",
+      "brand/control/border/lg": "1px",
+      "brand/control/font/sm": "12px",
+      "brand/control/font/md": "14px",
+      "brand/control/font/lg": "16px",
+      "brand/control/icon/sm": "16px",
+      "brand/control/icon/md": "16px",
+      "brand/control/icon/lg": "16px",
+      "brand/control/gap/sm": "4px",
+      "brand/control/gap/md": "8px",
+      "brand/control/gap/lg": "8px",
+      "brand/type/heading-1/tracking": "-0.04em",
+      "brand/type/heading-2/tracking": "-0.04em",
+      "brand/type/heading-3/tracking": "-0.02em",
+      "brand/type/heading-4/tracking": "-0.02em",
+      "brand/type/heading-5/tracking": "-0.01em",
+      "brand/type/heading-6/tracking": "-0.01em",
+      "brand/type/body-large/tracking": "0em",
+      "brand/type/body/tracking": "0em",
+      "brand/type/body-small/tracking": "0em",
+      "brand/type/caption/tracking": "0em",
+      "brand/type/caption-small/tracking": "0.02em",
+      "brand/shadow/xs/1/y": "1px",
+      "brand/shadow/xs/1/blur": "2px",
+      "brand/shadow/sm/1/y": "1px",
+      "brand/shadow/sm/1/blur": "3px",
+      "brand/shadow/sm/2/y": "1px",
+      "brand/shadow/sm/2/blur": "2px",
+      "brand/shadow/md/1/y": "4px",
+      "brand/shadow/md/1/blur": "8px",
+      "brand/shadow/md/2/y": "2px",
+      "brand/shadow/md/2/blur": "4px",
+      "brand/shadow/lg/1/y": "12px",
+      "brand/shadow/lg/1/blur": "16px",
+      "brand/shadow/lg/2/y": "4px",
+      "brand/shadow/lg/2/blur": "6px",
+      "brand/shadow/xl/1/y": "20px",
+      "brand/shadow/xl/1/blur": "24px",
+      "brand/shadow/xl/2/y": "8px",
+      "brand/shadow/xl/2/blur": "8px",
+      "brand/shadow/2xl/1/y": "24px",
+      "brand/shadow/2xl/1/blur": "48px",
+      "brand/effect/blur/sm": "4px",
+      "brand/effect/blur/md": "8px",
+      "brand/effect/blur/lg": "16px",
+      "brand/effect/blur/xl": "24px",
+      "brand/effect/layer-blur/sm": "2px",
+      "brand/effect/layer-blur/md": "4px",
+      "brand/effect/glow/brand": "#64a3fe59",
+      "brand/effect/glow/neutral": "#090f1733",
+      "brand/effect/glow/blur": "24px",
+      "brand/effect/noise": "0.04",
+      "brand/gradient/brand/angle": "135deg",
+      "brand/gradient/brand/from": "#64a3fe",
+      "brand/gradient/brand/to": "#2c71cf",
+      "brand/glass/surface/light": "#ffffffb8",
+      "brand/glass/surface/dark": "#131a2599",
+      "brand/glass/border/light": "#ffffff80",
+      "brand/glass/border/dark": "#ffffff1f",
+      "brand/glass/highlight/light": "#ffffff99",
+      "brand/glass/highlight/dark": "#ffffff14",
+      "brand/glass/blur": "8px",
+      "brand/glass/enabled": "0"
     }
   },
   "vtsd": {
@@ -1847,7 +2219,100 @@ export const brands = {
       "brand/shadow/lg/2": "#100d160f",
       "brand/shadow/xl/1": "#100d161a",
       "brand/shadow/xl/2": "#100d160f",
-      "brand/shadow/2xl/1": "#100d161f"
+      "brand/shadow/2xl/1": "#100d161f",
+      "brand/surface/page/light": "#fafafa",
+      "brand/surface/page/dark": "#0f0f0f",
+      "brand/surface/raised/light": "#ffffff",
+      "brand/surface/raised/dark": "#1a1a1a",
+      "brand/surface/sunken/light": "#f3f3f3",
+      "brand/surface/sunken/dark": "#070707",
+      "brand/surface/well/light": "#f3f3f3",
+      "brand/surface/well/dark": "#070707",
+      "brand/surface/panel/light": "#ffffff",
+      "brand/surface/panel/dark": "#1a1a1a",
+      "brand/surface/overlay/light": "#100d1699",
+      "brand/surface/overlay/dark": "#000000b8",
+      "brand/border/subtle/light": "#e7e7e7",
+      "brand/border/subtle/dark": "#2c2c2c",
+      "brand/border/default/light": "#d4d4d4",
+      "brand/border/default/dark": "#424242",
+      "brand/border/strong/light": "#8b8b8b",
+      "brand/border/strong/dark": "#585858",
+      "brand/frame/inset": "8px",
+      "brand/frame/enabled": "1",
+      "brand/frame/border/light": "#00000000",
+      "brand/frame/border/dark": "#2c2c2c",
+      "brand/shape/radius-control": "8px",
+      "brand/control/padding-x/sm": "12px",
+      "brand/control/padding-x/md": "16px",
+      "brand/control/padding-x/lg": "24px",
+      "brand/control/radius/sm": "8px",
+      "brand/control/radius/md": "8px",
+      "brand/control/radius/lg": "8px",
+      "brand/control/border/sm": "1px",
+      "brand/control/border/md": "1px",
+      "brand/control/border/lg": "1px",
+      "brand/control/font/sm": "12px",
+      "brand/control/font/md": "14px",
+      "brand/control/font/lg": "16px",
+      "brand/control/icon/sm": "16px",
+      "brand/control/icon/md": "16px",
+      "brand/control/icon/lg": "16px",
+      "brand/control/gap/sm": "4px",
+      "brand/control/gap/md": "8px",
+      "brand/control/gap/lg": "8px",
+      "brand/type/heading-1/tracking": "-0.04em",
+      "brand/type/heading-2/tracking": "-0.04em",
+      "brand/type/heading-3/tracking": "-0.02em",
+      "brand/type/heading-4/tracking": "-0.02em",
+      "brand/type/heading-5/tracking": "-0.01em",
+      "brand/type/heading-6/tracking": "-0.01em",
+      "brand/type/body-large/tracking": "0em",
+      "brand/type/body/tracking": "0em",
+      "brand/type/body-small/tracking": "0em",
+      "brand/type/caption/tracking": "0em",
+      "brand/type/caption-small/tracking": "0.02em",
+      "brand/shadow/xs/1/y": "1px",
+      "brand/shadow/xs/1/blur": "2px",
+      "brand/shadow/sm/1/y": "1px",
+      "brand/shadow/sm/1/blur": "3px",
+      "brand/shadow/sm/2/y": "1px",
+      "brand/shadow/sm/2/blur": "2px",
+      "brand/shadow/md/1/y": "4px",
+      "brand/shadow/md/1/blur": "8px",
+      "brand/shadow/md/2/y": "2px",
+      "brand/shadow/md/2/blur": "4px",
+      "brand/shadow/lg/1/y": "12px",
+      "brand/shadow/lg/1/blur": "16px",
+      "brand/shadow/lg/2/y": "4px",
+      "brand/shadow/lg/2/blur": "6px",
+      "brand/shadow/xl/1/y": "20px",
+      "brand/shadow/xl/1/blur": "24px",
+      "brand/shadow/xl/2/y": "8px",
+      "brand/shadow/xl/2/blur": "8px",
+      "brand/shadow/2xl/1/y": "24px",
+      "brand/shadow/2xl/1/blur": "48px",
+      "brand/effect/blur/sm": "4px",
+      "brand/effect/blur/md": "8px",
+      "brand/effect/blur/lg": "16px",
+      "brand/effect/blur/xl": "24px",
+      "brand/effect/layer-blur/sm": "2px",
+      "brand/effect/layer-blur/md": "4px",
+      "brand/effect/glow/brand": "#4ab2a759",
+      "brand/effect/glow/neutral": "#0f0f0f33",
+      "brand/effect/glow/blur": "24px",
+      "brand/effect/noise": "0.04",
+      "brand/gradient/brand/angle": "135deg",
+      "brand/gradient/brand/from": "#4ab2a7",
+      "brand/gradient/brand/to": "#008077",
+      "brand/glass/surface/light": "#ffffffb8",
+      "brand/glass/surface/dark": "#1a1a1a99",
+      "brand/glass/border/light": "#ffffff80",
+      "brand/glass/border/dark": "#ffffff1f",
+      "brand/glass/highlight/light": "#ffffff99",
+      "brand/glass/highlight/dark": "#ffffff14",
+      "brand/glass/blur": "8px",
+      "brand/glass/enabled": "0"
     }
   }
 } as const;
