@@ -74,16 +74,22 @@ for (const s of await figma.getLocalTextStylesAsync()) {
 const effectStyles = {};
 for (const s of await figma.getLocalEffectStylesAsync()) {
   effectStyles[s.name] = {
-    effects: s.effects.map((e) => ({
-      type: e.type,
-      x: e.offset ? e.offset.x : 0,
-      y: e.offset ? e.offset.y : 0,
-      blur: e.radius,
-      spread: e.spread || 0,
-      color: e.color ? toHex(e.color) : null,
-      visible: e.visible,
-      blendMode: e.blendMode || 'NORMAL',
-    })),
+    effects: s.effects.map((e) => {
+      const out = {
+        type: e.type,
+        x: e.offset ? e.offset.x : 0,
+        y: e.offset ? e.offset.y : 0,
+        blur: e.radius,
+        spread: e.spread || 0,
+        color: e.color ? toHex(e.color) : null,
+        visible: e.visible,
+        blendMode: e.blendMode || 'NORMAL',
+      };
+      // Cor ligada a variavel (nivel B do Estudio): brand/shadow/<estilo>/<camada>.
+      const b = e.boundVariables && e.boundVariables.color;
+      if (b) out.boundVariables = { color: byId[b.id] ? byId[b.id].name : b.id };
+      return out;
+    }),
   };
 }
 

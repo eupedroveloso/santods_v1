@@ -89,7 +89,9 @@ Nunca recrute duplicata de um papel que já existe.
 
 ## Regras do repositório (cobre nos relatórios)
 
-- Nada em `lib/tokens/` editado à mão. Exceções: `emit.mjs`, `types.ts`, `.d.ts`.
+- Nada em `lib/tokens/` editado à mão. Exceções: `emit.mjs`, `types.ts`, `.d.ts` e os módulos
+  puros `color.mjs`, `brand-ramp.mjs`, `brand-mode.mjs`, `contrast-audit.mjs`, `estudio.mjs`
+  (com seus `.d.mts` e `estudio.test.mjs`).
 - Fonte da verdade: `tokens/santods.figma.json`. Valor errado no CSS significa
   snapshot desatualizado ou emissor com bug, nunca remendo.
 - `emit.mjs` é o único caminho de renderização dos tokens.
@@ -107,6 +109,7 @@ Nunca recrute duplicata de um papel que já existe.
 ```
 tokens/santods.figma.json   espelho canônico do Figma (fonte da verdade)
 lib/tokens/emit.mjs         emissores puros (código-fonte)
+lib/tokens/{color,brand-ramp,brand-mode,contrast-audit,estudio}.mjs  módulos puros (código-fonte; API do Estúdio)
 lib/tokens/*.css, index.ts  GERADOS
 lib/ui/                     biblioteca de componentes (README = inventário)
 lib/fonts/                  catálogo Google Fonts (32 famílias)

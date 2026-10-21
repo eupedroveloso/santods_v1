@@ -29,7 +29,10 @@ function textStyleLine(name, s) {
   ]);
 }
 function effectStyleLine(name, s) {
-  return JSON.stringify([name, s.effects.map((e) => [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode])]);
+  return JSON.stringify([name, s.effects.map((e) => {
+    const row = [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode];
+    return e.boundVariables && e.boundVariables.color ? [...row, e.boundVariables.color] : row;
+  })]);
 }
 function hashLines(lines) {
   return fnv1a([...lines].sort().join('\n'));
@@ -95,6 +98,9 @@ const effectLines = (await figma.getLocalEffectStylesAsync()).map((s) =>
       color: e.color ? toHex(e.color) : null,
       visible: e.visible,
       blendMode: e.blendMode || 'NORMAL',
+      boundVariables: e.boundVariables && e.boundVariables.color && byId[e.boundVariables.color.id]
+        ? { color: byId[e.boundVariables.color.id].name }
+        : undefined,
     })),
   }),
 );

@@ -5,324 +5,324 @@
 
 /* Albert Sans/heading-1/light */
 .santo-heading-1-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-1/regular */
 .santo-heading-1-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-1/medium */
 .santo-heading-1-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-1/semibold */
 .santo-heading-1-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-1/bold */
 .santo-heading-1-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-1/extrabold */
 .santo-heading-1-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-72);
-  line-height: var(--santo-type-leading-80);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-1-size);
+  line-height: var(--santo-brand-type-heading-1-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-extrabold);
 }
 
 /* Albert Sans/heading-2/light */
 .santo-heading-2-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-2/regular */
 .santo-heading-2-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-2/medium */
 .santo-heading-2-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-2/semibold */
 .santo-heading-2-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-2/bold */
 .santo-heading-2-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-2/extrabold */
 .santo-heading-2-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-60);
-  line-height: var(--santo-type-leading-72);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-2-size);
+  line-height: var(--santo-brand-type-heading-2-leading);
   letter-spacing: var(--santo-type-tracking-tighter);
   font-weight: var(--santo-type-weight-extrabold);
 }
 
 /* Albert Sans/heading-3/light */
 .santo-heading-3-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-3/regular */
 .santo-heading-3-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-3/medium */
 .santo-heading-3-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-3/semibold */
 .santo-heading-3-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-3/bold */
 .santo-heading-3-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-3/extrabold */
 .santo-heading-3-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-48);
-  line-height: var(--santo-type-leading-56);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-3-size);
+  line-height: var(--santo-brand-type-heading-3-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-extrabold);
 }
 
 /* Albert Sans/heading-4/light */
 .santo-heading-4-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-4/regular */
 .santo-heading-4-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-4/medium */
 .santo-heading-4-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-4/semibold */
 .santo-heading-4-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-4/bold */
 .santo-heading-4-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-4/extrabold */
 .santo-heading-4-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-36);
-  line-height: var(--santo-type-leading-44);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-4-size);
+  line-height: var(--santo-brand-type-heading-4-leading);
   letter-spacing: var(--santo-type-tracking-tight);
   font-weight: var(--santo-type-weight-extrabold);
 }
 
 /* Albert Sans/heading-5/light */
 .santo-heading-5-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-5/regular */
 .santo-heading-5-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-5/medium */
 .santo-heading-5-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-5/semibold */
 .santo-heading-5-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-5/bold */
 .santo-heading-5-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-5/extrabold */
 .santo-heading-5-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-30);
-  line-height: var(--santo-type-leading-38);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-5-size);
+  line-height: var(--santo-brand-type-heading-5-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-extrabold);
 }
 
 /* Albert Sans/heading-6/light */
 .santo-heading-6-light {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-light);
 }
 
 /* Albert Sans/heading-6/regular */
 .santo-heading-6-regular {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-regular);
 }
 
 /* Albert Sans/heading-6/medium */
 .santo-heading-6-medium {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-medium);
 }
 
 /* Albert Sans/heading-6/semibold */
 .santo-heading-6-semibold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-semibold);
 }
 
 /* Albert Sans/heading-6/bold */
 .santo-heading-6-bold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-bold);
 }
 
 /* Albert Sans/heading-6/extrabold */
 .santo-heading-6-extrabold {
-  font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-24);
-  line-height: var(--santo-type-leading-32);
+  font-family: var(--santo-font-heading);
+  font-size: var(--santo-brand-type-heading-6-size);
+  line-height: var(--santo-brand-type-heading-6-leading);
   letter-spacing: var(--santo-type-tracking-snug);
   font-weight: var(--santo-type-weight-extrabold);
 }
@@ -330,8 +330,8 @@
 /* Albert Sans/body-large/light */
 .santo-body-large-light {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-light);
 }
@@ -339,8 +339,8 @@
 /* Albert Sans/body-large/regular */
 .santo-body-large-regular {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-regular);
 }
@@ -348,8 +348,8 @@
 /* Albert Sans/body-large/medium */
 .santo-body-large-medium {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-medium);
 }
@@ -357,8 +357,8 @@
 /* Albert Sans/body-large/semibold */
 .santo-body-large-semibold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-semibold);
 }
@@ -366,8 +366,8 @@
 /* Albert Sans/body-large/bold */
 .santo-body-large-bold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-bold);
 }
@@ -375,8 +375,8 @@
 /* Albert Sans/body-large/extrabold */
 .santo-body-large-extrabold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-18);
-  line-height: var(--santo-type-leading-28);
+  font-size: var(--santo-brand-type-body-large-size);
+  line-height: var(--santo-brand-type-body-large-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-extrabold);
 }
@@ -384,8 +384,8 @@
 /* Albert Sans/body/light */
 .santo-body-light {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-light);
 }
@@ -393,8 +393,8 @@
 /* Albert Sans/body/regular */
 .santo-body-regular {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-regular);
 }
@@ -402,8 +402,8 @@
 /* Albert Sans/body/medium */
 .santo-body-medium {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-medium);
 }
@@ -411,8 +411,8 @@
 /* Albert Sans/body/semibold */
 .santo-body-semibold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-semibold);
 }
@@ -420,8 +420,8 @@
 /* Albert Sans/body/bold */
 .santo-body-bold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-bold);
 }
@@ -429,8 +429,8 @@
 /* Albert Sans/body/extrabold */
 .santo-body-extrabold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-16);
-  line-height: var(--santo-type-leading-24);
+  font-size: var(--santo-brand-type-body-size);
+  line-height: var(--santo-brand-type-body-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-extrabold);
 }
@@ -438,8 +438,8 @@
 /* Albert Sans/body-small/light */
 .santo-body-small-light {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-light);
 }
@@ -447,8 +447,8 @@
 /* Albert Sans/body-small/regular */
 .santo-body-small-regular {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-regular);
 }
@@ -456,8 +456,8 @@
 /* Albert Sans/body-small/medium */
 .santo-body-small-medium {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-medium);
 }
@@ -465,8 +465,8 @@
 /* Albert Sans/body-small/semibold */
 .santo-body-small-semibold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-semibold);
 }
@@ -474,8 +474,8 @@
 /* Albert Sans/body-small/bold */
 .santo-body-small-bold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-bold);
 }
@@ -483,8 +483,8 @@
 /* Albert Sans/body-small/extrabold */
 .santo-body-small-extrabold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-14);
-  line-height: var(--santo-type-leading-20);
+  font-size: var(--santo-brand-type-body-small-size);
+  line-height: var(--santo-brand-type-body-small-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-extrabold);
 }
@@ -492,8 +492,8 @@
 /* Albert Sans/caption/light */
 .santo-caption-light {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-light);
 }
@@ -501,8 +501,8 @@
 /* Albert Sans/caption/regular */
 .santo-caption-regular {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-regular);
 }
@@ -510,8 +510,8 @@
 /* Albert Sans/caption/medium */
 .santo-caption-medium {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-medium);
 }
@@ -519,8 +519,8 @@
 /* Albert Sans/caption/semibold */
 .santo-caption-semibold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-semibold);
 }
@@ -528,8 +528,8 @@
 /* Albert Sans/caption/bold */
 .santo-caption-bold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-bold);
 }
@@ -537,8 +537,8 @@
 /* Albert Sans/caption/extrabold */
 .santo-caption-extrabold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-12);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-size);
+  line-height: var(--santo-brand-type-caption-leading);
   letter-spacing: var(--santo-type-tracking-normal);
   font-weight: var(--santo-type-weight-extrabold);
 }
@@ -546,8 +546,8 @@
 /* Albert Sans/caption-small/light */
 .santo-caption-small-light {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-light);
 }
@@ -555,8 +555,8 @@
 /* Albert Sans/caption-small/regular */
 .santo-caption-small-regular {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-regular);
 }
@@ -564,8 +564,8 @@
 /* Albert Sans/caption-small/medium */
 .santo-caption-small-medium {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-medium);
 }
@@ -573,8 +573,8 @@
 /* Albert Sans/caption-small/semibold */
 .santo-caption-small-semibold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-semibold);
 }
@@ -582,8 +582,8 @@
 /* Albert Sans/caption-small/bold */
 .santo-caption-small-bold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-bold);
 }
@@ -591,8 +591,8 @@
 /* Albert Sans/caption-small/extrabold */
 .santo-caption-small-extrabold {
   font-family: var(--santo-font-sans);
-  font-size: var(--santo-type-size-10);
-  line-height: var(--santo-type-leading-16);
+  font-size: var(--santo-brand-type-caption-small-size);
+  line-height: var(--santo-brand-type-caption-small-leading);
   letter-spacing: var(--santo-type-tracking-wide);
   font-weight: var(--santo-type-weight-extrabold);
 }

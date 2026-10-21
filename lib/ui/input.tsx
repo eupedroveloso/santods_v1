@@ -25,9 +25,9 @@ const LOOK: Record<FieldVariant, { box: string; idle: string }> = {
 };
 
 const SIZES: Record<ControlSize, string> = {
-  sm: "h-(--santo-dimension-size-32) px-xs santo-caption-regular",
-  md: "h-(--santo-dimension-size-40) px-sm santo-body-small-regular",
-  lg: "h-(--santo-dimension-size-48) px-md santo-body-regular",
+  sm: "h-(--santo-control-height-sm) px-xs santo-caption-regular",
+  md: "h-(--santo-control-height-md) px-sm santo-body-small-regular",
+  lg: "h-(--santo-control-height-lg) px-md santo-body-regular",
 };
 
 const BASE =

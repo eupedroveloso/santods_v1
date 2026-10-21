@@ -20,6 +20,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyBrandMode } from '../lib/tokens/brand-mode.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SNAPSHOT = resolve(root, 'tokens/santods.figma.json');
@@ -28,66 +29,45 @@ const checkOnly = process.argv.includes('--check');
 
 /* ------------------------------------- spec lida do script do Figma */
 
-const source = readFileSync(FIGMA_SCRIPT, 'utf8');
-/** Le `const NOME = <literal>;` do script do Figma. So aceita literal puro. */
-function literal(name) {
+/** Le `const NOME = <literal>;` de um script do Figma. So aceita literal puro. */
+function literalFrom(source, name) {
   const start = source.indexOf(`const ${name} = `);
-  if (start === -1) throw new Error(`${name} nao encontrado em scripts/figma-brand-mode.js`);
+  if (start === -1) throw new Error(`${name} nao encontrado no script do Figma`);
   const from = start + `const ${name} = `.length;
   const end = source.indexOf(';\n', from);
   const text = source.slice(from, end);
   if (/[`$()]|=>/.test(text.replace(/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/g, ''))) {
-    throw new Error(`${name} em scripts/figma-brand-mode.js precisa ser literal puro`);
+    throw new Error(`${name} no script do Figma precisa ser literal puro`);
   }
   return new Function(`return (${text});`)();
 }
+const source = readFileSync(FIGMA_SCRIPT, 'utf8');
+const literal = (name) => literalFrom(source, name);
 const MODE = literal('MODE');
 const SPEC = literal('SPEC');
-const DESCRIPTIONS = literal('DESCRIPTIONS');
+
+// As variaveis do nivel B do Estudio trazem o proprio valor por marca em
+// scripts/figma-nivel-b.js (que roda DEPOIS deste no Figma). Completa a spec com elas.
+const NIVEL_B_SCRIPT = resolve(root, 'scripts/figma-nivel-b.js');
+const nivelB = literalFrom(readFileSync(NIVEL_B_SCRIPT, 'utf8'), 'NIVEL_B');
+for (const [name, def] of Object.entries(nivelB.Brand)) {
+  if (!(name in SPEC.Brand) && MODE in def.values) SPEC.Brand[name] = def.values[MODE];
+}
+// O nivel B tambem reescreve descriptions (ex.: brand/family/sans); a dele vale.
+const DESCRIPTIONS = { ...literal('DESCRIPTIONS'), ...nivelB.descriptions };
 
 /* ------------------------------------------------------------ aplicacao */
 
+// A aplicacao e a validacao vivem em lib/tokens/brand-mode.mjs (modulo puro, o
+// mesmo que o Estudio usa no browser).
 const raw = readFileSync(SNAPSHOT, 'utf8');
-const doc = JSON.parse(raw);
-const problems = [];
-const changes = [];
-
-for (const [collectionName, values] of Object.entries(SPEC)) {
-  const c = doc.collections[collectionName];
-  if (!c) {
-    problems.push(`colecao ${collectionName} nao existe no snapshot`);
-    continue;
-  }
-  for (const name of Object.keys(c.variables)) if (!(name in values)) problems.push(`${collectionName}: spec nao cobre ${name}`);
-  for (const name of Object.keys(values)) if (!(name in c.variables)) problems.push(`${collectionName}: ${name} nao existe no snapshot`);
-  if (problems.length) continue;
-
-  if (!c.modes.includes(MODE)) {
-    c.modes = [...c.modes, MODE];
-    changes.push(`${collectionName}: modo ${MODE} criado (${c.modes.join('/')})`);
-  }
-  for (const [name, def] of Object.entries(c.variables)) {
-    const before = def.values ?? { [c.defaultMode]: def.value };
-    const merged = { ...before, [MODE]: values[name] };
-    // Formato do figma-dump.js: `values` na ordem dos modos; chaves type, values, scopes, description.
-    const ordered = Object.fromEntries(c.modes.map((m) => [m, merged[m]]));
-    const { type, scopes, description } = def;
-    const KNOWN = ['type', 'value', 'values', 'scopes', 'description'];
-    const rest = Object.fromEntries(Object.entries(def).filter(([k]) => !KNOWN.includes(k)));
-    const nextDescription = name in DESCRIPTIONS ? DESCRIPTIONS[name] : description;
-    const next = { type, values: ordered };
-    if (scopes) next.scopes = scopes;
-    if (nextDescription) next.description = nextDescription;
-    Object.assign(next, rest);
-    if (before[MODE] !== values[name]) changes.push(`${name} [${MODE}]: ${before[MODE] ?? '(novo)'} -> ${values[name]}`);
-    if (nextDescription !== description) changes.push(`${name} (description): ${JSON.stringify(description)} -> ${JSON.stringify(nextDescription)}`);
-    c.variables[name] = next;
-  }
-}
-
-if (problems.length) {
+let doc;
+let changes;
+try {
+  ({ doc, changes } = applyBrandMode(JSON.parse(raw), MODE, SPEC, DESCRIPTIONS));
+} catch (err) {
   console.error('Spec e snapshot nao batem — nada foi gravado:');
-  problems.forEach((p) => console.error('  ' + p));
+  console.error(err.message.replace(/^Spec de marca invalida:\n/, ''));
   process.exit(1);
 }
 
@@ -99,6 +79,8 @@ if (changes.length) {
     by: 'scripts/apply-brand-mode.mjs',
     why: 'OAuth do MCP do Figma indisponivel; excecao autorizada pelo Pedro, uma vez.',
     reconcile: '.claude/agents/figma-parity.md, secao "Reconciliacao: snapshot a frente do Figma"',
+    // Rastros de outras aplicacoes por script (ex.: nivel B, scripts/figma-nivel-b-apply.mjs) ficam.
+    ...(doc.meta.aheadOfFigma?.also ? { also: doc.meta.aheadOfFigma.also } : {}),
   };
 }
 

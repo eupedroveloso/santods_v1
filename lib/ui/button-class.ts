@@ -36,9 +36,9 @@ const VARIANTS: Record<ButtonVariant, string> = {
 };
 
 const SIZES: Record<ControlSize, { box: string; text: string; gap: string }> = {
-  sm: { box: "h-(--santo-dimension-size-32) px-sm", text: "santo-caption-semibold", gap: "gap-2xs" },
-  md: { box: "h-(--santo-dimension-size-40) px-md", text: "santo-body-small-semibold", gap: "gap-xs" },
-  lg: { box: "h-(--santo-dimension-size-48) px-lg", text: "santo-body-semibold", gap: "gap-xs" },
+  sm: { box: "h-(--santo-control-height-sm) px-sm", text: "santo-caption-semibold", gap: "gap-2xs" },
+  md: { box: "h-(--santo-control-height-md) px-md", text: "santo-body-small-semibold", gap: "gap-xs" },
+  lg: { box: "h-(--santo-control-height-lg) px-lg", text: "santo-body-semibold", gap: "gap-xs" },
 };
 
 /* Aperto com mola (lib/ui/motion.css). */
@@ -48,9 +48,9 @@ const DISABLED =
   "disabled:cursor-not-allowed disabled:bg-disabled disabled:text-text-disabled disabled:border-border-disabled disabled:hover:bg-disabled";
 
 const ICON_BOX: Record<ControlSize, string> = {
-  sm: "size-(--santo-dimension-size-32)",
-  md: "size-(--santo-dimension-size-40)",
-  lg: "size-(--santo-dimension-size-48)",
+  sm: "size-(--santo-control-height-sm)",
+  md: "size-(--santo-control-height-md)",
+  lg: "size-(--santo-control-height-lg)",
 };
 
 /**

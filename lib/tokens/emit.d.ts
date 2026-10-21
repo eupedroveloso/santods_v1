@@ -25,14 +25,18 @@ export declare function resolveValue(
 ): RawValue;
 export declare function toCss(name: string, type: VariableType, value: RawValue, prefix: string): string;
 export declare function unitOf(name: string, type: VariableType): string;
-export declare function shadowCss(effects: ShadowLayer[] | undefined): string;
-export declare function fontStacks(prefix: string): { sans: string; mono: string };
+/** Com `prefix`, camada com cor ligada a variavel sai como var(--<prefix>-...). */
+export declare function shadowCss(effects: ShadowLayer[] | undefined, prefix?: string): string;
+export declare function fontStacks(prefix: string): { sans: string; mono: string; heading: string };
+export declare function stackOf(fontFamilyBinding: string | undefined): "sans" | "mono" | "heading";
 export declare function trackingByPercent(index: Map<string, IndexEntry>): Map<RawValue, string>;
 export declare function textStyleClass(figmaName: string, prefix: string): string;
 export declare const BRAND_COLLECTIONS: readonly string[];
 export type BrandMode = { mode: string; id: string; name: string; isDefault: boolean };
 export declare function brandModes(doc: TokenDoc): BrandMode[];
 export declare function brandDependents(index: Map<string, IndexEntry>): Set<string>;
+/** Bloco CSS de uma marca, igual ao que tokens.css traz; `scope` padrao [data-brand='<id>']. */
+export declare function brandBlockCss(doc: TokenDoc, mode: string, opts?: { selector?: string; scope?: string }): string;
 export declare function declarations(doc: TokenDoc, mode?: string, brand?: string): Declaration[];
 export declare function colorDeclarations(doc: TokenDoc, mode: string): Declaration[];
 export declare function colorUtility(name: string): string;

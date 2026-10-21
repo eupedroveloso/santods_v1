@@ -513,7 +513,14 @@ ${table(['grupo', 'hash', 'qtd', 'modos'], fp.map(([n, h, q, m]) => [n, code(h),
 
 ${
   ahead
-    ? `**Snapshot à frente do Figma** em ${ahead.collections.join(' e ')}: o modo \`${ahead.mode}\` foi aplicado ao snapshot em ${ahead.since} por \`${ahead.by}\` (${ahead.why}). \`tokens:check\` avisa enquanto isso valer.`
+    ? [
+        `**Snapshot à frente do Figma** em ${ahead.collections.join(' e ')}: o modo \`${ahead.mode}\` foi aplicado ao snapshot em ${ahead.since} por \`${ahead.by}\` (${ahead.why}). \`tokens:check\` avisa enquanto isso valer.`,
+        // Outras aplicacoes por script ficam em meta.aheadOfFigma.also, uma por tag (ex.: nivel-b do Estudio).
+        ...(ahead.also ?? []).map(
+          (a) =>
+            `**Snapshot à frente do Figma (\`meta.aheadOfFigma.also\`, tag \`${a.tag}\`)** em ${a.collections.join(' e ')} e ${a.styles}: aplicado em ${a.since} por \`${a.by}\` (${a.why}) Reconciliar: ${a.reconcile}.`,
+        ),
+      ].join('\n\n')
     : 'Snapshot e Figma alinhados nas variáveis (sem `meta.aheadOfFigma`).'
 }
 

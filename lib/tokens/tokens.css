@@ -214,37 +214,93 @@
   --santo-type-tracking-wide: 0.02em;
   --santo-type-tracking-wider: 0.06em;
 
-  /* Brand (5) */
+  /* Brand (61) */
   --santo-brand-id: "santo";
   --santo-brand-name: "Santo";
   --santo-brand-family-sans: "Albert Sans";
   --santo-brand-family-mono: "JetBrains Mono";
   --santo-brand-shape-radius-base: var(--santo-dimension-radius-8);
+  --santo-brand-family-heading: "Albert Sans";
+  --santo-brand-shape-radius-xs: var(--santo-dimension-radius-4);
+  --santo-brand-shape-radius-sm: var(--santo-dimension-radius-8);
+  --santo-brand-shape-radius-lg: var(--santo-dimension-radius-12);
+  --santo-brand-shape-radius-xl: var(--santo-dimension-radius-16);
+  --santo-brand-shape-radius-2xl: var(--santo-dimension-radius-24);
+  --santo-brand-shape-radius-3xl: var(--santo-dimension-radius-32);
+  --santo-brand-space-3xs: var(--santo-dimension-space-2);
+  --santo-brand-space-2xs: var(--santo-dimension-space-4);
+  --santo-brand-space-xs: var(--santo-dimension-space-8);
+  --santo-brand-space-sm: var(--santo-dimension-space-12);
+  --santo-brand-space-md: var(--santo-dimension-space-16);
+  --santo-brand-space-lg: var(--santo-dimension-space-24);
+  --santo-brand-space-xl: var(--santo-dimension-space-32);
+  --santo-brand-space-2xl: var(--santo-dimension-space-40);
+  --santo-brand-space-3xl: var(--santo-dimension-space-48);
+  --santo-brand-space-4xl: var(--santo-dimension-space-64);
+  --santo-brand-space-5xl: var(--santo-dimension-space-80);
+  --santo-brand-space-6xl: var(--santo-dimension-space-96);
+  --santo-brand-space-7xl: var(--santo-dimension-space-128);
+  --santo-brand-space-8xl: var(--santo-dimension-space-192);
+  --santo-brand-type-heading-1-size: var(--santo-type-size-72);
+  --santo-brand-type-heading-1-leading: var(--santo-type-leading-80);
+  --santo-brand-type-heading-2-size: var(--santo-type-size-60);
+  --santo-brand-type-heading-2-leading: var(--santo-type-leading-72);
+  --santo-brand-type-heading-3-size: var(--santo-type-size-48);
+  --santo-brand-type-heading-3-leading: var(--santo-type-leading-56);
+  --santo-brand-type-heading-4-size: var(--santo-type-size-36);
+  --santo-brand-type-heading-4-leading: var(--santo-type-leading-44);
+  --santo-brand-type-heading-5-size: var(--santo-type-size-30);
+  --santo-brand-type-heading-5-leading: var(--santo-type-leading-38);
+  --santo-brand-type-heading-6-size: var(--santo-type-size-24);
+  --santo-brand-type-heading-6-leading: var(--santo-type-leading-32);
+  --santo-brand-type-body-large-size: var(--santo-type-size-18);
+  --santo-brand-type-body-large-leading: var(--santo-type-leading-28);
+  --santo-brand-type-body-size: var(--santo-type-size-16);
+  --santo-brand-type-body-leading: var(--santo-type-leading-24);
+  --santo-brand-type-body-small-size: var(--santo-type-size-14);
+  --santo-brand-type-body-small-leading: var(--santo-type-leading-20);
+  --santo-brand-type-caption-size: var(--santo-type-size-12);
+  --santo-brand-type-caption-leading: var(--santo-type-leading-16);
+  --santo-brand-type-caption-small-size: var(--santo-type-size-10);
+  --santo-brand-type-caption-small-leading: var(--santo-type-leading-16);
+  --santo-brand-control-height-sm: var(--santo-dimension-size-32);
+  --santo-brand-control-height-md: var(--santo-dimension-size-40);
+  --santo-brand-control-height-lg: var(--santo-dimension-size-48);
+  --santo-brand-shadow-xs-1: #100d1614;
+  --santo-brand-shadow-sm-1: #100d1614;
+  --santo-brand-shadow-sm-2: #100d160f;
+  --santo-brand-shadow-md-1: #100d1614;
+  --santo-brand-shadow-md-2: #100d160f;
+  --santo-brand-shadow-lg-1: #100d1617;
+  --santo-brand-shadow-lg-2: #100d160f;
+  --santo-brand-shadow-xl-1: #100d161a;
+  --santo-brand-shadow-xl-2: #100d160f;
+  --santo-brand-shadow-2xl-1: #100d161f;
 
-  /* Semantic (30) */
+  /* Semantic (33) */
   --santo-space-none: var(--santo-dimension-space-0);
-  --santo-space-3xs: var(--santo-dimension-space-2);
-  --santo-space-2xs: var(--santo-dimension-space-4);
-  --santo-space-xs: var(--santo-dimension-space-8);
-  --santo-space-sm: var(--santo-dimension-space-12);
-  --santo-space-md: var(--santo-dimension-space-16);
-  --santo-space-lg: var(--santo-dimension-space-24);
-  --santo-space-xl: var(--santo-dimension-space-32);
-  --santo-space-2xl: var(--santo-dimension-space-40);
-  --santo-space-3xl: var(--santo-dimension-space-48);
-  --santo-space-4xl: var(--santo-dimension-space-64);
-  --santo-space-5xl: var(--santo-dimension-space-80);
-  --santo-space-6xl: var(--santo-dimension-space-96);
-  --santo-space-7xl: var(--santo-dimension-space-128);
-  --santo-space-8xl: var(--santo-dimension-space-192);
+  --santo-space-3xs: var(--santo-brand-space-3xs);
+  --santo-space-2xs: var(--santo-brand-space-2xs);
+  --santo-space-xs: var(--santo-brand-space-xs);
+  --santo-space-sm: var(--santo-brand-space-sm);
+  --santo-space-md: var(--santo-brand-space-md);
+  --santo-space-lg: var(--santo-brand-space-lg);
+  --santo-space-xl: var(--santo-brand-space-xl);
+  --santo-space-2xl: var(--santo-brand-space-2xl);
+  --santo-space-3xl: var(--santo-brand-space-3xl);
+  --santo-space-4xl: var(--santo-brand-space-4xl);
+  --santo-space-5xl: var(--santo-brand-space-5xl);
+  --santo-space-6xl: var(--santo-brand-space-6xl);
+  --santo-space-7xl: var(--santo-brand-space-7xl);
+  --santo-space-8xl: var(--santo-brand-space-8xl);
   --santo-radius-none: var(--santo-dimension-radius-0);
-  --santo-radius-xs: var(--santo-dimension-radius-4);
-  --santo-radius-sm: var(--santo-dimension-radius-8);
+  --santo-radius-xs: var(--santo-brand-shape-radius-xs);
+  --santo-radius-sm: var(--santo-brand-shape-radius-sm);
   --santo-radius-md: var(--santo-brand-shape-radius-base);
-  --santo-radius-lg: var(--santo-dimension-radius-12);
-  --santo-radius-xl: var(--santo-dimension-radius-16);
-  --santo-radius-2xl: var(--santo-dimension-radius-24);
-  --santo-radius-3xl: var(--santo-dimension-radius-32);
+  --santo-radius-lg: var(--santo-brand-shape-radius-lg);
+  --santo-radius-xl: var(--santo-brand-shape-radius-xl);
+  --santo-radius-2xl: var(--santo-brand-shape-radius-2xl);
+  --santo-radius-3xl: var(--santo-brand-shape-radius-3xl);
   --santo-radius-full: var(--santo-dimension-radius-full);
   --santo-border-none: var(--santo-dimension-border-0);
   --santo-border-thin: var(--santo-dimension-border-1);
@@ -252,6 +308,9 @@
   --santo-border-heavy: var(--santo-dimension-border-4);
   --santo-focus-width: var(--santo-dimension-border-2);
   --santo-focus-offset: var(--santo-dimension-border-2);
+  --santo-control-height-sm: var(--santo-brand-control-height-sm);
+  --santo-control-height-md: var(--santo-brand-control-height-md);
+  --santo-control-height-lg: var(--santo-brand-control-height-lg);
 
   /* Color — modo Light (102) */
   --santo-color-surface-page: var(--santo-palette-neutral-50);
@@ -359,16 +418,17 @@
 
   /* Effect styles (7) */
   --santo-shadow-none: none;
-  --santo-shadow-xs: 0px 1px 2px 0px #100d1614;
-  --santo-shadow-sm: 0px 1px 3px 0px #100d1614, 0px 1px 2px -1px #100d160f;
-  --santo-shadow-md: 0px 4px 8px -2px #100d1614, 0px 2px 4px -2px #100d160f;
-  --santo-shadow-lg: 0px 12px 16px -4px #100d1617, 0px 4px 6px -2px #100d160f;
-  --santo-shadow-xl: 0px 20px 24px -4px #100d161a, 0px 8px 8px -4px #100d160f;
-  --santo-shadow-2xl: 0px 24px 48px -12px #100d161f;
+  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
 
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
 
   color-scheme: light dark;
 }
@@ -670,15 +730,94 @@
   --santo-palette-info-900: #194185;
   --santo-palette-info-950: #102a56;
 
-  /* Brand — modo Santo (5) */
+  /* Brand — modo Santo (61) */
   --santo-brand-id: "santo";
   --santo-brand-name: "Santo";
   --santo-brand-family-sans: "Albert Sans";
   --santo-brand-family-mono: "JetBrains Mono";
   --santo-brand-shape-radius-base: var(--santo-dimension-radius-8);
+  --santo-brand-family-heading: "Albert Sans";
+  --santo-brand-shape-radius-xs: var(--santo-dimension-radius-4);
+  --santo-brand-shape-radius-sm: var(--santo-dimension-radius-8);
+  --santo-brand-shape-radius-lg: var(--santo-dimension-radius-12);
+  --santo-brand-shape-radius-xl: var(--santo-dimension-radius-16);
+  --santo-brand-shape-radius-2xl: var(--santo-dimension-radius-24);
+  --santo-brand-shape-radius-3xl: var(--santo-dimension-radius-32);
+  --santo-brand-space-3xs: var(--santo-dimension-space-2);
+  --santo-brand-space-2xs: var(--santo-dimension-space-4);
+  --santo-brand-space-xs: var(--santo-dimension-space-8);
+  --santo-brand-space-sm: var(--santo-dimension-space-12);
+  --santo-brand-space-md: var(--santo-dimension-space-16);
+  --santo-brand-space-lg: var(--santo-dimension-space-24);
+  --santo-brand-space-xl: var(--santo-dimension-space-32);
+  --santo-brand-space-2xl: var(--santo-dimension-space-40);
+  --santo-brand-space-3xl: var(--santo-dimension-space-48);
+  --santo-brand-space-4xl: var(--santo-dimension-space-64);
+  --santo-brand-space-5xl: var(--santo-dimension-space-80);
+  --santo-brand-space-6xl: var(--santo-dimension-space-96);
+  --santo-brand-space-7xl: var(--santo-dimension-space-128);
+  --santo-brand-space-8xl: var(--santo-dimension-space-192);
+  --santo-brand-type-heading-1-size: var(--santo-type-size-72);
+  --santo-brand-type-heading-1-leading: var(--santo-type-leading-80);
+  --santo-brand-type-heading-2-size: var(--santo-type-size-60);
+  --santo-brand-type-heading-2-leading: var(--santo-type-leading-72);
+  --santo-brand-type-heading-3-size: var(--santo-type-size-48);
+  --santo-brand-type-heading-3-leading: var(--santo-type-leading-56);
+  --santo-brand-type-heading-4-size: var(--santo-type-size-36);
+  --santo-brand-type-heading-4-leading: var(--santo-type-leading-44);
+  --santo-brand-type-heading-5-size: var(--santo-type-size-30);
+  --santo-brand-type-heading-5-leading: var(--santo-type-leading-38);
+  --santo-brand-type-heading-6-size: var(--santo-type-size-24);
+  --santo-brand-type-heading-6-leading: var(--santo-type-leading-32);
+  --santo-brand-type-body-large-size: var(--santo-type-size-18);
+  --santo-brand-type-body-large-leading: var(--santo-type-leading-28);
+  --santo-brand-type-body-size: var(--santo-type-size-16);
+  --santo-brand-type-body-leading: var(--santo-type-leading-24);
+  --santo-brand-type-body-small-size: var(--santo-type-size-14);
+  --santo-brand-type-body-small-leading: var(--santo-type-leading-20);
+  --santo-brand-type-caption-size: var(--santo-type-size-12);
+  --santo-brand-type-caption-leading: var(--santo-type-leading-16);
+  --santo-brand-type-caption-small-size: var(--santo-type-size-10);
+  --santo-brand-type-caption-small-leading: var(--santo-type-leading-16);
+  --santo-brand-control-height-sm: var(--santo-dimension-size-32);
+  --santo-brand-control-height-md: var(--santo-dimension-size-40);
+  --santo-brand-control-height-lg: var(--santo-dimension-size-48);
+  --santo-brand-shadow-xs-1: #100d1614;
+  --santo-brand-shadow-sm-1: #100d1614;
+  --santo-brand-shadow-sm-2: #100d160f;
+  --santo-brand-shadow-md-1: #100d1614;
+  --santo-brand-shadow-md-2: #100d160f;
+  --santo-brand-shadow-lg-1: #100d1617;
+  --santo-brand-shadow-lg-2: #100d160f;
+  --santo-brand-shadow-xl-1: #100d161a;
+  --santo-brand-shadow-xl-2: #100d160f;
+  --santo-brand-shadow-2xl-1: #100d161f;
 
-  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (1) */
+  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (24) */
+  --santo-space-3xs: var(--santo-brand-space-3xs);
+  --santo-space-2xs: var(--santo-brand-space-2xs);
+  --santo-space-xs: var(--santo-brand-space-xs);
+  --santo-space-sm: var(--santo-brand-space-sm);
+  --santo-space-md: var(--santo-brand-space-md);
+  --santo-space-lg: var(--santo-brand-space-lg);
+  --santo-space-xl: var(--santo-brand-space-xl);
+  --santo-space-2xl: var(--santo-brand-space-2xl);
+  --santo-space-3xl: var(--santo-brand-space-3xl);
+  --santo-space-4xl: var(--santo-brand-space-4xl);
+  --santo-space-5xl: var(--santo-brand-space-5xl);
+  --santo-space-6xl: var(--santo-brand-space-6xl);
+  --santo-space-7xl: var(--santo-brand-space-7xl);
+  --santo-space-8xl: var(--santo-brand-space-8xl);
+  --santo-radius-xs: var(--santo-brand-shape-radius-xs);
+  --santo-radius-sm: var(--santo-brand-shape-radius-sm);
   --santo-radius-md: var(--santo-brand-shape-radius-base);
+  --santo-radius-lg: var(--santo-brand-shape-radius-lg);
+  --santo-radius-xl: var(--santo-brand-shape-radius-xl);
+  --santo-radius-2xl: var(--santo-brand-shape-radius-2xl);
+  --santo-radius-3xl: var(--santo-brand-shape-radius-3xl);
+  --santo-control-height-sm: var(--santo-brand-control-height-sm);
+  --santo-control-height-md: var(--santo-brand-control-height-md);
+  --santo-control-height-lg: var(--santo-brand-control-height-lg);
 
   /* Color — modo Light (100) */
   --santo-color-surface-page: var(--santo-palette-neutral-50);
@@ -782,9 +921,18 @@
   --santo-color-icon-danger: var(--santo-palette-danger-600);
   --santo-color-icon-info: var(--santo-palette-info-600);
 
+  /* Effect styles com cor ligada a variavel de marca (6) */
+  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
+
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 /* Marca Santo — Color modo Dark, seguindo o sistema. */
@@ -1080,15 +1228,94 @@
   --santo-palette-info-900: #194185;
   --santo-palette-info-950: #102a56;
 
-  /* Brand — modo VTSD (5) */
+  /* Brand — modo VTSD (61) */
   --santo-brand-id: "vtsd";
   --santo-brand-name: "Venda Todo Santo Dia";
   --santo-brand-family-sans: Sora;
   --santo-brand-family-mono: "JetBrains Mono";
   --santo-brand-shape-radius-base: var(--santo-dimension-radius-8);
+  --santo-brand-family-heading: Sora;
+  --santo-brand-shape-radius-xs: var(--santo-dimension-radius-4);
+  --santo-brand-shape-radius-sm: var(--santo-dimension-radius-8);
+  --santo-brand-shape-radius-lg: var(--santo-dimension-radius-12);
+  --santo-brand-shape-radius-xl: var(--santo-dimension-radius-16);
+  --santo-brand-shape-radius-2xl: var(--santo-dimension-radius-24);
+  --santo-brand-shape-radius-3xl: var(--santo-dimension-radius-32);
+  --santo-brand-space-3xs: var(--santo-dimension-space-2);
+  --santo-brand-space-2xs: var(--santo-dimension-space-4);
+  --santo-brand-space-xs: var(--santo-dimension-space-8);
+  --santo-brand-space-sm: var(--santo-dimension-space-12);
+  --santo-brand-space-md: var(--santo-dimension-space-16);
+  --santo-brand-space-lg: var(--santo-dimension-space-24);
+  --santo-brand-space-xl: var(--santo-dimension-space-32);
+  --santo-brand-space-2xl: var(--santo-dimension-space-40);
+  --santo-brand-space-3xl: var(--santo-dimension-space-48);
+  --santo-brand-space-4xl: var(--santo-dimension-space-64);
+  --santo-brand-space-5xl: var(--santo-dimension-space-80);
+  --santo-brand-space-6xl: var(--santo-dimension-space-96);
+  --santo-brand-space-7xl: var(--santo-dimension-space-128);
+  --santo-brand-space-8xl: var(--santo-dimension-space-192);
+  --santo-brand-type-heading-1-size: var(--santo-type-size-72);
+  --santo-brand-type-heading-1-leading: var(--santo-type-leading-80);
+  --santo-brand-type-heading-2-size: var(--santo-type-size-60);
+  --santo-brand-type-heading-2-leading: var(--santo-type-leading-72);
+  --santo-brand-type-heading-3-size: var(--santo-type-size-48);
+  --santo-brand-type-heading-3-leading: var(--santo-type-leading-56);
+  --santo-brand-type-heading-4-size: var(--santo-type-size-36);
+  --santo-brand-type-heading-4-leading: var(--santo-type-leading-44);
+  --santo-brand-type-heading-5-size: var(--santo-type-size-30);
+  --santo-brand-type-heading-5-leading: var(--santo-type-leading-38);
+  --santo-brand-type-heading-6-size: var(--santo-type-size-24);
+  --santo-brand-type-heading-6-leading: var(--santo-type-leading-32);
+  --santo-brand-type-body-large-size: var(--santo-type-size-18);
+  --santo-brand-type-body-large-leading: var(--santo-type-leading-28);
+  --santo-brand-type-body-size: var(--santo-type-size-16);
+  --santo-brand-type-body-leading: var(--santo-type-leading-24);
+  --santo-brand-type-body-small-size: var(--santo-type-size-14);
+  --santo-brand-type-body-small-leading: var(--santo-type-leading-20);
+  --santo-brand-type-caption-size: var(--santo-type-size-12);
+  --santo-brand-type-caption-leading: var(--santo-type-leading-16);
+  --santo-brand-type-caption-small-size: var(--santo-type-size-10);
+  --santo-brand-type-caption-small-leading: var(--santo-type-leading-16);
+  --santo-brand-control-height-sm: var(--santo-dimension-size-32);
+  --santo-brand-control-height-md: var(--santo-dimension-size-40);
+  --santo-brand-control-height-lg: var(--santo-dimension-size-48);
+  --santo-brand-shadow-xs-1: #100d1614;
+  --santo-brand-shadow-sm-1: #100d1614;
+  --santo-brand-shadow-sm-2: #100d160f;
+  --santo-brand-shadow-md-1: #100d1614;
+  --santo-brand-shadow-md-2: #100d160f;
+  --santo-brand-shadow-lg-1: #100d1617;
+  --santo-brand-shadow-lg-2: #100d160f;
+  --santo-brand-shadow-xl-1: #100d161a;
+  --santo-brand-shadow-xl-2: #100d160f;
+  --santo-brand-shadow-2xl-1: #100d161f;
 
-  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (1) */
+  /* Dependentes de Palette/Brand, redeclarados para o escopo valer fora do :root (24) */
+  --santo-space-3xs: var(--santo-brand-space-3xs);
+  --santo-space-2xs: var(--santo-brand-space-2xs);
+  --santo-space-xs: var(--santo-brand-space-xs);
+  --santo-space-sm: var(--santo-brand-space-sm);
+  --santo-space-md: var(--santo-brand-space-md);
+  --santo-space-lg: var(--santo-brand-space-lg);
+  --santo-space-xl: var(--santo-brand-space-xl);
+  --santo-space-2xl: var(--santo-brand-space-2xl);
+  --santo-space-3xl: var(--santo-brand-space-3xl);
+  --santo-space-4xl: var(--santo-brand-space-4xl);
+  --santo-space-5xl: var(--santo-brand-space-5xl);
+  --santo-space-6xl: var(--santo-brand-space-6xl);
+  --santo-space-7xl: var(--santo-brand-space-7xl);
+  --santo-space-8xl: var(--santo-brand-space-8xl);
+  --santo-radius-xs: var(--santo-brand-shape-radius-xs);
+  --santo-radius-sm: var(--santo-brand-shape-radius-sm);
   --santo-radius-md: var(--santo-brand-shape-radius-base);
+  --santo-radius-lg: var(--santo-brand-shape-radius-lg);
+  --santo-radius-xl: var(--santo-brand-shape-radius-xl);
+  --santo-radius-2xl: var(--santo-brand-shape-radius-2xl);
+  --santo-radius-3xl: var(--santo-brand-shape-radius-3xl);
+  --santo-control-height-sm: var(--santo-brand-control-height-sm);
+  --santo-control-height-md: var(--santo-brand-control-height-md);
+  --santo-control-height-lg: var(--santo-brand-control-height-lg);
 
   /* Color — modo Light (100) */
   --santo-color-surface-page: var(--santo-palette-neutral-50);
@@ -1192,9 +1419,18 @@
   --santo-color-icon-danger: var(--santo-palette-danger-600);
   --santo-color-icon-info: var(--santo-palette-info-600);
 
+  /* Effect styles com cor ligada a variavel de marca (6) */
+  --santo-shadow-xs: 0px 1px 2px 0px var(--santo-brand-shadow-xs-1);
+  --santo-shadow-sm: 0px 1px 3px 0px var(--santo-brand-shadow-sm-1), 0px 1px 2px -1px var(--santo-brand-shadow-sm-2);
+  --santo-shadow-md: 0px 4px 8px -2px var(--santo-brand-shadow-md-1), 0px 2px 4px -2px var(--santo-brand-shadow-md-2);
+  --santo-shadow-lg: 0px 12px 16px -4px var(--santo-brand-shadow-lg-1), 0px 4px 6px -2px var(--santo-brand-shadow-lg-2);
+  --santo-shadow-xl: 0px 20px 24px -4px var(--santo-brand-shadow-xl-1), 0px 8px 8px -4px var(--santo-brand-shadow-xl-2);
+  --santo-shadow-2xl: 0px 24px 48px -12px var(--santo-brand-shadow-2xl-1);
+
   /* Pilhas de fonte derivadas de brand/family/* */
   --santo-font-sans: var(--santo-brand-family-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --santo-font-mono: var(--santo-brand-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --santo-font-heading: var(--santo-brand-family-heading), ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 /* Marca Venda Todo Santo Dia — Color modo Dark, seguindo o sistema. */

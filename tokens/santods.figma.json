@@ -14,7 +14,21 @@
       "since": "2026-10-19",
       "by": "scripts/apply-brand-mode.mjs",
       "why": "OAuth do MCP do Figma indisponivel; excecao autorizada pelo Pedro, uma vez.",
-      "reconcile": ".claude/agents/figma-parity.md, secao \"Reconciliacao: snapshot a frente do Figma\""
+      "reconcile": ".claude/agents/figma-parity.md, secao \"Reconciliacao: snapshot a frente do Figma\"",
+      "also": [
+        {
+          "tag": "nivel-b",
+          "collections": [
+            "Brand",
+            "Semantic"
+          ],
+          "styles": "text styles (11 papeis) e effect styles (cor das camadas)",
+          "since": "2026-10-21",
+          "by": "scripts/figma-nivel-b-apply.mjs",
+          "why": "Nivel B do Estudio aprovado pelo maestro so no andar estudio; Figma read-only para o MCP.",
+          "reconcile": "colar scripts/figma-nivel-b.js no use_figma (DRY_RUN, depois real) e seguir .claude/agents/figma-parity.md"
+        }
+      ]
     }
   },
   "collections": {
@@ -2576,7 +2590,7 @@
           "scopes": [
             "FONT_FAMILY"
           ],
-          "description": "Família sans da marca. Cobre os 11 papéis de texto, do heading-1 ao caption-small."
+          "description": "Família sans da marca: corpo e legenda (body-large ao caption-small). Os títulos usam brand/family/heading."
         },
         "brand/family/mono": {
           "type": "STRING",
@@ -2597,6 +2611,636 @@
           "scopes": [
             "CORNER_RADIUS"
           ]
+        },
+        "brand/family/heading": {
+          "type": "STRING",
+          "values": {
+            "Santo": "Albert Sans",
+            "VTSD": "Sora"
+          },
+          "scopes": [
+            "FONT_FAMILY"
+          ],
+          "description": "Família dos títulos (heading-1 a heading-6). Igual à sans quando a marca não separa título de corpo."
+        },
+        "brand/shape/radius-xs": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/4}",
+            "VTSD": "{dimension/radius/4}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio xs da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/shape/radius-sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/8}",
+            "VTSD": "{dimension/radius/8}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio sm da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/shape/radius-lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/12}",
+            "VTSD": "{dimension/radius/12}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio lg da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/shape/radius-xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/16}",
+            "VTSD": "{dimension/radius/16}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio xl da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/shape/radius-2xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/24}",
+            "VTSD": "{dimension/radius/24}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio 2xl da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/shape/radius-3xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/radius/32}",
+            "VTSD": "{dimension/radius/32}"
+          },
+          "scopes": [
+            "CORNER_RADIUS"
+          ],
+          "description": "Raio 3xl da marca. No Estúdio: base × fator do nível."
+        },
+        "brand/space/3xs": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/2}",
+            "VTSD": "{dimension/space/2}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 3xs da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/2xs": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/4}",
+            "VTSD": "{dimension/space/4}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 2xs da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/xs": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/8}",
+            "VTSD": "{dimension/space/8}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço xs da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/12}",
+            "VTSD": "{dimension/space/12}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço sm da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/16}",
+            "VTSD": "{dimension/space/16}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço md da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/24}",
+            "VTSD": "{dimension/space/24}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço lg da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/32}",
+            "VTSD": "{dimension/space/32}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/2xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/40}",
+            "VTSD": "{dimension/space/40}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 2xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/3xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/48}",
+            "VTSD": "{dimension/space/48}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 3xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/4xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/64}",
+            "VTSD": "{dimension/space/64}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 4xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/5xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/80}",
+            "VTSD": "{dimension/space/80}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 5xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/6xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/96}",
+            "VTSD": "{dimension/space/96}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 6xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/7xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/128}",
+            "VTSD": "{dimension/space/128}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 7xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/space/8xl": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/space/192}",
+            "VTSD": "{dimension/space/192}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT",
+            "GAP"
+          ],
+          "description": "Espaço 8xl da marca. No Estúdio: unidade × fator do nível."
+        },
+        "brand/type/heading-1/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/72}",
+            "VTSD": "{type/size/72}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-1."
+        },
+        "brand/type/heading-1/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/80}",
+            "VTSD": "{type/leading/80}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-1."
+        },
+        "brand/type/heading-2/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/60}",
+            "VTSD": "{type/size/60}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-2."
+        },
+        "brand/type/heading-2/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/72}",
+            "VTSD": "{type/leading/72}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-2."
+        },
+        "brand/type/heading-3/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/48}",
+            "VTSD": "{type/size/48}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-3."
+        },
+        "brand/type/heading-3/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/56}",
+            "VTSD": "{type/leading/56}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-3."
+        },
+        "brand/type/heading-4/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/36}",
+            "VTSD": "{type/size/36}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-4."
+        },
+        "brand/type/heading-4/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/44}",
+            "VTSD": "{type/leading/44}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-4."
+        },
+        "brand/type/heading-5/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/30}",
+            "VTSD": "{type/size/30}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-5."
+        },
+        "brand/type/heading-5/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/38}",
+            "VTSD": "{type/leading/38}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-5."
+        },
+        "brand/type/heading-6/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/24}",
+            "VTSD": "{type/size/24}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel heading-6."
+        },
+        "brand/type/heading-6/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/32}",
+            "VTSD": "{type/leading/32}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel heading-6."
+        },
+        "brand/type/body-large/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/18}",
+            "VTSD": "{type/size/18}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel body-large."
+        },
+        "brand/type/body-large/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/28}",
+            "VTSD": "{type/leading/28}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel body-large."
+        },
+        "brand/type/body/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/16}",
+            "VTSD": "{type/size/16}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel body."
+        },
+        "brand/type/body/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/24}",
+            "VTSD": "{type/leading/24}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel body."
+        },
+        "brand/type/body-small/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/14}",
+            "VTSD": "{type/size/14}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel body-small."
+        },
+        "brand/type/body-small/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/20}",
+            "VTSD": "{type/leading/20}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel body-small."
+        },
+        "brand/type/caption/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/12}",
+            "VTSD": "{type/size/12}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel caption."
+        },
+        "brand/type/caption/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/16}",
+            "VTSD": "{type/leading/16}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel caption."
+        },
+        "brand/type/caption-small/size": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/size/10}",
+            "VTSD": "{type/size/10}"
+          },
+          "scopes": [
+            "FONT_SIZE"
+          ],
+          "description": "Tamanho do papel caption-small."
+        },
+        "brand/type/caption-small/leading": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{type/leading/16}",
+            "VTSD": "{type/leading/16}"
+          },
+          "scopes": [
+            "LINE_HEIGHT"
+          ],
+          "description": "Entrelinha do papel caption-small."
+        },
+        "brand/control/height/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/size/32}",
+            "VTSD": "{dimension/size/32}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle sm (botão, campo, seletor)."
+        },
+        "brand/control/height/md": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/size/40}",
+            "VTSD": "{dimension/size/40}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle md (botão, campo, seletor)."
+        },
+        "brand/control/height/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Santo": "{dimension/size/48}",
+            "VTSD": "{dimension/size/48}"
+          },
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle lg (botão, campo, seletor)."
+        },
+        "brand/shadow/xs/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d1614",
+            "VTSD": "#100d1614"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra xs. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/sm/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d1614",
+            "VTSD": "#100d1614"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra sm. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/sm/2": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d160f",
+            "VTSD": "#100d160f"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 2 da sombra sm. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/md/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d1614",
+            "VTSD": "#100d1614"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra md. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/md/2": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d160f",
+            "VTSD": "#100d160f"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 2 da sombra md. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/lg/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d1617",
+            "VTSD": "#100d1617"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra lg. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/lg/2": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d160f",
+            "VTSD": "#100d160f"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 2 da sombra lg. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/xl/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d161a",
+            "VTSD": "#100d161a"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra xl. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/xl/2": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d160f",
+            "VTSD": "#100d160f"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 2 da sombra xl. No Estúdio: tinta × alfa × intensidade."
+        },
+        "brand/shadow/2xl/1": {
+          "type": "COLOR",
+          "values": {
+            "Santo": "#100d161f",
+            "VTSD": "#100d161f"
+          },
+          "scopes": [
+            "EFFECT_COLOR"
+          ],
+          "description": "Cor da camada 1 da sombra 2xl. No Estúdio: tinta × alfa × intensidade."
         }
       }
     },
@@ -2616,7 +3260,7 @@
         },
         "space/3xs": {
           "type": "FLOAT",
-          "value": "{dimension/space/2}",
+          "value": "{brand/space/3xs}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2624,7 +3268,7 @@
         },
         "space/2xs": {
           "type": "FLOAT",
-          "value": "{dimension/space/4}",
+          "value": "{brand/space/2xs}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2632,7 +3276,7 @@
         },
         "space/xs": {
           "type": "FLOAT",
-          "value": "{dimension/space/8}",
+          "value": "{brand/space/xs}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2640,7 +3284,7 @@
         },
         "space/sm": {
           "type": "FLOAT",
-          "value": "{dimension/space/12}",
+          "value": "{brand/space/sm}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2648,7 +3292,7 @@
         },
         "space/md": {
           "type": "FLOAT",
-          "value": "{dimension/space/16}",
+          "value": "{brand/space/md}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2656,7 +3300,7 @@
         },
         "space/lg": {
           "type": "FLOAT",
-          "value": "{dimension/space/24}",
+          "value": "{brand/space/lg}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2664,7 +3308,7 @@
         },
         "space/xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/32}",
+          "value": "{brand/space/xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2672,7 +3316,7 @@
         },
         "space/2xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/40}",
+          "value": "{brand/space/2xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2680,7 +3324,7 @@
         },
         "space/3xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/48}",
+          "value": "{brand/space/3xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2688,7 +3332,7 @@
         },
         "space/4xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/64}",
+          "value": "{brand/space/4xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2696,7 +3340,7 @@
         },
         "space/5xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/80}",
+          "value": "{brand/space/5xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2704,7 +3348,7 @@
         },
         "space/6xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/96}",
+          "value": "{brand/space/6xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2712,7 +3356,7 @@
         },
         "space/7xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/128}",
+          "value": "{brand/space/7xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2720,7 +3364,7 @@
         },
         "space/8xl": {
           "type": "FLOAT",
-          "value": "{dimension/space/192}",
+          "value": "{brand/space/8xl}",
           "scopes": [
             "WIDTH_HEIGHT",
             "GAP"
@@ -2735,14 +3379,14 @@
         },
         "radius/xs": {
           "type": "FLOAT",
-          "value": "{dimension/radius/4}",
+          "value": "{brand/shape/radius-xs}",
           "scopes": [
             "CORNER_RADIUS"
           ]
         },
         "radius/sm": {
           "type": "FLOAT",
-          "value": "{dimension/radius/8}",
+          "value": "{brand/shape/radius-sm}",
           "scopes": [
             "CORNER_RADIUS"
           ]
@@ -2756,28 +3400,28 @@
         },
         "radius/lg": {
           "type": "FLOAT",
-          "value": "{dimension/radius/12}",
+          "value": "{brand/shape/radius-lg}",
           "scopes": [
             "CORNER_RADIUS"
           ]
         },
         "radius/xl": {
           "type": "FLOAT",
-          "value": "{dimension/radius/16}",
+          "value": "{brand/shape/radius-xl}",
           "scopes": [
             "CORNER_RADIUS"
           ]
         },
         "radius/2xl": {
           "type": "FLOAT",
-          "value": "{dimension/radius/24}",
+          "value": "{brand/shape/radius-2xl}",
           "scopes": [
             "CORNER_RADIUS"
           ]
         },
         "radius/3xl": {
           "type": "FLOAT",
-          "value": "{dimension/radius/32}",
+          "value": "{brand/shape/radius-3xl}",
           "scopes": [
             "CORNER_RADIUS"
           ]
@@ -2830,6 +3474,30 @@
           "scopes": [
             "STROKE_FLOAT"
           ]
+        },
+        "control/height/sm": {
+          "type": "FLOAT",
+          "value": "{brand/control/height/sm}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle sm. Use em h-(--santo-control-height-sm)."
+        },
+        "control/height/md": {
+          "type": "FLOAT",
+          "value": "{brand/control/height/md}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle md. Use em h-(--santo-control-height-md)."
+        },
+        "control/height/lg": {
+          "type": "FLOAT",
+          "value": "{brand/control/height/lg}",
+          "scopes": [
+            "WIDTH_HEIGHT"
+          ],
+          "description": "Altura de controle lg. Use em h-(--santo-control-height-lg)."
         }
       }
     }
@@ -2852,9 +3520,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -2875,9 +3543,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -2898,9 +3566,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -2921,9 +3589,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -2944,9 +3612,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -2967,9 +3635,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/72",
-        "lineHeight": "type/leading/80",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-1/size",
+        "lineHeight": "brand/type/heading-1/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -2990,9 +3658,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3013,9 +3681,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3036,9 +3704,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3059,9 +3727,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3082,9 +3750,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3105,9 +3773,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/60",
-        "lineHeight": "type/leading/72",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-2/size",
+        "lineHeight": "brand/type/heading-2/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3128,9 +3796,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3151,9 +3819,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3174,9 +3842,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3197,9 +3865,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3220,9 +3888,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3243,9 +3911,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/48",
-        "lineHeight": "type/leading/56",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-3/size",
+        "lineHeight": "brand/type/heading-3/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3266,9 +3934,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3289,9 +3957,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3312,9 +3980,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3335,9 +4003,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3358,9 +4026,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3381,9 +4049,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/36",
-        "lineHeight": "type/leading/44",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-4/size",
+        "lineHeight": "brand/type/heading-4/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3404,9 +4072,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3427,9 +4095,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3450,9 +4118,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3473,9 +4141,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3496,9 +4164,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3519,9 +4187,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/30",
-        "lineHeight": "type/leading/38",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-5/size",
+        "lineHeight": "brand/type/heading-5/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3542,9 +4210,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3565,9 +4233,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3588,9 +4256,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3611,9 +4279,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3634,9 +4302,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3657,9 +4325,9 @@
       "paragraphSpacing": 0,
       "paragraphIndent": 0,
       "boundVariables": {
-        "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/24",
-        "lineHeight": "type/leading/32",
+        "fontFamily": "brand/family/heading",
+        "fontSize": "brand/type/heading-6/size",
+        "lineHeight": "brand/type/heading-6/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3681,8 +4349,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3704,8 +4372,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3727,8 +4395,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3750,8 +4418,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3773,8 +4441,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3796,8 +4464,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/18",
-        "lineHeight": "type/leading/28",
+        "fontSize": "brand/type/body-large/size",
+        "lineHeight": "brand/type/body-large/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3819,8 +4487,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3842,8 +4510,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -3865,8 +4533,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -3888,8 +4556,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -3911,8 +4579,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -3934,8 +4602,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/16",
-        "lineHeight": "type/leading/24",
+        "fontSize": "brand/type/body/size",
+        "lineHeight": "brand/type/body/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -3957,8 +4625,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -3980,8 +4648,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -4003,8 +4671,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -4026,8 +4694,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -4049,8 +4717,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -4072,8 +4740,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/14",
-        "lineHeight": "type/leading/20",
+        "fontSize": "brand/type/body-small/size",
+        "lineHeight": "brand/type/body-small/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -4095,8 +4763,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -4118,8 +4786,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -4141,8 +4809,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -4164,8 +4832,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -4187,8 +4855,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -4210,8 +4878,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/12",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption/size",
+        "lineHeight": "brand/type/caption/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -4233,8 +4901,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/light"
       }
     },
@@ -4256,8 +4924,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/regular"
       }
     },
@@ -4279,8 +4947,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/medium"
       }
     },
@@ -4302,8 +4970,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/semibold"
       }
     },
@@ -4325,8 +4993,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/bold"
       }
     },
@@ -4348,8 +5016,8 @@
       "paragraphIndent": 0,
       "boundVariables": {
         "fontFamily": "brand/family/sans",
-        "fontSize": "type/size/10",
-        "lineHeight": "type/leading/16",
+        "fontSize": "brand/type/caption-small/size",
+        "lineHeight": "brand/type/caption-small/leading",
         "fontWeight": "type/weight/extrabold"
       }
     },
@@ -4414,7 +5082,10 @@
           "spread": 0,
           "color": "#100d1614",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/xs/1"
+          }
         }
       ]
     },
@@ -4428,7 +5099,10 @@
           "spread": 0,
           "color": "#100d1614",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/sm/1"
+          }
         },
         {
           "type": "DROP_SHADOW",
@@ -4438,7 +5112,10 @@
           "spread": -1,
           "color": "#100d160f",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/sm/2"
+          }
         }
       ]
     },
@@ -4452,7 +5129,10 @@
           "spread": -2,
           "color": "#100d1614",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/md/1"
+          }
         },
         {
           "type": "DROP_SHADOW",
@@ -4462,7 +5142,10 @@
           "spread": -2,
           "color": "#100d160f",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/md/2"
+          }
         }
       ]
     },
@@ -4476,7 +5159,10 @@
           "spread": -4,
           "color": "#100d1617",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/lg/1"
+          }
         },
         {
           "type": "DROP_SHADOW",
@@ -4486,7 +5172,10 @@
           "spread": -2,
           "color": "#100d160f",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/lg/2"
+          }
         }
       ]
     },
@@ -4500,7 +5189,10 @@
           "spread": -4,
           "color": "#100d161a",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/xl/1"
+          }
         },
         {
           "type": "DROP_SHADOW",
@@ -4510,7 +5202,10 @@
           "spread": -4,
           "color": "#100d160f",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/xl/2"
+          }
         }
       ]
     },
@@ -4524,7 +5219,10 @@
           "spread": -12,
           "color": "#100d161f",
           "visible": true,
-          "blendMode": "NORMAL"
+          "blendMode": "NORMAL",
+          "boundVariables": {
+            "color": "brand/shadow/2xl/1"
+          }
         }
       ]
     }

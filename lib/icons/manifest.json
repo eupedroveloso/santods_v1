@@ -1060,6 +1060,78 @@
         "desdobrar"
       ],
       "viewBox": "0 0 16 16"
+    },
+    "pen": {
+      "component": "PenIcon",
+      "file": "lib/icons/pen.tsx",
+      "figma": {
+        "name": "pen",
+        "kind": "icon",
+        "setNodeId": "38:54910",
+        "nodeId": "38:54914",
+        "weight": "regular"
+      },
+      "aliases": [
+        "caneta",
+        "editar",
+        "renomear",
+        "escrever"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "trash-can": {
+      "component": "TrashCanIcon",
+      "file": "lib/icons/trash-can.tsx",
+      "figma": {
+        "name": "trash-can",
+        "kind": "icon",
+        "setNodeId": "38:9992",
+        "nodeId": "38:9996",
+        "weight": "regular"
+      },
+      "aliases": [
+        "lixeira",
+        "apagar",
+        "excluir",
+        "remover"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "sliders": {
+      "component": "SlidersIcon",
+      "file": "lib/icons/sliders.tsx",
+      "figma": {
+        "name": "sliders",
+        "kind": "icon",
+        "setNodeId": "38:11124",
+        "nodeId": "38:11128",
+        "weight": "regular"
+      },
+      "aliases": [
+        "controles",
+        "ajustes",
+        "configurar",
+        "filtros"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "lock": {
+      "component": "LockIcon",
+      "file": "lib/icons/lock.tsx",
+      "figma": {
+        "name": "lock",
+        "kind": "icon",
+        "setNodeId": "38:1045",
+        "nodeId": "38:1049",
+        "weight": "regular"
+      },
+      "aliases": [
+        "cadeado",
+        "travado",
+        "bloqueado",
+        "fixo"
+      ],
+      "viewBox": "0 0 16 16"
     }
   }
 }

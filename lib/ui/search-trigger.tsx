@@ -7,9 +7,9 @@ import { RADIUS_CONTROL } from "./radius";
 import { useModKey } from "./use-mod-key";
 
 const HEIGHT: Record<ControlSize, string> = {
-  sm: "h-(--santo-dimension-size-32)",
-  md: "h-(--santo-dimension-size-40)",
-  lg: "h-(--santo-dimension-size-48)",
+  sm: "h-(--santo-control-height-sm)",
+  md: "h-(--santo-control-height-md)",
+  lg: "h-(--santo-control-height-lg)",
 };
 
 /**

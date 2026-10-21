@@ -90,7 +90,7 @@ export type ChipProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 /**
  * Pastilha clicavel (filtro, aba de editor). Em repouso e tonal (neutral/subtle),
- * nao texto solto; ativa leva o acento brand/subtle. Altura size/32.
+ * nao texto solto; ativa leva o acento brand/subtle. Altura control/height/sm (acompanha a escala de controles).
  */
 export function Chip({
   active,
@@ -105,7 +105,7 @@ export function Chip({
     <button
       type={type}
       aria-pressed={active}
-      className={`santo-body-small-medium inline-flex h-(--santo-dimension-size-32) shrink-0 cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} px-sm whitespace-nowrap santo-press ${
+      className={`santo-body-small-medium inline-flex h-(--santo-control-height-sm) shrink-0 cursor-pointer items-center gap-2xs ${RADIUS_CONTROL} px-sm whitespace-nowrap santo-press ${
         active
           ? "bg-brand-subtle-default text-text-brand hover:bg-brand-subtle-hover"
           : "bg-neutral-subtle-default text-text-secondary hover:bg-neutral-subtle-hover hover:text-text-primary"

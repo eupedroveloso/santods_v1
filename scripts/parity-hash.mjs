@@ -44,7 +44,11 @@ export function textStyleLine(name, s) {
 export function effectStyleLine(name, s) {
   return JSON.stringify([
     name,
-    s.effects.map((e) => [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode]),
+    s.effects.map((e) => {
+      const row = [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode];
+      // Cor ligada a variavel (nivel B): entra no hash so quando existe.
+      return e.boundVariables && e.boundVariables.color ? [...row, e.boundVariables.color] : row;
+    }),
   ]);
 }
 

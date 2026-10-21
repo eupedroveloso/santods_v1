@@ -43,9 +43,9 @@ export type SelectOption<T extends string> = {
 };
 
 const TRIGGER_SIZES: Record<ControlSize, string> = {
-  sm: "h-(--santo-dimension-size-32) pl-xs pr-2xl santo-caption-regular",
-  md: "h-(--santo-dimension-size-40) pl-sm pr-3xl santo-body-small-regular",
-  lg: "h-(--santo-dimension-size-48) pl-md pr-3xl santo-body-regular",
+  sm: "h-(--santo-control-height-sm) pl-xs pr-2xl santo-caption-regular",
+  md: "h-(--santo-control-height-md) pl-sm pr-3xl santo-body-small-regular",
+  lg: "h-(--santo-control-height-lg) pl-md pr-3xl santo-body-regular",
 };
 
 /** Acima disso o painel ganha campo de busca — rolar 300 itens não é opção. */

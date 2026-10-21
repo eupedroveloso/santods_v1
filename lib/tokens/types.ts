@@ -50,6 +50,8 @@ export type ShadowLayer = {
   color: string;
   visible: boolean;
   blendMode: string;
+  /** Cor ligada a variavel (nivel B do Estudio: brand/shadow/<estilo>/<camada>). */
+  boundVariables?: { color?: string };
 };
 
 export type EffectStyleDef = { effects: ShadowLayer[] };

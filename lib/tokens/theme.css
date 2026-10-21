@@ -6,6 +6,7 @@
 @theme inline {
   --font-sans: var(--santo-font-sans);
   --font-mono: var(--santo-font-mono);
+  --font-heading: var(--santo-font-heading);
 
   /* Cores semanticas — color/bg/* perde o segmento "bg" (bg-brand-solid-default),
      as demais familias mantem o prefixo (text-text-primary, border-border-subtle). */
@@ -262,38 +263,38 @@
   --shadow-2xl: var(--santo-shadow-2xl);
 
   /* Papeis de texto: text-heading-1, text-body, text-code-md. */
-  --text-heading-1: var(--santo-type-size-72);
-  --text-heading-1--line-height: var(--santo-type-leading-80);
+  --text-heading-1: var(--santo-brand-type-heading-1-size);
+  --text-heading-1--line-height: var(--santo-brand-type-heading-1-leading);
   --text-heading-1--letter-spacing: var(--santo-type-tracking-tighter);
-  --text-heading-2: var(--santo-type-size-60);
-  --text-heading-2--line-height: var(--santo-type-leading-72);
+  --text-heading-2: var(--santo-brand-type-heading-2-size);
+  --text-heading-2--line-height: var(--santo-brand-type-heading-2-leading);
   --text-heading-2--letter-spacing: var(--santo-type-tracking-tighter);
-  --text-heading-3: var(--santo-type-size-48);
-  --text-heading-3--line-height: var(--santo-type-leading-56);
+  --text-heading-3: var(--santo-brand-type-heading-3-size);
+  --text-heading-3--line-height: var(--santo-brand-type-heading-3-leading);
   --text-heading-3--letter-spacing: var(--santo-type-tracking-tight);
-  --text-heading-4: var(--santo-type-size-36);
-  --text-heading-4--line-height: var(--santo-type-leading-44);
+  --text-heading-4: var(--santo-brand-type-heading-4-size);
+  --text-heading-4--line-height: var(--santo-brand-type-heading-4-leading);
   --text-heading-4--letter-spacing: var(--santo-type-tracking-tight);
-  --text-heading-5: var(--santo-type-size-30);
-  --text-heading-5--line-height: var(--santo-type-leading-38);
+  --text-heading-5: var(--santo-brand-type-heading-5-size);
+  --text-heading-5--line-height: var(--santo-brand-type-heading-5-leading);
   --text-heading-5--letter-spacing: var(--santo-type-tracking-snug);
-  --text-heading-6: var(--santo-type-size-24);
-  --text-heading-6--line-height: var(--santo-type-leading-32);
+  --text-heading-6: var(--santo-brand-type-heading-6-size);
+  --text-heading-6--line-height: var(--santo-brand-type-heading-6-leading);
   --text-heading-6--letter-spacing: var(--santo-type-tracking-snug);
-  --text-body-large: var(--santo-type-size-18);
-  --text-body-large--line-height: var(--santo-type-leading-28);
+  --text-body-large: var(--santo-brand-type-body-large-size);
+  --text-body-large--line-height: var(--santo-brand-type-body-large-leading);
   --text-body-large--letter-spacing: var(--santo-type-tracking-normal);
-  --text-body: var(--santo-type-size-16);
-  --text-body--line-height: var(--santo-type-leading-24);
+  --text-body: var(--santo-brand-type-body-size);
+  --text-body--line-height: var(--santo-brand-type-body-leading);
   --text-body--letter-spacing: var(--santo-type-tracking-normal);
-  --text-body-small: var(--santo-type-size-14);
-  --text-body-small--line-height: var(--santo-type-leading-20);
+  --text-body-small: var(--santo-brand-type-body-small-size);
+  --text-body-small--line-height: var(--santo-brand-type-body-small-leading);
   --text-body-small--letter-spacing: var(--santo-type-tracking-normal);
-  --text-caption: var(--santo-type-size-12);
-  --text-caption--line-height: var(--santo-type-leading-16);
+  --text-caption: var(--santo-brand-type-caption-size);
+  --text-caption--line-height: var(--santo-brand-type-caption-leading);
   --text-caption--letter-spacing: var(--santo-type-tracking-normal);
-  --text-caption-small: var(--santo-type-size-10);
-  --text-caption-small--line-height: var(--santo-type-leading-16);
+  --text-caption-small: var(--santo-brand-type-caption-small-size);
+  --text-caption-small--line-height: var(--santo-brand-type-caption-small-leading);
   --text-caption-small--letter-spacing: var(--santo-type-tracking-wide);
   --text-code: var(--santo-type-size-14);
   --text-code--line-height: var(--santo-type-leading-20);
