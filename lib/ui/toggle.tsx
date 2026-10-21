@@ -12,8 +12,10 @@ import { RADIUS_CONTROL, RADIUS_CONTROL_VAR } from "./radius";
  * de toque pequena e o defeito mais comum desses controles.
  */
 
+// Sem raio aqui: cada caixa escolhe o seu. Com rounded-xs na base, o rounded-full
+// do radio perdia pela ordem do CSS gerado e o radio virava quadrado (lia como checkbox).
 const BOX =
-  "santo-focus-field grid size-md shrink-0 place-items-center rounded-xs border-thin transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)";
+  "santo-focus-field grid size-md shrink-0 place-items-center border-thin transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)";
 
 export function Checkbox({
   checked,
@@ -40,7 +42,7 @@ export function Checkbox({
         aria-checked={checked}
         disabled={disabled}
         onClick={() => onChange(!checked)}
-        className={`${BOX} mt-3xs cursor-pointer ${
+        className={`${BOX} mt-3xs cursor-pointer rounded-xs ${
           checked
             ? "border-border-brand bg-brand-solid-default text-text-on-brand"
             : "border-border-default bg-input-default hover:border-border-strong"

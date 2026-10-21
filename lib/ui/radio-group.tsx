@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import type { KeyboardEvent, ReactNode } from "react";
+import type { CSSProperties, KeyboardEvent, ReactNode } from "react";
 import { RadioMark } from "./toggle";
 
 /**
@@ -14,6 +14,7 @@ export function RadioCard({
   onSelect,
   children,
   leading,
+  labelStyle,
   disabled,
   tabIndex,
   onKeyDown,
@@ -25,6 +26,8 @@ export function RadioCard({
   children: ReactNode;
   /** Marcador visual a esquerda do rotulo: icone, amostra. */
   leading?: ReactNode;
+  /** Aplicado ao rotulo — a opcao de familia aparece na propria fonte (como no Select). */
+  labelStyle?: CSSProperties;
   disabled?: boolean;
   tabIndex?: number;
   onKeyDown?: (e: KeyboardEvent<HTMLButtonElement>) => void;
@@ -52,7 +55,10 @@ export function RadioCard({
     >
       <RadioMark checked={checked} disabled={disabled} />
       {leading && <span className="shrink-0 text-icon-secondary">{leading}</span>}
-      <span className="santo-body-small-medium min-w-0 text-text-primary">{children}</span>
+      {/* flex-1: um rotulo com valor a direita (nome · valor) ocupa a largura do cartao. */}
+      <span className="santo-body-small-medium min-w-0 flex-1 text-text-primary" style={labelStyle}>
+        {children}
+      </span>
     </button>
   );
 }
@@ -61,6 +67,7 @@ export type RadioCardOption<T extends string> = {
   value: T;
   label: ReactNode;
   leading?: ReactNode;
+  labelStyle?: CSSProperties;
   disabled?: boolean;
 };
 
@@ -128,6 +135,7 @@ export function RadioGroup<T extends string>({
           checked={o.value === value}
           onSelect={() => onChange(o.value)}
           leading={o.leading}
+          labelStyle={o.labelStyle}
           disabled={o.disabled}
           tabIndex={i === focusable ? 0 : -1}
           onKeyDown={onKeyDown(i)}

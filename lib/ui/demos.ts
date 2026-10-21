@@ -14,6 +14,9 @@ import { miniBarsDemos } from "./mini-bars.demo";
 import { fabDemos } from "./fab.demo";
 import { railNavDemos } from "./rail-nav.demo";
 import { appSidebarDemos } from "./app-sidebar.demo";
+import { editorFrameDemos } from "./editor-frame.demo";
+import { saveIndicatorDemos } from "./save-indicator.demo";
+import { stepRowDemos } from "./step-row.demo";
 import { brandLogoDemos } from "./brand-logo.demo";
 import { brandSwitchDemos } from "./brand-switch.demo";
 import { brandCardDemos } from "./brand-card.demo";
@@ -112,6 +115,9 @@ export const demos: DemoMap = {
   ...feedDemos,
   ...iconsDemos,
   ...kbdDemos,
+  ...editorFrameDemos,
+  ...saveIndicatorDemos,
+  ...stepRowDemos,
   ...copyButtonDemos,
   ...copyCodeDemos,
   ...codeBlockDemos,

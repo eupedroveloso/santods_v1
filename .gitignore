@@ -54,3 +54,9 @@ public/contexto/05-regras-e-rubricas.md
 public/contexto/06-figma.md
 public/contexto/santods-contexto-completo.txt
 public/contexto/indice.json
+
+# modelo de variaveis de ambiente (versionado; o .env de verdade fica fora)
+!.env.example
+
+# banco local do Estudio (SQLite); o esquema mora em drizzle/
+/data/

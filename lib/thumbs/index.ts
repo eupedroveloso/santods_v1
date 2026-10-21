@@ -33,6 +33,9 @@ import { ColorThumb } from "./color.thumb";
 import { CardThumb } from "./card.thumb";
 import { CardGridThumb } from "./card-grid.thumb";
 import { AppSidebarThumb } from "./app-sidebar.thumb";
+import { EditorFrameThumb } from "./editor-frame.thumb";
+import { SaveIndicatorThumb } from "./save-indicator.thumb";
+import { StepRowThumb } from "./step-row.thumb";
 import { BrandLogoThumb } from "./brand-logo.thumb";
 import { BrandSwitchThumb } from "./brand-switch.thumb";
 import { BrandCardThumb } from "./brand-card.thumb";
@@ -226,6 +229,9 @@ export const thumbs: Record<string, ComponentType> = {
   marker: MarkerThumb,
   ticker: TickerThumb,
   kbd: KbdThumb,
+  "editor-frame": EditorFrameThumb,
+  "save-indicator": SaveIndicatorThumb,
+  "step-row": StepRowThumb,
   "copy-button": CopyButtonThumb,
   "copy-code": CopyCodeThumb,
   "code-block": CodeBlockThumb,

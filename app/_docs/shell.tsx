@@ -51,6 +51,8 @@ export function DocsShell({
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const mod = useModKey();
+  // O editor do Estúdio traz os próprios painéis: sem a sidebar da doc e sem o padding de página.
+  const workspace = pathname.startsWith("/estudio/");
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -85,6 +87,9 @@ export function DocsShell({
   const sidebar = (pinned: boolean) => (
     <Sidebar nav={nav} pathname={pathname} pinned={pinned} onSearch={openSearch} onNavigate={() => setMenuOpen(false)} />
   );
+
+  // A rota de preview do Estúdio roda dentro de um iframe: sem moldura nenhuma.
+  if (pathname === "/estudio/preview") return <>{children}</>;
 
   return (
     <div className="flex min-h-full flex-col">
@@ -146,12 +151,16 @@ export function DocsShell({
       {/* Sem container centralizado: a sidebar encosta na borda esquerda da janela e
           o conteudo ocupa o resto. O max-w de leitura fica so no texto corrido. */}
       <div className="flex w-full flex-1">
+        {!workspace && (
         <aside className={`sticky top-(--santo-dimension-size-56) hidden h-[calc(100dvh-var(--santo-dimension-size-56))] ${LAYOUT.sidebar} shrink-0 overflow-y-scroll santo-pinned-scroll scrollbar-edge border-r-thin border-border-subtle px-xs pb-sm lg:block`}>
           {sidebar(true)}
         </aside>
+        )}
         {/* Altura minima = viewport menos a topbar: assim o rodape da pagina (mt-auto)
             encosta embaixo em pagina curta. */}
-        <main className="flex min-h-[calc(100dvh-var(--santo-dimension-size-56))] min-w-0 flex-1 flex-col px-md py-2xl lg:px-3xl">
+        <main
+          className={`flex min-h-[calc(100dvh-var(--santo-dimension-size-56))] min-w-0 flex-1 flex-col ${workspace ? "" : "px-md py-2xl lg:px-3xl"}`}
+        >
           {children}
         </main>
       </div>

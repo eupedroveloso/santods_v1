@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { Swatch } from "./swatch";
 import { RADIUS_BAR } from "./radius";
 
-export type TokenSampleVariant = "swatch" | "shadow" | "radius" | "bar" | "line" | "text" | "easing" | "duration";
+export type TokenSampleVariant = "swatch" | "shadow" | "radius" | "corner" | "bar" | "line" | "text" | "easing" | "duration";
 
 type TextProperty = "fontSize" | "fontWeight" | "fontFamily" | "letterSpacing";
 
@@ -13,6 +13,8 @@ type TextProperty = "fontSize" | "fontWeight" | "fontFamily" | "letterSpacing";
  * barra, curva como trajeto, duracao como deslocamento).
  *
  * easing e duration animam no hover e no foco (o bloco recebe Tab).
+ * `corner` mostra UM canto ampliado (miniatura de preset de raio): com `scale`
+ * o raio cresce na mesma proporção, e Reto/Suave/Arredondado se leem de relance.
  */
 export function TokenSample({
   variant,
@@ -36,7 +38,7 @@ export function TokenSample({
   property?: TextProperty;
   /** text: o texto da amostra. */
   sample?: string;
-  /** bar: fracao da largura (ex. 0.1 para container, que nao cabe inteiro). */
+  /** bar: fracao da largura (ex. 0.1 para container, que nao cabe inteiro). corner: ampliacao do raio (ex. 2). */
   scale?: number;
   /** easing: os quatro numeros da cubic-bezier, para desenhar a curva. */
   bezier?: [number, number, number, number];
@@ -68,6 +70,16 @@ export function TokenSample({
           className={`block size-2xl border-thin border-border-default bg-brand-subtle-default ${className}`}
           style={{ borderRadius: value }}
         />
+      );
+    case "corner":
+      // O quadrado interno passa da moldura: so o canto de cima a esquerda aparece, grande.
+      return (
+        <span className={`relative block size-2xl overflow-hidden ${className}`}>
+          <span
+            className="absolute left-0 top-0 block size-4xl border-thick border-border-brand bg-brand-subtle-default"
+            style={{ borderTopLeftRadius: scale ? `calc(${value} * ${scale})` : value }}
+          />
+        </span>
       );
     case "bar":
       return (
