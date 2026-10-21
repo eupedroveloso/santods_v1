@@ -8,21 +8,19 @@
  * `TODO(radius/control)`), nao em cada componente.
  */
 
-// TODO(radius/control): virar "rounded-control" quando o token Semantic radius/control
-// (-> Brand brand/shape/radius-control -> dimension/radius/8) for aprovado e sincronizado.
-// Hoje radius/md = 8 = control: nenhuma diferenca visual no Santo.
+// radius/control (-> brand/shape/radius-control): base de CONTROLE, separada do raio de
+// container (radius/md -> radius-base) desde o nivel B do Estudio. No Santo e VTSD = 8 = radius/md.
 /** Controle interativo compacto: botao, chip, count, aba, item de nav, campo de uma linha, FAB. */
-export const RADIUS_CONTROL = "rounded-md";
+export const RADIUS_CONTROL = "rounded-control";
 
-// TODO(radius/control): trilho = control + space/2xs (concentrico). Com control = 8 e
-// p-2xs = 4, e radius/lg (12); se a marca mudar o control, rever este degrau.
+// Trilho = control + space/2xs: concentrico ao controle que ele envolve, em qualquer marca
+// (com control 8 e p-2xs 4 da os 12 de sempre; se o Estudio mudar o control, o trilho acompanha).
 /** Trilho que envolve controles com `p-2xs`: Segmented, RailNav, tab bar, composer. */
-export const RADIUS_TRACK = "rounded-lg";
+export const RADIUS_TRACK = "rounded-[calc(var(--santo-radius-control)+var(--santo-space-2xs))]";
 
-// TODO(radius/control): virar rounded-l-control / rounded-r-control.
 /** Pontas de uma faixa feita de celulas (cabecalho tonal da Table): o raio de controle so nas pontas. */
-export const RADIUS_CONTROL_START = "rounded-l-md";
-export const RADIUS_CONTROL_END = "rounded-r-md";
+export const RADIUS_CONTROL_START = "rounded-l-control";
+export const RADIUS_CONTROL_END = "rounded-r-control";
 
 /**
  * EXCECAO do Pedro (2026-10-19): BADGE e TAG podem ser 100% arredondados —
@@ -38,6 +36,5 @@ export const RADIUS_BAR = "rounded-xs";
  * Os mesmos degraus como valor CSS, para o calculo concentrico em `style`
  * (Card, moldura dupla): raio da moldura = raio do filho + padding.
  */
-// TODO(radius/control): virar var(--santo-radius-control) junto com RADIUS_CONTROL.
-export const RADIUS_CONTROL_VAR = "var(--santo-radius-md)";
+export const RADIUS_CONTROL_VAR = "var(--santo-radius-control)";
 export const RADIUS_TRACK_VAR = "var(--santo-radius-lg)";

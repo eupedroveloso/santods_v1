@@ -9,7 +9,7 @@ import { RADIUS_CONTROL } from "./radius";
  * Campos de entrada do SantoDS.
  *
  * `variant`:
- *   well     (padrao) POCO: surface/sunken, sem contorno em repouso, pastilha
+ *   well     (padrao) POCO: surface/well (no Santo = sunken), sem contorno em repouso, pastilha
  *            (1 linha) — campo dentro de cartao (skill santo-ui-craft, secao 9).
  *   outline  contorno border/default sobre bg/input, raio md: formulario longo
  *            sobre o chao, onde o poco nao se destacaria.
@@ -20,18 +20,20 @@ import { RADIUS_CONTROL } from "./radius";
 export type FieldVariant = "well" | "outline";
 
 const LOOK: Record<FieldVariant, { box: string; idle: string }> = {
-  well: { box: `${RADIUS_CONTROL} bg-surface-sunken`, idle: "border-transparent hover:bg-neutral-subtle-default" },
-  outline: { box: `${RADIUS_CONTROL} bg-input-default`, idle: "border-border-default hover:border-border-strong" },
+  well: { box: "bg-surface-well", idle: "border-transparent hover:bg-neutral-subtle-default" },
+  outline: { box: "bg-input-default", idle: "border-border-default hover:border-border-strong" },
 };
 
+// Cada medida por tamanho vem de control/<medida>/<tamanho> (Estúdio > Controles), como no botão:
+// altura, padding horizontal, raio, borda e tamanho da fonte (com `!`: typography.css fica fora de @layer).
 const SIZES: Record<ControlSize, string> = {
-  sm: "h-(--santo-dimension-size-32) px-xs santo-caption-regular",
-  md: "h-(--santo-dimension-size-40) px-sm santo-body-small-regular",
-  lg: "h-(--santo-dimension-size-48) px-md santo-body-regular",
+  sm: "h-(--santo-control-height-sm) px-(--santo-control-padding-x-sm) rounded-(--santo-control-radius-sm) border-(length:--santo-control-border-sm) santo-caption-regular text-(length:--santo-control-font-sm)!",
+  md: "h-(--santo-control-height-md) px-(--santo-control-padding-x-md) rounded-(--santo-control-radius-md) border-(length:--santo-control-border-md) santo-body-small-regular text-(length:--santo-control-font-md)!",
+  lg: "h-(--santo-control-height-lg) px-(--santo-control-padding-x-lg) rounded-(--santo-control-radius-lg) border-(length:--santo-control-border-lg) santo-body-regular text-(length:--santo-control-font-lg)!",
 };
 
 const BASE =
-  "santo-focus-field w-full min-w-0 border-thin text-text-primary placeholder:text-text-placeholder transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled";
+  "santo-focus-field w-full min-w-0 text-text-primary placeholder:text-text-placeholder transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled";
 
 // `size` do HTML e numerico; o nosso e a escala de controle, entao substituimos.
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
@@ -61,7 +63,7 @@ export function Textarea({ invalid, variant = "well", className = "", rows = 3, 
     <textarea
       rows={rows}
       aria-invalid={invalid || undefined}
-      className={`${BASE} ${variant === "well" ? `${RADIUS_CONTROL} bg-surface-sunken` : LOOK.outline.box} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : LOOK[variant].idle} ${className}`}
+      className={`${BASE} border-thin ${RADIUS_CONTROL} ${variant === "well" ? "bg-surface-well" : LOOK.outline.box} santo-body-small-regular px-sm py-xs ${invalid ? "border-border-danger" : LOOK[variant].idle} ${className}`}
       {...rest}
     />
   );

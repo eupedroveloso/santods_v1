@@ -116,7 +116,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 
 ## Primitivos
 
-30 componentes.
+31 componentes.
 
 | Componente | Quando usar |
 |---|---|
@@ -143,6 +143,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `Progress` | Quanto de uma meta já foi cumprido. Sem teto, use `Stat`. `intent` muda o preenchimento. |
 | `Radio` | Chave quando o efeito é imediato; caixa quando existe um Salvar. Switch desabilitado continua mostrando o estado (ligado = brand/subtle). Switch concêntrico: trilho 24 × 40 no raio de controle com folga `space/2xs` nos quatro lados; punho 16 em pastilha (controle − 2xs = `radius/xs`); curso 16 = largura do punho. |
 | `Ring` | Anel de progresso (`value` 0–100, `size` sm/md/lg, `tone`, centro opcional; trilha em `neutral/subtle/active`). Ao lado de número grande, em tile, em linha de lista. **Interativo por padrão**: hover/foco (uma parada de Tab) engrossa o arco um degrau (`border/thick`) e abre tooltip com rótulo e valor (`detail` troca o "72%"); `interactive={false}` em anel decorativo. |
+| `SaveIndicator` | Estado do salvamento automático no cabeçalho de um editor: ícone + micro-texto (`salvo`, `salvando` com pulso, `erro` em text/danger), caption medium, aria-live polite. Sem botão nem explicação: o detalhe do erro mora onde a pessoa corrige. **Dívida de paridade**: sem par no Figma. |
 | `Segmented` | Escolha única entre 2 e 4 opções visíveis. Prefira a `Select` quando a comparação entre elas importa. Trilho com padding uniforme `space/2xs` e raio calculado como `radius/md + space/2xs`; os itens usam `RADIUS_CONTROL`, inclusive só ícones, em sm/md e `block`. Não depende de `radius/lg` fixo. `block` = largura do pai com abas iguais (irmão de campo/botão de largura total); nunca passa da largura do pai. |
 | `Select` | **Nunca o nativo.** O `<select>` do sistema abre o menu do SO, que ignora tema, tipografia e densidade — e não consegue mostrar cada opção com aparência própria, que é justamente o que faz um seletor de fontes ser útil. Aceita grupos, dica por opção, marcador à esquerda e `labelStyle`. Ganha campo de busca a partir de 12 opções. Painel em `position: fixed` para não ser recortado por ancestral com `overflow`. Teclado completo: setas, Home/End, Enter, Esc, Tab. |
 | `Skeleton` | Formas neutras (`Bar`, `Block`, `Circle`, `Button`, `Field`, `Chip`, `Check`, `Row`, `Rule`, `Bars`, `Line`) para ilustrar a anatomia de um componente ou segurar o lugar enquanto carrega. Sem texto, ícone nem cor de marca. `Block track` é opt-in para trilhos de miniatura: padding `space/3xs` uniforme e raio `radius/xs + space/3xs`, concêntrico ao filho `xs`. |
@@ -153,7 +154,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 
 ## Semânticos
 
-80 componentes.
+83 componentes.
 
 | Componente | Quando usar |
 |---|---|
@@ -190,8 +191,10 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `DashboardHeader` | Cabeçalho de dashboard (bloco): título heading-4 + meta, filtro de período e ação primária à direita, alinhado à grade. **Por dado** (a tela de exemplo só compõe): `periods`/`period`/`onPeriodChange` desenham o Segmented; `primaryAction` (`{ label, icon, onClick }`) desenha o Button primário. Slots `filter`/`action` para outra peça. Abaixo de md, os controles descem. |
 | `DonutChart` | Partes de um todo (≤ 5 fatias): total no meio (escala de número do DS: sm body, md heading-6, lg heading-5 — use formato compacto, ex. "24,3 mil") (em foco, a fatia), legenda `column` com a parte de cada uma; `pie` = disco cheio. Fatia em foco engorda `border/heavy`; todas mantêm o tom (ordem `CHART_TONES`); ponteiro no furo volta o centro ao total; legenda `w-fit`. |
 | `DownloadList` | Arquivos para baixar (contexto do sistema, materiais): item `featured` (o pacote completo) no topo com IconTile brand e Button primário "Baixar"; depois um arquivo por linha — ícone de documento, título + nome do arquivo em mono, tamanho (`formatBytes`) e IconButton ghost de download (`<a download>`). Lista enxuta: `description`, se houver, é uma linha de caption. Com `viewHref` a linha inteira abre a página de leitura e o botão continua baixando. Hairline entre linhas, sem caixa. Alimentada por dado. |
+| `EditorFrame` | Bancada de edição em três painéis: navegação no chão sunken à esquerda, documento vivo no centro e ajustes à direita (space/384), cada um rolando por conta própria. Abaixo de lg a navegação vira `mobileNav` no topo do centro; abaixo de xl os ajustes descem para baixo do documento. O pai dá a altura. Usada pelo Estúdio. **Dívida de paridade**: sem par no Figma. |
 | `EmptyState` | Lugar vazio com caminho: ícone, título, ação. Sem texto de apoio. |
 | `Field` | Rótulo + campo + apoio, com o espaçamento certo. `hint` some quando há `error`. |
+| `FontPicker` | Seletor de família para catálogo grande (índice do Google Fonts, ~1.800 famílias): busca, filtro por categoria em Chips, Curadoria no topo e lista VIRTUAL (só as linhas visíveis no DOM; a altura da linha é medida do token size/36). Cada opção aparece na própria fonte, carregada sob demanda por `previewHref` (só o peso regular, cache por página). Gatilho = poço do Select, altura control-height. Teclado completo; painel em position: fixed. Use no lugar do Select quando a pessoa escolhe pelo desenho da letra. **Dívida de paridade**: sem par no Figma. |
 | `GoalsCard` | Metas com teto (reserva, viagem): anel, nome em overline, guardado e alvo; metas separadas por Divider; `onAdd` liga "Nova meta". |
 | `InvestCard` | Ordem com valor e modalidade: campo-poço, tipo em Segmented, resumo, ação primária. |
 | `KeyValue` | Linha rótulo × valor (resumo de pedido, detalhe de transação). Valor tabular à direita; `emphasis` no total. |
@@ -207,7 +210,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `NavSection` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
 | `NavSub` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
 | `NavUser` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
-| `NumberField` | Slider de **largura total** para um número: a trilha não divide a linha com o valor. `valueLabel` `above` (padrão: rótulo flutuante acima do punho, acompanha a posição e nunca vaza nas pontas), `below` (mín | valor | máx abaixo da trilha) ou `none`. `field` liga o campo para digitar o valor exato, numa linha própria abaixo. Teclado no range nativo; `aria-valuetext` com a unidade. |
+| `NumberField` | Slider de **largura total** para um número: a trilha não divide a linha com o valor. `valueLabel` `above` (padrão: rótulo flutuante acima do punho, acompanha a posição e nunca vaza nas pontas), `below` (mín | valor | máx abaixo da trilha) ou `none`. `field` liga o campo para digitar o valor exato, numa linha própria abaixo. Teclado no range nativo; `aria-valuetext` com a unidade. `layout="inline"`: UMA linha alinhada ao grid do painel — rótulo à esquerda, trilha no meio, campo compacto com a unidade à direita (painel de ajustes). |
 | `Pagination` | Contagem à esquerda, navegação à direita. |
 | `PaymentsCard` | Tabela com seleção, status em Tag de intenção, ações por linha e paginação com contagem. |
 | `PreferencesCard` | Liga/desliga com salvar (cookies, notificações): SettingRow + Switch por hairline, contagem ligada. |
@@ -225,6 +228,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `StackedAreaChart` | Compatibilidade: `AreaChart stacked` com séries por cor crua. |
 | `Stat` | Número grande com rótulo e variação. Escala do número: `sm` heading-6 (24), `md` heading-5 (30, padrão de cartão), `lg` heading-3 (48, só o número da tela). |
 | `StatCard` | Métrica num cartão: número + unidade, `delta` em Tag, `trend` (spark, bars ou ring) no acento; `title` com `meta`/`badge` e `ranges` (Segmented); `details` chave × valor após Divider; `action` em bloco. KPI, saldo, cotação. |
+| `StepRow` | Passo editável de uma escala derivada (raio, espaço, tamanho de texto): amostra viva, nome do token em mono com largura fixa (space/96, a coluna alinha), campos do valor + unidade e o reset ao derivado. `overridden` acende o nome em brand e libera o reset; sem override o reset ocupa o lugar invisível. Hairline entre linhas, sem caixa. **Dívida de paridade**: sem par no Figma. |
 | `SwatchPicker` | Amostra que abre o `ColorPicker`. |
 | `TabBar` | Abas em pastilha. Trilho deriva `radius/md + space/2xs`; `floating` soma também `border/thin` do contorno. Padding uniforme nos quatro lados. |
 | `Table` | Tabela compacta: cabeçalho tonal em faixa (pontas no raio de controle, nunca cápsula), linhas hairline, número à direita. Realce de linha INSET com raio aninhado (`santo-row`, padrão) ou `flush` para tabela que ocupa o Card inteiro (`padded={false}`: realce reto, contêiner recorta). `layout="fixed"` + `Column.width` (degrau de dimension/space) trava as colunas — tabelas empilhadas alinham e texto longo quebra. `selected` liga a coluna de seleção, `rowAction` a de ações. Coluna sem `render` lê a célula pronta em `row[key]` (`CellRow`) — assim a tabela monta num Server Component; seleção e ações exigem cliente. |
@@ -232,7 +236,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `TeamCard` | Pessoa com papel (Select) / equipe com avatares no canto / link para copiar + quem tem acesso. |
 | `ThumbFrame` | Moldura de miniatura: poço 16:10 com grade sutil e cartão no centro, onde o `Skeleton` desenha. Só para a vitrine do índice de `/componentes` (ilustrações em `lib/thumbs`). |
 | `Ticker` | Faixa de cotações. Quebra em linhas (célula de largura mínima `space/240`) em vez de rolar: sem barra horizontal nem item cortado. |
-| `TokenSample` | Amostra viva de token pela var CSS: `swatch`, `shadow`, `radius`, `bar`, `line`, `text`, `easing` (curva + bolinha), `duration`. |
+| `TokenSample` | Amostra viva de token pela var CSS: `swatch`, `shadow`, `radius`, `corner` (um canto ampliado; `scale` aumenta o raio na mesma proporção — miniatura de preset de raio), `bar`, `line`, `text`, `easing` (curva + bolinha), `duration`. |
 | `TransactionRow` | Linha de extrato (bloco): seta de entrada (valor ≥ 0) em `IconTile tone="success"` ou de saída em `tone="danger"` — a cor carrega o significado, então a caixa tonal é permitida —, título, categoria · data e valor à direita na mesma cor (text/success ou text/danger), com sinal e tabular-nums; `onAction` liga o IconButton ghost de ações. |
 | `TransactionsCard` | Extrato curto: contagem, "Ver todas" e uma `TransactionRow` (acima) por linha; `onAction(transação)` liga as ações de cada linha. |
 | `TypingIndicator` | Conversa. Bolha recebida em poço (`surface/sunken`), enviada em `brand/solid` + `text/on-brand`, raio xl com cauda xs; reações em pastilha elevada. `ChatComposer`: campo-poço em pastilha com anexar (ghost) e enviar (primary, círculo) inline, anel no conjunto. `avatarSrc` em ChatHeader. |

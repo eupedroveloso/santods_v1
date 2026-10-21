@@ -1,0 +1,1 @@
+ALTER TABLE `sistemas` ADD `salvo` text;

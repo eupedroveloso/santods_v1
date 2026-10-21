@@ -13,7 +13,6 @@ import {
 } from "react";
 import { Check, ChevronDown, Search } from "./icons";
 import type { ControlSize } from "./button";
-import { RADIUS_CONTROL } from "./radius";
 
 /**
  * Seletor do SantoDS.
@@ -42,10 +41,11 @@ export type SelectOption<T extends string> = {
   leading?: ReactNode;
 };
 
+// Medidas do gatilho de control/<medida>/<tamanho>, como Input e botão. O pr fica maior: é a vaga do chevron.
 const TRIGGER_SIZES: Record<ControlSize, string> = {
-  sm: "h-(--santo-dimension-size-32) pl-xs pr-2xl santo-caption-regular",
-  md: "h-(--santo-dimension-size-40) pl-sm pr-3xl santo-body-small-regular",
-  lg: "h-(--santo-dimension-size-48) pl-md pr-3xl santo-body-regular",
+  sm: "h-(--santo-control-height-sm) pl-(--santo-control-padding-x-sm) pr-2xl rounded-(--santo-control-radius-sm) border-(length:--santo-control-border-sm) santo-caption-regular text-(length:--santo-control-font-sm)!",
+  md: "h-(--santo-control-height-md) pl-(--santo-control-padding-x-md) pr-3xl rounded-(--santo-control-radius-md) border-(length:--santo-control-border-md) santo-body-small-regular text-(length:--santo-control-font-md)!",
+  lg: "h-(--santo-control-height-lg) pl-(--santo-control-padding-x-lg) pr-3xl rounded-(--santo-control-radius-lg) border-(length:--santo-control-border-lg) santo-body-regular text-(length:--santo-control-font-lg)!",
 };
 
 /** Acima disso o painel ganha campo de busca — rolar 300 itens não é opção. */
@@ -254,9 +254,7 @@ export function Select<T extends string>({
         disabled={disabled}
         onClick={toggle}
         onKeyDown={onKeyDown}
-        className={`santo-focus-field relative flex w-full min-w-0 cursor-pointer items-center gap-2xs border-thin text-left text-text-primary santo-transition-colors disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${
-          RADIUS_CONTROL
-        } ${
+        className={`santo-focus-field relative flex w-full min-w-0 cursor-pointer items-center gap-2xs text-left text-text-primary santo-transition-colors disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${
           variant === "well"
             ? `bg-surface-sunken hover:bg-neutral-subtle-default ${open ? "border-border-brand" : "border-transparent"}`
             : `bg-input-default hover:border-border-strong ${open ? "border-border-brand" : "border-border-default"}`

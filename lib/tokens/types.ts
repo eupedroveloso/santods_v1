@@ -41,15 +41,18 @@ export type TextStyleDef = {
 };
 
 export type ShadowLayer = {
-  type: "DROP_SHADOW" | "INNER_SHADOW";
+  /** Sombras (DROP/INNER) ou desfoque (BACKGROUND_BLUR = vidro, LAYER_BLUR). */
+  type: "DROP_SHADOW" | "INNER_SHADOW" | "BACKGROUND_BLUR" | "LAYER_BLUR";
   x: number;
   y: number;
   blur: number;
   spread: number;
-  /** Hex de 8 digitos: os dois ultimos sao o alfa. */
-  color: string;
+  /** Hex de 8 digitos: os dois ultimos sao o alfa. null nos desfoques. */
+  color: string | null;
   visible: boolean;
   blendMode: string;
+  /** Campos ligados a variavel (nivel B do Estudio): cor, deslocamento vertical e desfoque. */
+  boundVariables?: { color?: string; y?: string; blur?: string };
 };
 
 export type EffectStyleDef = { effects: ShadowLayer[] };

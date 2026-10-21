@@ -50,6 +50,12 @@ Brand.
 
 Reproduzível com `node scripts/brand-ramp.mjs '#00A99D'`. O script não escreve nada.
 
+> **Desde 2026-10-21** a matemática de cor (`lib/tokens/color.mjs`) é determinística entre
+> motores JS: só usa `+ - * /` e `Math.sqrt`, e dá o mesmo resultado no Node e no Safari. Com
+> isso, `brand/100`, `200`, `400` e `500` saem a 1/255 de um canal da tabela abaixo, que foi gerada
+> com o `Math.cbrt`/`**` do V8. **A tabela, o snapshot e o Figma continuam valendo como estão**:
+> a spec da VTSD é literal e aprovada. O teste `lib/tokens/estudio.test.mjs` trava esse desvio.
+
 1. **Luminância casada degrau a degrau.** Cada degrau da VTSD tem a mesma luminância
    relativa WCAG (Y) do degrau Santo correspondente. Por isso todo contraste que a coleção
    Color garante no Santo vale igual na VTSD, já que a Color é compartilhada. Casar o L do

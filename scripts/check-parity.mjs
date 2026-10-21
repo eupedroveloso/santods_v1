@@ -29,8 +29,14 @@ const snapshot = JSON.parse(readFileSync(SNAPSHOT, 'utf8'));
 /** Marca deixada por scripts/apply-brand-mode.mjs: o snapshot esta a frente do Figma. */
 const ahead = snapshot.meta.aheadOfFigma;
 const aheadNotice = ahead
-  ? `AVISO: snapshot A FRENTE do Figma em ${ahead.collections.join(', ')} (modo ${ahead.mode}, desde ${ahead.since}, por ${ahead.by}). ` +
-    `Reconciliar: ${ahead.reconcile}.`
+  ? [
+      `AVISO: snapshot A FRENTE do Figma em ${ahead.collections.join(', ')} (modo ${ahead.mode}, desde ${ahead.since}, por ${ahead.by}). ` +
+        `Reconciliar: ${ahead.reconcile}.`,
+      // Outras aplicacoes por script (ex.: nivel B do Estudio), cada uma com o seu rastro.
+      ...(ahead.also ?? []).map(
+        (a) => `AVISO: snapshot A FRENTE do Figma (${a.tag}) em ${a.collections.join(', ')} e ${a.styles}, desde ${a.since}, por ${a.by}. Reconciliar: ${a.reconcile}.`,
+      ),
+    ].join('\n')
   : '';
 
 /* ------------------------------------------------- consistencia interna */
@@ -105,6 +111,16 @@ function validate(doc, label) {
       if (!flat.get(target)) problems.push(`${label}: text style "${styleName}" liga ${prop} a variavel inexistente ${target}`);
     }
   }
+  for (const [styleName, s] of Object.entries(doc.effectStyles ?? {})) {
+    s.effects.forEach((e, i) => {
+      for (const [key, target] of Object.entries(e.boundVariables ?? {})) {
+        const v = flat.get(target);
+        const tipo = key === 'color' ? 'COLOR' : 'FLOAT';
+        if (!v) problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga ${key} a variavel inexistente ${target}`);
+        else if (v.type !== tipo) problems.push(`${label}: effect style "${styleName}" camada ${i + 1} liga ${key} a ${target}, que e ${v.type}`);
+      }
+    });
+  }
   return problems;
 }
 
@@ -176,7 +192,9 @@ function diff(before, after) {
     ...diffMaps('text style', before.textStyles, after.textStyles, eq, (s) =>
       `${s.fontFamily} ${s.fontStyle} ${s.fontSize}/${s.lineHeight.value ?? 'auto'} ls=${s.letterSpacing.value}${s.letterSpacing.unit === 'PERCENT' ? '%' : 'px'}`),
     ...diffMaps('effect style', before.effectStyles, after.effectStyles, eq, (s) =>
-      s.effects.length ? s.effects.map((e) => `${e.x} ${e.y} ${e.blur} ${e.spread} ${e.color}`).join(' | ') : 'none'),
+      s.effects.length
+        ? s.effects.map((e) => `${e.x} ${e.y} ${e.blur} ${e.spread} ${e.color}${e.boundVariables ? ` @${Object.values(e.boundVariables).join('+')}` : ''}`).join(' | ')
+        : 'none'),
   );
 
   // paintStyles/gridStyles so existem no dump; sinaliza se o Figma passar a ter algum.

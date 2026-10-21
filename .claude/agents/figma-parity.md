@@ -23,16 +23,24 @@ scripts/parity-hash.mjs       serializacao canonica + FNV-1a (lado Node)
 scripts/check-parity.mjs      diff / validacao / modo --fingerprint
 scripts/figma-brand-mode.js   script de ESCRITA para o use_figma: cria/atualiza um modo de marca (fonte da spec)
 scripts/apply-brand-mode.mjs  EXCECAO: aplica o mesmo modo ao snapshot sem Figma (deixa meta.aheadOfFigma)
-scripts/brand-ramp.mjs        gera as rampas brand/neutral de uma marca nova (so imprime)
+scripts/brand-ramp.mjs        CLI das rampas brand/neutral de uma marca nova (so imprime; metodo em lib/tokens/brand-ramp.mjs)
+scripts/figma-nivel-b.js      script de ESCRITA para o use_figma: nivel B do Estudio (fonte da spec NIVEL_B)
+scripts/figma-nivel-b-apply.mjs EXCECAO: aplica o nivel B ao snapshot sem Figma (deixa meta.aheadOfFigma.also)
 scripts/build-tokens.mjs      snapshot -> arquivos gerados
 lib/tokens/emit.mjs           emissores puros (rodam no Node E no browser)
+lib/tokens/color.mjs          FONTE  sRGB/OKLCH, luminancia e contraste WCAG (puro)
+lib/tokens/brand-ramp.mjs     FONTE  rampas de uma marca nova pela cor oficial (puro)
+lib/tokens/brand-mode.mjs     FONTE  applyBrandMode / withBrandMode / validateBrandSpec / specOfMode (puro)
+lib/tokens/contrast-audit.mjs FONTE  auditContrast: os 49 pares, marca x tema (puro)
+lib/tokens/estudio.mjs        FONTE  API do Estudio: derivar(rascunho) -> spec + css + auditoria (puro)
+lib/tokens/estudio.test.mjs   FONTE  testes: node --test lib/tokens/estudio.test.mjs
 lib/tokens/tokens.css         GERADO  variaveis --santo-* (Light + Dark)
 lib/tokens/typography.css     GERADO  as 68 classes .santo-*
 lib/tokens/theme.css          GERADO  @theme inline do Tailwind v4
 lib/tokens/index.ts           GERADO  tokens tipados
 ```
 
-Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.mjs`, `types.ts` e os `.d.ts`, que sao codigo-fonte). Se um valor gerado esta errado, ou o snapshot esta errado (sincronize com o Figma) ou o emissor esta errado (corrija `lib/tokens/emit.mjs`).
+Regra de ouro: **nada em `lib/tokens/` e editado a mao** (com excecao de `emit.mjs`, `types.ts`, os `.d.ts`/`.d.mts` e os modulos puros marcados FONTE acima, que sao codigo-fonte). Se um valor gerado esta errado, ou o snapshot esta errado (sincronize com o Figma) ou o emissor esta errado (corrija `lib/tokens/emit.mjs`).
 
 `emit.mjs` e o unico caminho de renderizacao. Se voce mudar um emissor, muda tudo que o build produz — e esse e o ponto.
 
@@ -121,6 +129,17 @@ Vale enquanto `tokens/santods.figma.json` tiver `meta.aheadOfFigma`. O check imp
    `meta.aheadOfFigma`. A saida diz se os bytes bateram. A ordem de chaves da Color no snapshot
    (`type, scopes, values`) e mais antiga que a do dump (`type, values, scopes`), entao a
    primeira gravacao pode acusar "DIFERENTES (so ordem/formato)", com os valores iguais.
+   **Nivel B do Estudio (andar `estudio`, `meta.aheadOfFigma.also`, tag `nivel-b`):** depois do
+   passo 6 da VTSD, cole `scripts/figma-nivel-b.js` no `use_figma` (DRY_RUN, depois real):
+   149 variaveis novas na Brand; Semantic com 20 aliases redirecionados e 38 novas; Color com
+   7 aliases redirecionados (surface/*, border/*) e 7 novas (surface/well, surface/panel,
+   frame/surface, frame/border, glass/surface, glass/border, glass/highlight); 7 effect styles
+   novos (glass/sm|md|lg background blur, blur/sm|md layer blur, glow/brand|neutral); 66 text styles religados (tamanho, entrelinha e tracking) e
+   10 camadas de sombra com cor, offsetY e radius ligados a `brand/shadow/*`.
+   ATENCAO na reconciliacao: confirmar no Figma a unidade do letterSpacing ligado a variavel
+   (o snapshot guarda % do tamanho, como type/tracking/*). Repita dump,
+   diff vazio e `--write`. O `figma-dump.js` e o hash ja leem `boundVariables.color` das sombras.
+   Ensaiado em Figma simulado: escrita = snapshot aplicado, segunda rodada 0 mudancas.
 7. `npm run tokens && npm run tokens:check` (sem AVISO) e `npm run tokens:fingerprint`.
    A saida gerada nao pode mudar: confira com `git diff lib/tokens`.
 8. Atualize a tabela acima (estado "confirmado") e apague o aviso de "A FRENTE".

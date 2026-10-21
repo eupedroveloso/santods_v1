@@ -28,6 +28,7 @@ export function NumberField({
   valueLabel = "above",
   field = false,
   format = (n: number) => n.toLocaleString("pt-BR"),
+  layout = "stack",
   className = "",
 }: {
   value: number;
@@ -45,12 +46,62 @@ export function NumberField({
   field?: boolean;
   /** Como escrever o valor nos rotulos. */
   format?: (n: number) => string;
+  /**
+   * `stack` (padrao): trilha na largura toda, valor acima/abaixo, campo numa
+   * linha propria. `inline`: UMA linha alinhada ao grid do painel, rotulo a
+   * esquerda (largura fixa), trilha no meio e o campo compacto com a unidade a
+   * direita. Use em painel de ajustes com varios parametros empilhados.
+   */
+  layout?: "stack" | "inline";
   className?: string;
 }) {
   const [draft, setDraft] = useState<string | null>(null);
   const clamped = Math.min(max, Math.max(min, value));
   const p = max > min ? (clamped - min) / (max - min) : 0;
   const text = (n: number) => `${format(n)}${unit ? ` ${unit}` : ""}`;
+
+  const campo = (
+    <span className={`relative flex items-center ${layout === "inline" ? "w-(--santo-dimension-space-80) shrink-0" : "w-(--santo-dimension-space-128) self-end"}`}>
+      <input
+        type="number"
+        value={draft ?? value}
+        step={step}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={(e) => {
+          setDraft(null);
+          const n = Number(e.target.value);
+          if (Number.isFinite(n)) onChange(n);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") (e.target as HTMLInputElement).blur();
+        }}
+        disabled={disabled}
+        aria-label={`${label} (valor exato)`}
+        className={`santo-focus-field santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 ${RADIUS_CONTROL} border-thin border-transparent bg-surface-well text-right hover:bg-neutral-subtle-default font-mono tabular-nums text-text-primary disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${unit ? "pr-2xl pl-2xs" : "px-2xs"}`}
+      />
+      {unit && <span className="santo-caption-small-regular pointer-events-none absolute right-2xs text-text-tertiary">{unit}</span>}
+    </span>
+  );
+
+  if (layout === "inline")
+    return (
+      <div className={`flex min-w-0 flex-1 items-center gap-sm ${className}`}>
+        <span className="santo-caption-medium w-(--santo-dimension-space-80) shrink-0 truncate text-text-secondary">{label}</span>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={clamped}
+          onChange={(e) => onChange(Number(e.target.value))}
+          disabled={disabled}
+          aria-label={label}
+          aria-valuetext={text(clamped)}
+          className="santo-range block h-(--santo-dimension-size-28) min-w-0 flex-1"
+        />
+        {campo}
+      </div>
+    );
 
   return (
     <div className={`flex min-w-0 flex-1 flex-col gap-2xs ${className}`}>
@@ -90,30 +141,7 @@ export function NumberField({
           <span className="text-text-tertiary">{text(max)}</span>
         </div>
       )}
-      {field && (
-        <span className="relative flex w-(--santo-dimension-space-128) items-center self-end">
-          <input
-            type="number"
-            value={draft ?? value}
-            step={step}
-            onChange={(e) => setDraft(e.target.value)}
-            onBlur={(e) => {
-              setDraft(null);
-              const n = Number(e.target.value);
-              if (Number.isFinite(n)) onChange(n);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") (e.target as HTMLInputElement).blur();
-            }}
-            disabled={disabled}
-            aria-label={`${label} (valor exato)`}
-            className={`santo-focus-field santo-caption-regular h-(--santo-dimension-size-28) w-full min-w-0 ${RADIUS_CONTROL} border-thin border-transparent bg-surface-sunken text-right hover:bg-neutral-subtle-default font-mono tabular-nums text-text-primary disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${unit ? "pr-2xl pl-2xs" : "px-2xs"}`}
-          />
-          {unit && (
-            <span className="santo-caption-small-regular pointer-events-none absolute right-2xs text-text-tertiary">{unit}</span>
-          )}
-        </span>
-      )}
+      {field && campo}
     </div>
   );
 }

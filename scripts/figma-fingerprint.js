@@ -29,7 +29,13 @@ function textStyleLine(name, s) {
   ]);
 }
 function effectStyleLine(name, s) {
-  return JSON.stringify([name, s.effects.map((e) => [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode])]);
+  return JSON.stringify([name, s.effects.map((e) => {
+    const row = [e.type, e.x, e.y, e.blur, e.spread, e.color, e.visible, e.blendMode];
+    const bv = e.boundVariables || {};
+    const keys = Object.keys(bv).sort();
+    if (!keys.length) return row;
+    return keys.length === 1 && keys[0] === 'color' ? [...row, bv.color] : [...row, keys.map((k) => [k, bv[k]])];
+  })]);
 }
 function hashLines(lines) {
   return fnv1a([...lines].sort().join('\n'));
@@ -95,6 +101,14 @@ const effectLines = (await figma.getLocalEffectStylesAsync()).map((s) =>
       color: e.color ? toHex(e.color) : null,
       visible: e.visible,
       blendMode: e.blendMode || 'NORMAL',
+      boundVariables: (() => {
+        const bound = {};
+        for (const [field, key] of [['color', 'color'], ['offsetY', 'y'], ['radius', 'blur']]) {
+          const b = e.boundVariables && e.boundVariables[field];
+          if (b && byId[b.id]) bound[key] = byId[b.id].name;
+        }
+        return Object.keys(bound).length ? bound : undefined;
+      })(),
     })),
   }),
 );

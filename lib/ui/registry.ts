@@ -17,6 +17,10 @@ import { miniBarsMeta } from "./mini-bars.meta";
 import { fabMeta } from "./fab.meta";
 import { railNavMeta } from "./rail-nav.meta";
 import { appSidebarMeta } from "./app-sidebar.meta";
+import { editorFrameMeta } from "./editor-frame.meta";
+import { fontPickerMeta } from "./font-picker.meta";
+import { saveIndicatorMeta } from "./save-indicator.meta";
+import { stepRowMeta } from "./step-row.meta";
 import { brandLogoMeta } from "./brand-logo.meta";
 import { brandSwitchMeta } from "./brand-switch.meta";
 import { brandCardMeta } from "./brand-card.meta";
@@ -121,6 +125,10 @@ const ALL: ComponentMeta[] = [
   ...feedMeta,
   ...iconsMeta,
   ...kbdMeta,
+  ...editorFrameMeta,
+  ...fontPickerMeta,
+  ...saveIndicatorMeta,
+  ...stepRowMeta,
   ...copyButtonMeta,
   ...copyCodeMeta,
   ...codeBlockMeta,

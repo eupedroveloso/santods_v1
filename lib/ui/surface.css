@@ -119,3 +119,42 @@
     --santo-card-nested: initial;
   }
 }
+
+/*
+ * Chao sem caixa (Pedro, 2026-10-21: "tire os campos de dentro do box"): os
+ * controles vao direto sobre o chao sunken (navegacao e ajustes do
+ * EditorFrame). Ali poco e chao seriam o mesmo degrau (neutral/100 no claro,
+ * o mais fundo no escuro) e o campo sumiria. santo-floor remapeia, so para os
+ * descendentes, o poco e o trilho um degrau acima do chao: o campo continua
+ * lendo como poco, o selecionado continua elevando (raised). Ponha no
+ * conteudo, nao no proprio chao (o fundo dele le a mesma variavel).
+ */
+@utility santo-floor {
+  --santo-color-surface-well: var(--santo-color-bg-neutral-subtle-hover);
+  --santo-color-surface-sunken: var(--santo-color-bg-neutral-subtle-hover);
+  :root[data-theme='dark'] & {
+    --santo-color-surface-well: var(--santo-color-bg-neutral-subtle-default);
+    --santo-color-surface-sunken: var(--santo-color-bg-neutral-subtle-default);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) & {
+      --santo-color-surface-well: var(--santo-color-bg-neutral-subtle-default);
+      --santo-color-surface-sunken: var(--santo-color-bg-neutral-subtle-default);
+    }
+  }
+}
+
+/*
+ * Contexto de controle por tamanho (Estúdio > Controles): o ícone sem `size`
+ * dentro do controle herda --santo-control-icon-<tamanho> (IconBase lê
+ * --santo-icon-size). No Santo os três valem dimension/icon/16.
+ */
+@utility santo-control-sm {
+  --santo-icon-size: var(--santo-control-icon-sm);
+}
+@utility santo-control-md {
+  --santo-icon-size: var(--santo-control-icon-md);
+}
+@utility santo-control-lg {
+  --santo-icon-size: var(--santo-control-icon-lg);
+}

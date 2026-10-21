@@ -79,3 +79,9 @@ right-to-bracket | entrar, login, acessar                               # Landin
 # --- sidebar das docs: recolher/expandir todas as pastas (Ateliê, 2026-10-21) ---
 arrows-to-line | recolher tudo, recolher, fechar pastas, comprimir     # botão "recolher tudo" da árvore
 arrows-from-line | expandir tudo, expandir, abrir pastas, desdobrar    # botão "expandir tudo" da árvore
+
+# --- Estúdio (/estudio, 2026-10-21) ---
+pen | caneta, editar, renomear, escrever                                # renomear um sistema
+trash-can | lixeira, apagar, excluir, remover                           # apagar um sistema
+sliders | controles, ajustes, configurar, filtros                      # estilo Controles (substitui o shapes provisório)
+lock | cadeado, travado, bloqueado, fixo                                # Estúdio fase 2: accent e status travados

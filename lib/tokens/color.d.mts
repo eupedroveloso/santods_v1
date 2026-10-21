@@ -1,0 +1,16 @@
+export type Rgb = [number, number, number];
+export type Oklch = [L: number, C: number, H: number];
+export declare function hexToRgb(hex: string): Rgb;
+export declare function alphaOf(hex: string): number;
+export declare function rgbToHex(c: Rgb): string;
+export declare function srgbToLinear(x: number): number;
+export declare function linearToSrgb(x: number): number;
+export declare function luminance(hex: string): number;
+export declare function composite(fg: string, bg: string): string;
+export declare function contrast(fg: string, bg: string): number;
+export declare function hexToOklch(hex: string): Oklch;
+export declare function oklchToRgb(lch: Oklch): Rgb;
+export declare function inGamut(rgb: Rgb): boolean;
+export declare function fitGamut(lch: Oklch): string;
+export declare function matchLuminance(Y: number, C: number, H: number): string;
+export declare function grayOfLuminance(Y: number): string;

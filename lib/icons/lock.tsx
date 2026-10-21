@@ -1,0 +1,12 @@
+// GERADO POR scripts/figma-icons.mjs A PARTIR DA PAGINA ICONES DO FIGMA.
+// Nao edite. Para incluir um icone, adicione o slug em lib/icons/needed.txt.
+// Figma: lock / Weight=regular — node 38:1049
+import { IconBase, type IconProps } from "./icon-base";
+
+export function LockIcon(props: IconProps) {
+  return (
+    <IconBase {...props} viewBox="0 0 16 16" ratio={1}>
+      <path d="M6 3.99999V5.59999H10V3.99999C10 2.89499 9.105 1.99999 8 1.99999C6.895 1.99999 6 2.89499 6 3.99999ZM4.8 5.59999V3.99999C4.8 2.23249 6.2325 0.799988 8 0.799988C9.7675 0.799988 11.2 2.23249 11.2 3.99999V5.59999C12.0825 5.59999 12.8 6.31749 12.8 7.19999V12.8C12.8 13.6825 12.0825 14.4 11.2 14.4H4.8C3.9175 14.4 3.2 13.6825 3.2 12.8V7.19999C3.2 6.31749 3.9175 5.59999 4.8 5.59999ZM10 6.79999H6H4.8C4.58 6.79999 4.4 6.97999 4.4 7.19999V12.8C4.4 13.02 4.58 13.2 4.8 13.2H11.2C11.42 13.2 11.6 13.02 11.6 12.8V7.19999C11.6 6.97999 11.42 6.79999 11.2 6.79999H10Z" />
+    </IconBase>
+  );
+}

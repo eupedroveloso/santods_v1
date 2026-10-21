@@ -22,7 +22,7 @@ export async function familiesInUse(): Promise<string[]> {
   // Uma colecao com varios modos (Santo, VTSD...) grava `values` por modo e
   // nao tem `value`; com um modo so, `value`. Soma as familias de TODOS os
   // modos de marca: o seletor de marca troca de familia sem recarregar.
-  for (const name of ["brand/family/sans", "brand/family/mono"]) {
+  for (const name of ["brand/family/sans", "brand/family/heading", "brand/family/mono"]) {
     const v = doc.collections.Brand?.variables?.[name] as { value?: unknown; values?: Record<string, unknown> } | undefined;
     if (!v) continue;
     if (v.values) Object.values(v.values).forEach(add);

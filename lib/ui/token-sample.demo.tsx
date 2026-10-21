@@ -20,6 +20,18 @@ export const tokenSampleDemos: DemoMap = {
         ),
       },
       {
+        title: "Canto ampliado",
+        code: `<TokenSample variant="corner" value="var(--santo-dimension-radius-4)" scale={2} />
+<TokenSample variant="corner" value="var(--santo-dimension-radius-12)" scale={2} />`,
+        Preview: () => (
+          <div className="flex flex-wrap items-center gap-lg">
+            {[0, 4, 8, 12].map((r) => (
+              <TokenSample key={r} variant="corner" value={`var(--santo-dimension-radius-${r})`} scale={2} />
+            ))}
+          </div>
+        ),
+      },
+      {
         title: "Medida e texto",
         layout: "stretch",
         code: `<TokenSample variant="bar" value="var(--santo-space-4xl)" />

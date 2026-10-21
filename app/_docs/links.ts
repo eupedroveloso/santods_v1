@@ -10,6 +10,7 @@ export const TOP_LINKS = [
   { label: "Tokens", href: "/tokens" },
   { label: "Estilos", href: "/estilos" },
   { label: "Identidades", href: "/identidades" },
+  { label: "Estúdio", href: "/estudio" },
 ] as const;
 
 /**

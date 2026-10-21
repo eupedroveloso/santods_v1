@@ -14,7 +14,9 @@ Dois agentes cuidam deste repositório. Use-os:
 Regras que não se negociam:
 
 - **Nada em `lib/tokens/` é editado à mão.** São arquivos gerados. As exceções, que
-  são código-fonte de verdade: `emit.mjs`, `types.ts` e os `.d.ts`.
+  são código-fonte de verdade: `emit.mjs`, `types.ts`, os `.d.ts` e os módulos puros
+  `color.mjs`, `brand-ramp.mjs`, `brand-mode.mjs`, `contrast-audit.mjs` e `estudio.mjs`
+  (com seus `.d.mts` e `estudio.test.mjs`).
 - A fonte da verdade é `tokens/santods.figma.json`. Valor errado no CSS significa
   snapshot desatualizado (sincronize com o Figma) ou emissor com bug.
 - `lib/tokens/emit.mjs` é o único caminho de renderização. Mexeu num emissor,
