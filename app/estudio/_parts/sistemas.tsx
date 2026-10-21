@@ -45,7 +45,7 @@ export function SistemasPainel({ sistemas }: { sistemas: SistemaResumo[] }) {
   };
 
   return (
-    <Card padding="lg" className="max-w-(--santo-dimension-container-md) gap-lg">
+    <Card padding="lg" className="max-w-(--santo-dimension-container-md)">
       <form onSubmit={criar} className="flex items-end gap-xs">
         <Field label="Novo sistema" error={erro ?? undefined} className="min-w-0 flex-1">
           <Input

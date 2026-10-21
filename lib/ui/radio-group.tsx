@@ -51,7 +51,7 @@ export function RadioCard({
           ? "border-border-subtle bg-surface-raised shadow-xs"
           : "border-transparent bg-surface-sunken hover:bg-neutral-subtle-default"
       }`}
-      style={{ borderRadius: "min(var(--santo-radius-lg), var(--santo-card-inner-radius, var(--santo-radius-lg)))" }}
+      style={{ borderRadius: "min(var(--santo-radius-lg), var(--santo-inner-radius, var(--santo-radius-lg)))" }}
     >
       <RadioMark checked={checked} disabled={disabled} />
       {leading && <span className="shrink-0 text-icon-secondary">{leading}</span>}

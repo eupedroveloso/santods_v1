@@ -64,6 +64,7 @@ import { progressMeta } from "./progress.meta";
 import { keyValueMeta } from "./key-value.meta";
 import { skeletonMeta } from "./skeleton.meta";
 import { thumbFrameMeta } from "./thumb-frame.meta";
+import { nestMeta } from "./nest.meta";
 import { overlineMeta } from "./overline.meta";
 import { iconTileMeta } from "./icon-tile.meta";
 import { emptyStateMeta } from "./empty-state.meta";
@@ -140,6 +141,7 @@ const ALL: ComponentMeta[] = [
   ...keyValueMeta,
   ...skeletonMeta,
   ...thumbFrameMeta,
+  ...nestMeta,
   ...overlineMeta,
   ...iconTileMeta,
   ...emptyStateMeta,

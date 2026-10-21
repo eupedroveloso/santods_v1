@@ -16,7 +16,7 @@ const tituloDe = (tela: TelaId) => TELAS.find((t) => t.id === tela)!.label;
  * Um iframe de /estudio/preview. Na amostra: largura do pai e altura medida
  * (volta do iframe). Nas telas: o aparelho (largura × altura de tela) reduzido
  * por escala para caber, centrado; a caixa que recorta leva o raio interno da
- * moldura (--santo-card-inner-radius), então a moldura nasce do filho.
+ * moldura (--santo-inner-radius), então a moldura nasce do filho.
  */
 export function Aparelho({
   tela,
@@ -47,12 +47,12 @@ export function Aparelho({
         ref={registrar}
         src={src}
         title={rotulo}
-        className="block w-full overflow-hidden rounded-(--santo-card-inner-radius)"
+        className="block w-full overflow-hidden rounded-(--santo-inner-radius)"
         style={{ height: alturaAmostra ? `${alturaAmostra}px` : "var(--santo-dimension-space-448)" }}
       />
     );
   return (
-    <div className="shrink-0 overflow-hidden rounded-(--santo-card-inner-radius)" style={{ width: largura * escala, height: altura * escala }}>
+    <div className="shrink-0 overflow-hidden rounded-(--santo-inner-radius)" style={{ width: largura * escala, height: altura * escala }}>
       <iframe
         key={src}
         ref={registrar}
@@ -121,9 +121,8 @@ export function ClaroEscuro({
           // Raio aninhado: o conteúdo é colado no iframe (iframe = xl), e a moldura
           // nasce dele: xl + recuo xs. Mede no escopo do rascunho.
           <Card key={t.id} variant="sunken" padding="xs" contentRadius="xl">
-            <span className="px-sm pt-2xs">
-              <Overline>{t.label}</Overline>
-            </span>
+            {/* Faixa do rótulo no mesmo recuo da moldura (gap = recuo, aninhamento). */}
+            <Overline>{t.label}</Overline>
             <div ref={i === 0 ? medir : undefined} className="flex justify-center">
               <Aparelho
                 tela={pref.tela}

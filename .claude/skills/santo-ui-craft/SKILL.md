@@ -86,9 +86,9 @@ radius"). Verificável no DOM, para cada par de peças:
    Calculado em `style` com `calc()` de tokens, nunca px.
 4. **Cartão folgado** (padding ≥ raio, ex. Card raised xl com `p-lg`): o
    filho fica longe do canto, não há relação concêntrica a cumprir — ele leva o
-   degrau da sua família (regra 2). O piso do raio interno é o **raio de
-   controle**, nunca abaixo (`--santo-card-inner-radius = max(controle, raio −
-   padding)`).
+   degrau da sua família (regra 2), o **raio de controle**, mas **nunca igual
+   ou maior que o externo**: `min(controle, degrau abaixo do externo)` (12 → 8,
+   8 → 4, 4 → 0; decisão do maestro, 2026-10-21).
 
 Teto: cartão de página `radius-xl` (16). Moldura que embrulha cartões pode
 passar do teto porque é derivada (regra 3), não escolhida.
@@ -98,7 +98,7 @@ passar do teto porque é derivada (regra 3), não escolhida.
 | Card de página e superfícies equivalentes (Card raised, modal, EmptyState, LinkCard) | `radius-xl` (16) **no máximo** (Pedro, 2026-10-19: 2xl/3xl ficou grande demais) |
 | Cartão dentro de moldura sunken, painel do Card double, bolha de chat | `radius/lg` (12) — irmão do trilho |
 | Moldura sunken / moldura do Card double | **derivada**: filho (`lg`) + padding (+ fio) |
-| Filho de cartão (poço de campo, código, IconTile, RadioCard) | `max(controle, externo − padding)` (`--santo-card-inner-radius`): em cartão folgado = controle (8) |
+| Filho de cartão (poço de campo, código, IconTile, RadioCard) | `max(controle, externo − padding)` (`--santo-inner-radius`): em cartão folgado = controle (8) |
 | Controles compactos (botão, IconButton, chip, count, aba de segmented/tab bar, nav item, rail item, campo de 1 ou mais linhas, select, number field, disclosure, FAB, trilho do switch) | **raio de controle** `RADIUS_CONTROL` (`radius/md` = 8; vira `radius/control` quando o token entrar — `TODO(radius/control)` em `lib/ui/radius.ts`) |
 | Trilho que envolve controles com `p-2xs` (segmented, tab bar, rail, nav user, composer) — e o punho do Switch, que é controle − 2xs (`xs`) | `RADIUS_TRACK` = controle + 2xs = `radius/lg`, concêntrico |
 | **Badge e Tag** — Tag/Badge, Count, Marker (rótulo estático pequeno) | `radius-full` (`RADIUS_BADGE`) — **exceção do Pedro** (2026-10-19): a única cápsula fora do círculo |
@@ -112,6 +112,32 @@ passar do teto porque é derivada (regra 3), não escolhida.
 
 Fórmula inegociável: **interno = externo − padding** em moldura justa; em
 cartão folgado, mínimo = raio de controle; filho colado herda o raio do pai. O Exorcista mede no DOM.
+
+### Mecanismo de aninhamento (Pedro, 2026-10-21: "controle automático")
+
+Ninguém escolhe raio de filho à mão. Todo agrupador é uma **moldura do
+mecanismo** (`lib/ui/use-nest.tsx` + `Nest`, `lib/ui/nest.tsx`):
+
+- **Um recuo só** (token de espaço), **igual nos quatro lados e entre as
+  faixas** (cabeçalho, painel, rodapé, rótulo): `padding = gap = recuo`
+  (mais o fio da `santo-edge`, que entra na conta).
+- O raio do filho sai pronto: `nestInner(externo, recuo)`, com o **externo
+  sempre maior**: em moldura justa, concêntrico, `max(externo − recuo,
+  radius/xs)`; em moldura folgada (recuo ≥ externo), `min(controle, degrau
+  abaixo do externo)` — 12 → 8, 8 → 4, 4 → 0 (a regra 4 passa a valer com esse
+  teto). Moldura que nasce do filho também não passa do que a de cima oferece.
+- Profundidade: a moldura de dentro recalcula no próprio nível (contexto
+  React com `calc()` literal — CSS puro daria ciclo de variável).
+- Consumo: componentes da lib leem `useNestRadius()`/contexto; elemento solto
+  usa a classe **`santo-nested`** (`border-radius: var(--santo-inner-radius)`).
+- Já são molduras: Card (todas as variantes com caixa e o double), DoubleCard
+  (cabeçalho/rodapé no mesmo recuo do painel), CommandPalette (lista),
+  painel do Select/FontPicker, trilho do Segmented/TabBar (pastilha =
+  `santo-nested`), EditorFrame, gaveta do menu, LinkCard com ilustração,
+  ThumbFrame, molduras de preview do Estúdio (`contentRadius`: a moldura nasce
+  do filho).
+- Quem cobra: `scripts/check-nest.mjs` (6ª etapa do `npm run check`) e a
+  sonda `npm run nest:probe` (Δ do raio e recuo desigual no DOM).
 
 ## 4. Vocabulário de pastilha (sem cápsula)
 

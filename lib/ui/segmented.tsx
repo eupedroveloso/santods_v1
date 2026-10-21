@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
+import { useNest, useNestRadius } from "./use-nest";
 import { RADIUS_CONTROL_VAR } from "./radius";
 
 /**
@@ -26,25 +27,21 @@ export type Segment<T extends string> = {
 const TRACK_PADDING = "var(--santo-space-2xs)";
 const TRACK_NATURAL = `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING})`;
 /*
- * Dentro de um cartao, o trilho nunca passa do raio interno que o pai declara
- * (--santo-card-inner-radius): o externo e sempre maior que o interno (regra
- * do raio aninhado). Fora de cartao vale o natural (controle + 2xs). A
- * pastilha acompanha, concentrica: trilho - 2xs, com piso radius/xs.
+ * O trilho e uma moldura do aninhamento (nest.tsx): recuo space/2xs nos quatro
+ * lados; a pastilha recebe o raio interno (santo-nested). Dentro de um cartao o
+ * trilho nunca passa do raio que o pai oferece; fora, vale o natural
+ * (controle + 2xs).
  */
-const TRACK_RADIUS = `min(${TRACK_NATURAL}, var(--santo-card-inner-radius, ${TRACK_NATURAL}))`;
-const TRACK_STYLE = {
-  padding: TRACK_PADDING,
-  "--santo-track-radius": TRACK_RADIUS,
-  borderRadius: "var(--santo-track-radius)",
-} as CSSProperties;
-/** Pastilha dentro do trilho: concentrica a ele. */
-const ITEM_STYLE = { borderRadius: `max(var(--santo-radius-xs), calc(var(--santo-track-radius) - ${TRACK_PADDING}))` };
-const FLOATING_TRACK_STYLE = {
-  padding: TRACK_PADDING,
+function useTrack(floating = false) {
+  const offered = useNestRadius(TRACK_NATURAL);
   // Barra flutuante mora fora de cartao: raio natural + o fio do santo-edge.
-  "--santo-track-radius": TRACK_NATURAL,
-  borderRadius: `calc(${TRACK_NATURAL} + var(--santo-border-thin))`,
-} as CSSProperties;
+  const frame = useNest(
+    floating
+      ? { inset: "2xs", edge: true, radius: `calc(${TRACK_NATURAL} + var(--santo-border-thin))` }
+      : { inset: "2xs", radius: `min(${TRACK_NATURAL}, ${offered})` },
+  );
+  return { ...frame.style, padding: TRACK_PADDING } as CSSProperties;
+}
 
 const SEG_SIZE = {
   sm: "h-(--santo-dimension-size-24) px-xs santo-caption-semibold",
@@ -67,10 +64,11 @@ export function Segmented<T extends string>({
   /** Largura do pai, abas iguais: irmao de campo/botao de largura total no mesmo cartao. */
   block?: boolean;
 }) {
+  const track = useTrack();
   return (
     <div
       role="radiogroup"
-      style={TRACK_STYLE}
+      style={track}
       className={`${block ? "flex w-full" : "inline-flex"} max-w-full min-w-0 shrink-0 items-center gap-3xs bg-surface-sunken ${className}`}
     >
       {options.map((o) => {
@@ -86,8 +84,7 @@ export function Segmented<T extends string>({
             // visivel, ele e o nome acessivel — "clicar Auto" por voz tem que funcionar.
             aria-label={typeof o.label === "string" ? undefined : o.title}
             onClick={() => onChange(o.value)}
-            style={ITEM_STYLE}
-            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs whitespace-nowrap ${block ? "min-w-0 flex-1" : ""} ${SEG_SIZE[size]} ${
+            className={`santo-nested santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs whitespace-nowrap ${block ? "min-w-0 flex-1" : ""} ${SEG_SIZE[size]} ${
               active
                 ? "bg-surface-raised text-text-primary shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
@@ -136,11 +133,12 @@ export function TabBar<T extends string>({
   className?: string;
 }) {
   const floating = variant === "floating";
+  const track = useTrack(floating);
   return (
     <div
       role="tablist"
       aria-label={label}
-      style={floating ? FLOATING_TRACK_STYLE : TRACK_STYLE}
+      style={track}
       className={
         floating
           ? `santo-edge flex min-w-0 items-center justify-around gap-3xs bg-surface-raised shadow-lg backdrop-blur-md ${className}`
@@ -156,8 +154,7 @@ export function TabBar<T extends string>({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(o.value)}
-            style={ITEM_STYLE}
-            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap ${
+            className={`santo-nested santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap ${
               floating
                 ? `santo-caption-semibold min-w-(--santo-dimension-size-56) flex-1 flex-col gap-3xs px-sm py-xs ${
                     active ? "bg-brand-subtle-default text-text-brand" : "text-text-tertiary hover:text-text-primary"

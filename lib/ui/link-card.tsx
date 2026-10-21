@@ -32,8 +32,8 @@ export function LinkCard({
   href?: string;
   links?: CardLink[];
   /**
-   * Ilustracao no topo, de ponta a ponta do cartao (sem padding), com o titulo
-   * embaixo — a vitrine do indice de componentes (lib/thumbs).
+   * Ilustracao no topo, recuada como painel (mesmo recuo nos quatro lados), com
+   * o titulo embaixo na mesma margem — a vitrine do indice de componentes (lib/thumbs).
    */
   media?: ReactNode;
   /** sm: cartao de grade densa (vitrine) — titulo body-small, corpo com p-sm. */
@@ -81,10 +81,12 @@ export function LinkCard({
     </>
   );
   if (media) {
+    // Aninhamento: o cartao e moldura de recuo xs (igual nos quatro lados e entre
+    // a ilustracao e a faixa do nome); a ilustracao recorta no raio interno.
     return (
-      <Card padded={false} className={`overflow-hidden ${className}`}>
-        {media}
-        <div className={`flex flex-1 flex-col ${size === "sm" ? "gap-xs p-sm" : "gap-md p-lg"}`}>{body}</div>
+      <Card padding="xs" className={className}>
+        <div className="santo-nested overflow-hidden">{media}</div>
+        <div className={`flex flex-1 flex-col ${size === "sm" ? "gap-xs" : "gap-md"}`}>{body}</div>
       </Card>
     );
   }

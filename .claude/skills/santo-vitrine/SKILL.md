@@ -30,9 +30,9 @@ anatomia que o componente tem — quando ele muda, a thumb muda junto.
 - **Prancheta**: o desenho é feito em px de prancheta, **320 × 200**, dentro
   de um SVG com `viewBox` — a ilustração inteira (cartão e formas) escala
   junto com a moldura. Num card de 192 ou de 400, a proporção é a mesma.
-- **Cartão interno**: **176 × 112 fixos em toda miniatura** (55% da largura,
-  56% da altura — nunca mais que ~60% × ~55%), centrado, com **respiro mínimo
-  de `space/lg`** até a borda da moldura em todos os lados (sobra 72 × 44).
+- **Cartão interno**: **240 × 120 fixos em toda miniatura** — a prancheta menos
+  UM recuo igual nos quatro lados (`dimension/space/40`, aninhamento do Pedro,
+  2026-10-21; antes 176 × 112 centrado, que deixava 72/72/44/44 de recuo).
   Conteúdo centrado na vertical. Mesmo tamanho em todas = a fileira lê como
   conjunto. Não existe variante de largura.
 - **Raio do cartão — exceção consciente** (decisão do maestro): a ilustração
@@ -49,7 +49,7 @@ anatomia que o componente tem — quando ele muda, a thumb muda junto.
   (o tom separa do poço nos dois temas). Coluna flex com `gap-xs`.
 - **Respiro** (`pad`): `md` para peça isolada; `sm` para conteúdo denso (vale
   também para primitivo denso: Card, Select aberto, TabBar, Disclosure, Color).
-- **Área útil**: 152 × 88 com `pad="sm"`, 144 × 80 com `pad="md"`. Some as
+- **Área útil**: 216 × 96 com `pad="sm"`, 208 × 88 com `pad="md"`. Some as
   larguras de uma linha e as alturas da coluna antes de escrever. `Bar`
   encolhe em linha apertada (põe `min-w-0 flex-1` na coluna que a contém);
   as outras formas não.
@@ -144,8 +144,8 @@ Composições recorrentes (copie, não reinvente):
    | Divider | `Rule emphasis` |
    Ilustração leve e aérea: o resto em soft/base, strong só em título.
 2. **Hierarquia por tom**: título strong, corpo base, metadado sm/base.
-3. **Nada encosta nem vaza**: tudo cabe na área útil do cartão (152 × 88 /
-   144 × 80). Lista: no máximo 3 linhas; tabela: cabeçalho + 3.
+3. **Nada encosta nem vaza**: tudo cabe na área útil do cartão (216 × 96 /
+   208 × 88). Lista: no máximo 3 linhas; tabela: cabeçalho + 3.
 4. **Layout é `div` com flex/grid/gap/padding/`ml-auto`** — só layout. Borda,
    fundo, raio e sombra vêm **sempre** de `Skeleton`/`ThumbFrame`. Precisa de
    uma aparência que não existe? Vira prop do `Skeleton` (lib-first), nunca
@@ -173,7 +173,7 @@ Composições recorrentes (copie, não reinvente):
 ## Checklist de revisão
 
 - [ ] Usa só `ThumbFrame` + `Skeleton` + `div` de layout.
-- [ ] Proporção 16:10; cartão 176 × 112, `radius-sm` (exceção consciente), respiro ≥ `space/lg`.
+- [ ] Proporção 16:10; cartão 240 × 120 (recuo igual `dimension/space/40`), `radius-sm` (exceção consciente).
 - [ ] Primitivo sozinho; semântico com anatomia mínima reconhecível.
 - [ ] Exatamente um protagonista em `emphasis` (`tone`, `Button` primary, `Check on`, `highlight`, `Line`, `Ring`, `caret`, `Rule emphasis`); nenhum preto ou quase preto.
 - [ ] Anatomia santo-ui-craft: sem contorno fora de amostra/check; controles

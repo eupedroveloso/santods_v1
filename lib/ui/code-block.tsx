@@ -45,7 +45,7 @@ function highlight(line: string): ReactNode[] {
  * direita; corpo escuro com realce leve.
  *
  * Raio aninhado: dentro de um Card usa o raio interno que o Card expoe
- * (--santo-card-inner-radius); sozinho, radius/xl.
+ * (--santo-inner-radius); sozinho, radius/xl.
  */
 export function CodeBlock({
   code,
@@ -64,7 +64,7 @@ export function CodeBlock({
   return (
     <div
       className={`flex min-w-0 flex-col overflow-hidden border-thin border-(--santo-palette-neutral-800) bg-(--santo-palette-neutral-950) shadow-md ${className}`}
-      style={{ borderRadius: "var(--santo-card-inner-radius, var(--santo-radius-xl))" }}
+      style={{ borderRadius: "var(--santo-inner-radius, var(--santo-radius-xl))" }}
     >
       <div className="relative flex h-(--santo-dimension-size-36) shrink-0 items-center border-b-thin border-(--santo-palette-neutral-800) bg-(--santo-palette-neutral-900) px-sm">
         <span aria-hidden className="flex items-center gap-xs">

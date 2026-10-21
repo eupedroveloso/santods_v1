@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Nest } from "./nest";
 
 /**
  * Bancada de edição em três painéis: navegação à esquerda (chão sunken),
@@ -37,12 +38,16 @@ export function EditorFrame({
 }) {
   return (
     <div className={`flex min-h-0 ${className}`}>
-      <aside
+      {/* Aninhamento: recuo sm igual nos quatro lados e entre os blocos. */}
+      <Nest
+        as="aside"
+        inset="sm"
+        radius="0px"
         aria-label={navLabel}
-        className="hidden w-(--santo-dimension-space-256) shrink-0 flex-col gap-sm overflow-y-auto scrollbar-edge border-r-thin border-border-subtle bg-surface-sunken p-sm lg:flex"
+        className="hidden w-(--santo-dimension-space-256) shrink-0 overflow-y-auto scrollbar-edge border-r-thin border-border-subtle bg-surface-sunken lg:flex"
       >
         <div className="santo-floor flex min-w-0 flex-col gap-sm">{nav}</div>
-      </aside>
+      </Nest>
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto xl:flex-row xl:overflow-hidden">
         <section className="flex min-w-0 flex-col gap-xl p-md lg:p-xl xl:flex-1 xl:overflow-y-auto">
           {mobileNav && <div className="flex flex-col gap-sm lg:hidden">{mobileNav}</div>}
@@ -51,10 +56,11 @@ export function EditorFrame({
         {/* Chão sunken, como a navegação: os ajustes são cartões raised sobre ele, sem moldura dupla. */}
         <aside
           aria-label={panelLabel}
-          className="flex shrink-0 flex-col bg-surface-sunken p-md lg:p-xl xl:w-(--santo-dimension-space-384) xl:overflow-y-auto xl:px-md xl:pt-xl"
+          className="flex shrink-0 flex-col bg-surface-sunken xl:w-(--santo-dimension-space-384) xl:overflow-y-auto"
         >
-          {/* santo-floor: campos e trilhos sobre o chão sem caixa (surface.css). */}
-          <div className="santo-floor flex min-w-0 flex-col gap-xl">{panel}</div>
+          {/* Aninhamento: recuo md igual nos quatro lados e entre os blocos (Nest).
+              santo-floor: campos e trilhos sobre o chão sem caixa (surface.css). */}
+          <Nest inset="md" radius="0px" className="santo-floor min-w-0">{panel}</Nest>
         </aside>
       </div>
     </div>

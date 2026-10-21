@@ -61,6 +61,7 @@ import { progressDemos } from "./progress.demo";
 import { keyValueDemos } from "./key-value.demo";
 import { skeletonDemos } from "./skeleton.demo";
 import { thumbFrameDemos } from "./thumb-frame.demo";
+import { nestDemos } from "./nest.demo";
 import { overlineDemos } from "./overline.demo";
 import { iconTileDemos } from "./icon-tile.demo";
 import { emptyStateDemos } from "./empty-state.demo";
@@ -131,6 +132,7 @@ export const demos: DemoMap = {
   ...keyValueDemos,
   ...skeletonDemos,
   ...thumbFrameDemos,
+  ...nestDemos,
   ...overlineDemos,
   ...iconTileDemos,
   ...emptyStateDemos,

@@ -63,7 +63,7 @@ function ProductMark({ name, compact = false }: { name: string; compact?: boolea
 
 function TaskTile({ task, onComplete }: { task: TaskPreviewTask; onComplete: () => void }) {
   return (
-    <Card padding="sm" radius="md" elevation="xs" className="gap-sm">
+    <Card padding="sm" radius="md" elevation="xs">
       <div className="flex items-center justify-between gap-xs">
         <Tag intent={task.status === "done" ? "success" : "brand"}>{task.category}</Tag>
         <IconButton size="sm" label={task.status === "done" ? `Reabrir ${task.title}` : `Concluir ${task.title}`} onClick={onComplete}><Icon.Check size={12} /></IconButton>
@@ -159,7 +159,7 @@ export function TaskAppPreview({
 }
 
 function FeatureSurface({ title, count, children, className = "" }: { title: string; count?: number; children: ReactNode; className?: string }) {
-  return <Card variant="sunken" radius="xl" padding="md" className={`gap-lg text-left ${className}`}><div className="flex items-center justify-between gap-xs"><h3 className="santo-body-large-semibold text-text-primary">{title}</h3>{count !== undefined && <Count>{count}</Count>}</div>{children}</Card>;
+  return <Card variant="sunken" radius="xl" padding="md" className={`text-left ${className}`}><div className="flex items-center justify-between gap-xs"><h3 className="santo-body-large-semibold text-text-primary">{title}</h3>{count !== undefined && <Count>{count}</Count>}</div>{children}</Card>;
 }
 
 export type TaskBentoProject = { name: string; people: TaskPreviewTask["people"] };

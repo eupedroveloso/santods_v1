@@ -19,6 +19,7 @@ const CHECKS = [
   { name: 'lib-first', cmd: 'node', args: ['scripts/check-lib-first.mjs'] },
   { name: 'tier', cmd: 'node', args: ['scripts/check-tier.mjs'] },
   { name: 'tokens', cmd: 'node', args: ['scripts/check-parity.mjs'] },
+  { name: 'nest', cmd: 'node', args: ['scripts/check-nest.mjs'] },
 ];
 
 const results = [];

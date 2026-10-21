@@ -13,6 +13,8 @@ import {
 } from "react";
 import { Check, ChevronDown, Search } from "./icons";
 import type { ControlSize } from "./button";
+import { useNest } from "./use-nest";
+import { nestInner, nestInset } from "./radius";
 
 /**
  * Seletor do SantoDS.
@@ -74,8 +76,14 @@ export function Select<T extends string>({
   size?: ControlSize;
   /** @deprecated Sem efeito: todo campo leva o raio de controle (principio 5 do Pedro). */
   pill?: boolean;
-  /** Mesmo vocabulario do Input: `well` (poco, padrao) ou `outline`. */
-  variant?: "well" | "outline";
+  /**
+   * Mesmo vocabulario do Input: `well` (poco, padrao) ou `outline`. `compact`:
+   * gatilho de topbar (pastilha sunken no raio de controle, use com size="sm"); o painel
+   * ganha largura minima (space/192) e alinha pela direita quando faltaria
+   * tela; abaixo de `sm` vira quadrado de controle so com o `leading` (rotulo
+   * sr-only, chevron oculto) para caber na topbar do celular.
+   */
+  variant?: "well" | "outline" | "compact";
   mono?: boolean;
   disabled?: boolean;
   className?: string;
@@ -92,6 +100,8 @@ export function Select<T extends string>({
   const panelRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const listboxId = useId();
+  // Aninhamento: o painel e moldura lg com fio; a lista dentro dele recua 3xs.
+  const panelNest = useNest({ inset: "none", edge: true, radius: "var(--santo-radius-lg)" });
 
   const withSearch = searchable ?? options.length > SEARCH_THRESHOLD;
 
@@ -117,14 +127,18 @@ export function Select<T extends string>({
     const below = window.innerHeight - r.bottom - gap * 2;
     const above = r.top - gap * 2;
     const flip = below < 200 && above > below;
+    // Gatilho compacto de topbar: estreito, estreito, painel com largura de lista e preso a tela.
+    const min = variant === "compact" ? parseFloat(getComputedStyle(el).getPropertyValue("--santo-dimension-space-192")) || 0 : 0;
+    const width = Math.max(r.width, min);
+    const left = r.left + width > window.innerWidth - gap * 2 ? Math.max(gap * 2, r.right - width) : r.left;
     setPlacement({
-      left: r.left,
+      left,
       top: flip ? r.top - gap : r.bottom + gap,
-      width: r.width,
+      width,
       maxHeight: Math.max(160, Math.min(320, flip ? above : below)),
       flip,
     });
-  }, []);
+  }, [variant]);
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -255,20 +269,22 @@ export function Select<T extends string>({
         onClick={toggle}
         onKeyDown={onKeyDown}
         className={`santo-focus-field relative flex w-full min-w-0 cursor-pointer items-center gap-2xs text-left text-text-primary santo-transition-colors disabled:cursor-not-allowed disabled:border-border-disabled disabled:bg-input-disabled disabled:text-text-disabled ${TRIGGER_SIZES[size]} ${
-          variant === "well"
-            ? `bg-surface-sunken hover:bg-neutral-subtle-default ${open ? "border-border-brand" : "border-transparent"}`
-            : `bg-input-default hover:border-border-strong ${open ? "border-border-brand" : "border-border-default"}`
+          variant === "compact"
+            ? `border-transparent max-sm:min-w-(--santo-control-height-sm) max-sm:justify-center max-sm:pr-(--santo-control-padding-x-sm) ${open ? "bg-neutral-subtle-default" : "bg-surface-sunken hover:bg-neutral-subtle-default"}`
+            : variant === "well"
+              ? `bg-surface-sunken hover:bg-neutral-subtle-default ${open ? "border-border-brand" : "border-transparent"}`
+              : `bg-input-default hover:border-border-strong ${open ? "border-border-brand" : "border-border-default"}`
         }`}
       >
         {selected?.leading}
         <span
-          className={`min-w-0 flex-1 truncate ${mono ? "font-mono" : ""} ${selected ? "" : "text-text-placeholder"}`}
+          className={`min-w-0 flex-1 truncate ${mono ? "font-mono" : ""} ${selected ? "" : "text-text-placeholder"} ${variant === "compact" ? "max-sm:sr-only" : ""}`}
           style={selected?.labelStyle}
         >
           {selected?.label ?? placeholder}
         </span>
         <span
-          className="pointer-events-none absolute right-xs text-text-tertiary transition-transform ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast)"
+          className={`pointer-events-none absolute right-xs text-text-tertiary transition-transform ${variant === "compact" ? "max-sm:hidden" : ""} ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast)`}
           style={{ transform: open ? "rotate(180deg)" : undefined }}
         >
           <ChevronDown size={16} />
@@ -278,11 +294,9 @@ export function Select<T extends string>({
       {open && placement && (
         <div
           ref={panelRef}
-          className="santo-animate-scale-in fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden rounded-lg border-thin border-border-subtle bg-surface-raised shadow-lg"
+          className="santo-animate-scale-in fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden border-thin border-border-subtle bg-surface-raised shadow-lg"
           style={{
-            // Raio aninhado das opcoes: painel lg - p-3xs da lista - borda.
-            ["--santo-card-inner-radius" as string]:
-              "max(var(--santo-radius-xs), calc(var(--santo-radius-lg) - var(--santo-space-3xs) - var(--santo-border-thin)))",
+            ...panelNest.style,
             left: placement.left,
             top: placement.top,
             width: placement.width,
@@ -315,6 +329,8 @@ export function Select<T extends string>({
             role="listbox"
             aria-label={label}
             className="min-h-0 flex-1 overflow-y-auto p-3xs"
+            // Aninhamento: lista com recuo 3xs nos quatro lados; opcoes = painel − fio − 3xs.
+            style={{ ["--santo-inner-radius" as string]: nestInner(panelNest.inner, nestInset("3xs")) }}
           >
             {filtered.length === 0 && (
               <p className="santo-caption-regular px-sm py-xs text-text-tertiary">

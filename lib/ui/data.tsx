@@ -156,7 +156,7 @@ export function Table<T>({
   return (
     <div
       className={`overflow-x-auto scrollbar-bare ${className}`}
-      style={flush ? { borderRadius: "var(--santo-card-inner-radius)" } : undefined}
+      style={flush ? { borderRadius: "var(--santo-inner-radius)" } : undefined}
     >
       <table className={`w-full border-separate border-spacing-0 ${fixed ? "table-fixed" : ""}`}>
         <colgroup>

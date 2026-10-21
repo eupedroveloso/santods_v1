@@ -8,7 +8,7 @@ export const thumbFrameMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "thumb-frame.tsx",
     description:
-      "Moldura de miniatura: poço 16:10 com grade sutil e cartão pequeno no centro, onde o Skeleton desenha. Só para vitrine (índice de /componentes).",
+      "Moldura de miniatura: poço 16:10 com grade sutil e o cartão onde o Skeleton desenha, recuado por um único espaço igual nos quatro lados (aninhamento). Só para vitrine (índice de /componentes).",
     related: ["skeleton"],
   },
 ];

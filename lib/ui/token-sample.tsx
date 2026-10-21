@@ -61,7 +61,7 @@ export function TokenSample({
       return (
         <span
           className={`block size-3xl border-thin border-border-subtle bg-surface-raised ${className}`}
-          style={{ boxShadow: value, borderRadius: "min(var(--santo-radius-lg), var(--santo-card-inner-radius, var(--santo-radius-lg)))" }}
+          style={{ boxShadow: value, borderRadius: "min(var(--santo-radius-lg), var(--santo-inner-radius, var(--santo-radius-lg)))" }}
         />
       );
     case "radius":
@@ -116,7 +116,7 @@ function EasingSample({ value, bezier, className }: { value: string; bezier: [nu
       aria-label={`Curva ${value}`}
       className={`group relative block size-(--santo-dimension-space-96) border-thin border-border-subtle bg-surface-sunken ${className}`}
       // Raio aninhado: nunca maior que o raio interno da celula/Card em volta.
-      style={{ borderRadius: "min(var(--santo-radius-md), var(--santo-card-inner-radius, var(--santo-radius-md)))" }}
+      style={{ borderRadius: "min(var(--santo-radius-md), var(--santo-inner-radius, var(--santo-radius-md)))" }}
     >
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden className="absolute inset-xs size-[calc(100%-var(--santo-space-md))] overflow-visible">
         <path d={d} fill="none" stroke="var(--santo-color-icon-brand)" strokeWidth={1.5} vectorEffect="non-scaling-stroke" />

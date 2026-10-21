@@ -48,7 +48,7 @@ export function IconTile({
         shape === "round"
           ? undefined
           : {
-              borderRadius: `min(var(--santo-radius-${size === "md" ? "lg" : "xl"}), var(--santo-card-inner-radius, var(--santo-radius-${size === "md" ? "lg" : "xl"})))`,
+              borderRadius: `min(var(--santo-radius-${size === "md" ? "lg" : "xl"}), var(--santo-inner-radius, var(--santo-radius-${size === "md" ? "lg" : "xl"})))`,
             }
       }
     >

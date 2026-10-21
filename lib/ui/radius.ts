@@ -38,3 +38,32 @@ export const RADIUS_BAR = "rounded-xs";
  */
 export const RADIUS_CONTROL_VAR = "var(--santo-radius-control)";
 export const RADIUS_TRACK_VAR = "var(--santo-radius-lg)";
+
+/*
+ * Aninhamento (regra do Pedro, 2026-10-21): moldura com UM recuo igual nos
+ * quatro lados; raio interno = max(radius/xs, externo − recuo). Quem aplica e o
+ * primitivo Nest (nest.tsx) e o Card; aqui so a conta, em CSS de tokens.
+ */
+export type NestInset = "none" | "3xs" | "2xs" | "xs" | "sm" | "md" | "lg" | "xl";
+
+/** Recuo real em CSS: o token de espaco + o fio da moldura quando ela tem borda (santo-edge). */
+export function nestInset(inset: NestInset, edge = false): string {
+  const space = inset === "none" ? "0px" : `var(--santo-space-${inset})`;
+  return edge ? `${space} + var(--santo-border-thin)` : space;
+}
+
+/**
+ * Raio do filho (regra do Pedro: o externo e SEMPRE maior; decisao do maestro, 2026-10-21):
+ *   - moldura justa (recuo < externo): concentrico, max(externo − recuo, radius/xs);
+ *   - moldura folgada (recuo >= externo): min(controle, degrau abaixo do externo),
+ *     com o degrau abaixo = externo − radius/xs (12 → 8, 8 → 4, 4 → 0) — exato na
+ *     escala ate 16; acima disso o controle ja e menor.
+ * Sem condicional em CSS: cada termo e "ligado" por um fator * 1000 que satura
+ * (positivo no seu caso, negativo no outro) e o max final escolhe.
+ */
+export function nestInner(outer: string, inset: string): string {
+  const d = `(${outer} - (${inset}))`;
+  const tight = `max(calc(${d}), min(var(--santo-radius-xs), calc(${d} * 1000)))`;
+  const roomy = `min(var(--santo-radius-control), calc(${outer} - var(--santo-radius-xs)), calc(-1 * ${d} * 1000))`;
+  return `max(0px, ${tight}, ${roomy})`;
+}

@@ -15,6 +15,8 @@
     "design:check": "node scripts/check-design.mjs",
     "lib:check": "node scripts/check-lib-first.mjs",
     "tier:check": "node scripts/check-tier.mjs",
+    "nest:check": "node scripts/check-nest.mjs",
+    "nest:probe": "node scripts/probe-nest.mjs",
     "check": "node scripts/check.mjs",
     "contexto": "node scripts/build-contexto.mjs",
     "db:generate": "drizzle-kit generate",

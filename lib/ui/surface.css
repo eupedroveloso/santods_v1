@@ -33,7 +33,7 @@
  * opcao), no proprio elemento.
  */
 @utility santo-row {
-  --santo-row-radius: min(var(--santo-radius-sm), var(--santo-card-inner-radius, var(--santo-radius-sm)));
+  --santo-row-radius: min(var(--santo-radius-sm), var(--santo-inner-radius, var(--santo-radius-sm)));
   transition-property: background-color;
   transition-duration: var(--santo-motion-duration-fast);
   transition-timing-function: var(--santo-motion-easing-standard);
@@ -74,50 +74,31 @@
 }
 
 /*
- * Faixa fixa no topo de um contêiner rolável (busca da sidebar). O fundo é a
- * superfície do contêiner (--santo-pinned-surface, padrão surface/page) e,
- * em vez de linha dura embaixo, o tom desce em degradê por space/sm sobre o
- * que rola por baixo.
+ * Faixa fixa no topo de um contêiner rolável (marca da sidebar). Altura de
+ * barra (size/56, a mesma da topbar) com o divisor sutil embaixo, na mesma
+ * linha do divisor da topbar ao lado. O fundo e a superfície do contêiner
+ * (--santo-pinned-surface, padrão surface/page). --santo-pinned-bleed estende a
+ * faixa sobre o padding lateral do contêiner, para o divisor ir de borda a borda.
  */
 @utility santo-pinned-head {
   position: sticky;
   top: 0;
   z-index: 1;
+  box-sizing: border-box;
+  min-height: var(--santo-dimension-size-56);
+  margin-inline: calc(-1 * var(--santo-pinned-bleed, 0px));
+  padding-inline: var(--santo-pinned-bleed, 0px);
+  border-bottom: var(--santo-border-thin) solid var(--santo-color-border-subtle);
   background-color: var(--santo-pinned-surface, var(--santo-color-surface-page));
-  &::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    top: 100%;
-    height: var(--santo-space-sm);
-    pointer-events: none;
-    background-image: linear-gradient(var(--santo-pinned-surface, var(--santo-color-surface-page)), transparent);
-  }
 }
 
 /*
  * Para o pai que rola sob uma santo-pinned-head do AppSidebar: reserva a
- * altura da faixa (space/sm + busca size/40 + space/sm + divisor + degrade
- * space/sm) no scroll-padding, para foco por teclado e scrollIntoView pararem
- * abaixo dela. size/40 = SearchTrigger size="md" em app-sidebar.tsx: mudou
- * lá, muda aqui.
+ * altura da faixa (size/56) mais um respiro (space/sm) no scroll-padding, para
+ * foco por teclado e scrollIntoView pararem abaixo dela.
  */
 @utility santo-pinned-scroll {
-  scroll-padding-top: calc(
-    var(--santo-space-sm) * 3 + var(--santo-dimension-size-40) + var(--santo-border-thin)
-  );
-}
-
-/*
- * Escopo do raio aninhado do Card: limpa --santo-card-nested so nos
- * descendentes. O Card que nao e moldura (sunken) le o aviso da moldura de
- * cima no proprio raio; o reset precisa comecar nos filhos dele, para os
- * netos fora da moldura voltarem ao xl.
- */
-@utility santo-card-scope {
-  & > * {
-    --santo-card-nested: initial;
-  }
+  scroll-padding-top: calc(var(--santo-dimension-size-56) + var(--santo-space-sm));
 }
 
 /*
@@ -157,4 +138,21 @@
 }
 @utility santo-control-lg {
   --santo-icon-size: var(--santo-control-icon-lg);
+}
+
+/*
+ * Aninhamento (Nest, nest.tsx): a moldura aplica UM recuo (--santo-nest-inset)
+ * nos quatro lados e o mesmo entre as faixas; o raio interno vem pronto em
+ * --santo-inner-radius (externo − recuo, calculado no Nest/Card por nestInner).
+ * santo-nested: o filho solto (div, img, iframe) usa esse raio sem escolher.
+ */
+@utility santo-nest {
+  /* Sem display: quem usa decide (hidden lg:flex); o Nest poe flex se ninguem pos. */
+  flex-direction: column;
+  padding: var(--santo-nest-inset, 0px);
+  /* Entre faixas, o recuo real (com o fio da moldura, se houver). */
+  gap: var(--santo-nest-gap, var(--santo-nest-inset, 0px));
+}
+@utility santo-nested {
+  border-radius: var(--santo-inner-radius, var(--santo-radius-xl));
 }

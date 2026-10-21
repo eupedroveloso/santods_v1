@@ -16,8 +16,9 @@ const GRID: CSSProperties = {
 /**
  * Prancheta da ilustracao em px de desenho: 320 x 200 (16:10). O SVG escala a
  * prancheta inteira para a largura da moldura, entao cartao e formas mantem a
- * mesma proporcao em qualquer card. O cartao tem 176 x 112 fixos em toda
- * miniatura (55% x 56%), conteudo centrado, a pelo menos space/lg da borda.
+ * mesma proporcao em qualquer card. Aninhamento (regra do Pedro): o cartao
+ * ocupa a prancheta menos UM recuo igual nos quatro lados (dimension/space/40,
+ * fixo: nao varia com o espacamento da marca) — 240 x 120.
  */
 const BOARD = { w: 320, h: 200 } as const;
 
@@ -47,10 +48,15 @@ export function ThumbFrame({
       {label && <span className="santo-code-sm absolute left-xs top-xs text-text-tertiary">{label}</span>}
       <svg viewBox={`0 0 ${BOARD.w} ${BOARD.h}`} className="absolute inset-0 size-full">
         <foreignObject width={BOARD.w} height={BOARD.h}>
-          <div className="flex size-full items-center justify-center p-lg">
+          {/* Aninhamento: palco = moldura de recuo unico; o cartao usa o raio que
+              ela entrega (radius/sm, a excecao consciente da vitrine). */}
+          <div
+            className="santo-nest flex size-full"
+            style={{ "--santo-nest-inset": "var(--santo-dimension-space-40)", "--santo-inner-radius": "var(--santo-radius-sm)" } as CSSProperties}
+          >
             <div
               data-thumb-card
-              className={`flex h-(--santo-dimension-space-112) w-(--santo-dimension-space-176) flex-col justify-center gap-xs rounded-sm bg-surface-raised shadow-sm ${
+              className={`santo-nested flex size-full flex-col justify-center gap-xs bg-surface-raised shadow-sm ${
                 pad === "sm" ? "p-sm" : "p-md"
               }`}
             >

@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Chip } from "./chip";
 import { Check, ChevronDown, Search } from "./icons";
-import { RADIUS_CONTROL } from "./radius";
+import { useNest } from "./use-nest";
+import { RADIUS_CONTROL, nestInner, nestInset } from "./radius";
 
 export type FontFamilyOption = {
   family: string;
@@ -88,6 +89,8 @@ export function FontPicker({
   const campo = useRef<HTMLInputElement>(null);
   const medida = useRef<HTMLDivElement>(null);
   const listaId = useId();
+  // Aninhamento: o painel e moldura lg com fio; a lista dentro dele recua 3xs.
+  const panelNest = useNest({ inset: "none", edge: true, radius: "var(--santo-radius-lg)" });
 
   const porNome = useMemo(() => new Map(families.map((f) => [f.family, f])), [families]);
   const atual = porNome.get(value) ?? { family: value, category: "sans" };
@@ -275,12 +278,10 @@ export function FontPicker({
       {aberto && lugar && (
         <div
           ref={painel}
-          className="santo-animate-scale-in fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden rounded-lg border-thin border-border-subtle bg-surface-raised shadow-lg"
+          className="santo-animate-scale-in fixed z-(--santo-layer-dropdown) flex flex-col overflow-hidden border-thin border-border-subtle bg-surface-raised shadow-lg"
           style={
             {
-              // Raio aninhado das opções: painel lg − p-3xs da lista − borda.
-              "--santo-card-inner-radius":
-                "max(var(--santo-radius-xs), calc(var(--santo-radius-lg) - var(--santo-space-3xs) - var(--santo-border-thin)))",
+              ...panelNest.style,
               left: lugar.left,
               top: lugar.top,
               width: `max(${lugar.width}px, var(--santo-dimension-space-288))`,
@@ -333,6 +334,8 @@ export function FontPicker({
             aria-label={label}
             onScroll={(e) => setRolagem(e.currentTarget.scrollTop)}
             className="relative min-h-0 flex-1 overflow-x-hidden overflow-y-auto p-3xs"
+            // Aninhamento: lista com recuo 3xs nos quatro lados; opcoes = painel − fio − 3xs.
+            style={{ ["--santo-inner-radius" as string]: nestInner(panelNest.inner, nestInset("3xs")) }}
           >
             {/* Régua invisível: a altura de UMA linha, em token, para a virtualização. */}
             <div ref={medida} aria-hidden className="invisible absolute flex h-(--santo-dimension-size-36) w-full" />

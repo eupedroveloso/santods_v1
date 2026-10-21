@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import type { CSSProperties, KeyboardEvent, ReactNode } from "react";
+import type { KeyboardEvent, ReactNode } from "react";
 import { Search } from "./icons";
 import { Card } from "./card";
 import { Kbd } from "./kbd";
+import { Nest } from "./nest";
 import { useModal } from "./use-modal";
 
 export type CommandItem = {
@@ -65,7 +66,6 @@ function Panel({
 }) {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
-  const listRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const listId = useId();
 
@@ -104,10 +104,11 @@ function Panel({
   const current = Math.min(active, Math.max(ordered.length - 1, 0));
 
   useEffect(() => {
-    listRef.current
+    document
+      .getElementById(listId)
       ?.querySelector<HTMLElement>(`[data-index="${current}"]`)
       ?.scrollIntoView({ block: "nearest" });
-  }, [current]);
+  }, [current, listId]);
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === "ArrowDown") {
@@ -190,20 +191,15 @@ function Panel({
             Nada encontrado para “{query}”.
           </p>
         )}
-        <div
-          ref={listRef}
+        {/* Aninhamento: recuo sm nos quatro lados. Nas laterais, 2xs + a calha da
+            barra reservada nos dois lados (space/8) = sm; em cima e embaixo, sm. */}
+        <Nest
           id={listId}
           role="listbox"
           aria-label="Resultados"
-          className={`max-h-(--santo-dimension-space-384) flex-col gap-2xs overflow-y-auto p-2xs ${ordered.length ? "flex" : "hidden"}`}
-          // Raio aninhado das opcoes: painel do Card double (xl - xs - borda) - p-2xs
-          // da lista. Calculado aqui: a var nao pode ler a si mesma.
-          style={
-            {
-              "--santo-card-inner-radius":
-                "max(var(--santo-radius-xs), calc(var(--santo-radius-xl) - var(--santo-space-xs) - var(--santo-border-thin) - var(--santo-space-2xs)))",
-            } as CSSProperties
-          }
+          inset="sm"
+          className={`max-h-(--santo-dimension-space-384) overflow-y-auto ${ordered.length ? "flex" : "hidden"}`}
+          style={{ gap: "var(--santo-space-2xs)", paddingInline: "var(--santo-space-2xs)", scrollbarGutter: "stable both-edges" }}
         >
           {groups.map(([group, list]) => (
             <div key={group} role="group" aria-label={group || undefined} className="flex flex-col">
@@ -240,7 +236,7 @@ function Panel({
               })}
             </div>
           ))}
-        </div>
+        </Nest>
 
         </Card>
       </div>

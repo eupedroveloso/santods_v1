@@ -104,6 +104,7 @@ import { MarkdownViewThumb } from "./markdown-view.thumb";
 import { IconThumb } from "./icon.thumb";
 import { SkeletonThumb } from "./skeleton.thumb";
 import { ThumbFrameThumb } from "./thumb-frame.thumb";
+import { NestThumb } from "./nest.thumb";
 import { EmptyStateThumb } from "./empty-state.thumb";
 import { IconTileThumb } from "./icon-tile.thumb";
 import { ListRowThumb } from "./list-row.thumb";
@@ -241,6 +242,7 @@ export const thumbs: Record<string, ComponentType> = {
   icon: IconThumb,
   skeleton: SkeletonThumb,
   "thumb-frame": ThumbFrameThumb,
+  nest: NestThumb,
   "empty-state": EmptyStateThumb,
   "icon-tile": IconTileThumb,
   "list-row": ListRowThumb,

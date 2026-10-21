@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { Card, CodeBlock, Icon, IconButton } from "@/lib/ui";
+import { Card, CodeBlock, Icon, IconButton, Nest } from "@/lib/ui";
 
 /**
  * Bloco de demonstracao em borda dupla: o rotulo na moldura, o componente vivo
@@ -54,13 +54,11 @@ export function DemoCard({
         }
         footer={code && showCode ? <CodeBlock code={code} title={codeTitle} className="flex-1" /> : undefined}
       >
-        <div
-          className={`flex min-w-0 flex-col justify-center p-xl ${
-            layout === "center" ? "items-center" : "items-stretch"
-          }`}
-        >
+        {/* Aninhamento: o respiro do palco e uma moldura (recuo xl), para o que
+            vive nele receber o raio certo. */}
+        <Nest inset="xl" className={`min-w-0 justify-center ${layout === "center" ? "items-center" : "items-stretch"}`}>
           {children}
-        </div>
+        </Nest>
       </Card>
     </section>
   );
