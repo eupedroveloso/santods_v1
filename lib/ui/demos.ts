@@ -15,6 +15,7 @@ import { fabDemos } from "./fab.demo";
 import { railNavDemos } from "./rail-nav.demo";
 import { appSidebarDemos } from "./app-sidebar.demo";
 import { editorFrameDemos } from "./editor-frame.demo";
+import { fontPickerDemos } from "./font-picker.demo";
 import { saveIndicatorDemos } from "./save-indicator.demo";
 import { stepRowDemos } from "./step-row.demo";
 import { brandLogoDemos } from "./brand-logo.demo";
@@ -116,6 +117,7 @@ export const demos: DemoMap = {
   ...iconsDemos,
   ...kbdDemos,
   ...editorFrameDemos,
+  ...fontPickerDemos,
   ...saveIndicatorDemos,
   ...stepRowDemos,
   ...copyButtonDemos,

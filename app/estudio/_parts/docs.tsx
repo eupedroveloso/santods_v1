@@ -1,14 +1,14 @@
 "use client";
 
 import type { EffectStyleEntry, TextStyleEntry } from "@/lib/docs/catalog.types";
-import { curto, degraus, DERIVADAS, papeisDe, sugestao, TEMAS, TRAVADAS, type Tema } from "@/lib/estudio/cor";
+import { curto, degraus, DERIVADAS, mapaDePapeis, sugestao, TEMAS, TRAVADAS, type Tema } from "@/lib/estudio/cor";
 import type { AuditRow } from "@/lib/tokens/contrast-audit.mjs";
 import { LockIcon } from "@/lib/icons";
 import type { BrandSpec } from "@/lib/tokens/brand-mode.mjs";
 import { aliasTarget, isAlias } from "@/lib/tokens/emit.mjs";
 import type { Rascunho } from "@/lib/tokens/estudio.mjs";
 import { NIVEIS_CONTROLE, NIVEIS_ESPACO, NIVEIS_RAIO, NIVEIS_SOMBRA, PAPEIS_TIPO, type passosDe } from "@/lib/estudio/rascunho";
-import { Button, Card, CardGrid, Count, CopyCode, Icon, Input, Overline, Select, Swatch, Table, Tag, type Column } from "@/lib/ui";
+import { Button, Card, CardGrid, Chip, Count, CopyCode, Icon, IconButton, Input, Overline, Select, Swatch, Table, Tag, type Column } from "@/lib/ui";
 import { EffectCard } from "../../estilos/_parts/effect-card";
 import { StyleRow } from "../../estilos/_parts/style-row";
 import type { SlimVariable } from "../../tokens/_parts/token-table";
@@ -131,6 +131,8 @@ type LinhaRampa = { key: string; degrau: string; hex: string; ancora: boolean };
 
 /** Uma rampa derivada: amostra viva, degrau, valor e os papéis que ele alimenta em cada tema. */
 function Rampa({ familia, spec, ancora }: { familia: (typeof DERIVADAS)[number]; spec: BrandSpec; ancora?: string }) {
+  const papeis = mapaDePapeis(spec);
+  const papeisDe = (d: string) => papeis.get(d) ?? { Light: [], Dark: [] };
   const linhas: LinhaRampa[] = degraus(familia).map((d) => ({ key: d, degrau: d, hex: String(spec.Palette[d]), ancora: d === ancora }));
   const colunas: Column<LinhaRampa>[] = [
     { key: "amostra", header: "Cor", width: 72, render: (l) => <Swatch size="md" color={`var(${cssVarDe(l.degrau)})`} title={curto(l.degrau)} /> },
@@ -316,7 +318,7 @@ export function DocControles({ passos }: { passos: Passos }) {
                 <span className="santo-code-sm text-text-primary">{`control/height/${n}`}</span>
                 <span className="santo-caption-regular text-text-tertiary tabular-nums">{`${passos.controles[n]}px`}</span>
               </span>
-              <Button size={n} variant="primary" leading={<Icon.Plus size={16} />}>
+              <Button size={n} variant="primary" leading={<Icon.Plus />}>
                 Criar
               </Button>
               {/* O Input ocupa a largura do pai: a caixa fixa é que o põe lado a lado com os outros. */}
@@ -324,6 +326,10 @@ export function DocControles({ passos }: { passos: Passos }) {
                 <Input size={n} placeholder="Nome" aria-label={`Campo ${n}`} />
               </span>
               <Select size={n} label={`Seletor ${n}`} value="mensal" onChange={() => undefined} options={OPCOES} />
+              <Chip active>Filtro</Chip>
+              <IconButton size={n} variant="secondary" label={`Ajustes ${n}`}>
+                <Icon.Plus />
+              </IconButton>
             </div>
           ))}
         </div>

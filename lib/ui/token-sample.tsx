@@ -67,14 +67,16 @@ export function TokenSample({
     case "radius":
       return (
         <span
+          data-amostra="radius"
           className={`block size-2xl border-thin border-border-default bg-brand-subtle-default ${className}`}
           style={{ borderRadius: value }}
         />
       );
     case "corner":
       // O quadrado interno passa da moldura: so o canto de cima a esquerda aparece, grande.
+      // data-amostra: o raio aqui e o DADO mostrado, nao aninhamento (a auditoria de raio pula).
       return (
-        <span className={`relative block size-2xl overflow-hidden ${className}`}>
+        <span data-amostra="radius" className={`relative block size-2xl overflow-hidden ${className}`}>
           <span
             className="absolute left-0 top-0 block size-4xl border-thick border-border-brand bg-brand-subtle-default"
             style={{ borderTopLeftRadius: scale ? `calc(${value} * ${scale})` : value }}

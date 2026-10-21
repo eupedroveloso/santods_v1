@@ -13,6 +13,17 @@ function Playground({ valueLabel, field }: { valueLabel: "above" | "below" | "no
   );
 }
 
+function EmLinha() {
+  const [tinta, setTinta] = useState(40);
+  const [saturacao, setSaturacao] = useState(100);
+  return (
+    <div className="mx-auto flex w-full max-w-(--santo-dimension-space-320) flex-col gap-sm">
+      <NumberField layout="inline" label="Tinta" value={tinta} onChange={setTinta} min={0} max={100} unit="%" />
+      <NumberField layout="inline" label="Saturação" value={saturacao} onChange={setSaturacao} min={0} max={300} unit="%" />
+    </div>
+  );
+}
+
 export const numberFieldDemos: DemoMap = {
   "number-field": {
     playground: {
@@ -25,6 +36,14 @@ export const numberFieldDemos: DemoMap = {
       code: (v) =>
         `<NumberField label="Raio" value={raio} onChange={setRaio} min={0} max={64} unit="px"${v.valueLabel !== "above" ? ` valueLabel="${v.valueLabel}"` : ""}${v.field ? " field" : ""} />`,
     },
-    demos: [],
+    demos: [
+      {
+        title: "Em linha",
+        layout: "stretch",
+        code: `<NumberField layout="inline" label="Tinta" value={tinta} onChange={setTinta} min={0} max={100} unit="%" />
+<NumberField layout="inline" label="Saturação" value={saturacao} onChange={setSaturacao} min={0} max={300} unit="%" />`,
+        Preview: EmLinha,
+      },
+    ],
   },
 };

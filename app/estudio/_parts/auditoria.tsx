@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { AuditRow } from "@/lib/tokens/contrast-audit.mjs";
-import { Card, Count, ListRow, Overline, Segmented, Swatch, Tag } from "@/lib/ui";
+import { Count, ListRow, Overline, Segmented, Swatch, Tag } from "@/lib/ui";
 
 type Tema = "Light" | "Dark";
 
@@ -21,11 +21,9 @@ export function Auditoria({ auditoria }: { auditoria: Record<Tema, AuditRow[]> }
   const total = (t: Tema) => auditoria[t].filter((l) => !l.pass).length;
 
   return (
-    <Card
-      variant="double"
-      padding="md"
-      header={
-        <span className="flex min-w-0 flex-1 items-center justify-between gap-sm">
+    // Sem caixa: cabeçalho e pares direto sobre o chão do painel, separados por espaço.
+    <section aria-label="Contraste" className="flex min-w-0 flex-col gap-md">
+      <span className="flex min-w-0 flex-1 items-center justify-between gap-sm">
           <span className="flex items-center gap-xs">
             <Overline>Contraste</Overline>
             <Count tone={total("Light") + total("Dark") ? "neutral" : "brand"}>{`${linhas.length - falhas.length}/${linhas.length}`}</Count>
@@ -39,9 +37,7 @@ export function Auditoria({ auditoria }: { auditoria: Record<Tema, AuditRow[]> }
               { value: "Dark", label: `Escuro ${total("Dark")}` },
             ]}
           />
-        </span>
-      }
-    >
+      </span>
       {falhas.length === 0 ? (
         <Tag intent="success" dot>
           Todos os pares passam
@@ -51,7 +47,6 @@ export function Auditoria({ auditoria }: { auditoria: Record<Tema, AuditRow[]> }
           {falhas.map((l) => (
             <ListRow
               key={`${l.fg}|${l.bg}`}
-              divider
               leading={
                 <span className="flex shrink-0 -space-x-2xs">
                   <Swatch size="sm" round color={l.bgHex} title={curto(l.bg)} />
@@ -70,6 +65,6 @@ export function Auditoria({ auditoria }: { auditoria: Record<Tema, AuditRow[]> }
           ))}
         </div>
       )}
-    </Card>
+    </section>
   );
 }

@@ -15,6 +15,13 @@
       "when": 1792594780833,
       "tag": "0001_salvo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1792600761594,
+      "tag": "0002_presets",
+      "breakpoints": true
     }
   ]
 }

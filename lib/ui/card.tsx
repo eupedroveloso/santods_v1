@@ -28,7 +28,7 @@ import { OVERLINE } from "./text-class";
  */
 
 export type CardVariant = "raised" | "well" | "inset" | "sunken" | "outlined" | "dashed" | "double";
-export type CardPadding = "sm" | "md" | "lg";
+export type CardPadding = "xs" | "sm" | "md" | "lg";
 export type CardRadius = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 
 const SURFACE: Record<CardVariant, string> = {
@@ -42,13 +42,14 @@ const SURFACE: Record<CardVariant, string> = {
 };
 
 const PADDING: Record<CardPadding, string> = {
+  xs: "gap-xs p-xs",
   sm: "gap-xs p-sm",
   md: "gap-sm p-md",
   lg: "gap-md p-lg",
 };
 
 /** Grupo sem caixa (well/inset): so o ritmo do padding pedido, sem fundo nem recuo. */
-const GROUP_GAP: Record<CardPadding, string> = { sm: "gap-xs", md: "gap-sm", lg: "gap-md" };
+const GROUP_GAP: Record<CardPadding, string> = { xs: "gap-xs", sm: "gap-xs", md: "gap-sm", lg: "gap-md" };
 
 /** Variantes que viraram grupo sem caixa: nao tem raio, fundo nem padding. */
 const GROUP = new Set<CardVariant>(["well", "inset"]);
@@ -74,6 +75,7 @@ export function Card({
   header,
   footer,
   footerFlush = false,
+  contentRadius,
 }: {
   children: ReactNode;
   className?: string;
@@ -95,6 +97,13 @@ export function Card({
    * preview), em vez do recuo de acoes. Bordas coincidem com as do painel.
    */
   footerFlush?: boolean;
+  /**
+   * Moldura que NASCE do filho (regra do raio aninhado): o raio do conteúdo,
+   * em token, e a moldura vira conteudo + padding. Para quem embrulha uma peca
+   * de raio conhecido (preview em iframe com um Card xl dentro): com xl e
+   * padding xs a moldura e 16 + 8 = 24. Expoe o mesmo raio aos filhos.
+   */
+  contentRadius?: CardRadius;
 }) {
   if (variant === "double") {
     return (
@@ -109,6 +118,19 @@ export function Card({
   const pad = padded ? (padding ?? (variant === "raised" ? "lg" : "md")) : null;
   const style: CSSProperties & Record<string, string> = {};
   let own: string;
+  if (contentRadius !== undefined) {
+    const child = `var(--santo-radius-${contentRadius})`;
+    own = pad ? `calc(${child} + var(--santo-space-${pad}))` : child;
+    style.borderRadius = own;
+    style["--santo-card-inner-radius"] = child;
+    style["--santo-card-nested"] = "initial";
+    if (variant === "raised") style.boxShadow = `var(--santo-shadow-${elevation})`;
+    return (
+      <div className={`flex min-w-0 flex-col ${SURFACE[variant]} ${pad ? PADDING[pad] : ""} ${className}`} style={style}>
+        {children}
+      </div>
+    );
+  }
   if (radius !== undefined) own = `var(--santo-radius-${radius})`;
   else if (variant === "sunken") {
     // Moldura de cartoes: o filho (raised) vira lg, a moldura = lg + padding.

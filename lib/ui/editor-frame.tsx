@@ -2,7 +2,9 @@ import type { ReactNode } from "react";
 
 /**
  * Bancada de edição em três painéis: navegação à esquerda (chão sunken),
- * documento vivo no centro (chão da página) e painel de ajustes à direita.
+ * documento vivo no centro (chão da página) e ajustes à direita, também no
+ * chão sunken e SEM caixa: abas, seções e campos direto sobre o chão (os
+ * campos seguem como poços pelo santo-floor).
  * Use em editor que mexe num valor e mostra o resultado ao lado (Estúdio,
  * editor de tema). O pai dá a altura (`className`) e decide o que cada painel
  * mostra; quem rola é cada painel, não a página.
@@ -39,18 +41,20 @@ export function EditorFrame({
         aria-label={navLabel}
         className="hidden w-(--santo-dimension-space-256) shrink-0 flex-col gap-sm overflow-y-auto scrollbar-edge border-r-thin border-border-subtle bg-surface-sunken p-sm lg:flex"
       >
-        {nav}
+        <div className="santo-floor flex min-w-0 flex-col gap-sm">{nav}</div>
       </aside>
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto xl:flex-row xl:overflow-hidden">
         <section className="flex min-w-0 flex-col gap-xl p-md lg:p-xl xl:flex-1 xl:overflow-y-auto">
           {mobileNav && <div className="flex flex-col gap-sm lg:hidden">{mobileNav}</div>}
           {children}
         </section>
+        {/* Chão sunken, como a navegação: os ajustes são cartões raised sobre ele, sem moldura dupla. */}
         <aside
           aria-label={panelLabel}
-          className="flex shrink-0 flex-col gap-md px-md pb-md lg:px-xl lg:pb-xl xl:w-(--santo-dimension-space-384) xl:overflow-y-auto xl:pl-0 xl:pr-md xl:pt-xl"
+          className="flex shrink-0 flex-col bg-surface-sunken p-md lg:p-xl xl:w-(--santo-dimension-space-384) xl:overflow-y-auto xl:px-md xl:pt-xl"
         >
-          {panel}
+          {/* santo-floor: campos e trilhos sobre o chão sem caixa (surface.css). */}
+          <div className="santo-floor flex min-w-0 flex-col gap-xl">{panel}</div>
         </aside>
       </div>
     </div>

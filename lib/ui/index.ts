@@ -136,6 +136,8 @@ export { Fab, type FabPosition, type FabSize, type FabTone } from "./fab";
 export { RailItem, RailNav } from "./rail-nav";
 export { AppSidebar } from "./app-sidebar";
 export { EditorFrame } from "./editor-frame";
+export { FontPicker } from "./font-picker";
+export type { FontCategoryOption, FontFamilyOption } from "./font-picker";
 export { SaveIndicator } from "./save-indicator";
 export type { SaveState } from "./save-indicator";
 export { StepRow } from "./step-row";

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition, type FormEvent } from "react";
 import { estudioApi } from "@/lib/estudio/client";
 import { PaletteIcon } from "@/lib/icons";
-import { Button, Card, Divider, EmptyState, Field, Icon, IconTile, Input, ListRow } from "@/lib/ui";
+import { Button, Card, EmptyState, Field, Icon, IconTile, Input, ListRow } from "@/lib/ui";
 
 export type SistemaResumo = { id: string; nome: string; slug: string; atualizadoEm: string };
 
@@ -45,7 +45,7 @@ export function SistemasPainel({ sistemas }: { sistemas: SistemaResumo[] }) {
   };
 
   return (
-    <Card padding="lg" className="max-w-(--santo-dimension-container-md)">
+    <Card padding="lg" className="max-w-(--santo-dimension-container-md) gap-lg">
       <form onSubmit={criar} className="flex items-end gap-xs">
         <Field label="Novo sistema" error={erro ?? undefined} className="min-w-0 flex-1">
           <Input
@@ -60,7 +60,6 @@ export function SistemasPainel({ sistemas }: { sistemas: SistemaResumo[] }) {
           Criar
         </Button>
       </form>
-      <Divider />
       {sistemas.length === 0 ? (
         <EmptyState icon={<PaletteIcon size={20} />} title="Nenhum sistema ainda" />
       ) : (

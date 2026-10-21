@@ -154,7 +154,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 
 ## Semânticos
 
-82 componentes.
+83 componentes.
 
 | Componente | Quando usar |
 |---|---|
@@ -194,6 +194,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `EditorFrame` | Bancada de edição em três painéis: navegação no chão sunken à esquerda, documento vivo no centro e ajustes à direita (space/384), cada um rolando por conta própria. Abaixo de lg a navegação vira `mobileNav` no topo do centro; abaixo de xl os ajustes descem para baixo do documento. O pai dá a altura. Usada pelo Estúdio. **Dívida de paridade**: sem par no Figma. |
 | `EmptyState` | Lugar vazio com caminho: ícone, título, ação. Sem texto de apoio. |
 | `Field` | Rótulo + campo + apoio, com o espaçamento certo. `hint` some quando há `error`. |
+| `FontPicker` | Seletor de família para catálogo grande (índice do Google Fonts, ~1.800 famílias): busca, filtro por categoria em Chips, Curadoria no topo e lista VIRTUAL (só as linhas visíveis no DOM; a altura da linha é medida do token size/36). Cada opção aparece na própria fonte, carregada sob demanda por `previewHref` (só o peso regular, cache por página). Gatilho = poço do Select, altura control-height. Teclado completo; painel em position: fixed. Use no lugar do Select quando a pessoa escolhe pelo desenho da letra. **Dívida de paridade**: sem par no Figma. |
 | `GoalsCard` | Metas com teto (reserva, viagem): anel, nome em overline, guardado e alvo; metas separadas por Divider; `onAdd` liga "Nova meta". |
 | `InvestCard` | Ordem com valor e modalidade: campo-poço, tipo em Segmented, resumo, ação primária. |
 | `KeyValue` | Linha rótulo × valor (resumo de pedido, detalhe de transação). Valor tabular à direita; `emphasis` no total. |
@@ -209,7 +210,7 @@ a descrição do meta. Categorias continuam sendo um segundo eixo dentro da cama
 | `NavSection` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
 | `NavSub` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
 | `NavUser` | Painel de navegação (ao lado do `RailNav`). Itens com raio de controle (size/36); ativo = pastilha elevada (raised + shadow-xs) sobre o chão do painel (use num `Card variant="well"` ou região sunken); `emphasis` = acento brand. `count` à direita (número vira `Count`). Subitens em `NavSub` com `sub`: conectores de árvore. `NavSub branches` desenha os mesmos ramos para folhas e pastas recursivas; nesse modo não use também `NavItem sub`. `NavUser` em pastilha elevada. `href` vira link. |
-| `NumberField` | Slider de **largura total** para um número: a trilha não divide a linha com o valor. `valueLabel` `above` (padrão: rótulo flutuante acima do punho, acompanha a posição e nunca vaza nas pontas), `below` (mín | valor | máx abaixo da trilha) ou `none`. `field` liga o campo para digitar o valor exato, numa linha própria abaixo. Teclado no range nativo; `aria-valuetext` com a unidade. |
+| `NumberField` | Slider de **largura total** para um número: a trilha não divide a linha com o valor. `valueLabel` `above` (padrão: rótulo flutuante acima do punho, acompanha a posição e nunca vaza nas pontas), `below` (mín | valor | máx abaixo da trilha) ou `none`. `field` liga o campo para digitar o valor exato, numa linha própria abaixo. Teclado no range nativo; `aria-valuetext` com a unidade. `layout="inline"`: UMA linha alinhada ao grid do painel — rótulo à esquerda, trilha no meio, campo compacto com a unidade à direita (painel de ajustes). |
 | `Pagination` | Contagem à esquerda, navegação à direita. |
 | `PaymentsCard` | Tabela com seleção, status em Tag de intenção, ações por linha e paginação com contagem. |
 | `PreferencesCard` | Liga/desliga com salvar (cookies, notificações): SettingRow + Switch por hairline, contagem ligada. |

@@ -1,5 +1,6 @@
 import snapshot from "@/tokens/santods.figma.json";
-import { FONT_CATALOG } from "@/lib/fonts/catalog";
+import indiceGoogle from "@/lib/fonts/google-index.json";
+import type { IndiceGoogleFonts } from "@/lib/fonts/google.mjs";
 import { buildIndex, resolveValue } from "@/lib/tokens/emit.mjs";
 import {
   criarEstudio,
@@ -15,6 +16,9 @@ import {
   tamanho,
   type NivelEspaco,
   type NivelSombra,
+  type RascunhoLivre,
+  type Sombra,
+  controlesDe,
   type Papel,
   type Rascunho,
   type TabelaTipo,
@@ -33,13 +37,15 @@ import { ESTILO_IDS, type EstiloId } from "./estilos";
  *   espaco     base { valor }                         overrides { "3xs"?…"8xl"? } → passos.espaco
  *   tipografia base { corpo, titulo, mono, escala }   overrides { <papel>: [size, leading] }
  *   controles  base { valor }                         overrides { sm?, md?, lg? }
- *   cor        base = Rascunho.cor (parcial)          —
+ *   cor        base = Rascunho.cor (parcial)          overrides { brand?: {degrau: hex}, neutral?: {degrau: hex} } → passos.cor
  *   sombra     base = Rascunho.sombra (parcial)       overrides { xs?…"2xl"? } → passos.sombra (intensidade do nível)
  */
 
 export const doc = snapshot as unknown as TokenDoc;
 const index = buildIndex(doc);
-export const estudio = criarEstudio(doc, { fonts: FONT_CATALOG.map((f) => f.family) });
+/** Índice do Google Fonts (lib/fonts/google-index.json, ~1.800 famílias latin, curadoria no topo). */
+export const INDICE = indiceGoogle as unknown as IndiceGoogleFonts;
+export const estudio = criarEstudio(doc, { indice: INDICE });
 
 /** Escopo do preview: o mesmo `data-brand` em toda tela do Estúdio (contrato, §4). */
 export const ESCOPO = "[data-brand='rascunho']";
@@ -52,6 +58,7 @@ export const NIVEIS_ESPACO = Object.keys(ESPACO_FATOR) as NivelEspaco[];
 export const PAPEIS_TIPO = PAPEIS as Papel[];
 export const NIVEIS_SOMBRA = SOMBRA_NIVEIS as NivelSombra[];
 export const NIVEIS_CONTROLE = ["sm", "md", "lg"] as const;
+const CONTROLES_TAMANHOS = NIVEIS_CONTROLE;
 
 export const vazio = (): Registros =>
   Object.fromEntries(ESTILO_IDS.map((e) => [e, { base: {}, overrides: {} }])) as unknown as Registros;
@@ -68,7 +75,14 @@ const inteiros = (o: Record<string, unknown>) =>
 
 /** Tabela [size, leading] de uma escala: preset, tabela pronta ou { base, razao }. */
 export function tabelaDe(escala: Rascunho["tipografia"]["escala"]): TabelaTipo {
-  const valor = typeof escala === "string" ? PRESETS.tipografia[escala] : escala;
+  const fixos = PRESETS.tipografia as Record<string, TabelaTipo | "base">;
+  // Id de preset fixo, preset (fixo ou do banco) com tabela ou base/razão, tabela pronta ou { base, razao }.
+  const valor =
+    typeof escala === "string"
+      ? (fixos[escala] ?? "base")
+      : !Array.isArray(escala) && "nome" in escala
+        ? (escala.tabela ?? { base: escala.base, razao: escala.razao })
+        : escala;
   if (valor === "base") {
     return PAPEIS_TIPO.map((p) => [
       Number(resolveValue(index, doc.collections.Brand.variables[`brand/type/${p}/size`].values?.Santo, "Santo")),
@@ -83,18 +97,20 @@ export function tabelaDe(escala: Rascunho["tipografia"]["escala"]): TabelaTipo {
 }
 
 /** Rascunho completo a partir do que o banco guarda. */
-export function montarRascunho(sistema: { nome: string; slug: string }, r: Registros): Rascunho {
+export function montarRascunho(sistema: { nome: string; slug: string }, r: Registros): RascunhoLivre {
   const tipoBase = { ...RASCUNHO_PADRAO.tipografia, ...(r.tipografia.base as Partial<Rascunho["tipografia"]>) };
   const tipoPassos = r.tipografia.overrides as Partial<Record<Papel, [number, number]>>;
   const escala = Object.keys(tipoPassos).length
     ? tabelaDe(tipoBase.escala).map((linha, i) => tipoPassos[PAPEIS_TIPO[i]] ?? linha)
     : tipoBase.escala;
 
-  const controlesBase = (r.controles.base.valor as Rascunho["controles"] | undefined) ?? RASCUNHO_PADRAO.controles;
-  const alturas = typeof controlesBase === "string" ? PRESETS.controles[controlesBase] : controlesBase;
+  // Controles: preset, [sm, md, lg] ou as 7 medidas por tamanho. Overrides antigos (só altura) entram como altura.
+  const controlesBase = (r.controles.base.valor as RascunhoLivre["controles"] | undefined) ?? RASCUNHO_PADRAO.controles;
   const ctl = inteiros(r.controles.overrides);
-  const controles: Rascunho["controles"] = Object.keys(ctl).length
-    ? [ctl.sm ?? alturas[0], ctl.md ?? alturas[1], ctl.lg ?? alturas[2]]
+  const controles: RascunhoLivre["controles"] = Object.keys(ctl).length
+    ? Object.fromEntries(
+        CONTROLES_TAMANHOS.map((t) => [t, { ...controlesDe(controlesBase)[t], ...(ctl[t] !== undefined ? { altura: ctl[t] } : {}) }]),
+      )
     : controlesBase;
 
   return {
@@ -104,14 +120,16 @@ export function montarRascunho(sistema: { nome: string; slug: string }, r: Regis
     nome: sistema.nome,
     cor: { ...RASCUNHO_PADRAO.cor, ...(r.cor.base as Partial<Rascunho["cor"]>) },
     tipografia: { ...tipoBase, escala },
-    raio: numero(r.raio.base.valor) ?? RASCUNHO_PADRAO.raio,
-    espaco: numero(r.espaco.base.valor) ?? RASCUNHO_PADRAO.espaco,
-    sombra: { ...RASCUNHO_PADRAO.sombra, ...(r.sombra.base as Partial<Rascunho["sombra"]>) },
+    // Número (forma antiga) ou o objeto livre { container, controle, curva } / { unidade, curva }.
+    raio: (r.raio.base.valor as RascunhoLivre["raio"] | undefined) ?? RASCUNHO_PADRAO.raio,
+    espaco: (r.espaco.base.valor as RascunhoLivre["espaco"] | undefined) ?? RASCUNHO_PADRAO.espaco,
+    sombra: { ...RASCUNHO_PADRAO.sombra, ...(r.sombra.base as Partial<Sombra>) },
     controles,
     passos: {
       raio: r.raio.overrides as Record<string, number>,
       espaco: r.espaco.overrides as Record<string, number>,
-      sombra: r.sombra.overrides as Record<string, number>,
+      sombra: r.sombra.overrides as NonNullable<RascunhoLivre["passos"]>["sombra"],
+      cor: r.cor.overrides as NonNullable<Rascunho["passos"]>["cor"],
     },
   };
 }
@@ -128,6 +146,17 @@ export function passosDe(spec: BrandSpec) {
       PAPEIS_TIPO.map((p) => [p, [px(spec, `brand/type/${p}/size`), px(spec, `brand/type/${p}/leading`)] as [number, number]]),
     ),
     controles: Object.fromEntries(["sm", "md", "lg"].map((c) => [c, px(spec, `brand/control/height/${c}`)])),
+    /** Rampas brand e neutral já com os passos editados: { brand: { "50": hex… }, neutral: { "0": hex… } }. */
+    paleta: Object.fromEntries(
+      (["brand", "neutral"] as const).map((f) => [
+        f,
+        Object.fromEntries(
+          Object.keys(spec.Palette)
+            .filter((k) => k.startsWith(`palette/${f}/`))
+            .map((k) => [k.split("/")[2], String(spec.Palette[k])]),
+        ),
+      ]),
+    ) as Record<"brand" | "neutral", Record<string, string>>,
     /** Cor (hex com alfa) de cada camada, por nível: brand/shadow/<nível>/<camada>. */
     sombra: Object.fromEntries(
       NIVEIS_SOMBRA.map((n) => [

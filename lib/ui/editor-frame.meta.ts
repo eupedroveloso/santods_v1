@@ -8,7 +8,7 @@ export const editorFrameMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "editor-frame.tsx",
     description:
-      "Bancada de edição em três painéis: navegação no chão sunken à esquerda, documento vivo no centro e ajustes à direita (space/384), cada um rolando por conta própria. Abaixo de lg a navegação vira `mobileNav` no topo do centro; abaixo de xl os ajustes descem para baixo do documento. O pai dá a altura. Usada pelo Estúdio. **Dívida de paridade**: sem par no Figma.",
+      "Bancada de edição em três painéis: navegação no chão sunken à esquerda, documento vivo no centro e ajustes à direita (space/384) também no chão sunken, SEM caixa (abas, seções e campos direto sobre o chão; poço e trilho remapeados um degrau acima pelo santo-floor), cada um rolando por conta própria. Abaixo de lg a navegação vira `mobileNav` no topo do centro; abaixo de xl os ajustes descem para baixo do documento. O pai dá a altura. Usada pelo Estúdio. **Dívida de paridade**: sem par no Figma.",
     related: ["app-sidebar", "step-row", "save-indicator", "card"],
   },
 ];

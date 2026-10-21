@@ -1,4 +1,5 @@
 import type { EstiloId } from "./estilos";
+import type { PresetTipografia } from "@/lib/tokens/estudio.mjs";
 import type { Estilo, Sistema } from "./schema";
 
 /**
@@ -33,7 +34,17 @@ async function pedir<T>(url: string, init?: RequestInit): Promise<T> {
   return json as T;
 }
 
+/** Preset próprio. Tipografia: `dados` é o PresetTipografia; os outros estilos: o pedaço do rascunho (+ passos). */
+export type PresetJson<D = PresetTipografia> = { id: string; estilo: EstiloId; nome: string; dados: D; criadoEm: string };
+
 export const estudioApi = {
+  presets: <D = PresetTipografia>(estilo: EstiloId) =>
+    pedir<{ presets: PresetJson<D>[] }>(`/estudio/api/presets?estilo=${estilo}`).then((r) => r.presets),
+  criarPreset: <D = PresetTipografia>(estilo: EstiloId, nome: string, dados: D) =>
+    pedir<PresetJson<D>>("/estudio/api/presets", { method: "POST", body: JSON.stringify({ estilo, nome, dados }) }),
+  renomearPreset: <D = PresetTipografia>(id: string, nome: string) =>
+    pedir<PresetJson<D>>(`/estudio/api/presets/${id}`, { method: "PATCH", body: JSON.stringify({ nome }) }),
+  apagarPreset: (id: string) => pedir<void>(`/estudio/api/presets/${id}`, { method: "DELETE" }),
   criar: (nome: string) => pedir<SistemaComEstilosJson>(API, { method: "POST", body: JSON.stringify({ nome }) }),
   renomear: (id: string, nome: string) =>
     pedir<SistemaComEstilosJson>(`${API}/${id}`, { method: "PATCH", body: JSON.stringify({ nome }) }),

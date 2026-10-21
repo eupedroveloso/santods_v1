@@ -41,3 +41,18 @@ export const estilos = sqliteTable(
 
 export type Sistema = typeof sistemas.$inferSelect;
 export type Estilo = typeof estilos.$inferSelect;
+
+/**
+ * Presets próprios, por estilo (hoje: tipografia). `dados` é o preset no
+ * formato do contrato (PresetTipografia), validado no servidor antes de gravar.
+ * Valem para todos os sistemas; aplicar copia o preset para o rascunho.
+ */
+export const presets = sqliteTable("presets", {
+  id: text("id").primaryKey(),
+  estilo: text("estilo", { enum: ESTILO_IDS }).notNull(),
+  nome: text("nome").notNull(),
+  dados: text("dados", { mode: "json" }).$type<Record<string, unknown>>().notNull(),
+  criadoEm: integer("criado_em", { mode: "timestamp_ms" }).notNull().default(sql`(unixepoch() * 1000)`),
+});
+
+export type Preset = typeof presets.$inferSelect;

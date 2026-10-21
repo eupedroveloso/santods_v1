@@ -1,7 +1,7 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { RADIUS_CONTROL, RADIUS_CONTROL_VAR } from "./radius";
+import type { CSSProperties, ReactNode } from "react";
+import { RADIUS_CONTROL_VAR } from "./radius";
 
 /**
  * Controle segmentado: escolha unica entre 2 e 4 opcoes visiveis ao mesmo tempo.
@@ -24,15 +24,27 @@ export type Segment<T extends string> = {
  * radius/lg é fixo e não acompanha uma mudança de raio da marca.
  */
 const TRACK_PADDING = "var(--santo-space-2xs)";
+const TRACK_NATURAL = `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING})`;
+/*
+ * Dentro de um cartao, o trilho nunca passa do raio interno que o pai declara
+ * (--santo-card-inner-radius): o externo e sempre maior que o interno (regra
+ * do raio aninhado). Fora de cartao vale o natural (controle + 2xs). A
+ * pastilha acompanha, concentrica: trilho - 2xs, com piso radius/xs.
+ */
+const TRACK_RADIUS = `min(${TRACK_NATURAL}, var(--santo-card-inner-radius, ${TRACK_NATURAL}))`;
 const TRACK_STYLE = {
   padding: TRACK_PADDING,
-  borderRadius: `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING})`,
-};
+  "--santo-track-radius": TRACK_RADIUS,
+  borderRadius: "var(--santo-track-radius)",
+} as CSSProperties;
+/** Pastilha dentro do trilho: concentrica a ele. */
+const ITEM_STYLE = { borderRadius: `max(var(--santo-radius-xs), calc(var(--santo-track-radius) - ${TRACK_PADDING}))` };
 const FLOATING_TRACK_STYLE = {
-  ...TRACK_STYLE,
-  // santo-edge acrescenta um fio entre o padding e a borda exterior.
-  borderRadius: `calc(${RADIUS_CONTROL_VAR} + ${TRACK_PADDING} + var(--santo-border-thin))`,
-};
+  padding: TRACK_PADDING,
+  // Barra flutuante mora fora de cartao: raio natural + o fio do santo-edge.
+  "--santo-track-radius": TRACK_NATURAL,
+  borderRadius: `calc(${TRACK_NATURAL} + var(--santo-border-thin))`,
+} as CSSProperties;
 
 const SEG_SIZE = {
   sm: "h-(--santo-dimension-size-24) px-xs santo-caption-semibold",
@@ -74,7 +86,8 @@ export function Segmented<T extends string>({
             // visivel, ele e o nome acessivel — "clicar Auto" por voz tem que funcionar.
             aria-label={typeof o.label === "string" ? undefined : o.title}
             onClick={() => onChange(o.value)}
-            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs ${RADIUS_CONTROL} whitespace-nowrap ${block ? "min-w-0 flex-1" : ""} ${SEG_SIZE[size]} ${
+            style={ITEM_STYLE}
+            className={`santo-transition-elevation inline-flex cursor-pointer items-center justify-center gap-2xs whitespace-nowrap ${block ? "min-w-0 flex-1" : ""} ${SEG_SIZE[size]} ${
               active
                 ? "bg-surface-raised text-text-primary shadow-xs"
                 : "text-text-secondary hover:text-text-primary"
@@ -143,7 +156,8 @@ export function TabBar<T extends string>({
             role="tab"
             aria-selected={active}
             onClick={() => onChange(o.value)}
-            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center ${RADIUS_CONTROL} whitespace-nowrap ${
+            style={ITEM_STYLE}
+            className={`santo-transition-elevation flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap ${
               floating
                 ? `santo-caption-semibold min-w-(--santo-dimension-size-56) flex-1 flex-col gap-3xs px-sm py-xs ${
                     active ? "bg-brand-subtle-default text-text-brand" : "text-text-tertiary hover:text-text-primary"

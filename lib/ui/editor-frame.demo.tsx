@@ -28,7 +28,7 @@ export const editorFrameDemos: DemoMap = {
   className="h-[calc(100dvh-var(--santo-dimension-size-56))]"
   nav={<AppSidebar groups={estilos} showRail={false} surface="sunken" />}
   mobileNav={<Select label="Estilo" … />}
-  panel={<Card variant="double" header={abas}>…</Card>}
+  panel={<Card padding="md">{abas}…</Card>}
 >
   <header>…</header>
   {documentoVivo}
@@ -39,7 +39,8 @@ export const editorFrameDemos: DemoMap = {
               className="h-full bg-surface-page"
               nav={<AppSidebar groups={NAV} showRail={false} surface="sunken" label="Demo do editor" />}
               panel={
-                <Card variant="double" padding="md" header={<Overline>Ajustes</Overline>}>
+                <Card padding="md">
+                  <Overline>Ajustes</Overline>
                   <EmptyState title="Presets" />
                 </Card>
               }

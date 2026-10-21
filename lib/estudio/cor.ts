@@ -23,24 +23,35 @@ const palette = doc.collections.Palette.variables;
 /** Degraus de uma família na ordem do Figma: `palette/brand/50` … `/950`. */
 export const degraus = (familia: Familia) => Object.keys(palette).filter((n) => n.startsWith(`palette/${familia}/`));
 
-/** Para cada degrau, os papéis da Color que apontam para ele, por tema. */
-const PAPEIS = new Map<string, Record<Tema, string[]>>();
-const ALVO = new Map<string, Record<Tema, string | null>>();
-for (const [nome, v] of Object.entries(doc.collections.Color.variables)) {
-  const alvo: Record<Tema, string | null> = { Light: null, Dark: null };
-  for (const tema of TEMAS) {
-    const valor = v.values?.[tema];
-    if (!isAlias(valor)) continue;
-    const degrau = aliasTarget(valor);
-    alvo[tema] = degrau;
-    const atual = PAPEIS.get(degrau) ?? { Light: [], Dark: [] };
-    atual[tema].push(nome.replace(/^color\//, ""));
-    PAPEIS.set(degrau, atual);
+/**
+ * Degrau da Palette onde um papel da Color termina, num tema. A cadeia passa
+ * pela Brand (superfícies e bordas variam por marca: color/border/default →
+ * brand/border/default/light → palette/neutral/300), então segue a spec do rascunho.
+ */
+export function degrauDe(spec: BrandSpec, papel: string, tema: Tema): string | null {
+  let v: unknown = doc.collections.Color.variables[papel]?.values?.[tema];
+  for (let i = 0; i < 8 && isAlias(v); i++) {
+    const alvo = aliasTarget(v);
+    if (alvo.startsWith("palette/")) return alvo;
+    v = alvo in spec.Brand ? spec.Brand[alvo] : null;
   }
-  ALVO.set(nome, alvo);
+  return null;
 }
 
-export const papeisDe = (degrau: string): Record<Tema, string[]> => PAPEIS.get(degrau) ?? { Light: [], Dark: [] };
+/** Para cada degrau, os papéis da Color que terminam nele, por tema. */
+export function mapaDePapeis(spec: BrandSpec): Map<string, Record<Tema, string[]>> {
+  const mapa = new Map<string, Record<Tema, string[]>>();
+  for (const nome of Object.keys(doc.collections.Color.variables)) {
+    for (const tema of TEMAS) {
+      const degrau = degrauDe(spec, nome, tema);
+      if (!degrau) continue;
+      const atual = mapa.get(degrau) ?? { Light: [], Dark: [] };
+      atual[tema].push(nome.replace(/^color\//, ""));
+      mapa.set(degrau, atual);
+    }
+  }
+  return mapa;
+}
 
 /** `palette/brand/600` → `brand/600`. */
 export const curto = (nome: string) => nome.replace(/^(palette|color)\//, "");
@@ -61,7 +72,7 @@ export type Sugestao = { lado: "fg" | "bg"; degrau: string; ratio: number };
 export function sugestao(spec: BrandSpec, row: AuditRow, tema: Tema): Sugestao | null {
   const hex = (n: string) => String(spec.Palette[n]);
   const tentar = (lado: "fg" | "bg"): Sugestao | null => {
-    const atual = ALVO.get(lado === "fg" ? row.fg : row.bg)?.[tema];
+    const atual = degrauDe(spec, lado === "fg" ? row.fg : row.bg, tema);
     if (!atual) return null;
     const familia = atual.split("/")[1] as Familia;
     const lista = degraus(familia);
