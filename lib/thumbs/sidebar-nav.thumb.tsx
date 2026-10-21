@@ -5,7 +5,7 @@ export function SidebarNavThumb() {
   return (
     <ThumbFrame pad="sm">
       <div className="flex gap-xs">
-        <S.Block w="fit" tone="sunken" className="flex-col items-center gap-3xs p-3xs">
+        <S.Block w="fit" tone="sunken" track className="flex-col items-center gap-3xs">
           <S.Block w="xs" h="lg" elevated className="items-center justify-center">
             <S.Circle size="xs" tone="emphasis" />
           </S.Block>
@@ -18,7 +18,7 @@ export function SidebarNavThumb() {
         </S.Block>
         <div className="flex min-w-0 flex-1 flex-col gap-3xs">
           <S.Bar w="sm" size="sm" />
-          <S.Block tone="sunken" className="flex-col p-3xs">
+          <S.Block tone="sunken" track className="flex-col">
             <S.Row divider={false} active>
               <S.Bar w="fill" tone="strong" />
             </S.Row>

@@ -7,7 +7,7 @@ export function LandingHeaderThumb() {
     <ThumbFrame pad="sm">
       <S.Block elevated className="items-center justify-between gap-2xs p-3xs">
         <S.Bar w="xs" size="md" tone="strong" />
-        <S.Block w="fit" tone="sunken" className="gap-3xs p-3xs">
+        <S.Block w="fit" tone="sunken" track className="gap-3xs">
           <S.Chip w="xs" elevated>
             <S.Bar w="2xs" size="sm" tone="strong" />
           </S.Chip>

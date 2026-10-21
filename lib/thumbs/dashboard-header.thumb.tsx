@@ -8,7 +8,7 @@ export function DashboardHeaderThumb() {
       <div className="flex items-center justify-between gap-xs">
         <S.Bar w="md" size="lg" tone="strong" />
         <div className="flex items-center gap-2xs">
-          <S.Block w="fit" tone="sunken" className="gap-3xs p-3xs">
+          <S.Block w="fit" tone="sunken" track className="gap-3xs">
             <S.Chip w="xs" elevated>
               <S.Bar w="2xs" size="sm" tone="strong" />
             </S.Chip>

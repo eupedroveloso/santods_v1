@@ -4,7 +4,7 @@ import { ThumbFrame } from "@/lib/ui/thumb-frame";
 export function NavItemThumb() {
   return (
     <ThumbFrame pad="sm">
-      <S.Block tone="sunken" className="flex-col gap-3xs p-3xs">
+      <S.Block tone="sunken" track className="flex-col gap-3xs">
         <S.Row divider={false} active>
           <S.Circle size="xs" tone="emphasis" />
           <S.Bar w="md" tone="strong" />

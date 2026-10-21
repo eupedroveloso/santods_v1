@@ -116,11 +116,16 @@ export function Card({
   } else own = "var(--santo-card-nested, var(--santo-radius-xl))";
   style.borderRadius = own;
   style["--santo-card-inner-radius"] = innerRadius(own, pad);
-  // Moldura avisa os cartoes filhos; um cartao avisa os netos que ja nao estao na moldura.
-  style["--santo-card-nested"] = variant === "sunken" ? RADIUS_TRACK_VAR : "initial";
+  // Moldura avisa os cartoes filhos (lg). Os demais limpam o aviso so nos
+  // descendentes (santo-card-scope): gravado no proprio elemento, o raio dele
+  // leria o proprio reset e perderia o lg que a moldura mandou.
+  if (variant === "sunken") style["--santo-card-nested"] = RADIUS_TRACK_VAR;
   if (variant === "raised") style.boxShadow = `var(--santo-shadow-${elevation})`;
   return (
-    <div className={`flex min-w-0 flex-col ${SURFACE[variant]} ${pad ? PADDING[pad] : ""} ${className}`} style={style}>
+    <div
+      className={`flex min-w-0 flex-col ${variant === "sunken" ? "" : "santo-card-scope"} ${SURFACE[variant]} ${pad ? PADDING[pad] : ""} ${className}`}
+      style={style}
+    >
       {children}
     </div>
   );

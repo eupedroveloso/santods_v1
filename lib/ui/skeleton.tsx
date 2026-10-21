@@ -211,6 +211,8 @@ function Field({
 }) {
   return (
     <div
+      // Com trailing, os filhos xs encostam a 3xs da borda: raio = xs + 3xs (aninhado).
+      style={trailing ? { borderRadius: "calc(var(--santo-radius-xs) + var(--santo-space-3xs))" } : undefined}
       className={`flex shrink-0 gap-2xs bg-surface-sunken ${multiline ? "px-xs" : "pr-3xs pl-xs"} rounded-xs ${
         WIDTH[w]
       } ${multiline ? "h-3xl items-start py-xs" : "h-lg items-center"}`}

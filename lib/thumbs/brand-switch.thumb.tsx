@@ -6,7 +6,7 @@ export function BrandSwitchThumb() {
   return (
     <ThumbFrame pad="md">
       <div className="flex justify-center">
-        <S.Block w="fit" tone="sunken" className="gap-3xs p-3xs">
+        <S.Block w="fit" tone="sunken" track className="gap-3xs">
           <S.Chip w="md" elevated>
             <S.Bar w="sm" size="sm" tone="emphasis" />
           </S.Chip>

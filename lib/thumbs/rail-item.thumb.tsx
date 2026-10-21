@@ -5,7 +5,7 @@ export function RailItemThumb() {
   return (
     <ThumbFrame pad="md">
       <div className="flex justify-center">
-        <S.Block w="fit" tone="sunken" className="gap-3xs p-3xs">
+        <S.Block w="fit" tone="sunken" track className="gap-3xs">
           <S.Block w="xs" h="lg" elevated className="items-center justify-center">
             <S.Circle size="xs" tone="emphasis" />
           </S.Block>

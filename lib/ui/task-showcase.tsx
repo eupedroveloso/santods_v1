@@ -122,7 +122,7 @@ export function TaskAppPreview({
     setCreating(false);
   };
   return (
-    <div className={`santo-edge overflow-hidden rounded-xl bg-surface-raised text-left shadow-lg ${className}`}>
+    <div className={`santo-edge overflow-hidden rounded-lg bg-surface-raised text-left shadow-lg ${className}`}>
       <div className="flex flex-wrap items-center justify-between gap-sm border-b-thin border-border-subtle px-md py-sm">
         <ProductMark name={productName} />
         <span className="santo-caption-small-medium hidden items-center gap-lg text-text-tertiary sm:flex"><span className="text-text-primary">Visão geral</span><span>Meu trabalho</span><span>Equipe</span></span>
@@ -265,13 +265,13 @@ export function TaskOnboarding({ productName = "Compasso", steps = STEPS, classN
         <div aria-hidden inert style={{ width: "calc(var(--santo-dimension-space-384) + var(--santo-dimension-space-256))" }}><TaskAppPreview productName={productName} variant="sidebar" projectName={step === 1 ? "Nosso primeiro projeto juntos" : step === 2 ? "As ideias começam a ganhar vida" : "Tudo começa com uma boa ideia"} /></div>
       </div>
       <div className="flex flex-col gap-sm">{steps.map((item, index) => (
-        <Card key={item.title} padded={false} variant={step === index ? "raised" : "sunken"} radius="lg">
+        <Card key={item.title} padded={false} variant={step === index ? "raised" : "sunken"} radius="xl">
           <Disclosure variant="row" open={step === index} onToggle={() => setStep(index)} label={<span className="flex items-center gap-sm"><Count tone={step === index ? "brand" : "neutral"}>{String(index + 1).padStart(2, "0")}</Count><span className="santo-body-small-semibold text-text-primary">{item.title}</span></span>}>
             <p className="santo-body-small-regular text-text-secondary">{item.description}</p>
             {index === 0 ? (
               <CardGrid columns={{ base: 2 }} masonry={false} gap="sm">
-                <div className="flex min-w-0 flex-col gap-sm rounded-md bg-surface-page p-sm"><ProductMark name={productName} compact /><span className="santo-caption-semibold text-text-primary">Bom ter você por aqui.</span><Button size="sm" variant="secondary" onClick={() => setStarted(true)} leading={<Icon.Google size={12} />}>Google</Button><span className="santo-caption-small-regular text-text-tertiary">Seu time começa com você.</span></div>
-                <form className="flex min-w-0 flex-col gap-sm rounded-md bg-surface-page p-sm" onSubmit={(event) => { event.preventDefault(); if (email.trim()) setStarted(true); }}><span className="santo-caption-semibold text-text-primary">Crie o seu espaço</span><Field label="E-mail"><Input id={emailId} type="email" value={email} onChange={(event) => { setEmail(event.target.value); setStarted(false); }} placeholder="voce@time.com" required size="sm" /></Field><Button size="sm" variant="primary" type="submit" leading={started ? <Icon.Check size={12} /> : undefined}>{started ? "Pronto!" : "Começar"}</Button></form>
+                <div className="flex min-w-0 flex-col gap-sm rounded-lg bg-surface-page p-2xs"><ProductMark name={productName} compact /><span className="santo-caption-semibold text-text-primary">Bom ter você por aqui.</span><Button size="sm" variant="secondary" onClick={() => setStarted(true)} leading={<Icon.Google size={12} />}>Google</Button><span className="santo-caption-small-regular text-text-tertiary">Seu time começa com você.</span></div>
+                <form className="flex min-w-0 flex-col gap-sm rounded-lg bg-surface-page p-2xs" onSubmit={(event) => { event.preventDefault(); if (email.trim()) setStarted(true); }}><span className="santo-caption-semibold text-text-primary">Crie o seu espaço</span><Field label="E-mail"><Input id={emailId} type="email" value={email} onChange={(event) => { setEmail(event.target.value); setStarted(false); }} placeholder="voce@time.com" required size="sm" /></Field><Button size="sm" variant="primary" type="submit" leading={started ? <Icon.Check size={12} /> : undefined}>{started ? "Pronto!" : "Começar"}</Button></form>
               </CardGrid>
             ) : <div className="flex items-center gap-sm"><People /><span className="santo-caption-medium text-text-secondary">{index === 1 ? "Um convite, muitas possibilidades." : "Uma visão compartilhada do progresso."}</span></div>}
             {index === 0 && started && <p className="santo-caption-regular text-text-brand" role="status">Bom começo! Agora é hora de convidar seu time.</p>}

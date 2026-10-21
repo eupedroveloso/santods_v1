@@ -5,7 +5,7 @@ export function RailNavThumb() {
   return (
     <ThumbFrame pad="sm">
       <div className="flex gap-sm">
-        <S.Block w="fit" tone="sunken" className="flex-col items-center gap-3xs p-3xs">
+        <S.Block w="fit" tone="sunken" track className="flex-col items-center gap-3xs">
           <S.Block w="xs" h="lg" elevated className="items-center justify-center">
             <S.Circle size="xs" tone="emphasis" />
           </S.Block>

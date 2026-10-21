@@ -107,3 +107,15 @@
     var(--santo-space-sm) * 3 + var(--santo-dimension-size-40) + var(--santo-border-thin)
   );
 }
+
+/*
+ * Escopo do raio aninhado do Card: limpa --santo-card-nested so nos
+ * descendentes. O Card que nao e moldura (sunken) le o aviso da moldura de
+ * cima no proprio raio; o reset precisa comecar nos filhos dele, para os
+ * netos fora da moldura voltarem ao xl.
+ */
+@utility santo-card-scope {
+  & > * {
+    --santo-card-nested: initial;
+  }
+}
