@@ -72,3 +72,38 @@
     background-color: var(--santo-color-bg-selected);
   }
 }
+
+/*
+ * Faixa fixa no topo de um contêiner rolável (busca da sidebar). O fundo é a
+ * superfície do contêiner (--santo-pinned-surface, padrão surface/page) e,
+ * em vez de linha dura embaixo, o tom desce em degradê por space/sm sobre o
+ * que rola por baixo.
+ */
+@utility santo-pinned-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--santo-pinned-surface, var(--santo-color-surface-page));
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    height: var(--santo-space-sm);
+    pointer-events: none;
+    background-image: linear-gradient(var(--santo-pinned-surface, var(--santo-color-surface-page)), transparent);
+  }
+}
+
+/*
+ * Para o pai que rola sob uma santo-pinned-head do AppSidebar: reserva a
+ * altura da faixa (space/sm + busca size/40 + space/sm + divisor + degrade
+ * space/sm) no scroll-padding, para foco por teclado e scrollIntoView pararem
+ * abaixo dela. size/40 = SearchTrigger size="md" em app-sidebar.tsx: mudou
+ * lá, muda aqui.
+ */
+@utility santo-pinned-scroll {
+  scroll-padding-top: calc(
+    var(--santo-space-sm) * 3 + var(--santo-dimension-size-40) + var(--santo-border-thin)
+  );
+}

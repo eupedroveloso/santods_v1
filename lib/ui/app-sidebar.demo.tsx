@@ -79,6 +79,36 @@ export const appSidebarDemos: DemoMap = {
         ),
       },
       {
+        title: "Recolher e expandir tudo",
+        layout: "stretch",
+        code: `// Busca e botão fixos no topo do pai que rola (sem padding em cima).
+<aside className="overflow-y-scroll santo-pinned-scroll px-xs pb-sm">
+  <AppSidebar
+    groups={grupos}
+    showRail={false}
+    onSearch={abrirBusca}
+    foldAll
+    pinned
+    surface="sunken"
+  />
+</aside>`,
+        Preview: () => (
+          <Card variant="sunken" padded={false} className="mx-auto w-full max-w-(--santo-dimension-space-320) overflow-hidden">
+            <div className="santo-pinned-scroll max-h-(--santo-dimension-space-320) overflow-y-scroll px-sm pb-sm">
+              <AppSidebar
+                groups={GROUPS}
+                showRail={false}
+                onSearch={() => undefined}
+                foldAll
+                pinned
+                surface="sunken"
+                label="Demo recolher e expandir tudo"
+              />
+            </div>
+          </Card>
+        ),
+      },
+      {
         title: "Com trilho",
         layout: "stretch",
         code: `<AppSidebar

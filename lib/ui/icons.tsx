@@ -36,6 +36,8 @@ export {
   XmarkIcon as Close,
   EllipsisIcon as More,
   ExpandIcon as Expand,
+  ArrowsToLineIcon as CollapseAll,
+  ArrowsFromLineIcon as ExpandAll,
   CopyIcon as Copy,
   DownloadIcon as Download,
   PaletteIcon as Palette,

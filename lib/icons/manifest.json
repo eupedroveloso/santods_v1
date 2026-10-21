@@ -1024,6 +1024,42 @@
         "acessar"
       ],
       "viewBox": "0 0 16 16"
+    },
+    "arrows-to-line": {
+      "component": "ArrowsToLineIcon",
+      "file": "lib/icons/arrows-to-line.tsx",
+      "figma": {
+        "name": "arrows-to-line",
+        "kind": "icon",
+        "setNodeId": "38:34537",
+        "nodeId": "38:34541",
+        "weight": "regular"
+      },
+      "aliases": [
+        "recolher tudo",
+        "recolher",
+        "fechar pastas",
+        "comprimir"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "arrows-from-line": {
+      "component": "ArrowsFromLineIcon",
+      "file": "lib/icons/arrows-from-line.tsx",
+      "figma": {
+        "name": "arrows-from-line",
+        "kind": "icon",
+        "setNodeId": "38:34355",
+        "nodeId": "38:34359",
+        "weight": "regular"
+      },
+      "aliases": [
+        "expandir tudo",
+        "expandir",
+        "abrir pastas",
+        "desdobrar"
+      ],
+      "viewBox": "0 0 16 16"
     }
   }
 }

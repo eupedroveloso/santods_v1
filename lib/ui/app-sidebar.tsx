@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { IconButton } from "./button";
+import { Divider } from "./card";
 import { Count } from "./chip";
 import { Disclosure } from "./disclosure";
-import { Expand } from "./icons";
+import { CollapseAll, Expand, ExpandAll } from "./icons";
 import { NavItem, NavSub, SidebarNav } from "./nav";
 import { NAV_STEM_STYLE } from "./nav-layout";
 import { RailItem, RailNav } from "./rail-nav";
@@ -28,6 +29,20 @@ const groupItems = (group: AppSidebarGroup): AppSidebarItem[] => [
   ...(group.groups ?? []).flatMap(groupItems),
 ];
 
+/** Caminho de toda pasta com título, em qualquer nível. */
+function titledPaths(groups: AppSidebarGroup[], prefix = ""): string[] {
+  return groups.flatMap((group, index) => {
+    const path = `${prefix}${index}`;
+    return [...(group.title ? [path] : []), ...titledPaths(group.groups ?? [], `${path}.`)];
+  });
+}
+
+const PINNED_SURFACE = {
+  page: "var(--santo-color-surface-page)",
+  sunken: "var(--santo-color-surface-sunken)",
+  raised: "var(--santo-color-surface-raised)",
+};
+
 function activeGroupPaths(groups: AppSidebarGroup[], prefix = ""): string[] {
   return groups.flatMap((group, index) => {
     const path = `${prefix}${index}`;
@@ -46,6 +61,13 @@ function activeGroupPaths(groups: AppSidebarGroup[], prefix = ""): string[] {
  *
  * Use quando a navegacao cabe numa lista longa de secoes. Quem rola e o pai
  * (aside sticky, gaveta); ao montar, o item ativo e trazido para a vista.
+ * `foldAll` poe ao lado da busca um botao que recolhe todas as pastas quando
+ * alguma esta aberta e expande todas quando todas estao fechadas. `pinned`
+ * fixa essa linha no topo do pai que rola; ela assume o respiro de cima
+ * (space/sm), entao o pai nao leva padding no topo e leva santo-pinned-scroll
+ * (scroll-padding-top da faixa: foco e item ativo nao somem sob ela) e
+ * overflow-y-scroll (a calha fica sempre reservada: a busca nao muda de
+ * largura quando a lista recolhe e a barra sumiria).
  * Quem decide qual item esta ativo e quem navega e o pai.
  */
 export function AppSidebar({
@@ -54,6 +76,9 @@ export function AppSidebar({
   onNavigate,
   label = "Navegação",
   showRail = true,
+  foldAll = false,
+  pinned = false,
+  surface = "page",
   className = "",
 }: {
   /** Grupos na ordem de leitura. Grupo sem titulo = itens soltos no topo. */
@@ -66,6 +91,12 @@ export function AppSidebar({
   label?: string;
   /** false: só o painel de navegação, sem reservar espaço para o trilho. */
   showRail?: boolean;
+  /** Botão ao lado da busca que recolhe/expande todas as pastas. */
+  foldAll?: boolean;
+  /** Busca (e foldAll) fixas no topo do pai que rola. */
+  pinned?: boolean;
+  /** Superfície do pai, que pinta a faixa fixa e o degradê sob ela. */
+  surface?: keyof typeof PINNED_SURFACE;
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -79,6 +110,12 @@ export function AppSidebar({
       closed: navigation.closed.filter((path) => !activeGroupPaths(groups).includes(path)),
     });
   }
+  const folders = titledPaths(groups);
+  // Conta só a pasta visível: aberta e com todos os ancestrais abertos.
+  const visible = (path: string) =>
+    path.split(".").every((_, i, parts) => !navigation.closed.includes(parts.slice(0, i + 1).join(".")));
+  const anyOpen = folders.some(visible);
+  const toggleAll = () => setNavigation((state) => ({ ...state, closed: anyOpen ? folders : [] }));
   const openGroup = (index: number) => {
     setNavigation((state) => ({ ...state, closed: state.closed.filter((path) => path !== String(index)) }));
     ref.current?.querySelector<HTMLButtonElement>(`[data-sidebar-group="${index}"] button`)?.focus();
@@ -93,7 +130,9 @@ export function AppSidebar({
         if (!/auto|scroll/.test(getComputedStyle(parent).overflowY)) continue;
         const item = active.getBoundingClientRect();
         const viewport = parent.getBoundingClientRect();
-        if (item.top < viewport.top) parent.scrollTop += item.top - viewport.top;
+        // scroll-padding-top desconta a faixa fixa (santo-pinned-scroll).
+        const top = viewport.top + (parseFloat(getComputedStyle(parent).scrollPaddingTop) || 0);
+        if (item.top < top) parent.scrollTop += item.top - top;
         else if (item.bottom > viewport.bottom) parent.scrollTop += item.bottom - viewport.bottom;
         break;
       }
@@ -186,7 +225,27 @@ export function AppSidebar({
         </RailNav>
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-md">
-        {onSearch && <SearchTrigger onClick={onSearch} />}
+        {(onSearch || foldAll) && (
+          <div
+            className={`flex flex-col gap-sm ${pinned ? "santo-pinned-head pt-sm" : ""}`}
+            style={pinned ? ({ "--santo-pinned-surface": PINNED_SURFACE[surface] } as CSSProperties) : undefined}
+          >
+            <div className="flex items-center gap-2xs">
+              {/* size md (size/40) está no calc de santo-pinned-scroll (surface.css): mudou aqui, muda lá. */}
+              {onSearch && <SearchTrigger size="md" onClick={onSearch} className="min-w-0 flex-1" />}
+              {foldAll && folders.length > 0 && (
+                <IconButton
+                  label={anyOpen ? "Recolher todas as pastas" : "Expandir todas as pastas"}
+                  onClick={toggleAll}
+                  className="ml-auto shrink-0"
+                >
+                  {anyOpen ? <CollapseAll size={16} /> : <ExpandAll size={16} />}
+                </IconButton>
+              )}
+            </div>
+            <Divider />
+          </div>
+        )}
         <SidebarNav label={label}>
           <div className="flex flex-col gap-xs">
             {groups.map((group, index) => renderGroup(group, String(index)))}

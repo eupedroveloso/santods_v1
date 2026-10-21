@@ -81,8 +81,9 @@ export function DocsShell({
     setSearchOpen(true);
   };
 
-  const sidebar = (
-    <Sidebar nav={nav} pathname={pathname} onSearch={openSearch} onNavigate={() => setMenuOpen(false)} />
+  // No aside a busca fica fixa no topo; na gaveta ela rola junto do menu.
+  const sidebar = (pinned: boolean) => (
+    <Sidebar nav={nav} pathname={pathname} pinned={pinned} onSearch={openSearch} onNavigate={() => setMenuOpen(false)} />
   );
 
   return (
@@ -145,8 +146,8 @@ export function DocsShell({
       {/* Sem container centralizado: a sidebar encosta na borda esquerda da janela e
           o conteudo ocupa o resto. O max-w de leitura fica so no texto corrido. */}
       <div className="flex w-full flex-1">
-        <aside className={`sticky top-(--santo-dimension-size-56) hidden h-[calc(100dvh-var(--santo-dimension-size-56))] ${LAYOUT.sidebar} shrink-0 overflow-y-auto scrollbar-edge border-r-thin border-border-subtle px-xs py-sm lg:block`}>
-          {sidebar}
+        <aside className={`sticky top-(--santo-dimension-size-56) hidden h-[calc(100dvh-var(--santo-dimension-size-56))] ${LAYOUT.sidebar} shrink-0 overflow-y-scroll santo-pinned-scroll scrollbar-edge border-r-thin border-border-subtle px-xs pb-sm lg:block`}>
+          {sidebar(true)}
         </aside>
         {/* Altura minima = viewport menos a topbar: assim o rodape da pagina (mt-auto)
             encosta embaixo em pagina curta. */}
@@ -157,7 +158,7 @@ export function DocsShell({
 
       {menuOpen && (
         <MenuDrawer onClose={() => setMenuOpen(false)} brands={brands}>
-          {sidebar}
+          {sidebar(false)}
         </MenuDrawer>
       )}
 
@@ -272,11 +273,13 @@ function isActive(href: string, pathname: string, hash: string, nav: NavGroup[])
 function Sidebar({
   nav,
   pathname,
+  pinned,
   onSearch,
   onNavigate,
 }: {
   nav: NavGroup[];
   pathname: string;
+  pinned: boolean;
   onSearch: () => void;
   onNavigate: () => void;
 }) {
@@ -300,6 +303,8 @@ function Sidebar({
     <AppSidebar
       label="Documentação"
       showRail={false}
+      foldAll
+      pinned={pinned}
       onSearch={onSearch}
       onNavigate={onNavigate}
       groups={nav.map(sidebarGroup)}

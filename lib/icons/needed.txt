@@ -75,3 +75,7 @@ star-half-stroke:solid | meia estrela, avaliação                        # Rati
 play:solid | play, tocar, assistir, vídeo                               # VslBlock idle e "Continuar assistindo"
 user | usuário, conta, perfil, login                                     # LandingHeader, botão Login (hoje id-card)
 right-to-bracket | entrar, login, acessar                               # LandingHeader, alternativa ao user
+
+# --- sidebar das docs: recolher/expandir todas as pastas (Ateliê, 2026-10-21) ---
+arrows-to-line | recolher tudo, recolher, fechar pastas, comprimir     # botão "recolher tudo" da árvore
+arrows-from-line | expandir tudo, expandir, abrir pastas, desdobrar    # botão "expandir tudo" da árvore
