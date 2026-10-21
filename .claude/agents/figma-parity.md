@@ -22,7 +22,8 @@ scripts/figma-dump.js         script READ-ONLY para colar no use_figma (dump com
 scripts/parity-hash.mjs       serializacao canonica + FNV-1a (lado Node)
 scripts/check-parity.mjs      diff / validacao / modo --fingerprint
 scripts/figma-brand-mode.js   script de ESCRITA para o use_figma: cria/atualiza um modo de marca (fonte da spec)
-scripts/apply-brand-mode.mjs  EXCECAO: aplica o mesmo modo ao snapshot sem Figma (deixa meta.aheadOfFigma)
+scripts/apply-brand-mode.mjs  EXCECAO: aplica o mesmo modo ao snapshot sem Figma (deixa meta.aheadOfFigma); --spec <script> para outro modo
+scripts/figma-brand-mode-spp.js script de ESCRITA do modo SPP (Seu Produto Pronto), mesmo formato do da VTSD
 scripts/brand-ramp.mjs        CLI das rampas brand/neutral de uma marca nova (so imprime; metodo em lib/tokens/brand-ramp.mjs)
 scripts/figma-nivel-b.js      script de ESCRITA para o use_figma: nivel B do Estudio (fonte da spec NIVEL_B)
 scripts/figma-nivel-b-apply.mjs EXCECAO: aplica o nivel B ao snapshot sem Figma (deixa meta.aheadOfFigma.also)
@@ -140,6 +141,9 @@ Vale enquanto `tokens/santods.figma.json` tiver `meta.aheadOfFigma`. O check imp
    (o snapshot guarda % do tamanho, como type/tracking/*). Repita dump,
    diff vazio e `--write`. O `figma-dump.js` e o hash ja leem `boundVariables.color` das sombras.
    Ensaiado em Figma simulado: escrita = snapshot aplicado, segunda rodada 0 mudancas.
+   **Modo SPP (Seu Produto Pronto, tag `brand-mode-spp`):** DEPOIS do nivel B, cole
+   `scripts/figma-brand-mode-spp.js` (DRY_RUN, depois real); a spec cobre as variaveis do nivel B.
+   Spec e auditoria em `tokens/SPP.proposal.md`. Plano Pro: 4 modos por colecao (hoje 3).
 7. `npm run tokens && npm run tokens:check` (sem AVISO) e `npm run tokens:fingerprint`.
    A saida gerada nao pode mudar: confira com `git diff lib/tokens`.
 8. Atualize a tabela acima (estado "confirmado") e apague o aviso de "A FRENTE".

@@ -24,7 +24,10 @@ import { applyBrandMode } from '../lib/tokens/brand-mode.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SNAPSHOT = resolve(root, 'tokens/santods.figma.json');
-const FIGMA_SCRIPT = resolve(root, 'scripts/figma-brand-mode.js');
+// --spec <script>: outro modo de marca (ex.: scripts/figma-brand-mode-spp.js). Padrao: a VTSD.
+const specFlag = process.argv.indexOf('--spec');
+const DEFAULT_SCRIPT = resolve(root, 'scripts/figma-brand-mode.js');
+const FIGMA_SCRIPT = specFlag === -1 ? DEFAULT_SCRIPT : resolve(process.cwd(), process.argv[specFlag + 1]);
 const checkOnly = process.argv.includes('--check');
 
 /* ------------------------------------- spec lida do script do Figma */
@@ -71,7 +74,23 @@ try {
   process.exit(1);
 }
 
-if (changes.length) {
+if (changes.length && FIGMA_SCRIPT !== DEFAULT_SCRIPT) {
+  // Modo extra: rastro proprio em meta.aheadOfFigma.also (o principal continua sendo o da VTSD).
+  const ahead = doc.meta.aheadOfFigma ?? {};
+  const tag = `brand-mode-${MODE.toLowerCase()}`;
+  const prev = (ahead.also ?? []).find((x) => x.tag === tag);
+  const also = (ahead.also ?? []).filter((x) => x.tag !== tag);
+  also.push({
+    tag,
+    collections: ['Palette', 'Brand'],
+    styles: `modo ${MODE}`,
+    since: prev?.since ?? new Date().toLocaleDateString('sv-SE'),
+    by: `scripts/apply-brand-mode.mjs --spec ${FIGMA_SCRIPT.slice(root.length + 1)}`,
+    why: 'Modo de marca aplicado ao snapshot sem Figma (MCP read-only).',
+    reconcile: `colar ${FIGMA_SCRIPT.slice(root.length + 1)} no use_figma (DRY_RUN, depois real) DEPOIS do figma-nivel-b.js; seguir .claude/agents/figma-parity.md`,
+  });
+  doc.meta.aheadOfFigma = { ...ahead, also };
+} else if (changes.length) {
   doc.meta.aheadOfFigma = {
     collections: Object.keys(SPEC),
     mode: MODE,

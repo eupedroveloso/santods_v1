@@ -28,6 +28,18 @@
           "by": "scripts/figma-nivel-b-apply.mjs",
           "why": "Nivel B do Estudio aprovado pelo maestro so no andar estudio; Figma read-only para o MCP.",
           "reconcile": "colar scripts/figma-nivel-b.js no use_figma (DRY_RUN, depois real) e seguir .claude/agents/figma-parity.md"
+        },
+        {
+          "tag": "brand-mode-spp",
+          "collections": [
+            "Palette",
+            "Brand"
+          ],
+          "styles": "modo SPP",
+          "since": "2026-10-21",
+          "by": "scripts/apply-brand-mode.mjs --spec scripts/figma-brand-mode-spp.js",
+          "why": "Modo de marca aplicado ao snapshot sem Figma (MCP read-only).",
+          "reconcile": "colar scripts/figma-brand-mode-spp.js no use_figma (DRY_RUN, depois real) DEPOIS do figma-nivel-b.js; seguir .claude/agents/figma-parity.md"
         }
       ]
     }
@@ -36,7 +48,8 @@
     "Palette": {
       "modes": [
         "Santo",
-        "VTSD"
+        "VTSD",
+        "SPP"
       ],
       "defaultMode": "Santo",
       "variables": {
@@ -44,553 +57,632 @@
           "type": "COLOR",
           "values": {
             "Santo": "#edf3fb",
-            "VTSD": "#edf4f3"
+            "VTSD": "#edf4f3",
+            "SPP": "#ecf3f9"
           }
         },
         "palette/brand/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#e2edfe",
-            "VTSD": "#e0f0ed"
+            "VTSD": "#e0f0ed",
+            "SPP": "#dfeffa"
           }
         },
         "palette/brand/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#cde2fe",
-            "VTSD": "#cae6e1"
+            "VTSD": "#cae6e1",
+            "SPP": "#c9e3f8"
           }
         },
         "palette/brand/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#b1d0fe",
-            "VTSD": "#aad6d0"
+            "VTSD": "#aad6d0",
+            "SPP": "#a8d3f4"
           }
         },
         "palette/brand/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#8bbaff",
-            "VTSD": "#7dc4bc"
+            "VTSD": "#7dc4bc",
+            "SPP": "#7ac0f1"
           }
         },
         "palette/brand/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#64a3fe",
-            "VTSD": "#4ab2a7"
+            "VTSD": "#4ab2a7",
+            "SPP": "#46abec"
           }
         },
         "palette/brand/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#4693ff",
-            "VTSD": "#00a99d"
+            "VTSD": "#00a99d",
+            "SPP": "#009be6"
           }
         },
         "palette/brand/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#2c71cf",
-            "VTSD": "#008077"
+            "VTSD": "#008077",
+            "SPP": "#0b5cff"
           }
         },
         "palette/brand/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#1c54a0",
-            "VTSD": "#006159"
+            "VTSD": "#006159",
+            "SPP": "#005b88"
           }
         },
         "palette/brand/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#14407c",
-            "VTSD": "#004944"
+            "VTSD": "#004944",
+            "SPP": "#004469"
           }
         },
         "palette/brand/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#021e45",
-            "VTSD": "#002421"
+            "VTSD": "#002421",
+            "SPP": "#002136"
           }
         },
         "palette/accent/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#fef9ec",
-            "VTSD": "#fef9ec"
+            "VTSD": "#fef9ec",
+            "SPP": "#fef9ec"
           }
         },
         "palette/accent/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#fcf0cb",
-            "VTSD": "#fcf0cb"
+            "VTSD": "#fcf0cb",
+            "SPP": "#fcf0cb"
           }
         },
         "palette/accent/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#f9e093",
-            "VTSD": "#f9e093"
+            "VTSD": "#f9e093",
+            "SPP": "#f9e093"
           }
         },
         "palette/accent/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#f5ca5a",
-            "VTSD": "#f5ca5a"
+            "VTSD": "#f5ca5a",
+            "SPP": "#f5ca5a"
           }
         },
         "palette/accent/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#f2b62f",
-            "VTSD": "#f2b62f"
+            "VTSD": "#f2b62f",
+            "SPP": "#f2b62f"
           }
         },
         "palette/accent/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#e89f13",
-            "VTSD": "#e89f13"
+            "VTSD": "#e89f13",
+            "SPP": "#e89f13"
           }
         },
         "palette/accent/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#cd7d0d",
-            "VTSD": "#cd7d0d"
+            "VTSD": "#cd7d0d",
+            "SPP": "#cd7d0d"
           }
         },
         "palette/accent/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#a85b0f",
-            "VTSD": "#a85b0f"
+            "VTSD": "#a85b0f",
+            "SPP": "#a85b0f"
           }
         },
         "palette/accent/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#8a4813",
-            "VTSD": "#8a4813"
+            "VTSD": "#8a4813",
+            "SPP": "#8a4813"
           }
         },
         "palette/accent/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#743b16",
-            "VTSD": "#743b16"
+            "VTSD": "#743b16",
+            "SPP": "#743b16"
           }
         },
         "palette/accent/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#431d06",
-            "VTSD": "#431d06"
+            "VTSD": "#431d06",
+            "SPP": "#431d06"
           }
         },
         "palette/neutral/0": {
           "type": "COLOR",
           "values": {
             "Santo": "#ffffff",
-            "VTSD": "#ffffff"
+            "VTSD": "#ffffff",
+            "SPP": "#ffffff"
           }
         },
         "palette/neutral/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#f8fafb",
-            "VTSD": "#fafafa"
+            "VTSD": "#fafafa",
+            "SPP": "#fbfafa"
           }
         },
         "palette/neutral/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#f0f3f8",
-            "VTSD": "#f3f3f3"
+            "VTSD": "#f3f3f3",
+            "SPP": "#f5f2f4"
           }
         },
         "palette/neutral/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#e3e8ef",
-            "VTSD": "#e7e7e7"
+            "VTSD": "#e7e7e7",
+            "SPP": "#ece6e9"
           }
         },
         "palette/neutral/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#ced5df",
-            "VTSD": "#d4d4d4"
+            "VTSD": "#d4d4d4",
+            "SPP": "#dad3d6"
           }
         },
         "palette/neutral/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#7d8ca0",
-            "VTSD": "#8b8b8b"
+            "VTSD": "#8b8b8b",
+            "SPP": "#96878e"
           }
         },
         "palette/neutral/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#636f7f",
-            "VTSD": "#6e6e6e"
+            "VTSD": "#6e6e6e",
+            "SPP": "#776b70"
           }
         },
         "palette/neutral/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#4d596a",
-            "VTSD": "#585858"
+            "VTSD": "#585858",
+            "SPP": "#62545b"
           }
         },
         "palette/neutral/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#394352",
-            "VTSD": "#424242"
+            "VTSD": "#424242",
+            "SPP": "#4b4045"
           }
         },
         "palette/neutral/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#242d39",
-            "VTSD": "#2c2c2c"
+            "VTSD": "#2c2c2c",
+            "SPP": "#332a2e"
           }
         },
         "palette/neutral/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#131a25",
-            "VTSD": "#1a1a1a"
+            "VTSD": "#1a1a1a",
+            "SPP": "#20171c"
           }
         },
         "palette/neutral/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#090f17",
-            "VTSD": "#0f0f0f"
+            "VTSD": "#0f0f0f",
+            "SPP": "#100a0d"
           }
         },
         "palette/neutral/1000": {
           "type": "COLOR",
           "values": {
             "Santo": "#08060b",
-            "VTSD": "#070707"
+            "VTSD": "#070707",
+            "SPP": "#0a0608"
           }
         },
         "palette/success/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#ecfdf3",
-            "VTSD": "#ecfdf3"
+            "VTSD": "#ecfdf3",
+            "SPP": "#ecfdf3"
           }
         },
         "palette/success/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#d1fadf",
-            "VTSD": "#d1fadf"
+            "VTSD": "#d1fadf",
+            "SPP": "#d1fadf"
           }
         },
         "palette/success/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#a6f4c5",
-            "VTSD": "#a6f4c5"
+            "VTSD": "#a6f4c5",
+            "SPP": "#a6f4c5"
           }
         },
         "palette/success/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#6ce9a6",
-            "VTSD": "#6ce9a6"
+            "VTSD": "#6ce9a6",
+            "SPP": "#6ce9a6"
           }
         },
         "palette/success/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#32d583",
-            "VTSD": "#32d583"
+            "VTSD": "#32d583",
+            "SPP": "#32d583"
           }
         },
         "palette/success/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#12b76a",
-            "VTSD": "#12b76a"
+            "VTSD": "#12b76a",
+            "SPP": "#12b76a"
           }
         },
         "palette/success/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#039855",
-            "VTSD": "#039855"
+            "VTSD": "#039855",
+            "SPP": "#039855"
           }
         },
         "palette/success/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#027a48",
-            "VTSD": "#027a48"
+            "VTSD": "#027a48",
+            "SPP": "#027a48"
           }
         },
         "palette/success/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#05603a",
-            "VTSD": "#05603a"
+            "VTSD": "#05603a",
+            "SPP": "#05603a"
           }
         },
         "palette/success/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#054f31",
-            "VTSD": "#054f31"
+            "VTSD": "#054f31",
+            "SPP": "#054f31"
           }
         },
         "palette/success/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#023321",
-            "VTSD": "#023321"
+            "VTSD": "#023321",
+            "SPP": "#023321"
           }
         },
         "palette/warning/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#fffaeb",
-            "VTSD": "#fffaeb"
+            "VTSD": "#fffaeb",
+            "SPP": "#fffaeb"
           }
         },
         "palette/warning/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#fef0c7",
-            "VTSD": "#fef0c7"
+            "VTSD": "#fef0c7",
+            "SPP": "#fef0c7"
           }
         },
         "palette/warning/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#fedf89",
-            "VTSD": "#fedf89"
+            "VTSD": "#fedf89",
+            "SPP": "#fedf89"
           }
         },
         "palette/warning/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#fec84b",
-            "VTSD": "#fec84b"
+            "VTSD": "#fec84b",
+            "SPP": "#fec84b"
           }
         },
         "palette/warning/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#fdb022",
-            "VTSD": "#fdb022"
+            "VTSD": "#fdb022",
+            "SPP": "#fdb022"
           }
         },
         "palette/warning/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#f79009",
-            "VTSD": "#f79009"
+            "VTSD": "#f79009",
+            "SPP": "#f79009"
           }
         },
         "palette/warning/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#dc6803",
-            "VTSD": "#dc6803"
+            "VTSD": "#dc6803",
+            "SPP": "#dc6803"
           }
         },
         "palette/warning/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#b54708",
-            "VTSD": "#b54708"
+            "VTSD": "#b54708",
+            "SPP": "#b54708"
           }
         },
         "palette/warning/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#93370d",
-            "VTSD": "#93370d"
+            "VTSD": "#93370d",
+            "SPP": "#93370d"
           }
         },
         "palette/warning/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#7a2e0e",
-            "VTSD": "#7a2e0e"
+            "VTSD": "#7a2e0e",
+            "SPP": "#7a2e0e"
           }
         },
         "palette/warning/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#4e1d09",
-            "VTSD": "#4e1d09"
+            "VTSD": "#4e1d09",
+            "SPP": "#4e1d09"
           }
         },
         "palette/danger/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#fef3f2",
-            "VTSD": "#fef3f2"
+            "VTSD": "#fef3f2",
+            "SPP": "#fef3f2"
           }
         },
         "palette/danger/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#fee4e2",
-            "VTSD": "#fee4e2"
+            "VTSD": "#fee4e2",
+            "SPP": "#fee4e2"
           }
         },
         "palette/danger/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#fecdca",
-            "VTSD": "#fecdca"
+            "VTSD": "#fecdca",
+            "SPP": "#fecdca"
           }
         },
         "palette/danger/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#fda29b",
-            "VTSD": "#fda29b"
+            "VTSD": "#fda29b",
+            "SPP": "#fda29b"
           }
         },
         "palette/danger/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#f97066",
-            "VTSD": "#f97066"
+            "VTSD": "#f97066",
+            "SPP": "#f97066"
           }
         },
         "palette/danger/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#f04438",
-            "VTSD": "#f04438"
+            "VTSD": "#f04438",
+            "SPP": "#f04438"
           }
         },
         "palette/danger/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#d92d20",
-            "VTSD": "#d92d20"
+            "VTSD": "#d92d20",
+            "SPP": "#d92d20"
           }
         },
         "palette/danger/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#b42318",
-            "VTSD": "#b42318"
+            "VTSD": "#b42318",
+            "SPP": "#b42318"
           }
         },
         "palette/danger/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#912018",
-            "VTSD": "#912018"
+            "VTSD": "#912018",
+            "SPP": "#912018"
           }
         },
         "palette/danger/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#7a271a",
-            "VTSD": "#7a271a"
+            "VTSD": "#7a271a",
+            "SPP": "#7a271a"
           }
         },
         "palette/danger/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#55160c",
-            "VTSD": "#55160c"
+            "VTSD": "#55160c",
+            "SPP": "#55160c"
           }
         },
         "palette/info/50": {
           "type": "COLOR",
           "values": {
             "Santo": "#eff8ff",
-            "VTSD": "#eff8ff"
+            "VTSD": "#eff8ff",
+            "SPP": "#eff8ff"
           }
         },
         "palette/info/100": {
           "type": "COLOR",
           "values": {
             "Santo": "#d1e9ff",
-            "VTSD": "#d1e9ff"
+            "VTSD": "#d1e9ff",
+            "SPP": "#d1e9ff"
           }
         },
         "palette/info/200": {
           "type": "COLOR",
           "values": {
             "Santo": "#b2ddff",
-            "VTSD": "#b2ddff"
+            "VTSD": "#b2ddff",
+            "SPP": "#b2ddff"
           }
         },
         "palette/info/300": {
           "type": "COLOR",
           "values": {
             "Santo": "#84caff",
-            "VTSD": "#84caff"
+            "VTSD": "#84caff",
+            "SPP": "#84caff"
           }
         },
         "palette/info/400": {
           "type": "COLOR",
           "values": {
             "Santo": "#53b1fd",
-            "VTSD": "#53b1fd"
+            "VTSD": "#53b1fd",
+            "SPP": "#53b1fd"
           }
         },
         "palette/info/500": {
           "type": "COLOR",
           "values": {
             "Santo": "#2e90fa",
-            "VTSD": "#2e90fa"
+            "VTSD": "#2e90fa",
+            "SPP": "#2e90fa"
           }
         },
         "palette/info/600": {
           "type": "COLOR",
           "values": {
             "Santo": "#1570ef",
-            "VTSD": "#1570ef"
+            "VTSD": "#1570ef",
+            "SPP": "#1570ef"
           }
         },
         "palette/info/700": {
           "type": "COLOR",
           "values": {
             "Santo": "#175cd3",
-            "VTSD": "#175cd3"
+            "VTSD": "#175cd3",
+            "SPP": "#175cd3"
           }
         },
         "palette/info/800": {
           "type": "COLOR",
           "values": {
             "Santo": "#1849a9",
-            "VTSD": "#1849a9"
+            "VTSD": "#1849a9",
+            "SPP": "#1849a9"
           }
         },
         "palette/info/900": {
           "type": "COLOR",
           "values": {
             "Santo": "#194185",
-            "VTSD": "#194185"
+            "VTSD": "#194185",
+            "SPP": "#194185"
           }
         },
         "palette/info/950": {
           "type": "COLOR",
           "values": {
             "Santo": "#102a56",
-            "VTSD": "#102a56"
+            "VTSD": "#102a56",
+            "SPP": "#102a56"
           }
         }
       }
@@ -2646,7 +2738,8 @@
     "Brand": {
       "modes": [
         "Santo",
-        "VTSD"
+        "VTSD",
+        "SPP"
       ],
       "defaultMode": "Santo",
       "variables": {
@@ -2654,21 +2747,24 @@
           "type": "STRING",
           "values": {
             "Santo": "santo",
-            "VTSD": "vtsd"
+            "VTSD": "vtsd",
+            "SPP": "spp"
           }
         },
         "brand/name": {
           "type": "STRING",
           "values": {
             "Santo": "Santo",
-            "VTSD": "Venda Todo Santo Dia"
+            "VTSD": "Venda Todo Santo Dia",
+            "SPP": "Seu Produto Pronto"
           }
         },
         "brand/family/sans": {
           "type": "STRING",
           "values": {
             "Santo": "Albert Sans",
-            "VTSD": "Sora"
+            "VTSD": "Sora",
+            "SPP": "Montserrat"
           },
           "scopes": [
             "FONT_FAMILY"
@@ -2679,7 +2775,8 @@
           "type": "STRING",
           "values": {
             "Santo": "JetBrains Mono",
-            "VTSD": "JetBrains Mono"
+            "VTSD": "JetBrains Mono",
+            "SPP": "JetBrains Mono"
           },
           "scopes": [
             "FONT_FAMILY"
@@ -2690,7 +2787,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/8}",
-            "VTSD": "{dimension/radius/8}"
+            "VTSD": "{dimension/radius/8}",
+            "SPP": "{dimension/radius/16}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2700,7 +2798,8 @@
           "type": "STRING",
           "values": {
             "Santo": "Albert Sans",
-            "VTSD": "Sora"
+            "VTSD": "Sora",
+            "SPP": "Montserrat"
           },
           "scopes": [
             "FONT_FAMILY"
@@ -2711,7 +2810,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/4}",
-            "VTSD": "{dimension/radius/4}"
+            "VTSD": "{dimension/radius/4}",
+            "SPP": "{dimension/radius/8}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2722,7 +2822,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/8}",
-            "VTSD": "{dimension/radius/8}"
+            "VTSD": "{dimension/radius/8}",
+            "SPP": "{dimension/radius/16}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2733,7 +2834,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/12}",
-            "VTSD": "{dimension/radius/12}"
+            "VTSD": "{dimension/radius/12}",
+            "SPP": "{dimension/radius/24}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2744,7 +2846,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/16}",
-            "VTSD": "{dimension/radius/16}"
+            "VTSD": "{dimension/radius/16}",
+            "SPP": "{dimension/radius/32}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2755,7 +2858,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/24}",
-            "VTSD": "{dimension/radius/24}"
+            "VTSD": "{dimension/radius/24}",
+            "SPP": 48
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2766,7 +2870,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/32}",
-            "VTSD": "{dimension/radius/32}"
+            "VTSD": "{dimension/radius/32}",
+            "SPP": 64
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -2777,7 +2882,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/2}",
-            "VTSD": "{dimension/space/2}"
+            "VTSD": "{dimension/space/2}",
+            "SPP": "{dimension/space/2}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2789,7 +2895,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/4}",
-            "VTSD": "{dimension/space/4}"
+            "VTSD": "{dimension/space/4}",
+            "SPP": "{dimension/space/4}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2801,7 +2908,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/8}",
-            "VTSD": "{dimension/space/8}"
+            "VTSD": "{dimension/space/8}",
+            "SPP": "{dimension/space/8}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2813,7 +2921,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/12}",
-            "VTSD": "{dimension/space/12}"
+            "VTSD": "{dimension/space/12}",
+            "SPP": "{dimension/space/12}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2825,7 +2934,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/16}",
-            "VTSD": "{dimension/space/16}"
+            "VTSD": "{dimension/space/16}",
+            "SPP": "{dimension/space/16}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2837,7 +2947,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/24}",
-            "VTSD": "{dimension/space/24}"
+            "VTSD": "{dimension/space/24}",
+            "SPP": "{dimension/space/24}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2849,7 +2960,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/32}",
-            "VTSD": "{dimension/space/32}"
+            "VTSD": "{dimension/space/32}",
+            "SPP": "{dimension/space/32}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2861,7 +2973,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/40}",
-            "VTSD": "{dimension/space/40}"
+            "VTSD": "{dimension/space/40}",
+            "SPP": "{dimension/space/40}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2873,7 +2986,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/48}",
-            "VTSD": "{dimension/space/48}"
+            "VTSD": "{dimension/space/48}",
+            "SPP": "{dimension/space/48}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2885,7 +2999,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/64}",
-            "VTSD": "{dimension/space/64}"
+            "VTSD": "{dimension/space/64}",
+            "SPP": "{dimension/space/64}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2897,7 +3012,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/80}",
-            "VTSD": "{dimension/space/80}"
+            "VTSD": "{dimension/space/80}",
+            "SPP": "{dimension/space/80}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2909,7 +3025,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/96}",
-            "VTSD": "{dimension/space/96}"
+            "VTSD": "{dimension/space/96}",
+            "SPP": "{dimension/space/96}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2921,7 +3038,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/128}",
-            "VTSD": "{dimension/space/128}"
+            "VTSD": "{dimension/space/128}",
+            "SPP": "{dimension/space/128}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2933,7 +3051,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/space/192}",
-            "VTSD": "{dimension/space/192}"
+            "VTSD": "{dimension/space/192}",
+            "SPP": "{dimension/space/192}"
           },
           "scopes": [
             "WIDTH_HEIGHT",
@@ -2945,7 +3064,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/72}",
-            "VTSD": "{type/size/72}"
+            "VTSD": "{type/size/72}",
+            "SPP": "{type/size/60}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -2956,7 +3076,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/80}",
-            "VTSD": "{type/leading/80}"
+            "VTSD": "{type/leading/80}",
+            "SPP": 76
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -2967,7 +3088,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/60}",
-            "VTSD": "{type/size/60}"
+            "VTSD": "{type/size/60}",
+            "SPP": "{type/size/48}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -2978,7 +3100,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/72}",
-            "VTSD": "{type/leading/72}"
+            "VTSD": "{type/leading/72}",
+            "SPP": 60
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -2989,7 +3112,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/48}",
-            "VTSD": "{type/size/48}"
+            "VTSD": "{type/size/48}",
+            "SPP": "{type/size/36}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3000,7 +3124,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/56}",
-            "VTSD": "{type/leading/56}"
+            "VTSD": "{type/leading/56}",
+            "SPP": "{type/leading/44}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3011,7 +3136,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/36}",
-            "VTSD": "{type/size/36}"
+            "VTSD": "{type/size/36}",
+            "SPP": 32
           },
           "scopes": [
             "FONT_SIZE"
@@ -3022,7 +3148,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/44}",
-            "VTSD": "{type/leading/44}"
+            "VTSD": "{type/leading/44}",
+            "SPP": 40
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3033,7 +3160,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/30}",
-            "VTSD": "{type/size/30}"
+            "VTSD": "{type/size/30}",
+            "SPP": 28
           },
           "scopes": [
             "FONT_SIZE"
@@ -3044,7 +3172,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/38}",
-            "VTSD": "{type/leading/38}"
+            "VTSD": "{type/leading/38}",
+            "SPP": 36
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3055,7 +3184,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/24}",
-            "VTSD": "{type/size/24}"
+            "VTSD": "{type/size/24}",
+            "SPP": "{type/size/24}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3066,7 +3196,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/32}",
-            "VTSD": "{type/leading/32}"
+            "VTSD": "{type/leading/32}",
+            "SPP": "{type/leading/32}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3077,7 +3208,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/18}",
-            "VTSD": "{type/size/18}"
+            "VTSD": "{type/size/18}",
+            "SPP": "{type/size/20}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3088,7 +3220,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/28}",
-            "VTSD": "{type/leading/28}"
+            "VTSD": "{type/leading/28}",
+            "SPP": "{type/leading/32}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3099,7 +3232,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/16}",
-            "VTSD": "{type/size/16}"
+            "VTSD": "{type/size/16}",
+            "SPP": "{type/size/18}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3110,7 +3244,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/24}",
-            "VTSD": "{type/leading/24}"
+            "VTSD": "{type/leading/24}",
+            "SPP": "{type/leading/28}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3121,7 +3256,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/14}",
-            "VTSD": "{type/size/14}"
+            "VTSD": "{type/size/14}",
+            "SPP": "{type/size/16}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3132,7 +3268,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/20}",
-            "VTSD": "{type/leading/20}"
+            "VTSD": "{type/leading/20}",
+            "SPP": "{type/leading/24}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3143,7 +3280,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/12}",
-            "VTSD": "{type/size/12}"
+            "VTSD": "{type/size/12}",
+            "SPP": "{type/size/14}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3154,7 +3292,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/16}",
-            "VTSD": "{type/leading/16}"
+            "VTSD": "{type/leading/16}",
+            "SPP": "{type/leading/20}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3165,7 +3304,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/size/10}",
-            "VTSD": "{type/size/10}"
+            "VTSD": "{type/size/10}",
+            "SPP": "{type/size/12}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3176,7 +3316,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/leading/16}",
-            "VTSD": "{type/leading/16}"
+            "VTSD": "{type/leading/16}",
+            "SPP": "{type/leading/16}"
           },
           "scopes": [
             "LINE_HEIGHT"
@@ -3187,7 +3328,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/size/32}",
-            "VTSD": "{dimension/size/32}"
+            "VTSD": "{dimension/size/32}",
+            "SPP": "{dimension/size/36}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3198,7 +3340,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/size/40}",
-            "VTSD": "{dimension/size/40}"
+            "VTSD": "{dimension/size/40}",
+            "SPP": "{dimension/size/44}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3209,7 +3352,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/size/48}",
-            "VTSD": "{dimension/size/48}"
+            "VTSD": "{dimension/size/48}",
+            "SPP": "{dimension/size/56}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3220,7 +3364,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d1614",
-            "VTSD": "#100d1614"
+            "VTSD": "#100d1614",
+            "SPP": "#100a0d23"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3231,7 +3376,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d1614",
-            "VTSD": "#100d1614"
+            "VTSD": "#100d1614",
+            "SPP": "#100a0d23"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3242,7 +3388,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d160f",
-            "VTSD": "#100d160f"
+            "VTSD": "#100d160f",
+            "SPP": "#100a0d1a"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3253,7 +3400,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d1614",
-            "VTSD": "#100d1614"
+            "VTSD": "#100d1614",
+            "SPP": "#100a0d23"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3264,7 +3412,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d160f",
-            "VTSD": "#100d160f"
+            "VTSD": "#100d160f",
+            "SPP": "#100a0d1a"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3275,7 +3424,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d1617",
-            "VTSD": "#100d1617"
+            "VTSD": "#100d1617",
+            "SPP": "#100a0d28"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3286,7 +3436,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d160f",
-            "VTSD": "#100d160f"
+            "VTSD": "#100d160f",
+            "SPP": "#100a0d1a"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3297,7 +3448,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d161a",
-            "VTSD": "#100d161a"
+            "VTSD": "#100d161a",
+            "SPP": "#100a0d2e"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3308,7 +3460,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d160f",
-            "VTSD": "#100d160f"
+            "VTSD": "#100d160f",
+            "SPP": "#100a0d1a"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3319,7 +3472,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d161f",
-            "VTSD": "#100d161f"
+            "VTSD": "#100d161f",
+            "SPP": "#100a0d36"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -3330,7 +3484,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/50}",
-            "VTSD": "{palette/neutral/50}"
+            "VTSD": "{palette/neutral/50}",
+            "SPP": "{palette/neutral/0}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3342,7 +3497,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/950}",
-            "VTSD": "{palette/neutral/950}"
+            "VTSD": "{palette/neutral/950}",
+            "SPP": "{palette/neutral/1000}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3354,7 +3510,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/0}",
-            "VTSD": "{palette/neutral/0}"
+            "VTSD": "{palette/neutral/0}",
+            "SPP": "{palette/neutral/0}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3366,7 +3523,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/900}",
-            "VTSD": "{palette/neutral/900}"
+            "VTSD": "{palette/neutral/900}",
+            "SPP": "{palette/neutral/950}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3378,7 +3536,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/100}",
-            "VTSD": "{palette/neutral/100}"
+            "VTSD": "{palette/neutral/100}",
+            "SPP": "{palette/neutral/50}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3390,7 +3549,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/1000}",
-            "VTSD": "{palette/neutral/1000}"
+            "VTSD": "{palette/neutral/1000}",
+            "SPP": "{palette/neutral/1000}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3402,7 +3562,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/100}",
-            "VTSD": "{palette/neutral/100}"
+            "VTSD": "{palette/neutral/100}",
+            "SPP": "{palette/neutral/100}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3414,7 +3575,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/1000}",
-            "VTSD": "{palette/neutral/1000}"
+            "VTSD": "{palette/neutral/1000}",
+            "SPP": "{palette/neutral/950}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3426,7 +3588,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/0}",
-            "VTSD": "{palette/neutral/0}"
+            "VTSD": "{palette/neutral/0}",
+            "SPP": "{palette/neutral/0}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3438,7 +3601,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/900}",
-            "VTSD": "{palette/neutral/900}"
+            "VTSD": "{palette/neutral/900}",
+            "SPP": "{palette/neutral/950}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3450,7 +3614,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#100d1699",
-            "VTSD": "#100d1699"
+            "VTSD": "#100d1699",
+            "SPP": "#0a060899"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3462,7 +3627,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#000000b8",
-            "VTSD": "#000000b8"
+            "VTSD": "#000000b8",
+            "SPP": "#000000b8"
           },
           "scopes": [
             "FRAME_FILL",
@@ -3474,7 +3640,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/200}",
-            "VTSD": "{palette/neutral/200}"
+            "VTSD": "{palette/neutral/200}",
+            "SPP": "{palette/neutral/100}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3485,7 +3652,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/800}",
-            "VTSD": "{palette/neutral/800}"
+            "VTSD": "{palette/neutral/800}",
+            "SPP": "{palette/neutral/900}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3496,7 +3664,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/300}",
-            "VTSD": "{palette/neutral/300}"
+            "VTSD": "{palette/neutral/300}",
+            "SPP": "{palette/neutral/200}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3507,7 +3676,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/700}",
-            "VTSD": "{palette/neutral/700}"
+            "VTSD": "{palette/neutral/700}",
+            "SPP": "{palette/neutral/800}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3518,7 +3688,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/400}",
-            "VTSD": "{palette/neutral/400}"
+            "VTSD": "{palette/neutral/400}",
+            "SPP": "{palette/neutral/400}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3529,7 +3700,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/600}",
-            "VTSD": "{palette/neutral/600}"
+            "VTSD": "{palette/neutral/600}",
+            "SPP": "{palette/neutral/500}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3540,7 +3712,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/xs}",
-            "VTSD": "{brand/space/xs}"
+            "VTSD": "{brand/space/xs}",
+            "SPP": "{brand/space/xs}"
           },
           "scopes": [
             "GAP"
@@ -3551,7 +3724,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 1,
-            "VTSD": 1
+            "VTSD": 1,
+            "SPP": 0
           },
           "description": "Borda dupla ligada (1) ou desligada (0) no Design System da marca."
         },
@@ -3559,7 +3733,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#00000000",
-            "VTSD": "#00000000"
+            "VTSD": "#00000000",
+            "SPP": "{palette/neutral/100}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3570,7 +3745,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/neutral/800}",
-            "VTSD": "{palette/neutral/800}"
+            "VTSD": "{palette/neutral/800}",
+            "SPP": "{palette/neutral/900}"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -3581,7 +3757,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/radius/8}",
-            "VTSD": "{dimension/radius/8}"
+            "VTSD": "{dimension/radius/8}",
+            "SPP": "{dimension/radius/8}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -3592,7 +3769,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/sm}",
-            "VTSD": "{brand/space/sm}"
+            "VTSD": "{brand/space/sm}",
+            "SPP": "{brand/space/sm}"
           },
           "scopes": [
             "GAP"
@@ -3603,7 +3781,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/md}",
-            "VTSD": "{brand/space/md}"
+            "VTSD": "{brand/space/md}",
+            "SPP": "{brand/space/md}"
           },
           "scopes": [
             "GAP"
@@ -3614,7 +3793,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/lg}",
-            "VTSD": "{brand/space/lg}"
+            "VTSD": "{brand/space/lg}",
+            "SPP": "{brand/space/lg}"
           },
           "scopes": [
             "GAP"
@@ -3625,7 +3805,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/shape/radius-control}",
-            "VTSD": "{brand/shape/radius-control}"
+            "VTSD": "{brand/shape/radius-control}",
+            "SPP": "{brand/shape/radius-control}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -3636,7 +3817,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/shape/radius-control}",
-            "VTSD": "{brand/shape/radius-control}"
+            "VTSD": "{brand/shape/radius-control}",
+            "SPP": "{brand/shape/radius-control}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -3647,7 +3829,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/shape/radius-control}",
-            "VTSD": "{brand/shape/radius-control}"
+            "VTSD": "{brand/shape/radius-control}",
+            "SPP": "{brand/shape/radius-control}"
           },
           "scopes": [
             "CORNER_RADIUS"
@@ -3658,7 +3841,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/border/1}",
-            "VTSD": "{dimension/border/1}"
+            "VTSD": "{dimension/border/1}",
+            "SPP": "{dimension/border/2}"
           },
           "scopes": [
             "STROKE_FLOAT"
@@ -3669,7 +3853,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/border/1}",
-            "VTSD": "{dimension/border/1}"
+            "VTSD": "{dimension/border/1}",
+            "SPP": "{dimension/border/2}"
           },
           "scopes": [
             "STROKE_FLOAT"
@@ -3680,7 +3865,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/border/1}",
-            "VTSD": "{dimension/border/1}"
+            "VTSD": "{dimension/border/1}",
+            "SPP": "{dimension/border/2}"
           },
           "scopes": [
             "STROKE_FLOAT"
@@ -3691,7 +3877,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/type/caption/size}",
-            "VTSD": "{brand/type/caption/size}"
+            "VTSD": "{brand/type/caption/size}",
+            "SPP": "{brand/type/caption/size}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3702,7 +3889,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/type/body-small/size}",
-            "VTSD": "{brand/type/body-small/size}"
+            "VTSD": "{brand/type/body-small/size}",
+            "SPP": "{brand/type/body-small/size}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3713,7 +3901,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/type/body/size}",
-            "VTSD": "{brand/type/body/size}"
+            "VTSD": "{brand/type/body/size}",
+            "SPP": "{brand/type/body/size}"
           },
           "scopes": [
             "FONT_SIZE"
@@ -3724,7 +3913,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/icon/16}",
-            "VTSD": "{dimension/icon/16}"
+            "VTSD": "{dimension/icon/16}",
+            "SPP": "{dimension/icon/16}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3735,7 +3925,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/icon/16}",
-            "VTSD": "{dimension/icon/16}"
+            "VTSD": "{dimension/icon/16}",
+            "SPP": "{dimension/icon/20}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3746,7 +3937,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{dimension/icon/16}",
-            "VTSD": "{dimension/icon/16}"
+            "VTSD": "{dimension/icon/16}",
+            "SPP": "{dimension/icon/20}"
           },
           "scopes": [
             "WIDTH_HEIGHT"
@@ -3757,7 +3949,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/2xs}",
-            "VTSD": "{brand/space/2xs}"
+            "VTSD": "{brand/space/2xs}",
+            "SPP": "{brand/space/xs}"
           },
           "scopes": [
             "GAP"
@@ -3768,7 +3961,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/xs}",
-            "VTSD": "{brand/space/xs}"
+            "VTSD": "{brand/space/xs}",
+            "SPP": "{brand/space/sm}"
           },
           "scopes": [
             "GAP"
@@ -3779,7 +3973,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/space/xs}",
-            "VTSD": "{brand/space/xs}"
+            "VTSD": "{brand/space/xs}",
+            "SPP": "{brand/space/sm}"
           },
           "scopes": [
             "GAP"
@@ -3790,7 +3985,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/tighter}",
-            "VTSD": "{type/tracking/tighter}"
+            "VTSD": "{type/tracking/tighter}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3801,7 +3997,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/tighter}",
-            "VTSD": "{type/tracking/tighter}"
+            "VTSD": "{type/tracking/tighter}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3812,7 +4009,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/tight}",
-            "VTSD": "{type/tracking/tight}"
+            "VTSD": "{type/tracking/tight}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3823,7 +4021,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/tight}",
-            "VTSD": "{type/tracking/tight}"
+            "VTSD": "{type/tracking/tight}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3834,7 +4033,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/snug}",
-            "VTSD": "{type/tracking/snug}"
+            "VTSD": "{type/tracking/snug}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3845,7 +4045,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/snug}",
-            "VTSD": "{type/tracking/snug}"
+            "VTSD": "{type/tracking/snug}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3856,7 +4057,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/normal}",
-            "VTSD": "{type/tracking/normal}"
+            "VTSD": "{type/tracking/normal}",
+            "SPP": -3
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3867,7 +4069,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/normal}",
-            "VTSD": "{type/tracking/normal}"
+            "VTSD": "{type/tracking/normal}",
+            "SPP": "{type/tracking/normal}"
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3878,7 +4081,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/normal}",
-            "VTSD": "{type/tracking/normal}"
+            "VTSD": "{type/tracking/normal}",
+            "SPP": "{type/tracking/normal}"
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3889,7 +4093,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/normal}",
-            "VTSD": "{type/tracking/normal}"
+            "VTSD": "{type/tracking/normal}",
+            "SPP": "{type/tracking/normal}"
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3900,7 +4105,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{type/tracking/wide}",
-            "VTSD": "{type/tracking/wide}"
+            "VTSD": "{type/tracking/wide}",
+            "SPP": "{type/tracking/wide}"
           },
           "scopes": [
             "LETTER_SPACING"
@@ -3911,7 +4117,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 1,
-            "VTSD": 1
+            "VTSD": 1,
+            "SPP": 2
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3922,7 +4129,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 2,
-            "VTSD": 2
+            "VTSD": 2,
+            "SPP": 6
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3933,7 +4141,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 1,
-            "VTSD": 1
+            "VTSD": 1,
+            "SPP": 2
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3944,7 +4153,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 3,
-            "VTSD": 3
+            "VTSD": 3,
+            "SPP": 9
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3955,7 +4165,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 1,
-            "VTSD": 1
+            "VTSD": 1,
+            "SPP": 2
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3966,7 +4177,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 2,
-            "VTSD": 2
+            "VTSD": 2,
+            "SPP": 6
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3977,7 +4189,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 4,
-            "VTSD": 4
+            "VTSD": 4,
+            "SPP": 8
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3988,7 +4201,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 8,
-            "VTSD": 8
+            "VTSD": 8,
+            "SPP": 24
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -3999,7 +4213,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 2,
-            "VTSD": 2
+            "VTSD": 2,
+            "SPP": 4
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4010,7 +4225,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 4,
-            "VTSD": 4
+            "VTSD": 4,
+            "SPP": 12
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4021,7 +4237,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 12,
-            "VTSD": 12
+            "VTSD": 12,
+            "SPP": 24
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4032,7 +4249,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 16,
-            "VTSD": 16
+            "VTSD": 16,
+            "SPP": 48
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4043,7 +4261,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 4,
-            "VTSD": 4
+            "VTSD": 4,
+            "SPP": 8
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4054,7 +4273,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 6,
-            "VTSD": 6
+            "VTSD": 6,
+            "SPP": 18
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4065,7 +4285,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 20,
-            "VTSD": 20
+            "VTSD": 20,
+            "SPP": 40
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4076,7 +4297,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 24,
-            "VTSD": 24
+            "VTSD": 24,
+            "SPP": 72
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4087,7 +4309,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 8,
-            "VTSD": 8
+            "VTSD": 8,
+            "SPP": 16
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4098,7 +4321,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 8,
-            "VTSD": 8
+            "VTSD": 8,
+            "SPP": 24
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4109,7 +4333,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 24,
-            "VTSD": 24
+            "VTSD": 24,
+            "SPP": 48
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4120,7 +4345,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 48,
-            "VTSD": 48
+            "VTSD": 48,
+            "SPP": 144
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4131,7 +4357,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 4,
-            "VTSD": 4
+            "VTSD": 4,
+            "SPP": 8
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4142,7 +4369,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 8,
-            "VTSD": 8
+            "VTSD": 8,
+            "SPP": 16
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4153,7 +4381,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 16,
-            "VTSD": 16
+            "VTSD": 16,
+            "SPP": 32
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4164,7 +4393,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 24,
-            "VTSD": 24
+            "VTSD": 24,
+            "SPP": 64
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4175,7 +4405,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 2,
-            "VTSD": 2
+            "VTSD": 2,
+            "SPP": 10
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4186,7 +4417,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 4,
-            "VTSD": 4
+            "VTSD": 4,
+            "SPP": 64
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4197,7 +4429,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#64a3fe59",
-            "VTSD": "#4ab2a759"
+            "VTSD": "#4ab2a759",
+            "SPP": "#46abec52"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -4208,7 +4441,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#090f1733",
-            "VTSD": "#0f0f0f33"
+            "VTSD": "#0f0f0f33",
+            "SPP": "#100a0d29"
           },
           "scopes": [
             "EFFECT_COLOR"
@@ -4219,7 +4453,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 24,
-            "VTSD": 24
+            "VTSD": 24,
+            "SPP": 48
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4230,7 +4465,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 0.04,
-            "VTSD": 0.04
+            "VTSD": 0.04,
+            "SPP": 0.04
           },
           "scopes": [
             "OPACITY"
@@ -4241,7 +4477,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 135,
-            "VTSD": 135
+            "VTSD": 135,
+            "SPP": 96
           },
           "description": "Ângulo do gradiente de marca, em graus."
         },
@@ -4249,7 +4486,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/brand/500}",
-            "VTSD": "{palette/brand/500}"
+            "VTSD": "{palette/brand/500}",
+            "SPP": "{palette/brand/400}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4261,7 +4499,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "{palette/brand/700}",
-            "VTSD": "{palette/brand/700}"
+            "VTSD": "{palette/brand/700}",
+            "SPP": "{palette/brand/950}"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4273,7 +4512,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#ffffffb8",
-            "VTSD": "#ffffffb8"
+            "VTSD": "#ffffffb8",
+            "SPP": "#ece6e93d"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4285,7 +4525,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#131a2599",
-            "VTSD": "#1a1a1a99"
+            "VTSD": "#1a1a1a99",
+            "SPP": "#46abec0a"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4297,7 +4538,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#ffffff80",
-            "VTSD": "#ffffff80"
+            "VTSD": "#ffffff80",
+            "SPP": "#0a06080f"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -4308,7 +4550,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#ffffff1f",
-            "VTSD": "#ffffff1f"
+            "VTSD": "#ffffff1f",
+            "SPP": "#ffffff1f"
           },
           "scopes": [
             "STROKE_COLOR"
@@ -4319,7 +4562,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#ffffff99",
-            "VTSD": "#ffffff99"
+            "VTSD": "#ffffff99",
+            "SPP": "#ffffff99"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4331,7 +4575,8 @@
           "type": "COLOR",
           "values": {
             "Santo": "#ffffff14",
-            "VTSD": "#ffffff14"
+            "VTSD": "#ffffff14",
+            "SPP": "#ffffff14"
           },
           "scopes": [
             "FRAME_FILL",
@@ -4343,7 +4588,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": "{brand/effect/blur/md}",
-            "VTSD": "{brand/effect/blur/md}"
+            "VTSD": "{brand/effect/blur/md}",
+            "SPP": "{brand/effect/blur/md}"
           },
           "scopes": [
             "EFFECT_FLOAT"
@@ -4354,7 +4600,8 @@
           "type": "FLOAT",
           "values": {
             "Santo": 0,
-            "VTSD": 0
+            "VTSD": 0,
+            "SPP": 0
           },
           "description": "Tratamento de superfície em vidro ligado (1) ou desligado (0)."
         }

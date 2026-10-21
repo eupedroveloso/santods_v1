@@ -5,6 +5,8 @@
 | `santods.figma.json` | Fonte da verdade no repo: espelho das Variables e Styles do Figma SantoDS v1. **Não se edita à mão.** |
 | `santods.components.json` | Inventário dos componentes do Figma (gerado). |
 | `VTSD.proposal.md` | Spec do modo de marca VTSD: método das rampas, contraste e ordem de execução. |
+| `SPP.proposal.md` | Modo de marca Seu Produto Pronto: o que foi lido do Figma, o que foi adaptado, o que ficou fora, auditoria e rampas. |
+| `SPP.rascunho.json` | Rascunho do Estúdio (RascunhoLivre) que deriva exatamente o modo SPP (o teste cobra). |
 | `ESTUDIO.contrato.md` | Contrato do Estúdio: formato salvo, valores base, fórmulas, presets, preview e o que é travado. Nível B aplicado ao snapshot no andar `estudio`. |
 
 O fluxo de sincronização, os hashes de referência e a reconciliação estão em
@@ -21,6 +23,7 @@ escolhe a marca em qualquer elemento; sem o atributo vale a padrão.
 |---|---|---|---|
 | Santo | `Santo` (padrão) | `santo` | sincronizada |
 | Venda Todo Santo Dia | `VTSD` | `vtsd` | **snapshot à frente do Figma**: aplicada por `scripts/apply-brand-mode.mjs` em 2026-10-19 (exceção autorizada pelo Pedro). Reconciliação pendente |
+| Seu Produto Pronto | `SPP` | `spp` | **snapshot à frente do Figma**: aplicada por `scripts/apply-brand-mode.mjs --spec scripts/figma-brand-mode-spp.js` em 2026-10-21 (rastro `meta.aheadOfFigma.also`, tag `brand-mode-spp`). Spec em `tokens/SPP.proposal.md` |
 
 **Nível B (andar `estudio`, 2026-10-21):** a Brand passou a carregar, por marca, a família de
 título, a escala de raio, o espaço, tamanho e entrelinha dos 11 papéis de texto, as alturas de

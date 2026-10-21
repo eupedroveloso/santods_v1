@@ -1,0 +1,242 @@
+{
+  "modo": "SPP",
+  "id": "spp",
+  "nome": "Seu Produto Pronto",
+  "cor": {
+    "origem": "marca",
+    "marca": "#46abec",
+    "ancora": "500",
+    "neutros": {
+      "origem": "manual",
+      "base": "#100a0d"
+    }
+  },
+  "tipografia": {
+    "corpo": "Montserrat",
+    "titulo": "Montserrat",
+    "mono": "JetBrains Mono",
+    "pesos": {
+      "corpo": [
+        300,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "titulo": [
+        300,
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "mono": [
+        400
+      ]
+    },
+    "escala": [
+      [
+        12,
+        16
+      ],
+      [
+        14,
+        20
+      ],
+      [
+        16,
+        24
+      ],
+      [
+        18,
+        28
+      ],
+      [
+        20,
+        32
+      ],
+      [
+        24,
+        32
+      ],
+      [
+        28,
+        36
+      ],
+      [
+        32,
+        40
+      ],
+      [
+        36,
+        44
+      ],
+      [
+        48,
+        60
+      ],
+      [
+        60,
+        76
+      ]
+    ],
+    "tracking": {
+      "heading-1": -3,
+      "heading-2": -3,
+      "heading-3": -3,
+      "heading-4": -3,
+      "heading-5": -3,
+      "heading-6": -3,
+      "body-large": -3
+    }
+  },
+  "raio": {
+    "container": 16,
+    "controle": 8,
+    "curva": "santo"
+  },
+  "espaco": {
+    "unidade": 4,
+    "curva": "santo"
+  },
+  "sombra": {
+    "intensidade": 1.75,
+    "tinta": "#100a0d",
+    "desfoque": 3,
+    "deslocamento": 2
+  },
+  "controles": {
+    "sm": {
+      "altura": 36,
+      "paddingX": "sm",
+      "raio": "controle",
+      "borda": 2,
+      "fonte": "caption",
+      "icone": 16,
+      "gap": "xs"
+    },
+    "md": {
+      "altura": 44,
+      "paddingX": "md",
+      "raio": "controle",
+      "borda": 2,
+      "fonte": "body-small",
+      "icone": 20,
+      "gap": "sm"
+    },
+    "lg": {
+      "altura": 56,
+      "paddingX": "lg",
+      "raio": "controle",
+      "borda": 2,
+      "fonte": "body",
+      "icone": 20,
+      "gap": "sm"
+    }
+  },
+  "superficies": {
+    "tratamento": "plana",
+    "bordaDupla": false,
+    "recuo": "xs",
+    "tons": {
+      "claro": {
+        "page": 0,
+        "raised": 0,
+        "sunken": 50,
+        "well": 100,
+        "panel": 0
+      },
+      "escuro": {
+        "page": 1000,
+        "raised": 950,
+        "sunken": 1000,
+        "well": 950,
+        "panel": 950
+      }
+    },
+    "overlay": {
+      "claro": {
+        "degrau": 1000,
+        "alfa": 0.6
+      },
+      "escuro": "#000000b8"
+    },
+    "bordas": {
+      "claro": {
+        "subtle": 100,
+        "default": 200,
+        "strong": 400
+      },
+      "escuro": {
+        "subtle": 900,
+        "default": 800,
+        "strong": 500
+      }
+    },
+    "bordaInterna": {
+      "claro": 100,
+      "escuro": 900
+    },
+    "vidro": {
+      "blur": "md",
+      "alfa": {
+        "claro": 0.24,
+        "escuro": 0.04
+      },
+      "borda": {
+        "claro": 0.06,
+        "escuro": 0.12
+      },
+      "highlight": {
+        "claro": 0.6,
+        "escuro": 0.08
+      },
+      "tinta": {
+        "claro": 200,
+        "escuro": "brand-500"
+      },
+      "corBorda": {
+        "claro": 1000,
+        "escuro": 0
+      }
+    }
+  },
+  "efeitos": {
+    "blur": {
+      "sm": 8,
+      "md": 16,
+      "lg": 32,
+      "xl": 64
+    },
+    "layerBlur": {
+      "sm": 10,
+      "md": 64
+    },
+    "glow": {
+      "brand": {
+        "degrau": "500",
+        "alfa": 0.32
+      },
+      "neutral": {
+        "degrau": "950",
+        "alfa": 0.16
+      },
+      "desfoque": 48
+    },
+    "noise": 0.04,
+    "gradiente": {
+      "angulo": 96,
+      "de": "400",
+      "para": "950"
+    }
+  },
+  "passos": {
+    "cor": {
+      "brand": {
+        "700": "#0b5cff"
+      }
+    }
+  }
+}

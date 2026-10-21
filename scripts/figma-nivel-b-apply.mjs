@@ -48,9 +48,11 @@ const problems = [];
 
 const brand = doc.collections.Brand;
 for (const [name, def] of Object.entries(SPEC.Brand)) {
-  const missing = brand.modes.filter((m) => !(m in def.values));
+  // Modo de marca que a spec nao lista (ex.: SPP, aplicado depois por apply-brand-mode --spec) mantem o valor do snapshot.
+  const existente = brand.variables[name]?.values ?? {};
+  const missing = brand.modes.filter((m) => !(m in def.values) && !(m in existente));
   if (missing.length) problems.push(`${name}: sem valor no(s) modo(s) ${missing.join(', ')}`);
-  const values = Object.fromEntries(brand.modes.map((m) => [m, def.values[m]]));
+  const values = Object.fromEntries(brand.modes.map((m) => [m, m in def.values ? def.values[m] : existente[m]]));
   const next = { type: def.type, values };
   if (def.scopes?.length) next.scopes = def.scopes; // o figma-dump.js omite scopes vazios
   if (def.description) next.description = def.description;

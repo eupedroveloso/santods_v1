@@ -273,10 +273,10 @@
   --shadow-glow-neutral: var(--santo-glow-neutral);
 
   /* Desfoque de fundo: backdrop-blur-effect-md. */
-  --blur-effect-sm: var(--santo-effect-blur-sm);
-  --blur-effect-md: var(--santo-effect-blur-md);
-  --blur-effect-lg: var(--santo-effect-blur-lg);
-  --blur-effect-xl: var(--santo-effect-blur-xl);
+  --blur-effect-sm: calc(var(--santo-effect-blur-sm) / 2);
+  --blur-effect-md: calc(var(--santo-effect-blur-md) / 2);
+  --blur-effect-lg: calc(var(--santo-effect-blur-lg) / 2);
+  --blur-effect-xl: calc(var(--santo-effect-blur-xl) / 2);
 
   /* Papeis de texto: text-heading-1, text-body, text-code-md. */
   --text-heading-1: var(--santo-brand-type-heading-1-size);

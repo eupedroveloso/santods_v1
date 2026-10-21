@@ -126,13 +126,15 @@ const allVars = await figma.variables.getLocalVariablesAsync();
 const byName = new Map(allVars.map((v) => [v.name, v]));
 
 const isAlias = (v) => typeof v === 'string' && v.startsWith('{') && v.endsWith('}');
+// #rrggbb ou #rrggbbaa (sombras, vidro e glow do nivel B tem alfa).
 const hexToRgba = (hex) => ({
   r: parseInt(hex.slice(1, 3), 16) / 255,
   g: parseInt(hex.slice(3, 5), 16) / 255,
   b: parseInt(hex.slice(5, 7), 16) / 255,
-  a: 1,
+  a: hex.length === 9 ? parseInt(hex.slice(7, 9), 16) / 255 : 1,
 });
-const toHex = (c) => '#' + [c.r, c.g, c.b].map((x) => Math.round(x * 255).toString(16).padStart(2, '0')).join('');
+const h2 = (x) => Math.round(x * 255).toString(16).padStart(2, '0');
+const toHex = (c) => '#' + h2(c.r) + h2(c.g) + h2(c.b) + (c.a === undefined || c.a === 1 ? '' : h2(c.a));
 const show = (val) => {
   if (val && typeof val === 'object' && val.type === 'VARIABLE_ALIAS') {
     const t = allVars.find((v) => v.id === val.id);
@@ -161,7 +163,7 @@ for (const [collectionName, values] of Object.entries(SPEC)) {
       continue;
     }
     if (isAlias(val) && !byName.has(val.slice(1, -1))) problems.push(`${name}: alias para variavel inexistente ${val}`);
-    if (v.resolvedType === 'COLOR' && !isAlias(val) && !/^#[0-9a-f]{6}$/i.test(val)) problems.push(`${name}: COLOR precisa de #rrggbb (veio ${val})`);
+    if (v.resolvedType === 'COLOR' && !isAlias(val) && !/^#[0-9a-f]{6}([0-9a-f]{2})?$/i.test(val)) problems.push(`${name}: COLOR precisa de #rrggbb ou #rrggbbaa (veio ${val})`);
   }
   const existing = c.modes.find((m) => m.name === MODE);
   plan.push({ collection: c, vars, values, existing });

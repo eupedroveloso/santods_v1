@@ -123,13 +123,15 @@ export type RascunhoLivre = Omit<Rascunho, "raio" | "espaco" | "sombra" | "contr
 };
 
 export type Vidro = {
-  /** Degrau de efeito (sm..xl) ou px. */
+  /** Degrau de efeito (sm..xl) ou raio do Figma em px (o CSS usa a metade). */
   blur: "sm" | "md" | "lg" | "xl" | number;
   alfa: Record<Tema, number>;
   borda: Record<Tema, number>;
   highlight: Record<Tema, number>;
   /** Degrau neutral ou 'brand-<degrau>'. */
   tinta: Record<Tema, DegrauNeutral | `brand-${DegrauBrand}`>;
+  /** Cor da borda do vidro por tema (degrau neutral). Padrao 0 (branco). */
+  corBorda?: Record<Tema, DegrauNeutral>;
 };
 export type Efeitos = {
   blur: Record<"sm" | "md" | "lg" | "xl", number>;
