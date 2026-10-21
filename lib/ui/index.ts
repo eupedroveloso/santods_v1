@@ -149,7 +149,7 @@ export { StepRow } from "./step-row";
 export { BrandLogo, BRAND_LOGOS, BRAND_MARKS, brandLogoFile, hasBrandLogo, hasBrandMark } from "./brand-logo";
 export type { BrandId, BrandLogoSize } from "./brand-logo";
 export { BrandSwitch } from "./brand-switch";
-export { BrandCard } from "./brand-card";
+export { BrandCard, BrandCardAction } from "./brand-card";
 export { DashboardHeader } from "./dashboard-header";
 export { BreakdownCard } from "./breakdown-card";
 export { DownloadList, formatBytes } from "./download-list";

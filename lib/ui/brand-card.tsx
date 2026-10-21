@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import Link from "next/link";
+import type { CSSProperties, ReactNode } from "react";
 import { BrandLogo } from "./brand-logo";
 import { Card, Divider } from "./card";
 import { Tag } from "./chip";
@@ -6,8 +7,8 @@ import { Overline } from "./overline";
 import { Swatch } from "./swatch";
 
 export type BrandCardColor = {
-  /** A var CSS do token (`--santo-palette-brand-600`): a amostra e viva. */
-  cssVar: string;
+  /** A var CSS do token (`--santo-palette-brand-600`): a amostra e viva. Sem ela, a amostra usa `value`. */
+  cssVar?: string;
   /** Hex resolvido para esta marca — dado, em mono. */
   value: string;
 };
@@ -24,12 +25,21 @@ const COL = {
   radius: "md:w-(--santo-dimension-space-96)",
 } as const;
 
+/** Amostra: a var quando existe (marca com CSS emitido), senao o valor (sistema do Estudio). */
+const viva = (c: BrandCardColor) => (c.cssVar ? `var(${c.cssVar})` : c.value);
+
+/**
+ * Linha de conteudo de toda celula (e da ficha de acao): altura minima de um
+ * controle md, entao fichas irmas (identidade, sistema, criar) medem o mesmo.
+ */
+const ROW = "flex min-h-(--santo-control-height-md) min-w-0 items-center gap-sm";
+
 /** Uma celula da linha: Overline pequeno em cima e o conteudo, centrado na vertical, sem caixa. */
 function Cell({ title, col, children }: { title: string; col: keyof typeof COL; children: ReactNode }) {
   return (
     <div className={`flex min-w-0 shrink-0 flex-col justify-center gap-2xs ${COL[col]}`}>
       <Overline>{title}</Overline>
-      <div className="flex min-w-0 items-center gap-sm">{children}</div>
+      <div className={ROW}>{children}</div>
     </div>
   );
 }
@@ -61,12 +71,18 @@ export function BrandCard({
   name,
   isDefault = false,
   font,
+  fontStack,
   color,
   neutrals,
   radius,
+  mark,
+  meta,
+  href,
+  actions,
+  actionsVisible = false,
 }: {
-  /** Id de brand/id: grava data-brand e escolhe a logo. */
-  brand: string;
+  /** Id de brand/id: grava data-brand e escolhe a logo. Sem ele (sistema do Estudio), as amostras usam os valores. */
+  brand?: string;
   /** brand/name: rotulo acessivel da ficha (nao e escrito; a logo ja mostra). */
   name: string;
   isDefault?: boolean;
@@ -78,36 +94,64 @@ export function BrandCard({
   neutrals: { light: BrandCardColor; dark: BrandCardColor };
   /** Raio principal: var + valor resolvido. */
   radius: BrandCardColor;
+  /** No lugar da logo (sistema do Estudio: o nome dele, na fonte de titulo dele). */
+  mark?: ReactNode;
+  /** Metadado discreto ao lado da marca (slug · atualizado em). */
+  meta?: ReactNode;
+  /** Pilha de fonte do "Aa" (sistema sem CSS de marca emitido). */
+  fontStack?: string;
+  /** A ficha inteira vira link (link esticado; as acoes ficam por cima). */
+  href?: string;
+  /** Acoes (IconButton ghost): aparecem no hover e no foco, sempre no toque e abaixo de md. */
+  actions?: ReactNode;
+  /** Mantem as acoes a vista (confirmacao em curso). */
+  actionsVisible?: boolean;
 }) {
   const sep = <Divider orientation="vertical" className="hidden md:block" />;
   return (
-    <section id={brand} data-brand={brand} aria-label={`Identidade ${name}`} className="scroll-mt-6xl">
-      <Card padding="md">
-        <div className="grid grid-cols-2 gap-md px-sm md:flex md:items-center md:gap-lg">
+    <section id={brand} data-brand={brand} aria-label={`Identidade ${name}`} className="group scroll-mt-6xl">
+      <Card padding="md" className={href ? "relative santo-transition-elevation hover:shadow-md" : ""}>
+        {href && (
+          // Link esticado: a ficha inteira é o alvo; o conteúdo fica por baixo, as ações por cima.
+          <Link href={href} aria-label={`Abrir ${name}`} className="absolute inset-0" style={{ borderRadius: "inherit" }} />
+        )}
+        {/* Com acoes, o gap cai para sm: a coluna de acoes cabe sem roubar a da marca. */}
+        <div className={`grid grid-cols-2 gap-md px-sm md:flex md:items-center ${actions ? "md:gap-sm" : "md:gap-lg"}`}>
           {/* Logo REDUZIDA (mark; sem mark, a completa) + Tag Padrao, numa coluna de
-              largura fixa (space/224): as celulas ficam perto da logo e alinhadas. */}
-          <div className="col-span-2 flex min-w-0 shrink-0 items-center gap-sm md:w-(--santo-dimension-space-224)">
+              largura fixa (space/224): as celulas ficam perto da logo e alinhadas.
+              Com acoes, e ela que cede espaco (o nome trunca; as celulas nao). */}
+          <div className={`col-span-2 flex min-w-0 items-center gap-sm md:w-(--santo-dimension-space-224) ${actions ? "" : "shrink-0"}`}>
             {/* Mesmo peso visual entre marcas: a mark (compacta) em 24; a logo
                 completa (larga) em 20. */}
-            <BrandLogo brand={brand} size={24} variant="mark" fallbackSize={20} />
+            {meta ? (
+              // Marca com metadado (sistema do Estudio): o nome em cima, slug · data embaixo.
+              <span className="flex min-w-0 flex-1 flex-col gap-3xs">
+                {mark}
+                <span className="santo-caption-regular min-w-0 truncate text-text-tertiary">{meta}</span>
+              </span>
+            ) : (
+              (mark ?? (brand && <BrandLogo brand={brand} size={24} variant="mark" fallbackSize={20} />))
+            )}
             {isDefault && <Tag intent="brand">Padrão</Tag>}
           </div>
           {sep}
           <Cell title="Tipografia" col="font">
-            <span className="santo-heading-6-semibold shrink-0 text-text-primary">Aa</span>
+            <span className="santo-heading-6-semibold shrink-0 text-text-primary" style={fontStack ? ({ fontFamily: fontStack } as CSSProperties) : undefined}>
+              Aa
+            </span>
             <span title={font} className="santo-caption-regular min-w-0 truncate text-text-secondary">
               {font}
             </span>
           </Cell>
           {sep}
           <Cell title="Cor de marca" col="color">
-            <Swatch color={`var(${color.cssVar})`} size="md" title="Brand" />
+            <Swatch color={viva(color)} size="md" title="Brand" />
             <Hex>{color.value}</Hex>
           </Cell>
           {sep}
           <Cell title="Neutros" col="neutrals">
-            <Swatch color={`var(${neutrals.light.cssVar})`} size="md" title={`Claro ${neutrals.light.value}`} />
-            <Swatch color={`var(${neutrals.dark.cssVar})`} size="md" title={`Escuro ${neutrals.dark.value}`} />
+            <Swatch color={viva(neutrals.light)} size="md" title={`Claro ${neutrals.light.value}`} />
+            <Swatch color={viva(neutrals.dark)} size="md" title={`Escuro ${neutrals.dark.value}`} />
             <span className="flex min-w-0 flex-col">
               <Hex>{neutrals.light.value}</Hex>
               <Hex>{neutrals.dark.value}</Hex>
@@ -118,12 +162,34 @@ export function BrandCard({
             <span
               aria-hidden
               className="block size-(--santo-dimension-size-28) border-thin border-border-default bg-brand-subtle-default"
-              style={{ borderRadius: `var(${radius.cssVar})` }}
+              style={{ borderRadius: viva(radius) }}
             />
             <Hex>{radius.value}</Hex>
           </Cell>
+          {actions && (
+            // Por cima do link esticado. Da md para cima somem até o hover ou o foco (sempre no toque); abaixo, sempre à vista.
+            <div className={`santo-transition-opacity relative col-span-2 flex shrink-0 items-center justify-end gap-3xs md:ml-auto ${actionsVisible ? "" : "md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100 pointer-coarse:opacity-100"}`}>
+              {actions}
+            </div>
+          )}
         </div>
       </Card>
     </section>
+  );
+}
+
+/**
+ * Ficha de ACAO no mesmo molde da BrandCard (criar um sistema, importar uma
+ * marca): a mesma celula (Overline + linha de conteudo) e o mesmo padding, entao
+ * a altura casa com as fichas irmas. O conteudo e o botao ou o campo inline.
+ */
+export function BrandCardAction({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <Card padding="md">
+      <div className="flex min-w-0 flex-col justify-center gap-2xs px-sm">
+        <Overline>{title}</Overline>
+        <div className={ROW}>{children}</div>
+      </div>
+    </Card>
   );
 }

@@ -1,7 +1,10 @@
 "use client";
 
 import { brands } from "@/lib/tokens";
-import { BrandCard } from "./brand-card";
+import { PenIcon, TrashCanIcon } from "@/lib/icons";
+import { BrandCard, BrandCardAction } from "./brand-card";
+import { Button, IconButton } from "./button";
+import * as Icon from "./icons";
 import type { DemoMap } from "./registry.types";
 
 /** Valores por marca vindos dos tokens (brands.<id>.resolved), nunca hex escrito a mao. */
@@ -39,6 +42,62 @@ export const brandCardDemos: DemoMap = {
       code: (v) => `<BrandCard brand="${v.brand}" name="…" font="…"
   color={{ cssVar, value }} neutrals={{ light, dark }} radius={{ cssVar, value }} />`,
     },
-    demos: [],
+    demos: [
+      {
+        title: "Sistema: nome no lugar da logo",
+        code: `<BrandCard
+  name="Atlas"
+  mark={<span className="santo-heading-6-semibold" style={{ fontFamily }}>Atlas</span>}
+  meta="atlas · 21/10/2026"
+  href="/estudio/atlas/cor"
+  font="Fraunces · Albert Sans"
+  fontStack={fontFamily}
+  color={{ value }} neutrals={{ light: { value }, dark: { value } }} radius={{ value: "12px" }}
+  actions={<IconButton size="sm" label="Renomear Atlas">…</IconButton>}
+/>`,
+        Preview: () => (
+          <div className="w-full">
+            <BrandCard
+              name="Atlas"
+              mark={<span className="santo-heading-6-semibold min-w-0 truncate text-text-primary">Atlas</span>}
+              meta="atlas · 21/10/2026"
+              font="Albert Sans"
+              color={{ value: hex("vtsd", "palette/brand/600") }}
+              neutrals={{ light: { value: hex("vtsd", "palette/neutral/50") }, dark: { value: hex("vtsd", "palette/neutral/950") } }}
+              radius={{ value: hex("vtsd", "brand/shape/radius-base") }}
+              actionsVisible
+              actions={
+                <>
+                  <IconButton size="sm" label="Renomear Atlas">
+                    <PenIcon size={16} />
+                  </IconButton>
+                  <IconButton size="sm" label="Duplicar Atlas">
+                    <Icon.Copy size={16} />
+                  </IconButton>
+                  <IconButton size="sm" label="Apagar Atlas">
+                    <TrashCanIcon size={16} />
+                  </IconButton>
+                </>
+              }
+            />
+          </div>
+        ),
+      },
+      {
+        title: "Ficha de ação",
+        code: `<BrandCardAction title="Novo sistema">
+  <Button variant="secondary" leading={<Icon.Plus size={16} />}>Criar sistema</Button>
+</BrandCardAction>`,
+        Preview: () => (
+          <div className="w-full">
+            <BrandCardAction title="Novo sistema">
+              <Button variant="secondary" leading={<Icon.Plus size={16} />}>
+                Criar sistema
+              </Button>
+            </BrandCardAction>
+          </div>
+        ),
+      },
+    ],
   },
 };

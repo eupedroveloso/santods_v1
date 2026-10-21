@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
+import { fichaDe } from "@/lib/estudio/ficha";
 import { listarSistemas } from "@/lib/estudio/repo";
 import { Count } from "@/lib/ui";
 import { DocHeader, DocPage } from "../_docs/page-header";
@@ -23,9 +24,7 @@ export default async function EstudioPage() {
         divided
         actions={<Count>{sistemas.length}</Count>}
       />
-      <SistemasPainel
-        sistemas={sistemas.map((s) => ({ id: s.id, nome: s.nome, slug: s.slug, atualizadoEm: s.atualizadoEm.toISOString() }))}
-      />
+      <SistemasPainel sistemas={sistemas.map(fichaDe)} />
     </DocPage>
   );
 }

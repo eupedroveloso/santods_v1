@@ -8,7 +8,7 @@ export const brandCardMeta: ComponentMeta[] = [
     tier: "semantico",
     source: "brand-card.tsx",
     description:
-      "Ficha de identidade de uma marca em uma linha compacta: logo (+ Padrão), tipografia, cor de marca, neutros claro/escuro e raio principal, separados por divisores, em grade fixa de colunas por token (alinham entre fichas); 2 por linha no celular.",
+      "Ficha de identidade de uma marca em uma linha compacta: logo (+ Padrão), tipografia, cor de marca, neutros claro/escuro e raio principal, separados por divisores, em grade fixa de colunas por token (alinham entre fichas); 2 por linha no celular. Sem `brand` (sistema do Estúdio): `mark` no lugar da logo, `meta`, amostras pelos valores, `href` (ficha inteira é link) e `actions` no hover. BrandCardAction: ficha de ação (criar) com a mesma altura.",
     related: ["brand-logo", "brand-switch", "swatch"],
   },
 ];
