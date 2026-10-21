@@ -18,8 +18,14 @@ import {
   type NivelSombra,
   type Raio,
   type Sombra,
+  type Superficies,
+  BORDAS,
+  NEUTRAL_DEGRAUS,
+  PRESETS_SUPERFICIES,
+  SUPERFICIES,
+  VIDRO_PADRAO,
 } from "@/lib/tokens/estudio.mjs";
-import { Field, Icon, IconButton, NumberField, Overline, Segmented, StepRow, Swatch, SwatchPicker, Tag, TokenSample } from "@/lib/ui";
+import { Field, Icon, IconButton, NumberField, Overline, Segmented, Select, StepRow, Swatch, SwatchPicker, Switch, Tag, TokenSample } from "@/lib/ui";
 import { CampoHex, CampoPasso, Rotulo, semChave, type Aba, type Editar, type Passos } from "./paineis";
 import { PresetsDoEstilo } from "./presets-estilo";
 
@@ -365,6 +371,146 @@ export function PainelControles({ registro, editar, aba, controles }: Props & { 
           })}
         </section>
       ))}
+    </div>
+  );
+}
+
+/* ----------------------------------------------------------- superfícies */
+
+type Sup = Superficies;
+type TemaSup = "claro" | "escuro";
+const TRATAMENTOS = [
+  { value: "plana", label: "Plana" },
+  { value: "tonal", label: "Tonal" },
+  { value: "borda-dupla", label: "Dupla" },
+  { value: "vidro", label: "Vidro" },
+] as const;
+const RECUOS = ["2xs", "xs", "sm", "md"] as const;
+const BLURS = ["sm", "md", "lg", "xl"] as const;
+const ROTULO_SUP: Record<(typeof SUPERFICIES)[number], string> = { page: "página", raised: "cartão", sunken: "chão", well: "poço", panel: "painel" };
+const ROTULO_BORDA: Record<(typeof BORDAS)[number], string> = { subtle: "sutil", default: "padrão", strong: "forte" };
+const pct = (n: number) => `${Math.round(n * 100)}`;
+
+/** Superfícies completas: preset por id ou o objeto (sobre o padrão do preset do tratamento). */
+export const superficiesDe = (v: unknown): Sup =>
+  typeof v === "string" ? PRESETS_SUPERFICIES[v as keyof typeof PRESETS_SUPERFICIES] ?? PRESETS_SUPERFICIES["borda-dupla"] : { ...PRESETS_SUPERFICIES["borda-dupla"], ...(v as Partial<Sup>) };
+
+/** Degrau neutral num Select, com a amostra viva da rampa do rascunho. */
+function Degrau({ valor, onValor, rotulo, transparente, hex }: { valor: number | "transparente"; onValor: (v: number | "transparente") => void; rotulo: string; transparente?: boolean; hex: (d: number) => string }) {
+  const opcoes = [
+    ...(transparente ? [{ value: "transparente", label: "sem borda" }] : []),
+    ...NEUTRAL_DEGRAUS.map((d) => ({ value: String(d), label: `neutral/${d}`, leading: <Swatch size="xs" color={hex(d)} /> })),
+  ];
+  return (
+    <span className="w-(--santo-dimension-space-160)">
+      <Select size="sm" label={rotulo} value={String(valor)} onChange={(v) => onValor(v === "transparente" ? v : Number(v))} options={opcoes} />
+    </span>
+  );
+}
+
+export function PainelSuperficies({ registro, passos, editar, aba }: Props) {
+  const sup = superficiesDe(registro.base.valor);
+  const muda = (patch: Partial<Sup>) => editar((x) => ({ ...x, base: { valor: { ...sup, ...patch } } }));
+  const [tema, setTema] = useState<TemaSup>("claro");
+  const hex = (d: number) => passos.paleta.neutral[String(d)];
+  const vidro = { ...VIDRO_PADRAO, ...sup.vidro };
+  const padrao = PRESETS_SUPERFICIES[sup.tratamento ?? "borda-dupla"];
+
+  if (aba === "presets")
+    return (
+      <PresetsDoEstilo
+        estilo="superficies"
+        fixos={PRESETS_FIXOS.superficies}
+        atual={sup}
+        passos={{}}
+        normalizar={(d) => superficiesDe(d)}
+        aplicar={(dados) => editar(() => ({ base: { valor: dados }, overrides: {} }))}
+        // Miniatura: página → cartão → poço nos degraus do preset (claro).
+        leading={(d) => {
+          const t = superficiesDe(d).tons.claro;
+          return (
+            <span className="flex -space-x-2xs">
+              {(["page", "raised", "well"] as const).map((s) => (
+                <Swatch key={s} size="sm" color={hex(t[s])} />
+              ))}
+            </span>
+          );
+        }}
+        // Meta: o recuo da moldura quando ela existe (o nome já diz o tratamento).
+        rotulo={({ nome, dados }) => <Rotulo nome={nome} valor={superficiesDe(dados).bordaDupla ? `recuo ${superficiesDe(dados).recuo}` : ""} />}
+      />
+    );
+
+  if (aba === "base")
+    return (
+      <div className="flex flex-col gap-md">
+        <Field label="Tratamento">
+          <Segmented
+            block
+            value={sup.tratamento ?? "borda-dupla"}
+            // Trocar o tratamento parte do preset dele (tons, bordas e moldura coerentes).
+            onChange={(t) => editar(() => ({ base: { valor: { ...PRESETS_SUPERFICIES[t] } }, overrides: {} }))}
+            options={TRATAMENTOS.map((t) => ({ value: t.value, label: t.label }))}
+          />
+        </Field>
+        <span className="flex items-center justify-between gap-sm">
+          <span className="santo-caption-medium text-text-secondary">Borda dupla</span>
+          <Switch label="Borda dupla" checked={sup.bordaDupla} disabled={sup.tratamento === "vidro"} onChange={(v) => muda({ bordaDupla: v })} />
+        </span>
+        <Field label="Recuo da moldura">
+          <Segmented block value={sup.recuo as (typeof RECUOS)[number]} onChange={(r) => muda({ recuo: r })} options={RECUOS.map((r) => ({ value: r, label: r }))} />
+        </Field>
+        {sup.tratamento === "vidro" && (
+          <section className="flex flex-col gap-md">
+            <Overline>Vidro</Overline>
+            <Field label="Desfoque">
+              <Segmented
+                block
+                value={(typeof vidro.blur === "string" ? vidro.blur : "md") as (typeof BLURS)[number]}
+                onChange={(b) => muda({ vidro: { ...vidro, blur: b } })}
+                options={BLURS.map((b) => ({ value: b, label: b }))}
+              />
+            </Field>
+            <Segmented block value={tema} onChange={setTema} options={[{ value: "claro", label: "Claro" }, { value: "escuro", label: "Escuro" }]} />
+            <NumberField layout="inline" label="Fundo" value={Number(pct(vidro.alfa[tema]))} min={0} max={100} unit="%" onChange={(n) => muda({ vidro: { ...vidro, alfa: { ...vidro.alfa, [tema]: Math.round(n) / 100 } } })} />
+            <NumberField layout="inline" label="Borda" value={Number(pct(vidro.borda[tema]))} min={0} max={100} unit="%" onChange={(n) => muda({ vidro: { ...vidro, borda: { ...vidro.borda, [tema]: Math.round(n) / 100 } } })} />
+            <NumberField layout="inline" label="Brilho" value={Number(pct(vidro.highlight[tema]))} min={0} max={100} unit="%" onChange={(n) => muda({ vidro: { ...vidro, highlight: { ...vidro.highlight, [tema]: Math.round(n) / 100 } } })} />
+            <span className="flex items-center justify-between gap-sm">
+              <span className="santo-caption-medium text-text-secondary">Tinta</span>
+              <Degrau
+                rotulo="Tinta do vidro"
+                valor={typeof vidro.tinta[tema] === "number" ? (vidro.tinta[tema] as number) : 0}
+                hex={hex}
+                onValor={(v) => muda({ vidro: { ...vidro, tinta: { ...vidro.tinta, [tema]: v as number } } })}
+              />
+            </span>
+          </section>
+        )}
+      </div>
+    );
+
+  // Passos: cada superfície e borda, por tema, num degrau da rampa neutral; reset = o do preset do tratamento.
+  const linha = (nome: string, valor: number | "transparente", ref: number | "transparente", onValor: (v: number | "transparente") => void, transparente = false) => (
+    <StepRow key={nome} name={nome} sample={valor === "transparente" ? undefined : <Swatch size="sm" color={hex(valor)} />} overridden={valor !== ref} onReset={() => onValor(ref)} resetLabel={`Voltar ${nome} ao preset`}>
+      <Degrau rotulo={nome} valor={valor} onValor={onValor} hex={hex} transparente={transparente} />
+    </StepRow>
+  );
+  return (
+    <div className="flex flex-col gap-lg">
+      <Segmented block value={tema} onChange={setTema} options={[{ value: "claro", label: "Claro" }, { value: "escuro", label: "Escuro" }]} />
+      <section className="flex flex-col">
+        <Overline>Superfícies</Overline>
+        {SUPERFICIES.map((s) =>
+          linha(ROTULO_SUP[s], sup.tons[tema][s], padrao.tons[tema][s], (v) => muda({ tons: { ...sup.tons, [tema]: { ...sup.tons[tema], [s]: v } } })),
+        )}
+      </section>
+      <section className="flex flex-col">
+        <Overline>Bordas</Overline>
+        {BORDAS.map((b) =>
+          linha(ROTULO_BORDA[b], sup.bordas[tema][b], padrao.bordas[tema][b], (v) => muda({ bordas: { ...sup.bordas, [tema]: { ...sup.bordas[tema], [b]: v } } })),
+        )}
+        {linha("interna", sup.bordaInterna[tema], padrao.bordaInterna[tema], (v) => muda({ bordaInterna: { ...sup.bordaInterna, [tema]: v } }), true)}
+      </section>
     </div>
   );
 }

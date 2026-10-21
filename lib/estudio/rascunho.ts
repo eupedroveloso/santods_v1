@@ -125,6 +125,8 @@ export function montarRascunho(sistema: { nome: string; slug: string }, r: Regis
     espaco: (r.espaco.base.valor as RascunhoLivre["espaco"] | undefined) ?? RASCUNHO_PADRAO.espaco,
     sombra: { ...RASCUNHO_PADRAO.sombra, ...(r.sombra.base as Partial<Sombra>) },
     controles,
+    // Preset ('borda-dupla' = Santo, 'tonal', 'plana', 'vidro') ou o objeto Superficies inteiro.
+    superficies: (r.superficies.base.valor as RascunhoLivre["superficies"] | undefined) ?? "borda-dupla",
     passos: {
       raio: r.raio.overrides as Record<string, number>,
       espaco: r.espaco.overrides as Record<string, number>,

@@ -101,6 +101,28 @@ export const cardDemos: DemoMap = {
           </Card>
         ),
       },
+      {
+        title: "Vidro",
+        layout: "stretch",
+        code: `// Vidro só sobre fundo que mostre o efeito (imagem, gradiente) e em superfície pequena.
+<div className="santo-gradient-brand …">
+  <Card variant="glass">
+    <CardHeader title="Saldo" meta={<Count>3</Count>} />
+    <MiniBars …/>
+  </Card>
+</div>`,
+        Preview: () => (
+          // Fundo com forma: o desfoque do vidro só se lê com algo atrás.
+          <div className="santo-gradient-brand relative mx-auto flex w-full max-w-(--santo-dimension-space-448) items-center justify-center overflow-hidden rounded-xl p-2xl">
+            <span aria-hidden className="absolute -left-md top-md size-5xl rounded-full bg-accent-solid-default" />
+            <span aria-hidden className="absolute -right-sm bottom-sm size-4xl rounded-full bg-success-solid-default" />
+            <Card variant="glass" className="relative w-full">
+              <CardHeader title="Saldo" meta={<Count>3</Count>} />
+              <MiniBars values={[4, 6, 5, 9, 8, 12, 10]} highlight={-1} size="md" label="Saldo por dia" className="text-text-primary" />
+            </Card>
+          </div>
+        ),
+      },
     ],
   },
   "card-header": {

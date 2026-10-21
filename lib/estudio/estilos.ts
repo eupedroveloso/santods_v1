@@ -11,6 +11,7 @@ export const ESTILOS = [
   { id: "sombra", label: "Sombra" },
   { id: "espaco", label: "Espaço" },
   { id: "controles", label: "Controles" },
+  { id: "superficies", label: "Superfícies" },
 ] as const;
 
 export type EstiloId = (typeof ESTILOS)[number]["id"];

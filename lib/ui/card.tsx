@@ -20,6 +20,10 @@ import { OVERLINE } from "./text-class";
  *   outlined  so contorno (border/default): opcao escolhida, sem fundo nem sombra.
  *   dashed    contorno tracejado: lugar vazio, alvo de "adicionar".
  *   double    moldura (chao) + painel (cartao): cabecalho e rodape na moldura.
+ *             Le os tokens de superficie (--santo-frame-*): recuo, superficie e
+ *             borda do painel; com --santo-frame-enabled 0 cai para cartao.
+ *   glass     vidro (santo-glass): sobre imagem ou gradiente, superficie
+ *             pequena. O raised tambem vira vidro sozinho quando o DS escolhe vidro.
  *   well/inset GRUPO sem caixa (regra do Pedro, 2026-10-19: nada de box escuro
  *             em volta de tile, Stat, KeyValue ou lista dentro de cartao). So
  *             empilha com o gap do padding; separe por espaco ou Divider. Poco
@@ -29,18 +33,21 @@ import { OVERLINE } from "./text-class";
  * (Nest) — moldura = filho + recuo, filho = max(piso, moldura − recuo).
  */
 
-export type CardVariant = "raised" | "well" | "inset" | "sunken" | "outlined" | "dashed" | "double";
+export type CardVariant = "raised" | "well" | "inset" | "sunken" | "outlined" | "dashed" | "double" | "glass";
 export type CardPadding = "xs" | "sm" | "md" | "lg";
 export type CardRadius = "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 
 const SURFACE: Record<CardVariant, string> = {
-  raised: "santo-edge bg-surface-raised",
+  // santo-auto-glass: vira vidro sozinho quando o DS escolhe o tratamento vidro.
+  raised: "santo-edge bg-surface-raised santo-auto-glass",
+  // Vidro explícito (sobre imagem, gradiente): surface.css santo-glass.
+  glass: "santo-glass",
   well: "",
   inset: "",
   sunken: "bg-surface-sunken",
   outlined: "border-thin border-border-default",
   dashed: "border-thin border-dashed border-border-default",
-  double: "santo-edge bg-surface-sunken",
+  double: "santo-frame",
 };
 
 /** Aninhamento: o gap entre as faixas do cartao e o proprio recuo (um token so). */
@@ -121,7 +128,7 @@ export function Card({
     <FrameCard
       variant={variant}
       elevation={elevation}
-      pad={padded ? (padding ?? (variant === "raised" ? "lg" : "md")) : null}
+      pad={padded ? (padding ?? (variant === "raised" || variant === "glass" ? "lg" : "md")) : null}
       radius={radius}
       contentRadius={contentRadius}
       className={className}
@@ -202,7 +209,6 @@ function DoubleCard({
   const panelInner = nestInner(frame.inner, nestInset(pad ?? "none", true));
   const panelStyle: CSSProperties = {
     borderRadius: frame.inner,
-    boxShadow: "var(--santo-shadow-xs)",
     ["--santo-inner-radius" as string]: panelInner,
   };
   return (
@@ -210,15 +216,14 @@ function DoubleCard({
       className={`flex min-w-0 flex-col ${SURFACE.double} ${className}`}
       style={{
         ...frame.style,
-        boxShadow: "var(--santo-shadow-sm)",
-        padding: "var(--santo-space-xs)",
+        // Recuo, fio e sombra vem do santo-frame (tokens de superficie; somem sem moldura).
         gap: `calc(${frame.inset})`,
       }}
     >
       <NestScope inner={frame.inner}>
         {/* Faixas da moldura: no mesmo recuo do painel (mesma largura, mesmo gap). */}
         {header && <div className="flex min-w-0 items-center gap-sm">{header}</div>}
-        <div className={`santo-edge flex min-h-0 min-w-0 flex-1 flex-col bg-surface-raised ${pad ? PADDING[pad] : ""}`} style={panelStyle}>
+        <div className={`santo-frame-panel flex min-h-0 min-w-0 flex-1 flex-col ${pad ? PADDING[pad] : ""}`} style={panelStyle}>
           <NestScope inner={panelInner}>{children}</NestScope>
         </div>
         {footer &&

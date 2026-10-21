@@ -12,6 +12,7 @@ import {
   ExpandIcon,
   CircleHalfStrokeIcon,
   FontIcon,
+  LayerGroupIcon,
   ListIcon,
   PaletteIcon,
   SlidersIcon,
@@ -22,9 +23,9 @@ import { Auditoria } from "./auditoria";
 import { ClaroEscuro } from "./claro-escuro";
 import { PreviewGrande } from "./preview-grande";
 import { usePreferencia } from "./use-preferencia";
-import { DocControles, DocCor, DocEspaco, DocRaio, DocSombra, DocTipografia } from "./docs";
+import { DocControles, DocCor, DocEspaco, DocRaio, DocSombra, DocSuperficies, DocTipografia } from "./docs";
 import { PainelAjustes, PainelCor, type Aba } from "./paineis";
-import { PainelControles, PainelEspaco, PainelRaio, PainelSombra } from "./paineis-livres";
+import { PainelControles, PainelEspaco, PainelRaio, PainelSombra, PainelSuperficies } from "./paineis-livres";
 import { PainelTipografia } from "./painel-tipografia";
 import { useRascunho } from "./use-rascunho";
 
@@ -35,6 +36,7 @@ const ICONE: Record<EstiloId, (p: { size?: 16 | 20 }) => ReactNode> = {
   sombra: CircleHalfStrokeIcon,
   espaco: ArrowsLeftRightIcon,
   controles: SlidersIcon,
+  superficies: LayerGroupIcon,
 };
 
 /** Abas do painel por estilo: Presets (fixos + próprios), Base (parâmetros livres) e Passos (tudo editável com reset). */
@@ -45,6 +47,7 @@ const ABAS: Record<EstiloId, Aba[]> = {
   sombra: ["presets", "base", "passos"],
   espaco: ["presets", "base", "passos"],
   controles: ["presets", "base", "passos"],
+  superficies: ["presets", "base", "passos"],
 };
 
 export type EditorProps = {
@@ -99,6 +102,8 @@ export function Editor({ sistema, sistemas, registros: inicial, estilosTexto, ef
         return <PainelSombra {...props} />;
       case "controles":
         return <PainelControles {...props} controles={preview?.auditoria.controles} />;
+      case "superficies":
+        return <PainelSuperficies {...props} />;
     }
   };
   const corAncora = preview?.salvo.draft.cor;
@@ -220,6 +225,7 @@ export function Editor({ sistema, sistemas, registros: inicial, estilosTexto, ef
               {estilo === "cor" && <DocCor spec={preview.spec} auditoria={preview.auditoria} ancora={ancora} />}
               {estilo === "sombra" && <DocSombra efeitos={efeitos} passos={passos} />}
               {estilo === "controles" && <DocControles passos={passos} />}
+              {estilo === "superficies" && <DocSuperficies spec={preview.spec} />}
             </div>
             {/* Sob o rascunho também: a moldura usa o xl e o xs do rascunho, os mesmos da amostra no iframe. */}
             <div data-brand="rascunho">

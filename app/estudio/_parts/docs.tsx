@@ -8,7 +8,7 @@ import type { BrandSpec } from "@/lib/tokens/brand-mode.mjs";
 import { aliasTarget, isAlias } from "@/lib/tokens/emit.mjs";
 import type { Rascunho } from "@/lib/tokens/estudio.mjs";
 import { NIVEIS_CONTROLE, NIVEIS_ESPACO, NIVEIS_RAIO, NIVEIS_SOMBRA, PAPEIS_TIPO, type passosDe } from "@/lib/estudio/rascunho";
-import { Button, Card, CardGrid, Chip, Count, CopyCode, Icon, IconButton, Input, Overline, Select, Swatch, Table, Tag, type Column } from "@/lib/ui";
+import { Button, Card, CardGrid, CardHeader, Chip, Count, CopyCode, Field, Icon, IconButton, Input, Overline, Select, Swatch, Table, Tag, type Column } from "@/lib/ui";
 import { EffectCard } from "../../estilos/_parts/effect-card";
 import { StyleRow } from "../../estilos/_parts/style-row";
 import type { SlimVariable } from "../../tokens/_parts/token-table";
@@ -335,5 +335,70 @@ export function DocControles({ passos }: { passos: Passos }) {
         </div>
       </Card>
     </Secao>
+  );
+}
+
+/* ----------------------------------------------------------- superfícies */
+
+const SUPS = ["page", "raised", "sunken", "well", "panel"] as const;
+const BORDAS_DOC = ["subtle", "default", "strong"] as const;
+
+/** Hex final de uma variável Brand por tema (alias para a Palette do rascunho). */
+function hexBrand(spec: BrandSpec, nome: string) {
+  const v = spec.Brand[nome];
+  const alvo = isAlias(v) ? aliasTarget(v) : null;
+  return { css: alvo ? String(spec.Palette[alvo]) : String(v), alias: alvo };
+}
+
+/**
+ * Superfícies: a mesma tabela de /tokens (amostra, nome, claro, escuro, uso)
+ * para as superfícies e bordas que o rascunho define, e as camadas vivas:
+ * chão → cartão → poço, e a moldura dupla (que some quando o DS a desliga).
+ */
+type LinhaSup = { key: string; nome: string; cssVar: string; claro: { css: string; alias: string | null }; escuro: { css: string; alias: string | null } };
+
+export function DocSuperficies({ spec }: { spec: BrandSpec }) {
+  const linhas: LinhaSup[] = [
+    ...SUPS.map((s) => ({ key: s, nome: `surface/${s}`, cssVar: `--santo-color-surface-${s}`, claro: hexBrand(spec, `brand/surface/${s}/light`), escuro: hexBrand(spec, `brand/surface/${s}/dark`) })),
+    ...BORDAS_DOC.map((b) => ({ key: b, nome: `border/${b}`, cssVar: `--santo-color-border-${b}`, claro: hexBrand(spec, `brand/border/${b}/light`), escuro: hexBrand(spec, `brand/border/${b}/dark`) })),
+  ];
+  const celula = (v: { css: string; alias: string | null }) => (
+    <span className="flex min-w-0 items-center gap-xs" title={v.alias ?? undefined}>
+      <Swatch size="sm" color={v.css} />
+      <span className="santo-code-sm truncate text-text-primary">{v.alias ? curto(v.alias) : v.css}</span>
+    </span>
+  );
+  const colunas: Column<LinhaSup>[] = [
+    { key: "amostra", header: "Amostra", width: 96, render: (l) => <Swatch size="md" color={`var(${l.cssVar})`} title={l.nome} /> },
+    { key: "nome", header: "Token", render: (l) => <CopyCode truncate value={l.nome} label={`Copiar ${l.cssVar}`} /> },
+    { key: "claro", header: "Claro", width: 176, render: (l) => celula(l.claro) },
+    { key: "escuro", header: "Escuro", width: 176, render: (l) => celula(l.escuro) },
+  ];
+  return (
+    <>
+      <Secao titulo="Camadas">
+        <CardGrid columns={{ md: 2 }} gap="md" masonry={false}>
+          <Card variant="sunken" padding="sm">
+            <Card padding="md">
+              <CardHeader title="Pedido nº 1024" meta={<Tag>novo</Tag>} />
+              <Field label="Observação">
+                <Input placeholder="Entregar na portaria" />
+              </Field>
+            </Card>
+          </Card>
+          <Card variant="double" padding="md" header={<Overline>Moldura</Overline>}>
+            <CardHeader title="Resumo" meta={<Count>3</Count>} />
+            <Field label="Cupom">
+              <Input placeholder="SANTO10" />
+            </Field>
+          </Card>
+        </CardGrid>
+      </Secao>
+      <Secao titulo="Superfícies e bordas" total={linhas.length}>
+        <Card padding="md">
+          <Table layout="fixed" columns={colunas} rows={linhas} />
+        </Card>
+      </Secao>
+    </>
   );
 }

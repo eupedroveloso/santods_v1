@@ -8,7 +8,7 @@ export const cardMeta: ComponentMeta[] = [
     tier: "primitivo",
     source: "card.tsx",
     description:
-      "Superfície elevada com um assunto só. Sempre com borda além da sombra — no escuro a sombra some. padded={false} quando o conteúdo encosta na borda (tabela).",
+      "Superfície elevada com um assunto só. Sempre com borda além da sombra — no escuro a sombra some. padded={false} quando o conteúdo encosta na borda (tabela). `variant=\"glass\"`: vidro (santo-glass, tokens de efeito) sobre imagem ou gradiente; o raised vira vidro sozinho quando o DS escolhe o tratamento vidro. O `double` lê os tokens de superfície (--santo-frame-*) e cai para cartão quando o DS desliga a borda dupla.",
     related: ["card-header", "stat", "link-card"],
     figma: { name: "Card", nodeId: "125:378" },
   },

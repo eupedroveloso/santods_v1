@@ -156,3 +156,96 @@
 @utility santo-nested {
   border-radius: var(--santo-inner-radius, var(--santo-radius-xl));
 }
+
+/*
+ * Moldura dupla como ESCOLHA do DS (Estudio > Superficies). O Card double le os
+ * tokens de superficie do Compasso:
+ *   santo-frame        a moldura: chao sunken, recuo --santo-frame-inset, fio
+ *                      santo-edge e sombra curta.
+ *   santo-frame-panel  o painel: --santo-frame-surface com a borda
+ *                      --santo-frame-border.
+ * Com --santo-frame-enabled: 0 (tratamento plano, tonal ou vidro) a moldura some
+ * e o painel vira o cartao: sem fundo, recuo nem sombra por fora, sombra do
+ * cartao no painel. Style query (Chrome 111+, Safari 18+); sem suporte a
+ * moldura fica dupla, que e o padrao do Santo.
+ */
+@utility santo-frame {
+  background-color: var(--santo-color-surface-sunken);
+  padding: var(--santo-frame-inset);
+  border: var(--santo-border-thin) solid transparent;
+  box-shadow: var(--santo-shadow-sm);
+  :root[data-theme='dark'] & {
+    border-color: var(--santo-color-border-subtle);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) & {
+      border-color: var(--santo-color-border-subtle);
+    }
+  }
+  @container style(--santo-frame-enabled: 0) {
+    & {
+      background-color: transparent;
+      padding: 0;
+      border-color: transparent;
+      box-shadow: none;
+    }
+  }
+}
+
+@utility santo-frame-panel {
+  background-color: var(--santo-frame-surface);
+  border: var(--santo-border-thin) solid var(--santo-frame-border);
+  box-shadow: var(--santo-shadow-xs);
+  @container style(--santo-frame-enabled: 0) {
+    & {
+      box-shadow: var(--santo-shadow-sm);
+    }
+  }
+}
+
+/*
+ * Vidro (Estudio > Superficies > Vidro; tokens do Compasso): fundo com alfa,
+ * desfoque do que esta atras (--santo-glass-md), borda clara e um highlight de
+ * 1 fio no topo. Sem backdrop-filter, cai para a superficie raised (o texto
+ * continua legivel). Use em superficie pequena e fixa: topbar, menu, cartao
+ * sobre imagem, nunca em lista longa (skill santo-ui-craft §11).
+ */
+@utility santo-glass {
+  background-color: var(--santo-glass-surface);
+  border: var(--santo-border-thin) solid var(--santo-glass-border);
+  box-shadow: inset 0 var(--santo-border-thin) 0 var(--santo-glass-highlight), var(--santo-shadow-md);
+  -webkit-backdrop-filter: var(--santo-glass-md);
+  backdrop-filter: var(--santo-glass-md);
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background-color: var(--santo-color-surface-raised);
+  }
+}
+
+/*
+ * Vidro quando o DS escolhe vidro: com --santo-glass-enabled: 1 o cartao raised
+ * (e o header flutuante) passa a vidro sozinho; com 0 nada muda. Style query.
+ */
+@utility santo-auto-glass {
+  @container style(--santo-glass-enabled: 1) {
+    /* && dobra a especificidade: vence o bg-surface-raised do Card, que vem depois na folha. */
+    && {
+      background-color: var(--santo-glass-surface);
+      border-color: var(--santo-glass-border);
+      -webkit-backdrop-filter: var(--santo-glass-md);
+      backdrop-filter: var(--santo-glass-md);
+    }
+  }
+}
+
+/* Desfoque de camada (o proprio elemento): imagem de fundo, estado bloqueado. */
+@utility santo-blur-sm {
+  filter: var(--santo-blur-sm);
+}
+@utility santo-blur-md {
+  filter: var(--santo-blur-md);
+}
+
+/* Gradiente da marca (angulo e degraus vem do Estudio > Efeitos). */
+@utility santo-gradient-brand {
+  background-image: var(--santo-gradient-brand);
+}
