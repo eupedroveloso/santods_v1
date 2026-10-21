@@ -1,20 +1,25 @@
 import { Skeleton as S } from "@/lib/ui/skeleton";
 import { ThumbFrame } from "@/lib/ui/thumb-frame";
 
-/** Trilho com duas marcas; a ativa elevada, com a marca em enfase. */
+/** Gatilho com o ponto da marca ativa e o chevron; painel com as marcas, a ativa marcada. */
 export function BrandSwitchThumb() {
   return (
-    <ThumbFrame pad="md">
-      <div className="flex justify-center">
-        <S.Block w="fit" tone="sunken" track className="gap-3xs">
-          <S.Chip w="md" elevated>
-            <S.Bar w="sm" size="sm" tone="emphasis" />
-          </S.Chip>
-          <S.Chip w="md" tone="sunken">
-            <S.Bar w="sm" size="sm" />
-          </S.Chip>
-        </S.Block>
-      </div>
+    <ThumbFrame>
+      <S.Field placeholder="sm" leading={<S.Circle size="xs" tone="strong" />} trailing={<S.Block w="2xs" h="xs" tone="strong" />} w="lg" />
+      <S.Block elevated className="flex-col p-2xs">
+        <S.Row divider={false} selected>
+          <S.Circle size="xs" tone="strong" />
+          <S.Bar w="md" tone="emphasis" />
+        </S.Row>
+        <S.Row divider={false}>
+          <S.Circle size="xs" tone="base" />
+          <S.Bar w="sm" />
+        </S.Row>
+        <S.Row divider={false}>
+          <S.Circle size="xs" tone="base" />
+          <S.Bar w="lg" />
+        </S.Row>
+      </S.Block>
     </ThumbFrame>
   );
 }

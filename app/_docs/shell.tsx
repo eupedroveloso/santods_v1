@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import {
   buttonClass,
   Card,
@@ -16,10 +16,12 @@ import {
   type BrandOption,
   NavItem,
   NavSection,
+  Nest,
   SidebarNav,
   Tag,
   useModal,
   useModKey,
+  Switch,
   type CommandItem,
 } from "@/lib/ui";
 import { ThemeToggle } from "../_components/theme-toggle";
@@ -83,81 +85,90 @@ export function DocsShell({
     setSearchOpen(true);
   };
 
-  // No aside a busca fica fixa no topo; na gaveta ela rola junto do menu.
+  const [collapsed, setCollapsed] = useSidebarCollapsed();
+  // No aside a faixa do topo (logo, recolher pastas, compactar) fica fixa; na gaveta
+  // a logo mora no cabeçalho dela e nada compacta.
   const sidebar = (pinned: boolean) => (
-    <Sidebar nav={nav} pathname={pathname} pinned={pinned} onSearch={openSearch} onNavigate={() => setMenuOpen(false)} />
+    <Sidebar
+      nav={nav}
+      pathname={pathname}
+      pinned={pinned}
+      collapsed={pinned && collapsed}
+      onCollapsedChange={pinned ? setCollapsed : undefined}
+      onNavigate={() => setMenuOpen(false)}
+    />
   );
 
   // A rota de preview do Estúdio roda dentro de um iframe: sem moldura nenhuma.
   if (pathname === "/estudio/preview") return <>{children}</>;
 
   return (
-    <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-(--santo-layer-sticky) border-b-thin border-border-subtle bg-surface-page">
-        {/* Altura total da topbar = size/56 com a borda inclusa: a trilha sticky (top size/56) e a
-            sidebar encostam nela sem vao de 1px. */}
-        <div className="flex h-[calc(var(--santo-dimension-size-56)-var(--santo-border-thin))] w-full items-center gap-sm px-md md:gap-md lg:px-lg">
-          <IconButton label="Abrir menu" size="sm" className="lg:hidden" onClick={() => setMenuOpen(true)}>
-            <Icon.Menu size={16} />
-          </IconButton>
-          <Link href="/" aria-label="SantoDS — início" className="flex shrink-0 items-center rounded-md">
-            <BrandLogo brand="santo" priority />
-          </Link>
-          <nav aria-label="Seções" className="hidden items-center gap-3xs lg:flex">
-            {TOP_LINKS.map((l) => {
-              const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`santo-body-small-medium rounded-md px-sm py-2xs transition-colors ease-(--santo-motion-easing-standard) duration-(--santo-motion-duration-fast) ${
-                    active
-                      ? "bg-neutral-subtle-default text-text-primary"
-                      : "text-text-secondary hover:text-text-primary"
-                  }`}
-                >
-                  {l.label}
-                </Link>
-              );
-            })}
-          </nav>
-          <div className="ml-auto flex items-center gap-2xs">
-            <IconButton label={`Buscar (${mod} K)`} size="sm" className="lg:hidden" onClick={openSearch}>
-              <Icon.Search size={16} />
-            </IconButton>
-            {/* No celular o Figma sai da topbar para caber o alternador; segue na home. */}
-            <span className="hidden sm:block">
-              <a
-                href={FIGMA_URL}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Abrir o arquivo no Figma"
-                title="Abrir o arquivo no Figma"
-                className={buttonClass({ variant: "ghost", size: "sm", icon: true })}
-              >
-                <Icon.Figma size={16} />
-              </a>
-            </span>
-            {/* No celular o seletor de marca mora na gaveta: no header ele empurrava a barra para fora dos 390px. */}
-            <div className="hidden sm:block">
-              <BrandControl brands={brands} />
-            </div>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
-
-      {/* Sem container centralizado: a sidebar encosta na borda esquerda da janela e
-          o conteudo ocupa o resto. O max-w de leitura fica so no texto corrido. */}
-      <div className="flex w-full flex-1">
-        {!workspace && (
-        <aside className={`sticky top-(--santo-dimension-size-56) hidden h-[calc(100dvh-var(--santo-dimension-size-56))] ${LAYOUT.sidebar} shrink-0 overflow-y-scroll santo-pinned-scroll scrollbar-edge border-r-thin border-border-subtle px-xs pb-sm lg:block`}>
+    // Sidebar de altura inteira, colada no topo; a topbar fica so sobre o conteudo, na
+    // mesma linha (size/56, mesmo divisor) da faixa da logo da sidebar (Pedro, 2026-10-21).
+    <div className="flex min-h-full">
+      {!workspace && (
+        <aside
+          style={
+            {
+              transition: "width var(--santo-motion-duration-normal) var(--santo-motion-easing-standard)",
+              "--santo-pinned-bleed": "var(--santo-space-xs)",
+            } as CSSProperties
+          }
+          className={`sticky top-0 hidden h-dvh ${collapsed ? LAYOUT.rail : LAYOUT.sidebar} shrink-0 overflow-y-scroll santo-pinned-scroll scrollbar-edge border-r-thin border-border-subtle px-xs pb-sm lg:block`}
+        >
           {sidebar(true)}
         </aside>
-        )}
-        {/* Altura minima = viewport menos a topbar: assim o rodape da pagina (mt-auto)
-            encosta embaixo em pagina curta. */}
+      )}
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="sticky top-0 z-(--santo-layer-sticky) border-b-thin border-border-subtle bg-surface-page">
+          {/* Altura total = size/56 com a borda inclusa: igual a faixa da logo na sidebar. */}
+          <div className="flex h-[calc(var(--santo-dimension-size-56)-var(--santo-border-thin))] w-full items-center gap-sm px-md md:gap-md lg:px-lg">
+            <IconButton label="Abrir menu" size="sm" className="lg:hidden" onClick={() => setMenuOpen(true)}>
+              <Icon.Menu size={16} />
+            </IconButton>
+            {/* Abaixo de lg a sidebar some: a logo volta para a topbar (o simbolo no celular). */}
+            <span className="flex lg:hidden">
+              <span className="hidden sm:flex"><HomeLogo /></span>
+              <span className="flex sm:hidden"><HomeLogo variant="mark" /></span>
+            </span>
+            <Switch
+              checked={pathname.startsWith("/estudio")}
+              onChange={() => undefined}
+              offHref="/"
+              onHref="/estudio"
+              label="Área do site"
+              offLabel="Documentação"
+              onLabel="Estúdio"
+              offIcon={<Icon.BookIcon size={16} />}
+              onIcon={<Icon.SlidersIcon size={16} />}
+              offTone="brand"
+              onTone="accent"
+            />
+            <div className="ml-auto flex items-center gap-2xs">
+              {/* Busca no grupo da direita (saiu da sidebar): o mesmo modal do ⌘K. */}
+              <IconButton label={`Buscar (${mod} K)`} size="sm" onClick={openSearch} aria-keyshortcuts={`${mod === "⌘" ? "Meta" : "Control"}+K`}>
+                <Icon.Search size={16} />
+              </IconButton>
+              {/* No celular o Figma sai da topbar para caber o alternador; segue na home. */}
+              <span className="hidden sm:block">
+                <a
+                  href={FIGMA_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Abrir o arquivo no Figma"
+                  title="Abrir o arquivo no Figma"
+                  className={buttonClass({ variant: "ghost", size: "sm", icon: true })}
+                >
+                  <Icon.Figma size={16} />
+                </a>
+              </span>
+              {/* Dropdown de marca: no celular o gatilho fica so com o ponto da marca. */}
+              <BrandControl brands={brands} />
+              <ThemeToggle />
+            </div>
+          </div>
+        </header>
+        {/* Altura minima = viewport menos a topbar: o rodape da pagina (mt-auto) encosta embaixo. */}
         <main
           className={`flex min-h-[calc(100dvh-var(--santo-dimension-size-56))] min-w-0 flex-1 flex-col ${workspace ? "" : "px-md py-2xl lg:px-3xl"}`}
         >
@@ -166,7 +177,7 @@ export function DocsShell({
       </div>
 
       {menuOpen && (
-        <MenuDrawer onClose={() => setMenuOpen(false)} brands={brands}>
+        <MenuDrawer onClose={() => setMenuOpen(false)}>
           {sidebar(false)}
         </MenuDrawer>
       )}
@@ -200,7 +211,7 @@ function NavGlyph({ name, size = 16 }: { name: NavIcon; size?: 16 | 20 }) {
 }
 
 /** Gaveta do menu no celular: modal de verdade (Esc, foco preso, foco devolvido). */
-function MenuDrawer({ onClose, brands, children }: { onClose: () => void; brands: BrandOption[]; children: ReactNode }) {
+function MenuDrawer({ onClose, children }: { onClose: () => void; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useModal(ref, onClose);
   return (
@@ -231,12 +242,8 @@ function MenuDrawer({ onClose, brands, children }: { onClose: () => void; brands
             </div>
           }
         >
-          <div className="flex min-h-0 flex-1 flex-col gap-sm overflow-y-auto p-xs">
-            {brands.length > 1 && (
-              <div className="sm:hidden">
-                <BrandControl brands={brands} />
-              </div>
-            )}
+          {/* Aninhamento: recuo xs nos quatro lados e entre os blocos do menu. */}
+          <Nest inset="xs" className="min-h-0 flex-1 overflow-y-auto">
             <SidebarNav className="lg:hidden">
               <NavSection>
                 {TOP_LINKS.map((l) => (
@@ -247,7 +254,7 @@ function MenuDrawer({ onClose, brands, children }: { onClose: () => void; brands
               </NavSection>
             </SidebarNav>
             {children}
-          </div>
+          </Nest>
         </Card>
       </div>
     </div>
@@ -279,17 +286,59 @@ function isActive(href: string, pathname: string, hash: string, nav: NavGroup[])
   return first?.href === href;
 }
 
+/** Logo com link para a home, na faixa do topo da sidebar (completa ou reduzida). */
+function HomeLogo({ variant = "full" }: { variant?: "full" | "mark" }) {
+  return (
+    <Link href="/" aria-label="SantoDS — início" className="flex shrink-0 items-center rounded-md">
+      <BrandLogo brand="santo" variant={variant} priority={variant === "full"} />
+    </Link>
+  );
+}
+
+/*
+ * Sidebar compactada (trilho): mora no localStorage, como tema e marca, e e lida
+ * por useSyncExternalStore (servidor = expandida, sem divergir na hidratacao).
+ */
+const SIDEBAR_KEY = "santo-sidebar";
+const sidebarListeners = new Set<() => void>();
+const subscribeSidebar = (cb: () => void) => {
+  sidebarListeners.add(cb);
+  return () => sidebarListeners.delete(cb);
+};
+const readSidebar = () => {
+  try {
+    return localStorage.getItem(SIDEBAR_KEY) === "compacta";
+  } catch {
+    return false;
+  }
+};
+function useSidebarCollapsed(): [boolean, (collapsed: boolean) => void] {
+  const collapsed = useSyncExternalStore(subscribeSidebar, readSidebar, () => false);
+  const set = (next: boolean) => {
+    try {
+      if (next) localStorage.setItem(SIDEBAR_KEY, "compacta");
+      else localStorage.removeItem(SIDEBAR_KEY);
+    } catch {
+      // Sem storage (aba privada): a sidebar fica expandida.
+    }
+    sidebarListeners.forEach((l) => l());
+  };
+  return [collapsed, set];
+}
+
 function Sidebar({
   nav,
   pathname,
   pinned,
-  onSearch,
+  collapsed,
+  onCollapsedChange,
   onNavigate,
 }: {
   nav: NavGroup[];
   pathname: string;
   pinned: boolean;
-  onSearch: () => void;
+  collapsed: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
   onNavigate: () => void;
 }) {
   const hash = useSyncExternalStore(subscribeHash, readHash, () => "");
@@ -314,7 +363,11 @@ function Sidebar({
       showRail={false}
       foldAll
       pinned={pinned}
-      onSearch={onSearch}
+      collapsed={collapsed}
+      onCollapsedChange={onCollapsedChange}
+      // Logo na faixa do topo (só no aside: na gaveta ela já está no cabeçalho).
+      brand={pinned ? <HomeLogo /> : undefined}
+      brandMark={<HomeLogo variant="mark" />}
       onNavigate={onNavigate}
       groups={nav.map(sidebarGroup)}
     />

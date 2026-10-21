@@ -1132,6 +1132,59 @@
         "fixo"
       ],
       "viewBox": "0 0 16 16"
+    },
+    "angles-left": {
+      "component": "AnglesLeftIcon",
+      "file": "lib/icons/angles-left.tsx",
+      "figma": {
+        "name": "angles-left",
+        "kind": "icon",
+        "setNodeId": "38:28337",
+        "nodeId": "38:28341",
+        "weight": "regular"
+      },
+      "aliases": [
+        "compactar",
+        "recolher sidebar",
+        "trilho",
+        "fechar painel"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "angles-right": {
+      "component": "AnglesRightIcon",
+      "file": "lib/icons/angles-right.tsx",
+      "figma": {
+        "name": "angles-right",
+        "kind": "icon",
+        "setNodeId": "38:28351",
+        "nodeId": "38:28355",
+        "weight": "regular"
+      },
+      "aliases": [
+        "expandir",
+        "abrir sidebar",
+        "mostrar painel"
+      ],
+      "viewBox": "0 0 16 16"
+    },
+    "sidebar": {
+      "component": "SidebarIcon",
+      "file": "lib/icons/sidebar.tsx",
+      "figma": {
+        "name": "sidebar",
+        "kind": "icon",
+        "setNodeId": "38:611",
+        "nodeId": "38:615",
+        "weight": "regular"
+      },
+      "aliases": [
+        "sidebar",
+        "painel lateral",
+        "menu lateral",
+        "alternar"
+      ],
+      "viewBox": "0 0 16 16"
     }
   }
 }

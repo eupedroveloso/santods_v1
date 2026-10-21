@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { AppSidebar, type AppSidebarGroup } from "./app-sidebar";
+import { BrandLogo } from "./brand-logo";
 import { Card } from "./card";
 import { Code, File, Palette, TrendUp } from "./icons";
 import { componentsByTier } from "./registry";
@@ -45,6 +47,32 @@ const TREE: AppSidebarGroup[] = [
   { title: "Documentos", icon: <File size={16} />, items: [{ href: "#guia", label: "Guia da equipe" }] },
 ];
 
+function CompactDemo() {
+  const [compacta, setCompacta] = useState(false);
+  return (
+    <Card
+      variant="sunken"
+      padded={false}
+      className={`mx-auto overflow-hidden ${compacta ? "w-(--santo-dimension-space-72)" : "w-full max-w-(--santo-dimension-space-320)"}`}
+    >
+      <div className="santo-pinned-scroll max-h-(--santo-dimension-space-320) overflow-y-scroll px-xs pb-sm">
+        <AppSidebar
+          groups={GROUPS}
+          showRail={false}
+          brand={<BrandLogo brand="santo" />}
+          brandMark={<BrandLogo brand="santo" variant="mark" />}
+          foldAll
+          collapsed={compacta}
+          onCollapsedChange={setCompacta}
+          pinned
+          surface="sunken"
+          label="Demo faixa fixa e compactar"
+        />
+      </div>
+    </Card>
+  );
+}
+
 export const appSidebarDemos: DemoMap = {
   "app-sidebar": {
     playground: {
@@ -79,34 +107,24 @@ export const appSidebarDemos: DemoMap = {
         ),
       },
       {
-        title: "Recolher e expandir tudo",
+        title: "Faixa fixa e compactar",
         layout: "stretch",
-        code: `// Busca e botão fixos no topo do pai que rola (sem padding em cima).
-<aside className="overflow-y-scroll santo-pinned-scroll px-xs pb-sm">
+        code: `// Logo, recolher pastas e compactar fixos no topo do pai que rola (sem padding em cima).
+const [compacta, setCompacta] = useState(false);
+<aside className={compacta ? "w-(--santo-dimension-space-72)" : "w-(--santo-dimension-space-256)"}>
   <AppSidebar
     groups={grupos}
     showRail={false}
-    onSearch={abrirBusca}
+    brand={<BrandLogo brand="santo" />}
+    brandMark={<BrandLogo brand="santo" variant="mark" />}
     foldAll
+    collapsed={compacta}
+    onCollapsedChange={setCompacta}   // o pai persiste (localStorage)
     pinned
     surface="sunken"
   />
 </aside>`,
-        Preview: () => (
-          <Card variant="sunken" padded={false} className="mx-auto w-full max-w-(--santo-dimension-space-320) overflow-hidden">
-            <div className="santo-pinned-scroll max-h-(--santo-dimension-space-320) overflow-y-scroll px-sm pb-sm">
-              <AppSidebar
-                groups={GROUPS}
-                showRail={false}
-                onSearch={() => undefined}
-                foldAll
-                pinned
-                surface="sunken"
-                label="Demo recolher e expandir tudo"
-              />
-            </div>
-          </Card>
-        ),
+        Preview: CompactDemo,
       },
       {
         title: "Com trilho",

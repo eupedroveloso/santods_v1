@@ -31,6 +31,7 @@ export const brandSwitchDemos: DemoMap = {
       {
         title: "Marca num contêiner",
         code: `const [marca, setMarca] = useState("santo");
+// Dropdown compacto (Select variant="compact", sm): ponto na cor de cada marca, check na ativa.
 <BrandSwitch brands={[{ id: "santo", label: "Santo" }, { id: "vtsd", label: "VTSD" }]}
   value={marca} onChange={setMarca} />
 <div data-brand={marca}>…</div>   // na doc, o atributo vai na raiz e persiste`,

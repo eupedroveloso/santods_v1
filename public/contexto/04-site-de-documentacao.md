@@ -47,15 +47,17 @@ cor de seleção.
 
 É a moldura do site, e tudo nela segue o mesmo tema:
 
-- **Topbar sticky.** A altura é `size/56` com a borda incluída. Tem o `BrandLogo`, os links
-  de seção (`TOP_LINKS`: Docs, Componentes, Tokens, Estilos, Identidades, com o ativo em
-  `bg-neutral-subtle-default`), o link para o Figma, o **seletor de marca**
-  (`BrandControl`) e o **alternador de tema** (`ThemeToggle`). No celular há um botão de
-  menu e um de busca, e o seletor de marca vai para a gaveta.
+- **Topbar sticky.** A altura é `size/56` com a borda incluída. À esquerda, só dois links
+  (`TOP_LINKS`: Documentação, ativo em todo o site fora do Estúdio, e Estúdio). À direita,
+  num grupo de ícones: a **busca** (IconButton com a lupa; abre o mesmo modal do ⌘K), o
+  link para o Figma, o **seletor de marca** (dropdown `BrandControl`) e o **alternador de
+  tema** (`ThemeToggle`, Claro | Auto | Escuro). No celular entra o botão de menu.
 - **Sidebar fixa à esquerda.** Largura `space/256` (`LAYOUT.sidebar` em
   `app/_docs/links.ts`), sticky, com rolagem própria. Ela é o componente **`AppSidebar`** da
-  lib, em coluna única com todos os grupos abertos, campo de busca no topo e item ativo
-  calculado pela rota e pela hash.
+  lib, em coluna única, com item ativo calculado pela rota e pela hash. A faixa fixa do
+  topo leva a **logo** (link para a home), recolher/expandir todas as pastas e
+  **compactar a sidebar** em trilho de ícones (`LAYOUT.rail`, `space/72`; logo reduzida no
+  topo; estado em `localStorage` `santo-sidebar`; a largura anima pelos tokens de motion).
 - **Gaveta (`MenuDrawer`) no celular.** É um modal de verdade: fecha com Esc, prende o foco e
   devolve o foco ao fechar.
 - **Busca ⌘K (Ctrl K fora do Mac).** É o `CommandPalette` da lib, aberto por atalho global
@@ -167,8 +169,9 @@ O componente também entra sozinho na sidebar, na busca e no índice. Depois, ro
 ## Seletores de tema e de marca
 
 - **Tema** (`app/_components/theme-toggle.tsx`): o modo mora no `localStorage`
-  (`santo-theme`) e no `data-theme` da raiz, não em estado React. Sem atributo, segue o
-  sistema. O script do `<head>` aplica antes da pintura, e o alternador só lê e escreve.
+  (`santo-theme`: `light`, `dark` ou `system`) e no `data-theme` da raiz, não em estado
+  React. O padrão é o **claro**: sem escolha salva, a raiz nasce com `data-theme="light"`.
+  A ordem é Claro | Auto | Escuro; Auto tira o atributo e passa a seguir o sistema. O script do `<head>` aplica antes da pintura, e o alternador só lê e escreve.
 - **Marca** (`app/_components/brand-control.tsx`, sobre o `BrandSwitch` da lib) segue o
   mesmo desenho, com `santo-brand` e `data-brand`. A marca padrão não grava atributo. A
   troca vale na doc inteira, persiste e já tem as famílias carregadas.

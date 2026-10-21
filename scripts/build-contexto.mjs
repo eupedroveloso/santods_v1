@@ -165,7 +165,7 @@ Exemplo de cadeia: \`radius/md → brand/shape/radius-base → dimension/radius/
 - **Utilitários Tailwind v4** (\`lib/tokens/theme.css\`, \`@theme inline\`): \`color/bg/*\` perde o segmento \`bg\` (\`bg-brand-solid-default\`); as outras famílias mantêm o prefixo (\`text-text-primary\`, \`border-border-subtle\`, \`bg-surface-page\`). \`space/*\` vira \`p-md\`, \`gap-lg\` etc.; \`radius/*\` vira \`rounded-md\`; também entram pesos, tracking, leading, easing, sombras (\`shadow-md\`) e papéis de texto (\`text-heading-1\`).
 - **De propósito fora do Tailwind**: a escala numérica (\`p-4\` = 1rem) fica intacta; \`dimension/space/N\` não vira \`--spacing-N\`; \`dimension/container/*\` não entra no \`@theme\` (use \`var(--${prefix}-dimension-container-lg)\`).
 - **Classes de texto**: uma por text style, \`.${prefix}-<papel>-<peso>\` (\`.${prefix}-heading-1-semibold\`), em \`lib/tokens/typography.css\`.
-- **Tema e marca no HTML**: \`data-theme="light|dark"\` no \`:root\` (sem ele, segue o sistema); \`data-brand="<id>"\` em qualquer elemento (sem ele, vale a marca padrão).
+- **Tema e marca no HTML**: o tema padrão do DS é o **claro** — o site nasce com \`data-theme="light"\` no \`:root\` (script do \`<head>\`), \`data-theme="dark"\` fixa o escuro e só o Auto escolhido tira o atributo (aí segue o sistema); \`data-brand="<id>"\` em qualquer elemento (sem ele, vale a marca padrão).
 
 ## Como o emissor funciona
 

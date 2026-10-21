@@ -4,12 +4,10 @@ import { figmaSource } from "@/lib/tokens";
 
 export const FIGMA_URL = `https://www.figma.com/design/${figmaSource.fileKey}`;
 
+// Topo com dois destinos (Pedro, 2026-10-21): a documentação inteira e o Estúdio.
+// Componentes, Tokens, Estilos e Identidades moram na sidebar.
 export const TOP_LINKS = [
-  { label: "Docs", href: "/" },
-  { label: "Componentes", href: "/componentes" },
-  { label: "Tokens", href: "/tokens" },
-  { label: "Estilos", href: "/estilos" },
-  { label: "Identidades", href: "/identidades" },
+  { label: "Documentação", href: "/" },
   { label: "Estúdio", href: "/estudio" },
 ] as const;
 
@@ -22,6 +20,8 @@ export const TOP_LINKS = [
  */
 export const LAYOUT = {
   sidebar: "w-(--santo-dimension-space-256)",
+  /** Sidebar compactada em trilho: item size/40 + trilho 2xs + aside xs, dos dois lados. */
+  rail: "w-(--santo-dimension-space-72)",
   drawer: "w-(--santo-dimension-space-288)",
   /** Painel de controles do playground, ao lado do preview a partir de md. */
   panel: "md:w-(--santo-dimension-space-256)",

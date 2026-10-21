@@ -91,7 +91,8 @@ Figma ──(scripts/figma-dump.js via MCP)──▶ tokens/santods.figma.json
   `layer/*`; e `motion/easing/*` sai cru.
 - Temas: o modo Light vai no `:root`. O Dark vai em `@media (prefers-color-scheme: dark)`
   com a guarda `:root:not([data-theme='light'])` e também em `:root[data-theme='dark']`.
-  Sem atributo, o site segue o sistema.
+  O padrão do DS é o tema claro: o site nasce com `data-theme="light"`. Só o Auto, quando
+  escolhido, tira o atributo, e aí o site segue o sistema.
 
 ### Como os tokens viram classe
 

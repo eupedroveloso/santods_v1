@@ -5,7 +5,7 @@ import { IconButton } from "./button";
 import { Divider } from "./card";
 import { Count } from "./chip";
 import { Disclosure } from "./disclosure";
-import { CollapseAll, Expand, ExpandAll } from "./icons";
+import { AnglesLeftIcon, AnglesRightIcon, CollapseAll, Expand, ExpandAll } from "./icons";
 import { NavItem, NavSub, SidebarNav } from "./nav";
 import { NAV_STEM_STYLE } from "./nav-layout";
 import { RailItem, RailNav } from "./rail-nav";
@@ -77,6 +77,10 @@ export function AppSidebar({
   label = "Navegação",
   showRail = true,
   foldAll = false,
+  brand,
+  brandMark,
+  collapsed = false,
+  onCollapsedChange,
   pinned = false,
   surface = "page",
   className = "",
@@ -91,8 +95,16 @@ export function AppSidebar({
   label?: string;
   /** false: só o painel de navegação, sem reservar espaço para o trilho. */
   showRail?: boolean;
-  /** Botão ao lado da busca que recolhe/expande todas as pastas. */
+  /** Botão na faixa do topo que recolhe/expande todas as pastas. */
   foldAll?: boolean;
+  /** Marca na faixa do topo (logo com link para a home); toma o lugar da busca. */
+  brand?: ReactNode;
+  /** Marca reduzida (símbolo) no topo do trilho compactado. */
+  brandMark?: ReactNode;
+  /** Sidebar compactada em trilho de ícones (controlado pelo pai, que persiste). */
+  collapsed?: boolean;
+  /** Liga o botão de compactar/expandir a sidebar inteira. */
+  onCollapsedChange?: (collapsed: boolean) => void;
   /** Busca (e foldAll) fixas no topo do pai que rola. */
   pinned?: boolean;
   /** Superfície do pai, que pinta a faixa fixa e o degradê sob ela. */
@@ -212,6 +224,48 @@ export function AppSidebar({
     // mais xs antes da próxima raiz, sem alterar o ritmo dos ramos internos.
     return <div key={path} className={!nested && visibleChildren ? "pb-xs last:pb-0" : undefined}>{node}</div>;
   };
+  if (collapsed) {
+    // Compactada: trilho de ícones. Cada raiz com ícone vira um RailItem (dica
+    // no title); a pasta expande a sidebar e abre o próprio grupo.
+    const isActive = (group: AppSidebarGroup) => groupItems(group).some((item) => item.active);
+    return (
+      <div ref={ref} className={`flex flex-col items-center gap-sm ${className}`}>
+        <div
+          className={`flex w-full items-center justify-center ${pinned ? "santo-pinned-head" : "pb-sm"}`}
+          style={pinned ? ({ "--santo-pinned-surface": PINNED_SURFACE[surface] } as CSSProperties) : undefined}
+        >
+          {brandMark}
+        </div>
+        {onCollapsedChange && (
+          <IconButton label="Expandir barra lateral" onClick={() => onCollapsedChange(false)}>
+            <AnglesRightIcon size={16} />
+          </IconButton>
+        )}
+        <RailNav label={label}>
+          {groups.flatMap((group, index) =>
+            group.title
+              ? (group.railIcon ?? group.icon)
+                ? [
+                    <RailItem
+                      key={index}
+                      icon={group.railIcon ?? group.icon}
+                      label={group.title}
+                      active={isActive(group)}
+                      onClick={() => {
+                        setNavigation((state) => ({ ...state, closed: state.closed.filter((path) => path !== String(index)) }));
+                        onCollapsedChange?.(false);
+                      }}
+                    />,
+                  ]
+                : []
+              : group.items.filter((item) => item.icon).map((item) => (
+                  <RailItem key={item.href} icon={item.icon} label={item.label} href={item.href} active={item.active} onClick={onNavigate} />
+                )),
+          )}
+        </RailNav>
+      </div>
+    );
+  }
   return (
     <div ref={ref} className={`flex min-w-0 gap-xs ${className}`}>
       {showRail && (
@@ -225,14 +279,17 @@ export function AppSidebar({
         </RailNav>
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-md">
-        {(onSearch || foldAll) && (
+        {(brand || onSearch || foldAll || onCollapsedChange) && (
           <div
-            className={`flex flex-col gap-sm ${pinned ? "santo-pinned-head pt-sm" : ""}`}
+            className={`flex flex-col justify-center gap-sm ${pinned ? "santo-pinned-head" : ""}`}
             style={pinned ? ({ "--santo-pinned-surface": PINNED_SURFACE[surface] } as CSSProperties) : undefined}
           >
             <div className="flex items-center gap-2xs">
-              {/* size md (size/40) está no calc de santo-pinned-scroll (surface.css): mudou aqui, muda lá. */}
-              {onSearch && <SearchTrigger size="md" onClick={onSearch} className="min-w-0 flex-1" />}
+              {brand ? (
+                <div className="flex h-(--santo-dimension-size-40) min-w-0 flex-1 items-center">{brand}</div>
+              ) : (
+                onSearch && <SearchTrigger size="md" onClick={onSearch} className="min-w-0 flex-1" />
+              )}
               {foldAll && folders.length > 0 && (
                 <IconButton
                   label={anyOpen ? "Recolher todas as pastas" : "Expandir todas as pastas"}
@@ -242,8 +299,14 @@ export function AppSidebar({
                   {anyOpen ? <CollapseAll size={16} /> : <ExpandAll size={16} />}
                 </IconButton>
               )}
+              {onCollapsedChange && (
+                <IconButton label="Compactar barra lateral" onClick={() => onCollapsedChange(true)} className="shrink-0">
+                  <AnglesLeftIcon size={16} />
+                </IconButton>
+              )}
             </div>
-            <Divider />
+            {/* Fixa, o divisor e a borda da faixa (alinhada a da topbar); solta, um Divider. */}
+            {!pinned && <Divider />}
           </div>
         )}
         <SidebarNav label={label}>

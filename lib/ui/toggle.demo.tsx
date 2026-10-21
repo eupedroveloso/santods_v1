@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BookIcon, SlidersIcon } from "./icons";
 import { jsx } from "./demo-kit";
 import { Checkbox, Radio, SettingRow, Switch } from "./toggle";
 import type { DemoMap, ControlValues } from "./registry.types";
@@ -108,6 +109,23 @@ function Settings() {
   );
 }
 
+function SwitchSides() {
+  const [estudio, setEstudio] = useState(false);
+  return (
+    <Switch
+      checked={estudio}
+      onChange={setEstudio}
+      label="Área do site"
+      offLabel="Documentação"
+      onLabel="Estúdio"
+      offIcon={<BookIcon size={16} />}
+      onIcon={<SlidersIcon size={16} />}
+      offTone="brand"
+      onTone="accent"
+    />
+  );
+}
+
 export const toggleDemos: DemoMap = {
   checkbox: {
     playground: {
@@ -178,6 +196,22 @@ export const toggleDemos: DemoMap = {
 <Switch checked={false} onChange={set} label="Desligada" />
 <Switch checked onChange={set} label="Desabilitada" disabled />`,
         Preview: SwitchStates,
+      },
+      {
+        title: "Dois lados com ícones",
+        code: `// Alternador entre dois lugares: só ícones, trilho na cor de cada lado; nomes no aria-label/title.
+<Switch
+  checked={estudio}
+  onChange={setEstudio}
+  label="Área do site"
+  offLabel="Documentação"
+  onLabel="Estúdio"
+  offIcon={<Icon.BookIcon size={16} />}
+  onIcon={<Icon.SlidersIcon size={16} />}
+  offTone="brand"
+  onTone="accent"
+/>`,
+        Preview: SwitchSides,
       },
     ],
   },

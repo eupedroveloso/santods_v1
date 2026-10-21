@@ -13,19 +13,22 @@ type Mode = "system" | "light" | "dark";
  */
 const listeners = new Set<() => void>();
 
+// Padrao do DS: claro. Auto (seguir o sistema) e Escuro so quando escolhidos.
+const DEFAULT_MODE: Mode = "light";
+
 function read(): Mode {
   try {
     const v = localStorage.getItem(THEME_STORAGE_KEY);
-    return v === "light" || v === "dark" ? v : "system";
+    return v === "system" || v === "dark" ? v : DEFAULT_MODE;
   } catch {
-    return "system";
+    return DEFAULT_MODE;
   }
 }
 
 function write(mode: Mode) {
   try {
-    if (mode === "system") localStorage.removeItem(THEME_STORAGE_KEY);
-    else localStorage.setItem(THEME_STORAGE_KEY, mode);
+    // Auto tambem e salvo: sem chave, a pagina volta ao claro padrao.
+    localStorage.setItem(THEME_STORAGE_KEY, mode);
   } catch {
     // Sem storage (aba privada): o tema vale so ate recarregar.
   }
@@ -42,17 +45,28 @@ function subscribe(listener: () => void) {
 
 /**
  * Controla o tema no elemento raiz:
- *   data-theme  -> claro/escuro (ausente = segue o sistema)
+ *   data-theme  -> claro/escuro (ausente = Auto, segue o sistema)
+ * Padrao: claro. Ordem: Claro | Auto | Escuro.
  */
 export function ThemeToggle() {
-  const mode = useSyncExternalStore(subscribe, read, () => "system" as Mode);
+  const mode = useSyncExternalStore(subscribe, read, () => DEFAULT_MODE);
   return (
     <Segmented
       value={mode}
       onChange={write}
       options={[
-        { value: "system", label: "Auto", title: "Seguir o sistema" },
         { value: "light", label: <Icon.Sun size={16} />, title: "Tema claro" },
+        // No celular, Auto vira o meio círculo (tema automático) para a topbar caber em 375.
+        {
+          value: "system",
+          label: (
+            <>
+              <span className="sm:hidden"><Icon.CircleHalfStrokeIcon size={16} /></span>
+              <span className="max-sm:sr-only">Auto</span>
+            </>
+          ),
+          title: "Seguir o sistema",
+        },
         { value: "dark", label: <Icon.Moon size={16} />, title: "Tema escuro" },
       ]}
     />

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId } from "react";
 import type { ReactNode } from "react";
 import { Check } from "./icons";
@@ -123,6 +124,29 @@ export function Radio({
   );
 }
 
+/** Cor do trilho por estado: neutro (desligado padrao), marca, ou a cor de destaque (accent). */
+export type SwitchTone = "neutral" | "brand" | "accent";
+
+/** Punho circular do alternador de icones: a cor do lado ativo. */
+const THUMB_TONE: Record<SwitchTone, string> = {
+  neutral: "bg-surface-raised",
+  brand: "bg-brand-solid-default",
+  accent: "bg-accent-solid-default",
+};
+
+/** Icone sobre o punho: contraste com a cor dele. */
+const ON_TONE: Record<SwitchTone, string> = {
+  neutral: "text-icon-primary",
+  brand: "text-text-on-brand",
+  accent: "text-text-on-accent",
+};
+
+const TRACK_TONE: Record<SwitchTone, string> = {
+  neutral: "bg-neutral-subtle-active",
+  brand: "bg-brand-solid-default",
+  accent: "bg-accent-solid-default",
+};
+
 /**
  * Chave liga/desliga. Use quando o efeito e imediato; caixa quando ha um Salvar.
  *
@@ -131,41 +155,165 @@ export function Radio({
  * quatro lados; punho = 24 - 2 x 4 = 16 (`size-md`), PASTILHA com raio =
  * raio do trilho - folga (8 - 4 = radius/xs). Curso = 40 - 2 x 4 - 16 = 16 =
  * a largura do punho, entao `translateX(100%)` encosta na folga do outro lado.
+ *
+ * Alternador de dois lados (`offLabel` + `onLabel`): para escolher entre dois
+ * lugares, nao ligar/desligar (topbar: Documentacao | Estudio).
+ *   - com `offIcon` + `onIcon`: SO ICONES, REDONDO (excecao do Pedro: capsula),
+ *     trilho neutro com um icone fixo em cada ponta; o punho circular desliza
+ *     para o lado ativo, na cor dele (`offTone`/`onTone`), com o icone em
+ *     on-color; os nomes ficam no aria-label e na dica (title);
+ *   - sem icones: um rotulo de texto de cada lado do trilho, o ativo em enfase
+ *     (`compact`: so para leitor de tela abaixo de `sm`).
  */
 export function Switch({
   checked,
   onChange,
   label,
   disabled,
+  offLabel,
+  onLabel,
+  offTone = "neutral",
+  onTone = "brand",
+  compact = false,
+  offIcon,
+  onIcon,
+  offHref,
+  onHref,
   className = "",
 }: {
   checked: boolean;
   onChange: (checked: boolean) => void;
   label: string;
   disabled?: boolean;
+  /** Rotulo do lado desligado (esquerda). Com `onLabel`, vira alternador de dois lados. */
+  offLabel?: string;
+  /** Rotulo do lado ligado (direita). */
+  onLabel?: string;
+  /** Cor do trilho desligado. */
+  offTone?: SwitchTone;
+  /** Cor do trilho ligado. */
+  onTone?: SwitchTone;
+  /** Rotulos laterais so para leitor de tela abaixo de `sm` (topbar do celular). */
+  compact?: boolean;
+  /** Icone do lado desligado (16). Com `onIcon`, o alternador e so de icones. */
+  offIcon?: ReactNode;
+  /** Icone do lado ligado. */
+  onIcon?: ReactNode;
+  /**
+   * Destinos dos dois lados (alternador de icones que troca de AREA): o
+   * controle vira <nav> com dois links — mesmo visual, aria-current no ativo,
+   * Cmd/Ctrl+clique abre em nova aba. `onChange` deixa de ser chamado.
+   */
+  offHref?: string;
+  onHref?: string;
   className?: string;
 }) {
+  const sided = Boolean(offLabel && onLabel);
+  // Desligado+desabilitado e ligado+desabilitado precisam continuar
+  // distinguiveis: o ligado vira brand/subtle, nao o mesmo cinza.
+  const tone = checked ? `${TRACK_TONE[onTone]} disabled:bg-brand-subtle-active` : `${TRACK_TONE[offTone]} disabled:bg-disabled`;
+  const thumb = (
+    <span
+      className="size-md bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring)"
+      style={{
+        transform: checked ? "translateX(100%)" : "translateX(0)",
+        borderRadius: `calc(${RADIUS_CONTROL_VAR} - var(--santo-space-2xs))`,
+      }}
+    />
+  );
+  const trackClass = `relative inline-flex h-lg w-2xl shrink-0 items-center ${RADIUS_CONTROL} p-2xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard)`;
+  if (!sided) {
+    return (
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={label}
+        disabled={disabled}
+        onClick={() => onChange(!checked)}
+        className={`santo-focus-solid ${trackClass} cursor-pointer disabled:cursor-not-allowed ${tone} ${className}`}
+      >
+        {thumb}
+      </button>
+    );
+  }
+  if (offIcon && onIcon) {
+    // EXCECAO do Pedro (2026-10-21): este alternador e REDONDO — trilho em capsula
+    // e punho circular. O trilho fica neutro; so o punho muda de cor pelo lado
+    // ativo (offTone/onTone) e leva o icone dele em on-color. Os dois icones
+    // ficam fixos nas pontas, em tom neutro; o punho cobre o ativo.
+    // Trilho size/32 = 2 vagas de size/24 + folga 2xs; o punho desliza uma vaga.
+    const thumbTone = checked ? onTone : offTone;
+    const slot = "relative z-1 grid size-(--santo-dimension-size-24) place-items-center santo-transition-colors";
+    const thumb = (
+      <span
+        aria-hidden
+        className={`absolute top-2xs left-2xs size-(--santo-dimension-size-24) rounded-full shadow-sm transition-[translate,background-color] duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring) ${THUMB_TONE[thumbTone]}`}
+        style={{ translate: checked ? "100% 0" : "0 0" }}
+      />
+    );
+    if (offHref && onHref) {
+      const link = (href: string, name: string, icon: ReactNode, active: boolean) => (
+        <Link
+          href={href}
+          aria-label={name}
+          title={name}
+          aria-current={active ? "page" : undefined}
+          className={`santo-focus-solid ${slot} rounded-full ${active ? ON_TONE[thumbTone] : "text-icon-tertiary hover:text-icon-secondary"}`}
+        >
+          {icon}
+        </Link>
+      );
+      return (
+        <nav aria-label={label} className={`relative inline-flex h-(--santo-dimension-size-32) shrink-0 items-center rounded-full bg-surface-sunken p-2xs ${className}`}>
+          {thumb}
+          {link(offHref, offLabel as string, offIcon, !checked)}
+          {link(onHref, onLabel as string, onIcon, checked)}
+        </nav>
+      );
+    }
+    return (
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={`${label}: ${checked ? onLabel : offLabel}`}
+        title={checked ? onLabel : offLabel}
+        disabled={disabled}
+        onClick={() => onChange(!checked)}
+        className={`santo-focus-solid relative inline-flex h-(--santo-dimension-size-32) shrink-0 cursor-pointer items-center rounded-full bg-surface-sunken p-2xs disabled:cursor-not-allowed ${className}`}
+      >
+        {thumb}
+        <span aria-hidden className={`${slot} ${checked ? "text-icon-tertiary" : ON_TONE[thumbTone]}`}>{offIcon}</span>
+        <span aria-hidden className={`${slot} ${checked ? ON_TONE[thumbTone] : "text-icon-tertiary"}`}>{onIcon}</span>
+      </button>
+    );
+  }
+  const side = (text: string, active: boolean) => (
+    <span
+      className={`santo-body-small-medium santo-transition-colors whitespace-nowrap ${active ? "text-text-primary" : "text-text-tertiary"} ${
+        compact ? "max-sm:sr-only" : ""
+      }`}
+    >
+      {text}
+    </span>
+  );
   return (
     <button
       type="button"
       role="switch"
       aria-checked={checked}
-      aria-label={label}
+      aria-label={`${label}: ${offLabel} ou ${onLabel}`}
+      title={checked ? onLabel : offLabel}
       disabled={disabled}
       onClick={() => onChange(!checked)}
-      // Desligado+desabilitado e ligado+desabilitado precisam continuar
-      // distinguiveis: o ligado vira brand/subtle, nao o mesmo cinza.
-      className={`santo-focus-field relative inline-flex h-lg w-2xl shrink-0 cursor-pointer items-center ${RADIUS_CONTROL} p-2xs transition-colors duration-(--santo-motion-duration-fast) ease-(--santo-motion-easing-standard) disabled:cursor-not-allowed ${
-        checked ? "bg-brand-solid-default disabled:bg-brand-subtle-active" : "bg-neutral-subtle-active disabled:bg-disabled"
-      } ${className}`}
+      className={`santo-focus-solid inline-flex cursor-pointer items-center gap-xs ${RADIUS_CONTROL} disabled:cursor-not-allowed ${className}`}
     >
-      <span
-        className="size-md bg-surface-raised shadow-sm transition-transform duration-(--santo-motion-duration-normal) ease-(--santo-motion-easing-spring)"
-        style={{
-          transform: checked ? "translateX(100%)" : "translateX(0)",
-          borderRadius: `calc(${RADIUS_CONTROL_VAR} - var(--santo-space-2xs))`,
-        }}
-      />
+      {side(offLabel as string, !checked)}
+      <span aria-hidden className={`${trackClass} ${checked ? TRACK_TONE[onTone] : TRACK_TONE[offTone]}`}>
+        {thumb}
+      </span>
+      {side(onLabel as string, checked)}
     </button>
   );
 }

@@ -2,10 +2,13 @@
 export const THEME_STORAGE_KEY = "santo-theme";
 
 /**
- * Roda no <head>, antes da primeira pintura: aplica o tema salvo para a pagina
- * nao abrir no tema do sistema e trocar em seguida.
+ * Roda no <head>, antes da primeira pintura. O padrao do DS e o tema CLARO:
+ * sem escolha salva, a raiz nasce com data-theme="light". "dark" fixa o
+ * escuro; "system" (Auto) tira o atributo e o CSS segue prefers-color-scheme.
+ * Sem storage (aba privada), fica o claro. Termina em ";": o layout concatena
+ * com o BRAND_SCRIPT.
  */
-export const THEME_SCRIPT = `try{var t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}`;
+export const THEME_SCRIPT = `(function(){var h=document.documentElement,t=null;try{t=localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)})}catch(e){}if(t==="system")h.removeAttribute("data-theme");else h.setAttribute("data-theme",t==="dark"?"dark":"light")})();`;
 
 /** Chave da marca escolhida no localStorage (id de brand/id). */
 export const BRAND_STORAGE_KEY = "santo-brand";

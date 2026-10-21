@@ -294,4 +294,13 @@
   .santo-focus-field:not([aria-invalid="true"]):focus-visible:focus-visible {
     border-color: var(--santo-color-border-brand);
   }
+
+  /* Controle SEM borda (trilho do Switch): o anel subtle sozinho some sobre o chao
+     claro (1,32:1). Folga na cor da pagina + anel border/focus (>= 3:1 nos dois temas), so tokens. */
+  .santo-focus-solid:focus-visible:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--santo-border-thick) var(--santo-color-surface-page),
+      0 0 0 calc(var(--santo-border-thick) * 2) var(--santo-color-border-focus);
+  }
 }

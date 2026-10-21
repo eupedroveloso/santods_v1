@@ -26,10 +26,15 @@ type LogoFile = { light: string; dark: string; ratio: number };
 /*
  * `mark`: a variante REDUZIDA (simbolo compacto) para espaco curto — header no
  * celular, trilho, favicon. Marca sem mark registrada usa a logo completa
- * (hoje o Santo ainda nao tem mark: falta o asset).
+ * (SPP ainda nao tem mark).
  */
 const LOGOS: Record<string, { alt: string; full: LogoFile; mark?: LogoFile }> = {
-  santo: { alt: "SantoDS v1", full: { light: "/brand/santods-logo.svg", dark: "/brand/santods-logo-dark.svg", ratio: 417 / 92 } },
+  santo: {
+    alt: "SantoDS v1",
+    full: { light: "/brand/santods-logo.svg", dark: "/brand/santods-logo-dark.svg", ratio: 417 / 92 },
+    // Proposta do Compasso (2026-10-21): o monograma DS da logo oficial; o Figma nao tem simbolo.
+    mark: { light: "/brand/santo-mark.svg", dark: "/brand/santo-mark-dark.svg", ratio: 94.052 / 71.781 },
+  },
   vtsd: {
     alt: "Venda Todo Santo Dia",
     full: { light: "/brand/vtsd-logo.svg", dark: "/brand/vtsd-logo-dark.svg", ratio: 120 / 32 },

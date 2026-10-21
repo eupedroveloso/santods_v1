@@ -26,7 +26,7 @@ export const toggleMeta: ComponentMeta[] = [
     category: "entrada",
     tier: "primitivo",
     source: "toggle.tsx",
-    description: "Chave quando o efeito é imediato. Quando há um Salvar, Checkbox.",
+    description: "Chave quando o efeito é imediato. Quando há um Salvar, Checkbox. Variante de dois lados (offLabel/onLabel + offTone/onTone); com offIcon/onIcon é só ícones e redonda (exceção do Pedro): trilho neutro, punho circular na cor do lado ativo com o ícone em on-color; nomes no aria-label/title; com offHref/onHref vira nav de dois links (topbar: Documentação em brand, Estúdio em accent).",
     related: ["setting-row", "checkbox"],
   },
   {

@@ -85,3 +85,8 @@ pen | caneta, editar, renomear, escrever                                # renome
 trash-can | lixeira, apagar, excluir, remover                           # apagar um sistema
 sliders | controles, ajustes, configurar, filtros                      # estilo Controles (substitui o shapes provisório)
 lock | cadeado, travado, bloqueado, fixo                                # Estúdio fase 2: accent e status travados
+
+# --- shell: compactar/expandir a sidebar em trilho (Ateliê, 2026-10-21) ---
+angles-left | compactar, recolher sidebar, trilho, fechar painel        # compactar a sidebar
+angles-right | expandir, abrir sidebar, mostrar painel                  # expandir a sidebar
+sidebar | sidebar, painel lateral, menu lateral, alternar               # alternativa: um só botão de alternância
