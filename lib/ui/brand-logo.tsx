@@ -40,6 +40,8 @@ const LOGOS: Record<string, { alt: string; full: LogoFile; mark?: LogoFile }> = 
     full: { light: "/brand/vtsd-logo.svg", dark: "/brand/vtsd-logo-dark.svg", ratio: 120 / 32 },
     mark: { light: "/brand/vtsd-mark.svg", dark: "/brand/vtsd-mark-dark.svg", ratio: 48 / 21 },
   },
+  // Seu Produto Pronto (Compasso, 2026-10-21): logo vetorial do arquivo da SPP; sem simbolo no Figma.
+  spp: { alt: "Seu Produto Pronto", full: { light: "/brand/spp-logo.svg", dark: "/brand/spp-logo-dark.svg", ratio: 168 / 57 } },
 };
 
 /** Arquivo da logo (claro/escuro) de uma marca e variante, ou null se a marca nao tem logo. */
@@ -49,7 +51,7 @@ export function brandLogoFile(brand: string, variant: "full" | "mark" = "full"):
   return { alt: l.alt, ...((variant === "mark" ? l.mark : undefined) ?? l.full) };
 }
 
-export type BrandId = "santo" | "vtsd";
+export type BrandId = "santo" | "vtsd" | "spp";
 
 /** As marcas com logo registrada — para seletor de marca e identidades. */
 export const BRAND_LOGOS = Object.keys(LOGOS) as BrandId[];

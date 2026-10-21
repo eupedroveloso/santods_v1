@@ -17,6 +17,7 @@
     "tier:check": "node scripts/check-tier.mjs",
     "nest:check": "node scripts/check-nest.mjs",
     "nest:probe": "node scripts/probe-nest.mjs",
+    "estudio:seed": "node scripts/estudio-seed.mjs",
     "check": "node scripts/check.mjs",
     "contexto": "node scripts/build-contexto.mjs",
     "db:generate": "drizzle-kit generate",

@@ -38,6 +38,8 @@ export const FONT_CATALOG: FontEntry[] = [
   { family: "Geist", category: "sans", weights: { from: 100, to: 900 } },
   { family: "Lexend", category: "sans", weights: { from: 100, to: 900 } },
   { family: "Epilogue", category: "sans", weights: { from: 100, to: 900 } },
+  // Seu Produto Pronto (SPP): a fonte real do arquivo da marca.
+  { family: "Montserrat", category: "sans", weights: { from: 100, to: 900 } },
 
   // Serif
   { family: "Source Serif 4", category: "serif", weights: { from: 200, to: 900 } },

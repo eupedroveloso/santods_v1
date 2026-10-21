@@ -26,14 +26,18 @@ function variableIn(slug: string, name: string) {
   );
 }
 
-/** Degrau da Palette para o qual color/surface/page aponta num modo de tema (Light/Dark). */
+/** Variavel para a qual color/surface/page aponta num modo de tema (Light/Dark). */
 function pageStep(theme: "Light" | "Dark") {
   return variableIn("color", "color/surface/page")?.values.find((v) => v.mode === theme)?.alias ?? null;
 }
 
-/** Var e hex de um degrau da Palette num modo de marca. */
+/**
+ * Var e valor do chao da pagina num modo de marca. Desde o nivel B o alias de
+ * color/surface/page cai em brand/surface/page/* (colecao Brand, por marca);
+ * antes caia direto num degrau da Palette. Resolve nos dois casos.
+ */
 function paletteColor(name: string | null, mode: string) {
-  const v = name ? variableIn("palette", name) : null;
+  const v = name ? (variableIn("brand", name) ?? variableIn("palette", name)) : null;
   return { cssVar: v?.cssVar ?? "", value: v?.values.find((m) => m.mode === mode)?.css ?? "—" };
 }
 
